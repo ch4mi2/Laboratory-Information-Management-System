@@ -23,10 +23,23 @@ npm start
 2. **If you wish to add additional dependancies, please mention the name and exact version in this document**. 
 3. **Please dont upgrade package versions even if they are out-dated**. ( Most of the packages are depenedant on each other and every member should have the same versions,
  so it will break the system if one memeber were to upgrade a common package. The packages are installed with their Long-term-support(lts) version. Newer "alpha/beta" versions does not guarantee compatibality)
-4. **Create a branch with your name with `git switch -c "your-name" ` . Commit only to this newly created branch.**
-   <div>
-        <h3>git basic commands</h3>
-        <p> Add files to git hub (cd to ProjectITP folder and run `git add . ` )
-   </div>
+4. **Create a branch with your name with `git switch -c "your-name" ` . Commit only to this newly created branch. Commit whenever a new feature is developped**
+   
+<details><summary>Basic Git commands</summary>
+<p>
+
+#### Add files to git hub ( cd to ProjectITP folder and run)
+
+```
+  git switch "your-branch-name"      
+  git add .
+  git commit -m "your-message"
+  git push origin your-branch-name
+```
+replace `your-branch-name` and `your-message` with appopriate names
+</p>
+</details>
+
+
 5. Create a new folder with the name of the function in src/components to store your custom components.  eg: Login/SignupComponent.js
 6. Use src/css folder to store your custom styles (create a new stylesheet with your function name). eg: Login/loginFormStyles.css
