@@ -20,10 +20,10 @@ npm start
 ***Use the custom navbar, header, footer provided in your files ( Those files are yet to be created. Will update this when done . For now ignore this point )***
 
 1. **Please check the package.json file before installing additional dependancies**. Chances are the dependancy that you are looking for, may have already installed in node_modules. 
-2. If you wish to add additional dependancies, please mention the name and exact version in this document. 
-3. Please dont upgrade package versions even if they are out-dated. ( Most of the packages are depenedant on each other and every member should have the same versions,
+2.** If you wish to add additional dependancies, please mention the name and exact version in this document**. 
+3.** Please dont upgrade package versions even if they are out-dated**. ( Most of the packages are depenedant on each other and every member should have the same versions,
  so it will break the system if one memeber were to upgrade a common package. The packages are installed with their Long-term-support(lts) version. Newer "alpha/beta" versions
  does not guarantee compatibality)
-4. Create a branch with your name in github repo. Commit only to this newly created branch.
+4. **Create a branch with your name in github repo. Commit only to this newly created branch.**
 4. Use src/components folder to store your custom components
 5. Use src/css folder to store your custom styles (create a new stylesheet with your name eg: styleHaritha.css/styleHaritha.module.css, styleDinal.css/styleDinal.module.css)
