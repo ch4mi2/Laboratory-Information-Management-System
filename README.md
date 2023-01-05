@@ -23,7 +23,7 @@ npm start
 2. **If you wish to add additional dependancies, please mention the name and exact version in this document**. 
 3. **Please dont upgrade package versions even if they are out-dated**. ( Most of the packages are depenedant on each other and every member should have the same versions,
  so it will break the system if one memeber were to upgrade a common package. The packages are installed with their Long-term-support(lts) version. Newer "alpha/beta" versions does not guarantee compatibality)
-4. **Create a branch with your name with `git switch -c "your-name" ` . Commit only to this newly created branch. Commit whenever a new feature is developped**
+4. **Create a branch with your name with `git switch -c "yourName-feature" ` eg: `git switch -c haritha-loginFunction` . Commit only to this newly created branch. Commit whenever a new feature is developped**
    
 <details><summary>Basic Git commands</summary>
 <p>
