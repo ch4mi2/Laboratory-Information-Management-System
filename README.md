@@ -46,6 +46,7 @@ replace `your-branch-name` and `your-message` with appopriate names
 
 # Useful info and links 
 
-Node.js `v18.12.1` is used - Download from here : https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi
-Git : https://git-scm.com/downloads
-npm `9.2.0` is used
+Node.js `v18.12.1` is used - Download from here : https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi <br />
+Git : https://git-scm.com/downloads <br />
+npm `9.2.0` is used <br />
+
