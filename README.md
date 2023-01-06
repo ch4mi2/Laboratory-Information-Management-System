@@ -47,10 +47,10 @@ npm start
   git commit -m "your-message"
   git push origin your-branch-name
 ```
-replace `your-branch-name` and `your-message` with appopriate names
+replace `your-branch-name` and `your-message` with appopriate names <br />
+Always confirm you are in the correct branch with `git status`
 </p>
 </details>
-
 
 5. Create a new folder with the name of the function in src/components to store your custom components.  eg: Login/SignupComponent.js
 6. Use src/css folder to store your custom styles (create a new stylesheet with your function name). eg: Login/loginFormStyles.css
@@ -60,4 +60,5 @@ replace `your-branch-name` and `your-message` with appopriate names
 Node.js `v18.12.1` is used - Download from here : https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi <br />
 Git : https://git-scm.com/downloads <br />
 npm `9.2.0` is used <br />
+Refer to the `package.json` file for more details
 
