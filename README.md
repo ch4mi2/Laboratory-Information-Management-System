@@ -1,4 +1,9 @@
 # How to install 
+
+Install Node.js `v18.12.1`. Download from here : https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi <br />
+npm `9.2.0` is used <br />
+Install Git : https://git-scm.com/downloads <br />
+
 Open a convenient folder with powershell/terminal and run these commands (do not run npm audit fix --force)
 ```
 git clone https://github.com/Navojith/ProjectITP.git
