@@ -1,6 +1,6 @@
 # Seting up
 ## Prerequisites
-1. Install and configure git [Download](https://git-scm.com/downloads)
+1. Install and configure git [Download](https://git-scm.com/downloads) <br/>
 Please refer this [Tutorial](https://youtube.com/playlist?list=PL4cUxeGkcC9goXbgTDQ0n_4TBzOO0ocPR) to learn more about git.
 2. Install Node.js `v18.12.1`. [Download](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi)
   npm `9.2.0` is used
@@ -43,6 +43,7 @@ press ctrl + c to stop the server
 2. **If you wish to add additional dependancies, please notify it to Pawara**. 
 3. **Please dont upgrade package versions even if they are out-dated**. ( Most of the packages are depenedant on each other and every member should have the same versions,
  so it will break the system if one memeber were to upgrade a common package. The packages are installed with their Long-term-support(lts) version. Newer "alpha/beta" versions does not guarantee compatibality)
+4. Follow coding standards, use comments. 
 
 ### Frontend
 1. Use the custom navbar, header, footer provided in your files ( Those files are yet to be created. Will update this when done . For now ignore this point )
@@ -63,7 +64,7 @@ Output should be like this:
 origin  https://github.com/ch4mi2/ProjectITP.git (fetch)
 origin  https://github.com/ch4mi2/ProjectITP.git (push)
 ```
-If not add it by running the below command
+If not, add it by running the below command
 ```
 git remote add origin <your repo link>
 ```
