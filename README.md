@@ -1,22 +1,22 @@
 # Seting up
 ## Prerequisites
-1.Install and configure git [Download](https://git-scm.com/downloads)
-2.Install Node.js `v18.12.1`. [Download](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi)
+1. Install and configure git [Download](https://git-scm.com/downloads)
+2. Install Node.js `v18.12.1`. [Download](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi)
   npm `9.2.0` is used
-3.Make sure you installed correct Node.js and npm versions with
+3. Make sure you installed correct Node.js and npm versions with
   ```
   node -v
   npm -v
   ```
 # Installation
-1.Fork the repo
-2.Clone it to your machine (do not run npm audit fix --force)
+1. Fork the repo
+2. Clone it to your machine (do not run npm audit fix --force)
 ```
 git clone <repo link>
 ```
-3.Run the below command twice on both frontend and backend folders to install node modules <br />
-&ensp use cd/folderName to move into folder <br />
-&ensp use cd.. to move up
+3. Run the below command twice on both frontend and backend folders to install node modules <br />
+   - use cd/folderName to move into folder <br />
+   - use cd.. to move up
 ```
 npm install
 ```
@@ -24,17 +24,17 @@ do not run npm audit fix --force . This will break the system !
 
 
 # How to run
-1.Frontend <br />
-&ensp cd to frontend and run
+## Frontend <br />
+cd to frontend and run
 ```
 npm start
 ```
-2.Backend <br />
-&ensp cd to backend and run
+## Backend <br />
+cd to backend and run
 ```
 nodemon server.js
 ```
-&ensp press ctrl + c to stop the server
+press ctrl + c to stop the server
 
         
         
