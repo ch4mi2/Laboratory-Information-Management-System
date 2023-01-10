@@ -1,16 +1,15 @@
 # Seting up
-Prerequisites <br />
-1.Install and configure git <br />
-2.Install Node.js `v18.12.1`. <br />
-  Download from here : https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi <br />
-  npm `9.2.0` is used <br />
+## Prerequisites
+1.Install and configure git [Download](https://git-scm.com/downloads)
+2.Install Node.js `v18.12.1`. [Download](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi)
+  npm `9.2.0` is used
 3.Make sure you installed correct Node.js and npm versions with
   ```
   node -v
   npm -v
   ```
 # Installation
-1.Fork the repo <br />
+1.Fork the repo
 2.Clone it to your machine (do not run npm audit fix --force)
 ```
 git clone <repo link>
