@@ -16,8 +16,8 @@ Prerequisites <br />
 git clone <repo link>
 ```
 3.Run the below command twice on both frontend and backend folders to install node modules <br />
-  use cd/folderName to move into folder <br />
-  use cd.. to move up
+&ensp use cd/folderName to move into folder <br />
+&ensp use cd.. to move up
 ```
 npm install
 ```
@@ -26,16 +26,16 @@ do not run npm audit fix --force . This will break the system !
 
 # How to run
 1.Frontend <br />
-  cd to frontend and run
+&ensp cd to frontend and run
 ```
 npm start
 ```
 2.Backend <br />
-  cd to backend and run
+&ensp cd to backend and run
 ```
 nodemon server.js
 ```
-  press ctrl + c to stop the server
+&ensp press ctrl + c to stop the server
 
         
         
