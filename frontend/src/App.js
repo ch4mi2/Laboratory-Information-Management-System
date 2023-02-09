@@ -1,5 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// pages and components
+import PatientList from './pages/PatientList';
 
 function App() {
   return (
@@ -7,7 +9,7 @@ function App() {
       <BrowserRouter>
         <div className="pages">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/patient-list" element={<PatientList />} />
           </Routes>
         </div>
       </BrowserRouter>
