@@ -1,3 +1,5 @@
+///(search function needs to be implemented later)
+
 import { useState } from 'react';
 import { usePatientContext } from '../../hooks/usePatientContext';
 import { CREATE_PATIENT } from '../../context/patientContextDeclarations';
