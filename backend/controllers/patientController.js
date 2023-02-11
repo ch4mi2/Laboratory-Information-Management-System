@@ -47,7 +47,9 @@ const createPatient = async (req, res) => {
     emptyFields.push('gender');
   }
   if (emptyFields.length > 0) {
-    return res.status(400).json({ error: 'Please fill in all the fields' });
+    return res
+      .status(400)
+      .json({ error: 'Please fill in all the fields', emptyFields });
   }
 
   // add doc to db
