@@ -3,6 +3,7 @@ require('dotenv').config(); //require and directly invoke the config method
 const express = require('express');
 const mongoose = require('mongoose');
 const patientRoutes = require('./routes/patientRoutes');
+const servicesRoutes = require('./routes/servicesRoutes');
 
 //express app
 const app = express(); //invokes the function
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use('/api/patients/', patientRoutes);
+app.use('/api/services/', servicesRoutes);
 
 //connect to db
 mongoose
