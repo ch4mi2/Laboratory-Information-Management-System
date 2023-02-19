@@ -1,5 +1,3 @@
-//bug reload error!!!!
-
 import { useEffect, useState } from 'react';
 import { usePatientContext } from '../hooks/usePatientContext';
 import { SET_PATIENTS } from '../context/patientContextDeclarations';
@@ -14,7 +12,7 @@ const PatientProfile = () => {
 
   useEffect(() => {
     const fetchPatients = async () => {
-      const response = await fetch('/api/patients/' + id);
+      const response = await fetch('/api/patients/');
       const json = await response.json();
 
       if (response.ok) {
@@ -23,14 +21,15 @@ const PatientProfile = () => {
     };
 
     fetchPatients();
-  }, [id]);
+  }, []);
+
+  const patient =
+    patients && patients.filter((patient) => patient._id === id)[0];
 
   return (
     <div className="patient-profile">
-      {console.log(patients)}
-      <PatientDetails patient={patients} />
+      {patient ? <PatientDetails patient={patient} /> : <div>Loading...</div>}
     </div>
   );
 };
-
 export default PatientProfile;

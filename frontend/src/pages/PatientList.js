@@ -25,12 +25,15 @@ const PatientList = () => {
   return (
     <div className="patientList">
       <div className="patients">
-        {patients &&
+        {patients ? (
           patients.map((patient) => (
             <Link key={patient._id} to={`../patient-profile/${patient._id}`}>
               <PatientDetails key={patient._id} patient={patient} />
             </Link>
-          ))}
+          ))
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
     </div>
   );

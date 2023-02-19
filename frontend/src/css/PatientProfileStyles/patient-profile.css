@@ -1,3 +1,5 @@
-.patient-profile div {
-  background: #000;
+.patient-profile .patientDetailBlock {
+  border: 1px solid black;
+  background: #d45252;
+  margin-top: 1vh;
 }
