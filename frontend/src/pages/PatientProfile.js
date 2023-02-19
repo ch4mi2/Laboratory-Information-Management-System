@@ -1,17 +1,20 @@
-import { useEffect } from 'react';
+//bug reload error
+
+import { useEffect, useState } from 'react';
 import { usePatientContext } from '../hooks/usePatientContext';
 import { SET_PATIENTS } from '../context/patientContextDeclarations';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // components
 import PatientDetails from '../components/PatientComponents/PatientDetails';
 
-const PatientList = () => {
+const PatientProfile = () => {
   const { patients, dispatch } = usePatientContext();
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchPatients = async () => {
-      const response = await fetch('/api/patients/');
+      const response = await fetch('/api/patients/' + id);
       const json = await response.json();
 
       if (response.ok) {
@@ -20,20 +23,14 @@ const PatientList = () => {
     };
 
     fetchPatients();
-  }, []);
+  }, [id]);
 
   return (
-    <div className="patientList">
-      <div className="patients">
-        {patients &&
-          patients.map((patient) => (
-            <Link key={patient._id} to={`../patient-profile/${patient._id}`}>
-              <PatientDetails key={patient._id} patient={patient} />
-            </Link>
-          ))}
-      </div>
+    <div className="patient-profile">
+      {console.log(patients)}
+      <PatientDetails patient={patients} />
     </div>
   );
 };
 
-export default PatientList;
+export default PatientProfile;
