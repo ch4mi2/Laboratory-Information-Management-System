@@ -5,6 +5,7 @@ import { usePatientContext } from '../../hooks/usePatientContext';
 import {
   SET_PATIENTS,
   CREATE_PATIENT,
+  UPDATE_PATIENT,
 } from '../../context/patientContextDeclarations';
 import { Link, useParams } from 'react-router-dom';
 
@@ -50,7 +51,7 @@ const EditPatientForm = () => {
       setError(null);
       setEmptyFields([]);
       console.log('patient updated', json);
-      dispatch({ type: SET_PATIENTS, payload: json });
+      dispatch({ type: UPDATE_PATIENT, payload: json });
     }
   };
 

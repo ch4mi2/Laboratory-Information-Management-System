@@ -4,6 +4,7 @@ import {
   SET_PATIENTS,
   CREATE_PATIENT,
   DELETE_PATIENT,
+  UPDATE_PATIENT,
 } from './patientContextDeclarations';
 
 export const PatientContext = createContext();
@@ -24,6 +25,13 @@ export const patientsReducer = (state, action) => {
     case DELETE_PATIENT:
       return {
         patients: state.patients.filter((p) => p._id !== action.payload._id),
+      };
+    case UPDATE_PATIENT:
+      return {
+        ...state,
+        patients: state.patients.map((patient) =>
+          patient._id === action.payload._id ? action.payload : patient
+        ),
       };
 
     default:
