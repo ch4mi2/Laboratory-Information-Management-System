@@ -1,5 +1,3 @@
-///(search function needs to be implemented later)
-
 import { useEffect, useState } from 'react';
 import { usePatientContext } from '../../hooks/usePatientContext';
 import {
