@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { usePatientContext } from '../hooks/usePatientContext';
 import { SET_PATIENTS } from '../context/patientContextDeclarations';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 // components
 import PatientDetails from '../components/PatientComponents/PatientDetails';
@@ -29,6 +29,9 @@ const PatientProfile = () => {
   return (
     <div className="patient-profile">
       {patient ? <PatientDetails patient={patient} /> : <div>Loading...</div>}
+      <Link to={'edit'}>
+        <button>Edit</button>
+      </Link>
     </div>
   );
 };
