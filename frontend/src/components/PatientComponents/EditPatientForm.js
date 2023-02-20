@@ -22,6 +22,7 @@ const EditPatientForm = () => {
   const [gender, setGender] = useState('Male');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [updated, setUpdated] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,6 +53,7 @@ const EditPatientForm = () => {
       setEmptyFields([]);
       console.log('patient updated', json);
       dispatch({ type: UPDATE_PATIENT, payload: json });
+      setUpdated(true);
     }
   };
 
@@ -68,6 +70,12 @@ const EditPatientForm = () => {
   return (
     <div className="container createPatientFormContainer">
       <form className="createPatientForm" onSubmit={handleSubmit}>
+        {updated && (
+          <div className="text-success text-center">
+            <strong>Updated Successfully</strong>
+          </div>
+        )}
+        <br />
         <center>
           <h3>Register a new Patient</h3>
         </center>
