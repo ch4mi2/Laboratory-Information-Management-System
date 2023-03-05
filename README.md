@@ -1,6 +1,6 @@
 # Seting up
 ## Prerequisites
-##Sign in to mongo db with google account. read credentials.txt
+## Sign in to mongo db with google account. read credentials.txt
 1. Install and configure git [Download](https://git-scm.com/downloads) <br/>
 Please refer this [Tutorial](https://youtube.com/playlist?list=PL4cUxeGkcC9goXbgTDQ0n_4TBzOO0ocPR) to learn more about git.
 2. Install Node.js `v18.12.1`. [Download](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x64.msi)
