@@ -11,7 +11,8 @@ Please go under edit and edit this file as needed for your project
 ### Member 7 - 
 ### Member 8 - 
 
-#### Brief Description of Project - Medi Line is a small, independently owned and operated laboratory located in
+#### Brief Description of Project - 
+Medi Line is a small, independently owned and operated laboratory located in
 Athurugiriya. The laboratory was founded in 2016. The laboratory focuses on providing
 routine clinical laboratory services such as hematology, biochemistry, and clinical
 chemistry to locals.
