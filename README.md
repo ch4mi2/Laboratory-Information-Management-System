@@ -29,6 +29,7 @@ easier to access and analyze data, which can help to improve decision-making and
 research outcomes.
 
 #### Technologies used - 
+MongoDB, Express, React, Node
 
 Note - The student's github account should be given in brackets e.g. (asiriRepos), this ideally should be your student id 
 
