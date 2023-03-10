@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 Please go under edit and edit this file as needed for your project
 
-# Project Name - Laboratory Information Management System
+# Project Name - Laboratory Information Management System (LIMS)
 
 # Batch - ITP_WD_B08_G05
 
@@ -9,9 +9,9 @@ Please go under edit and edit this file as needed for your project
 
 ### Member 2 - IT21286414 - Gunathilaka L.P.N (Navojith)
 
-### Member 3 -
+### Member 3 - IT21273230 - Surendra D.M.B.G.D (it21273230)
 
-### Member 4 -
+### Member 4 - IT21216046 - Wijerathne B.N.B (IT21216046)
 
 ### Member 5 -
 
