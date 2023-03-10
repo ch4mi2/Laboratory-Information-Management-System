@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 Please go under edit and edit this file as needed for your project
 
-# Project Name - Laboratory Information Management System
+# Project Name - Laboratory Information Management System (LIMS)
 
 # Batch - ITP_WD_B08_G05
 
