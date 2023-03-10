@@ -1,0 +1,38 @@
+.patientDetailBlock {
+  border: 1px solid black;
+  background: #ecebeb;
+  margin-top: 1vh;
+}
+
+.error {
+  border: 1px solid red;
+  background-color: #e6b9b9;
+}
+
+.createPatientForm label,
+input {
+  display: block;
+  width: 100%;
+  margin-top: 2vh;
+}
+
+.createPatientForm input {
+  margin-top: 0;
+}
+
+.createPatientForm select {
+  margin: 2vh;
+}
+
+.createPatientForm {
+  margin-top: 5vh;
+}
+
+#form-container-div {
+  background: #eeeeee;
+  padding: 1rem;
+  border-radius: 20px;
+}
+h3 {
+  font-size: 2rem;
+}
