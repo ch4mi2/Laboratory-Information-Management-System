@@ -7,7 +7,7 @@ Please go under edit and edit this file as needed for your project
 
 ### Group Leader - IT21237904 - Gunawardana U.G.C.D (ch4mi2)
 
-### Member 2 -
+### Member 2 - IT21286414 - Gunathilaka L.P.N (Navojith)
 
 ### Member 3 -
 
