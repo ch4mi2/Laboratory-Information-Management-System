@@ -94,7 +94,7 @@ const PatientDetails = ({ edit, patient }) => {
                     width: '100%',
                     minHeight: '50px',
                     fontSize: '1rem',
-                    background: '#FF5252',
+                    background: 'var(--orange)',
                     color: 'white',
                     borderRadius: '66px',
                   }}
@@ -111,7 +111,7 @@ const PatientDetails = ({ edit, patient }) => {
                     width: '100%',
                     minHeight: '50px',
                     fontSize: '1rem',
-                    background: '#FF5252',
+                    background: 'var(--orange)',
                     color: 'white',
                     borderRadius: '66px',
                   }}

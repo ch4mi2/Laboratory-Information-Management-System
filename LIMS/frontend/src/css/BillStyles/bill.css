@@ -1,0 +1,6 @@
+.receipt {
+  background-color: var(--grey);
+  border: 1px dashed black;
+  border-width: thick;
+  padding: 2rem;
+}
