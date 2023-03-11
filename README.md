@@ -15,7 +15,7 @@ Please go under edit and edit this file as needed for your project
 
 ### Member 5 -
 
-### Member 6 - IT21214752 - Perera M.A.S.S (She)
+### Member 6 - IT21214752 - Perera M.A.S.S (ShenanPerera)
 
 ### Member 7 -
 
