@@ -15,9 +15,9 @@ Please go under edit and edit this file as needed for your project
 
 ### Member 5 -
 
-### Member 6 -
+### Member 6 - IT21214752 - Perera M.A.S.S (ShenanPerera)
 
-### Member 7 -
+### Member 7 - IT21219252 - Senadheera S.A.A.D (Dinal-Senadheera)
 
 ### Member 8 -
 
