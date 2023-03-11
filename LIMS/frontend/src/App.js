@@ -9,6 +9,7 @@ import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
+import AddBill from './pages/AddBill';
 function App() {
   return (
     <div className="App">
@@ -23,6 +24,7 @@ function App() {
             <Route path="/patient-list" element={<PatientList />} />
             <Route path="/create-patient" element={<CreatePatientForm />} />
             <Route path="/patient-profile/:id" element={<PatientProfile />} />
+            <Route path="/patient-profile/:id/addBill" element={<AddBill />} />
             <Route
               path="/patient-profile/:id/edit"
               element={<EditPatientForm />}

@@ -107,7 +107,7 @@ const CreatePatientForm = () => {
 
           <button
             style={{
-              background: '#FF5252',
+              background: 'var(--orange)',
               color: 'white',
               borderRadius: '66px',
             }}
