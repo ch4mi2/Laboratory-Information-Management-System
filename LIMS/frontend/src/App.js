@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+
 // pages and components
 import PatientList from './pages/PatientList';
 import PatientProfile from './pages/PatientProfile';
 import EditPatientForm from './components/PatientComponents/EditPatientForm';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
+import PendingAccession from './pages/PendingAccession'
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -26,6 +28,10 @@ function App() {
             <Route
               path="/patient-profile/:id/edit"
               element={<EditPatientForm />}
+            />
+            <Route 
+              path="/pendingAccession"
+              element={<PendingAccession />}
             />
           </Routes>
         </div>
