@@ -9,6 +9,7 @@ const getSamples = async (req, res) => {
   try {
     const samples = await Sample.find({})
       .populate('patient')
+      .populate('test')
       .sort({createdAt: -1})
       .exec();
 
@@ -24,6 +25,7 @@ const getPendingSamples = async (req, res) => {
   try {
     const samples = await Sample.find({ status: 'pending' })
       .populate('patient')
+      .populate('test')
       .sort({createdAt: -1})
       .exec();
 
@@ -38,6 +40,7 @@ const getCollectedSamples = async (req, res) => {
   try {
     const samples = await Sample.find({ status: 'collected' })
       .populate('patient')
+      .populate('test')
       .sort({createdAt: -1})
       .exec();
 
@@ -135,6 +138,7 @@ const updateSample = async (req, res) => {
     res.status(200).json(sample)
   }
 
+  /*
 //generate barcode
 const generateBarcode = async(req, res) => {
     const { id } = req.params
@@ -170,7 +174,8 @@ const generateBarcode = async(req, res) => {
       } catch (error) {
         res.status(500).json({ error: error.message });
       }
-}  
+}
+*/  
 
 // POST request handler for barcode reader
 /*router.post('/barcode', async (req, res) => {
@@ -200,5 +205,5 @@ module.exports = {
     createSample,
     deleteSample,
     updateSample,
-    generateBarcode
+    //generateBarcode
 }

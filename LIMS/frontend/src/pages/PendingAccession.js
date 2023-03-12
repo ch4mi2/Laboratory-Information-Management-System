@@ -1,3 +1,4 @@
+
 import { useEffect } from "react"
 import '../css/samples.css'
 import { useSampleContext } from "../hooks/useSampleContext"
@@ -55,8 +56,9 @@ const PendingAccession = () => {
               <div className="card-body sample-details-body d-flex justify-content-between align-items-center">
                 <p className="card-text">{sample.sampleID}</p>
                 <p className="card-text">{sample.patient?.firstName}</p>
+                <p className="card-text">{sample.test?.testName}</p>
+                <p className="card-text">{sample.test?.specimen}</p>
                 <button className="sampleBtn" onClick={() => handleCollectClick(sample._id)}>Collect</button>
-                <button className="sampleBtn">Print</button>
               </div>
             </div>  
           ))}

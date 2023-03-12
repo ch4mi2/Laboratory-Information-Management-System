@@ -58,6 +58,11 @@ function App() {
                     element={<PendingAccession />}
                   />
                   <Route
+                    path="/accessed"
+                    element={<Accessed />}
+                  />
+                  <Route path="/expenseslist" element ={<Expenseslist/>}/>
+                  <Route
                     path='/testData'
                     element={ <TestData /> }
                   />
@@ -73,7 +78,7 @@ function App() {
                     path='/updateTest'
                     element={ <UpdateTest /> }
                   />
-                </Routes>
+          </Routes>
               </div>
             </div>
             <div className="col-0 col-sm-1 col-md-2 col-lg-2"></div>
