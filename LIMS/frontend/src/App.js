@@ -39,6 +39,7 @@ function App() {
               path="/pendingAccession"
               element={<PendingAccession />}
             />
+            <Route path="/expenseslist" element ={<Expenseslist/>}/>
           </Routes>
         </div>
       </BrowserRouter>

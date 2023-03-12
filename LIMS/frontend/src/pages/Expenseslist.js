@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 
+//components
+import ExpensesDetails from "../components/ExpensesComponent/expensesDetails"
+
 const Expenseslist = () => {
     const [expenses, setexpenses] = useState(null)
 
@@ -8,7 +11,7 @@ const Expenseslist = () => {
             const response = await fetch('/api/expenses/')
             const json = await response.json()
 
-            if(json.ok){
+            if(response.ok){
                 setexpenses(json)
             }
         }
@@ -18,9 +21,14 @@ const Expenseslist = () => {
     return(
         <div className="container">
            <div className="expenses">
-            <h2>list</h2>
+            
             {expenses && expenses.map((expenses) => (
-                <p key={expenses._id}>{expenses.amount}</p>
+                <div key={expenses._id}>
+                    
+               <ExpensesDetails key={expenses._id} expenses={expenses}/>
+               
+                </div>
+                
             ))}
            </div>
         </div>
