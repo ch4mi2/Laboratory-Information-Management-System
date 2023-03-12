@@ -1,0 +1,27 @@
+.machine-details{
+    background: #fff;
+    border-radius: 4px;
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0, 0,0,0,05);
+}
+
+.machine-details h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    color: var(--primary);
+}
+
+.machine-details p{
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.machine-details button{
+    left: 683px;
+    top: 905px;
+    background: #FF5252;
+    border-radius: 50px;
+}

@@ -4,6 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import './css/PatientDetailStyles/PatientDetailStyles.css';
 import './css/PatientProfileStyles/patient-profile.css';
+import './css/MachineStyles/machineDetails.css'
 import App from './App';
 import { PatientContextProvider } from './context/PatientContext';
 

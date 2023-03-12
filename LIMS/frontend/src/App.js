@@ -6,6 +6,7 @@ import PatientProfile from './pages/PatientProfile';
 import EditPatientForm from './components/PatientComponents/EditPatientForm';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
+import Machines from './pages/machineHistory'
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -27,10 +28,12 @@ function App() {
               path="/patient-profile/:id/edit"
               element={<EditPatientForm />}
             />
+            <Route path="/" element={<Machines />}/>
           </Routes>
         </div>
       </BrowserRouter>
     </div>
+    
   );
 }
 
