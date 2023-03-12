@@ -24,7 +24,14 @@ const testResultSchema = new mongoose.Schema({
         },
       },
     ],
-  });
+    status: {
+        type: String,
+        enum: ['pending', 'completed'],
+        default: 'pending',
+      },
+      },
+      { timestamps: true }
+  );
   
 
 module.exports = mongoose.model('TestResult', testResultSchema);
