@@ -19,6 +19,36 @@ const getSamples = async (req, res) => {
   }
 }
 
+//get all pending samples
+const getPendingSamples = async (req, res) => {
+  try {
+    const samples = await Sample.find({ status: 'pending' })
+      .populate('patient')
+      .sort({createdAt: -1})
+      .exec();
+
+    res.status(200).json(samples);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({message: 'Error retrieving pending samples', error: err});
+  }
+}
+
+const getCollectedSamples = async (req, res) => {
+  try {
+    const samples = await Sample.find({ status: 'collected' })
+      .populate('patient')
+      .sort({createdAt: -1})
+      .exec();
+
+    res.status(200).json(samples);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({message: 'Error retrieving collected samples', error: err});
+  }
+}
+
+
 
 
 // get a single sample 
@@ -51,7 +81,7 @@ const createSample = async (req, res) => {
     const sampleID = `${currentYear}${newNumber}`;
   
     // Generate collection time as current date and time
-    const collectionTime = new Date();
+    //const collectionTime = new Date();
   
     // Create new sample with generated ID and collection time
     try {
@@ -59,7 +89,7 @@ const createSample = async (req, res) => {
         sampleID,
         patient,
         test,
-        collectionTime
+        //collectionTime
       });
       res.status(201).json(sample);
     } catch(error) {
@@ -164,6 +194,8 @@ const generateBarcode = async(req, res) => {
 
 module.exports = {
     getSamples,
+    getPendingSamples,
+    getCollectedSamples,
     getSample,
     createSample,
     deleteSample,

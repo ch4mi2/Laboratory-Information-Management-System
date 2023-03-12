@@ -8,6 +8,7 @@ import EditPatientForm from './components/PatientComponents/EditPatientForm';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import PendingAccession from './pages/PendingAccession'
+import Accessed from './pages/Accessed'
 import SideNavBar from './components/SideNavComponent/SideNavBar'
 
 // assets
@@ -29,14 +30,9 @@ function App() {
             <Route path="/create-patient" element={<CreatePatientForm />} />
             <Route path="/patient-profile/:id" element={<PatientProfile />} />
             <Route path="/patient-profile/:id/addBill" element={<AddBill />} />
-            <Route
-              path="/patient-profile/:id/edit"
-              element={<EditPatientForm />}
-            />
-            <Route 
-              path="/pendingAccession"
-              element={<PendingAccession />}
-            />
+            <Route path="/patient-profile/:id/edit" element={<EditPatientForm />} />
+            <Route path="/pendingAccession" element={<PendingAccession />}/>
+            <Route path="/Accessed" element={<Accessed />}/>
           </Routes>
         </div>
       </BrowserRouter>

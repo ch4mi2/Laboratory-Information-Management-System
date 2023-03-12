@@ -1,6 +1,8 @@
 const express = require('express') 
 const {
     getSamples,
+    getPendingSamples,
+    getCollectedSamples,
     getSample,
     createSample,
     deleteSample,
@@ -12,6 +14,12 @@ const router = express.Router()
 
 //Get all samples
 router.get('/', getSamples)
+
+//Get pending samples
+router.get('/pendingSamples',getPendingSamples)
+
+//Get collected samples
+router.get('/collectedSamples',getCollectedSamples)
 
 //Get a single sample
 router.get('/:id', getSample)

@@ -8,12 +8,15 @@ import './css/BillStyles/bill.css';
 import './css/SideNavStyles/sideNavBar.css';
 import App from './App';
 import { PatientContextProvider } from './context/PatientContext';
+import { SamplesContextProvider } from './context/SampleContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PatientContextProvider>
+      <SamplesContextProvider>
       <App />
+      </SamplesContextProvider>
     </PatientContextProvider>
   </React.StrictMode>
 );
