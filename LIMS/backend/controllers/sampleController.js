@@ -3,12 +3,23 @@ const mongoose = require('mongoose')
 const bwipjs = require('bwip-js')
 
 
+
 // get all samples
 const getSamples = async (req, res) => {
-    const samples = await Sample.find({}).sort({createdAt: -1})
+  try {
+    const samples = await Sample.find({})
+      .populate('patient')
+      .sort({createdAt: -1})
+      .exec();
 
-    res.status(200).json(samples)
+    res.status(200).json(samples);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({message: 'Error retrieving samples', error: err});
+  }
 }
+
+
 
 // get a single sample 
 const getSample = async (req, res) => {
