@@ -8,6 +8,7 @@ const billRoutes = require('./routes/billRoutes');
 const expensesRoutes = require('./routes/expensesRoutes');
 const sampleRoutes = require('./routes/samples');
 const testRoutes = require('./routes/tests');
+const testResultRoutes = require('./routes/testResultRoutes');
 
 //express app
 const app = express(); //invokes the function
@@ -28,6 +29,8 @@ app.use('/api/bills/', billRoutes);
 app.use('/api/expenses/', expensesRoutes);
 app.use('/api/samples', sampleRoutes);
 app.use('/api/tests', testRoutes);
+app.use('/api/testResult', testResultRoutes);
+
 
 //connect to db
 mongoose

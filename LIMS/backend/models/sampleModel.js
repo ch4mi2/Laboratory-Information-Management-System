@@ -7,11 +7,11 @@ const sampleSchema = new mongoose.Schema({
   sampleID: String,
   patient: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Patient,
+    ref: 'Patient',
   },
   test: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Test,
+    ref: 'Test',
   },
   status: {
     type: String,
