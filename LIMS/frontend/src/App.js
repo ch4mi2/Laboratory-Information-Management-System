@@ -9,7 +9,12 @@ import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import PendingAccession from './pages/PendingAccession';
 import Expenseslist from './pages/Expenseslist';
 import Accessed from './pages/Accessed';
+import TestData from './pages/TestData';
 import SideNavBar from './components/SideNavComponent/SideNavBar';
+import CreateTest from './pages/CreateTest';
+import ViewTest from './pages/ViewTest';
+import UpdateTest from './pages/UpdateTest';
+
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -51,6 +56,22 @@ function App() {
                   <Route
                     path="/pendingAccession"
                     element={<PendingAccession />}
+                  />
+                  <Route
+                    path='/testData'
+                    element={ <TestData /> }
+                  />
+                  <Route
+                    path='/createTest'
+                    element={ <CreateTest /> }
+                  />
+                  <Route 
+                    path='/viewTest/:id'
+                    element={ <ViewTest /> }
+                  />
+                  <Route 
+                    path='/updateTest'
+                    element={ <UpdateTest /> }
                   />
                 </Routes>
               </div>
