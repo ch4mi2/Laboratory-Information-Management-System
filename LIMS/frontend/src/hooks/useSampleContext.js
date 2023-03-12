@@ -1,4 +1,4 @@
-import { SamplesContext } from "../context/SampleContext";
+import { SamplesContext } from "../context/SampleContext.js";
 import { useContext } from "react";
 
 export const useSampleContext = () => {

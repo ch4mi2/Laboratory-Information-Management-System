@@ -7,7 +7,7 @@ const {
     createSample,
     deleteSample,
     updateSample,
-    generateBarcode
+   // generateBarcode
 } = require('../controllers/sampleController')
 
 const router = express.Router()
@@ -34,7 +34,7 @@ router.delete('/:id', deleteSample)
 router.patch('/:id', updateSample)
 
 //generate barcode
-router.get('/barcode/:id', generateBarcode)
+//router.get('/barcode/:id', generateBarcode)
 
 
 module.exports = router

@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const Patient = require('../models/patientModel')
+const Test = require('../models/testModel')
 
 
 const sampleSchema = new mongoose.Schema({
   sampleID: String,
   patient: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Patient,
+    ref: 'Patient',
   },
   test: {
     type: mongoose.Schema.Types.ObjectId,

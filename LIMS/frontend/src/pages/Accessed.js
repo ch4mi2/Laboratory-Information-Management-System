@@ -1,6 +1,10 @@
 import { useEffect } from "react"
 import '../css/samples.css'
 import { useSampleContext } from "../hooks/useSampleContext"
+import jsPDF from 'jspdf';
+import { printJS } from 'print-js';
+
+
 
 
 
@@ -41,9 +45,6 @@ const Accessed = () => {
           default: return "th";
         }
       }
-      
-
-    
 
     return(
         <div className="container">
@@ -53,6 +54,8 @@ const Accessed = () => {
                     <div className="card-body sample-details-body d-flex justify-content-between align-items-center">
                     <p className="card-text">{sample.sampleID}</p>
                     <p className="card-text">{sample.patient?.firstName}</p>
+                    <p className="card-text">{sample.test?.testName}</p>
+                    <p className="card-text">{sample.test?.specimen}</p>
                     <p className="card-text">{formatDate(sample.collectionTime)}</p>
                     <button className="sampleBtn">Print</button>
                     </div>
