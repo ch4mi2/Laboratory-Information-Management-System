@@ -52,6 +52,10 @@ function App() {
                     path="/pendingAccession"
                     element={<PendingAccession />}
                   />
+                  <Route
+                    path="/accessed"
+                    element={<Accessed />}
+                  />
                 </Routes>
               </div>
             </div>
