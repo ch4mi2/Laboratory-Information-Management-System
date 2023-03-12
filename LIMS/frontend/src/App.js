@@ -8,6 +8,7 @@ import EditPatientForm from './components/PatientComponents/EditPatientForm';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import PendingAccession from './pages/PendingAccession'
+import SideNavBar from './components/SideNavComponent/SideNavBar'
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -21,6 +22,7 @@ function App() {
         username={''}
       />
       <BrowserRouter>
+      <SideNavBar />
         <div className="pages">
           <Routes>
             <Route path="/patient-list" element={<PatientList />} />
