@@ -1,26 +1,28 @@
-aside
-{
-    position:fixed;
-    width: 200px;
-    height: 100%;
-    top: 55px;
-    left: 0;
+aside {
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  top: 55px;
+  left: 0;
 }
- 
- #sideNav {
-    /* background-color: #EEEEEE !important; */
-    height: 100%;
-    position: absolute;
-    color: #000000 !important;
-    /* margin-bottom: -5000px; */
-    /* padding-bottom: 5000px; */
-    
+
+#sideNav {
+  /* background-color: #EEEEEE !important; */
+  height: 100%;
+
+  color: #000000 !important;
+  /* margin-bottom: -5000px; */
+  /* padding-bottom: 5000px; */
 }
 
 .navItems {
-    color: #000000 !important;
-} 
+  color: #000000 !important;
+}
 
 .subNav {
-    padding-left: 10px;
-  }
+  padding-left: 10px;
+}
+
+.sidenav---expanded---1KdUL {
+  min-width: 150px !important;
+}
