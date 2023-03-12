@@ -7,7 +7,8 @@ import PatientProfile from './pages/PatientProfile';
 import EditPatientForm from './components/PatientComponents/EditPatientForm';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
-import PendingAccession from './pages/PendingAccession'
+import PendingAccession from './pages/PendingAccession';
+import Expenseslist from './pages/Expenseslist'
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -35,6 +36,7 @@ function App() {
               path="/pendingAccession"
               element={<PendingAccession />}
             />
+            <Route path='/expenseslist' element={<Expenseslist />}/>
           </Routes>
         </div>
       </BrowserRouter>
