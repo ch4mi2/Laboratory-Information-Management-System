@@ -56,7 +56,8 @@ function App() {
                     path="/accessed"
                     element={<Accessed />}
                   />
-                </Routes>
+                  <Route path="/expenseslist" element ={<Expenseslist/>}/>
+          </Routes>
               </div>
             </div>
             <div className="col-0 col-sm-1 col-md-2 col-lg-2"></div>
