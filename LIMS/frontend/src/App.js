@@ -28,7 +28,7 @@ function App() {
             <div className="col-3 col-sm-3 col-md-2 col-lg-2">
               <SideNavBar />
             </div>
-            <div className="col-9 col-sm-8 col-md-8 col-lg-8">
+            <div className="col-9 col-sm-8 col-md-8 col-lg-8 mt-4">
               <div className="pages">
                 <Routes>
                   <Route path="/patient-list" element={<PatientList />} />
