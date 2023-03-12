@@ -20,7 +20,9 @@ const sampleSchema = new mongoose.Schema({
   collectionTime: {
     type: Date,
   },
-});
+  },
+  { timestamps: true }
+);
 
 const Sample = mongoose.model('Sample', sampleSchema);
 
