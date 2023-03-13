@@ -1,11 +1,11 @@
-import { useEffect , useState} from "react"
+import { useEffect} from "react"
+import { useMachineContext } from "../hooks/useMachineContext"
 
 //components
 import MachineDetails from "../components/machineComponent/machineDetails"
-import MachineForm from "../components/machineComponent/MachineForm"
 
 const MachineHistory = () => {
-    const [machines, setMachines] = useState(null)
+    const {machines , dispatch} = useMachineContext()
 
     useEffect(() => {
         const fetchMachines = async () => {
@@ -13,7 +13,7 @@ const MachineHistory = () => {
             const json = await response.json() 
 
             if(response.ok){
-                setMachines(json)
+                dispatch({type: 'SET_MACHINES' ,payload: json})
             }
         }
 
@@ -27,7 +27,6 @@ const MachineHistory = () => {
                     <MachineDetails key={machine._id} machine = {machine}/>
                 ))}
             </div>
-            <MachineForm />
         </div>
      );
 }

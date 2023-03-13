@@ -7,9 +7,11 @@ import './css/PatientProfileStyles/patient-profile.css';
 import './css/BillStyles/bill.css';
 import './css/SideNavStyles/sideNavBar.css';
 import './css/MachineStyles/machineDetails.css'
+import './css/MachineStyles/machineDetails.css'
 import App from './App';
 import { PatientContextProvider } from './context/PatientContext';
 import { SamplesContextProvider } from './context/SampleContext'
+import { MachinesContextProvider } from './context/MachineContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,5 +21,10 @@ root.render(
       <App />
       </SamplesContextProvider>
     </PatientContextProvider>
+   <MachinesContextProvider>
+      <App/>
+   </MachinesContextProvider>
   </React.StrictMode>
 );
+
+ 

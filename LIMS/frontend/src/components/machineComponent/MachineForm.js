@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import {useMachineContext} from '../../hooks/useMachineContext'
 
 const MachineForm = () => {
+  const {dispatch} = useMachineContext()
+
   const [MachineType, setMachineType] = useState('')
   const [Brand, setBrand] = useState('')
   const [Model, setModel] = useState('')
@@ -40,73 +43,88 @@ const MachineForm = () => {
       setManufacturer('')
       setTelNo('')
       console.log('new workout added:', json)
+      dispatch({type: 'CREATE_MACHINE' , payload: json })
     }
 
   }
 
   return (
-    <form className="create" onSubmit={handleSubmit}> 
-      <h3>Add a New Machine</h3>
-
-      <label>Machine :</label>
-      <input 
-        type="text" 
-        onChange={(e) => setMachineType(e.target.value)} 
-        value={MachineType}
-      />
-
-      <label>Brand:</label>
-      <input 
-        type="text" 
-        onChange={(e) => setBrand(e.target.value)} 
-        value={Brand}
-      />
-
-      <label>Model:</label>
-      <input 
-        type="text" 
-        onChange={(e) => setModel(e.target.value)} 
-        value={Model} 
-      />
-
-      <label>Serial No :</label>
-      <input 
-        type="text" 
-        onChange={(e) => setSerialNo(e.target.value)} 
-        value={SerialNo} 
-      />
-
-      <label>Purchased Date:</label>
-      <input 
-        type="date" 
-        onChange={(e) => setpurchasedDate(e.target.value)} 
-        value={PurchaseDate} 
-      />
-
-      <label>Warranty Expiration:</label>
-      <input 
-        type="date" 
-        onChange={(e) => setWarrantyExp(e.target.value)} 
-        value={WarrantyExp} 
-      />
-
-      <label>Manufacturer</label>
-      <input 
-        type="text" 
-        onChange={(e) => setManufacturer(e.target.value)} 
-        value={Manufacturer} 
-      />
-
-      <label>Tel No:</label>
-      <input 
-        type="text" 
-        onChange={(e) => setTelNo(e.target.value)} 
-        value={TelNo} 
-      />
-
-      <button>Add Machine</button>
-      {error && <div className="error">{error}</div>}
+    <div class = "container">
+      <div class="title">Add a New Machine</div>
+      <hr/>
+      <form className="create" onSubmit={handleSubmit}> 
+      <div class = "machinelabels">
+        <div class="input-box">
+          <label>Machine :</label>
+          <input 
+            type="text" 
+            onChange={(e) => setMachineType(e.target.value)} 
+            value={MachineType} required
+          />
+        </div>
+        <div class="input-box">
+          <label>Brand:</label>
+          <input 
+            type="text" 
+            onChange={(e) => setBrand(e.target.value)} 
+            value={Brand} required
+          />
+        </div>
+        <div class="input-box">
+          <label>Model:</label>
+          <input 
+            type="text" 
+            onChange={(e) => setModel(e.target.value)} 
+            value={Model} required
+          />
+        </div>
+        <div class="input-box">
+          <label>Serial No :</label>
+          <input 
+            type="text" 
+            onChange={(e) => setSerialNo(e.target.value)} 
+            value={SerialNo} required
+          />
+        </div>  
+        <div class="input-box">
+          <label>Purchased Date:</label>
+          <input 
+            type="date" 
+            onChange={(e) => setpurchasedDate(e.target.value)} 
+            value={PurchaseDate}  required
+          />
+        </div>
+        <div class="input-box">
+          <label>Warranty Expiration:</label>
+          <input 
+            type="date" 
+            onChange={(e) => setWarrantyExp(e.target.value)} 
+            value={WarrantyExp} required
+          />
+        </div>
+        <div class="input-box">
+          <label>Manufacturer</label>
+          <input 
+            type="text" 
+            onChange={(e) => setManufacturer(e.target.value)} 
+            value={Manufacturer} required
+          />
+        </div>  
+        <div class="input-box">
+          <label>Tel No:</label>
+          <input 
+            type="text" 
+            onChange={(e) => setTelNo(e.target.value)} 
+            value={TelNo} required
+          />
+        </div>
+        <div class="Add-button">
+          <button>Add Machine</button>
+        </div>  
+        {error && <div className="error">{error}</div>}
+    </div>    
     </form>
+    </div>
   )
 }
 

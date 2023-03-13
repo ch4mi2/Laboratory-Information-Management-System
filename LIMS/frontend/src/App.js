@@ -11,6 +11,7 @@ import Expenseslist from './pages/Expenseslist';
 import Accessed from './pages/Accessed';
 import SideNavBar from './components/SideNavComponent/SideNavBar';
 import Machines from './pages/machineHistory'
+import AddMachines from './pages/AddMachines';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -57,7 +58,8 @@ function App() {
                     path="/accessed"
                     element={<Accessed />}
                   />
-                  <Route path="/" element={<Machines />}/>
+                  <Route path="/machines" element={<Machines />}/>
+                  <Route path="/addMachines" element={<AddMachines/>}></Route>
           </Routes>
               </div>
             </div>

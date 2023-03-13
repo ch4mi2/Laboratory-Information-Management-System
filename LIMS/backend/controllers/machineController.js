@@ -30,7 +30,8 @@ const getMachine = async (req, res) => {
 //create new workout
 const createMachine = async (req , res) => {
     const {MachineType , Brand, PurchaseDate,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
-    
+
+
     //add doc to db
     try {
         const machine = await Machine.create({

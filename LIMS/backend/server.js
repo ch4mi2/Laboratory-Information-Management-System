@@ -31,7 +31,6 @@ app.use('/api/expenses/', expensesRoutes);
 app.use('/api/samples', sampleRoutes);
 app.use('/api/tests', testRoutes);
 app.use('/api/testResult', testResultRoutes);
-
 app.use('/api/machines' , machineRoutes );
 
 //connect to db
