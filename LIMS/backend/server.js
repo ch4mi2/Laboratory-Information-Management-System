@@ -9,7 +9,7 @@ const expensesRoutes = require('./routes/expensesRoutes');
 const sampleRoutes = require('./routes/samples');
 const testRoutes = require('./routes/tests');
 const testResultRoutes = require('./routes/testResultRoutes');
-
+const inventoryRoutes = require('./routes/inventoryRoutes');
 //express app
 const app = express(); //invokes the function
 
@@ -30,6 +30,7 @@ app.use('/api/expenses/', expensesRoutes);
 app.use('/api/samples', sampleRoutes);
 app.use('/api/tests', testRoutes);
 app.use('/api/testResult', testResultRoutes);
+app.use('/api/inventoryRoutes', inventoryRoutes);
 
 
 //connect to db
