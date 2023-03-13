@@ -6,6 +6,7 @@ import './css/PatientDetailStyles/PatientDetailStyles.css';
 import './css/PatientProfileStyles/patient-profile.css';
 import './css/BillStyles/bill.css';
 import './css/SideNavStyles/sideNavBar.css';
+import './css/TestDataStyles/testData.css'
 import App from './App';
 import { PatientContextProvider } from './context/PatientContext';
 import { SamplesContextProvider } from './context/SampleContext'
