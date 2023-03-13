@@ -11,6 +11,7 @@ import Expenseslist from './pages/Expenseslist';
 import Accessed from './pages/Accessed';
 import TestData from './pages/TestData';
 import SideNavBar from './components/SideNavComponent/SideNavBar';
+import AddExpenses from './pages/AddExpenses';
 import CreateTest from './pages/CreateTest';
 import ViewTest from './pages/ViewTest';
 import UpdateTest from './pages/UpdateTest';
@@ -61,7 +62,7 @@ function App() {
                     path="/accessed"
                     element={<Accessed />}
                   />
-                  <Route path="/expenseslist" element ={<Expenseslist/>}/>
+                  
                   <Route
                     path='/testData'
                     element={ <TestData /> }
@@ -77,6 +78,18 @@ function App() {
                   <Route 
                     path='/updateTest'
                     element={ <UpdateTest /> }
+                  />
+                  <Route 
+                    path="/expenseslist" 
+                    element ={<Expenseslist/>}
+                    />
+                  <Route 
+                    path="/addExpenses"
+                    element ={<AddExpenses/>}
+                    />
+                  <Route 
+                  path="/expenseslist" 
+                  element ={<Expenseslist/>}
                   />
           </Routes>
               </div>
