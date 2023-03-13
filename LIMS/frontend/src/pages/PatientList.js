@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { usePatientContext } from '../hooks/usePatientContext';
 import { SET_PATIENTS } from '../context/patientContextDeclarations';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import PatientDetails from '../components/PatientComponents/PatientDetails';
 
 const PatientList = () => {
   const { patients, dispatch } = usePatientContext();
+  const [noOfPatients, setNoOfPatients] = useState();
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -17,14 +18,22 @@ const PatientList = () => {
       if (response.ok) {
         dispatch({ type: SET_PATIENTS, payload: json });
       }
+      setNoOfPatients(json.length);
     };
 
     fetchPatients();
   }, []);
 
   return (
-    <div className="patientList">
-      <div className="patients m-5">
+    <div className="container patientList">
+      {noOfPatients ? (
+        <div className="row mt-5 text-danger">
+          <p style={{ textAlign: 'right' }}>{noOfPatients} Patients Found</p>
+        </div>
+      ) : (
+        <div></div>
+      )}
+      <div className="patients m-3">
         {patients ? (
           patients.map((patient) => (
             <Link

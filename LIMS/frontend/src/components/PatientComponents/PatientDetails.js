@@ -1,12 +1,30 @@
-//import { usePatientContext } from '../../hooks/usePatientContext';
-import { Link } from 'react-router-dom';
+import { usePatientContext } from '../../hooks/usePatientContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { DELETE_PATIENT } from '../../context/patientContextDeclarations';
+
 const PatientDetails = ({ edit, patient }) => {
-  //const { dispatch } = usePatientContext();
+  const { dispatch } = usePatientContext();
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    const response = await fetch('/api/patients/' + patient._id, {
+      method: 'DELETE',
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({ type: DELETE_PATIENT, payload: json });
+    }
+
+    navigate('/patient-list');
+    console.log('Patient Deleted');
+  };
 
   return (
     <div className="container patientDetailBlock">
       <div className="row">
-        {edit == true ? (
+        {edit === true ? (
           <center>
             <h3 className="mb-3">Patient Profile</h3>
           </center>
@@ -40,7 +58,7 @@ const PatientDetails = ({ edit, patient }) => {
           </p>
         </div>
       </div>
-      {edit == true ? (
+      {edit === true ? (
         <div className="container">
           <div className="row">
             <div className="col-6">
@@ -58,6 +76,7 @@ const PatientDetails = ({ edit, patient }) => {
                 <button
                   id="deleteProfileButton"
                   className="btn mt-4 px-4 d-block m-auto"
+                  onClick={handleDelete}
                 >
                   Delete Account
                 </button>
@@ -75,7 +94,7 @@ const PatientDetails = ({ edit, patient }) => {
                     width: '100%',
                     minHeight: '50px',
                     fontSize: '1rem',
-                    background: '#FF5252',
+                    background: 'var(--orange)',
                     color: 'white',
                     borderRadius: '66px',
                   }}
@@ -92,7 +111,7 @@ const PatientDetails = ({ edit, patient }) => {
                     width: '100%',
                     minHeight: '50px',
                     fontSize: '1rem',
-                    background: '#FF5252',
+                    background: 'var(--orange)',
                     color: 'white',
                     borderRadius: '66px',
                   }}

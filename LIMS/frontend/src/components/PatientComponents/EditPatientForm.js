@@ -2,16 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { usePatientContext } from '../../hooks/usePatientContext';
-import {
-  SET_PATIENTS,
-  CREATE_PATIENT,
-  UPDATE_PATIENT,
-} from '../../context/patientContextDeclarations';
-import { Link, useParams } from 'react-router-dom';
+import { UPDATE_PATIENT } from '../../context/patientContextDeclarations';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const EditPatientForm = () => {
   const { patients, dispatch } = usePatientContext();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const currentPatient = patients.filter((p) => p._id === id)[0];
 
@@ -67,9 +64,27 @@ const EditPatientForm = () => {
     }
   }, []);
 
+  const goBack = () => {
+    navigate(`/patient-profile/${id}`);
+  };
+
   return (
     <div className="container createPatientFormContainer">
       <div id="form-container-div" className="mt-5">
+        {updated ? (
+          <div>
+            <h5
+              style={{
+                textAlign: 'center',
+                color: '#FF5252',
+              }}
+            >
+              Profile updated
+            </h5>
+          </div>
+        ) : (
+          <></>
+        )}
         <form className="createPatientForm" onSubmit={handleSubmit}>
           <center>
             <h3 className="">Edit Profile</h3>
@@ -124,15 +139,27 @@ const EditPatientForm = () => {
 
           <button
             style={{
-              background: '#FF5252',
+              background: 'var(--orange)',
               color: 'white',
               borderRadius: '66px',
+              width: '100%',
             }}
             className="btn mt-4 px-4 d-block m-auto"
           >
             {' '}
             Confirm{' '}
           </button>
+          <span
+            onClick={goBack}
+            style={{
+              background: 'var(--orange)',
+              color: 'white',
+              borderRadius: '66px',
+            }}
+            className="btn mt-3 px-4 d-block m-auto"
+          >
+            {'<-'} Go Back
+          </span>
           {error && <div className="error">{error}</div>}
         </form>
       </div>

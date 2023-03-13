@@ -3,12 +3,56 @@ const mongoose = require('mongoose')
 const bwipjs = require('bwip-js')
 
 
+
 // get all samples
 const getSamples = async (req, res) => {
-    const samples = await Sample.find({}).sort({createdAt: -1})
+  try {
+    const samples = await Sample.find({})
+      .populate('patient')
+      .populate('test')
+      .sort({createdAt: -1})
+      .exec();
 
-    res.status(200).json(samples)
+    res.status(200).json(samples);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({message: 'Error retrieving samples', error: err});
+  }
 }
+
+//get all pending samples
+const getPendingSamples = async (req, res) => {
+  try {
+    const samples = await Sample.find({ status: 'pending' })
+      .populate('patient')
+      .populate('test')
+      .sort({createdAt: -1})
+      .exec();
+
+    res.status(200).json(samples);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({message: 'Error retrieving pending samples', error: err});
+  }
+}
+
+const getCollectedSamples = async (req, res) => {
+  try {
+    const samples = await Sample.find({ status: 'collected' })
+      .populate('patient')
+      .populate('test')
+      .sort({createdAt: -1})
+      .exec();
+
+    res.status(200).json(samples);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({message: 'Error retrieving collected samples', error: err});
+  }
+}
+
+
+
 
 // get a single sample 
 const getSample = async (req, res) => {
@@ -40,7 +84,7 @@ const createSample = async (req, res) => {
     const sampleID = `${currentYear}${newNumber}`;
   
     // Generate collection time as current date and time
-    const collectionTime = new Date();
+    //const collectionTime = new Date();
   
     // Create new sample with generated ID and collection time
     try {
@@ -48,7 +92,7 @@ const createSample = async (req, res) => {
         sampleID,
         patient,
         test,
-        collectionTime
+        //collectionTime
       });
       res.status(201).json(sample);
     } catch(error) {
@@ -94,6 +138,7 @@ const updateSample = async (req, res) => {
     res.status(200).json(sample)
   }
 
+  /*
 //generate barcode
 const generateBarcode = async(req, res) => {
     const { id } = req.params
@@ -129,7 +174,8 @@ const generateBarcode = async(req, res) => {
       } catch (error) {
         res.status(500).json({ error: error.message });
       }
-}  
+}
+*/  
 
 // POST request handler for barcode reader
 /*router.post('/barcode', async (req, res) => {
@@ -153,9 +199,11 @@ const generateBarcode = async(req, res) => {
 
 module.exports = {
     getSamples,
+    getPendingSamples,
+    getCollectedSamples,
     getSample,
     createSample,
     deleteSample,
     updateSample,
-    generateBarcode
+    //generateBarcode
 }

@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Patient = require('../models/patientModel')
+const Test = require('../models/testModel')
 
 
 const sampleSchema = new mongoose.Schema({
@@ -19,7 +21,9 @@ const sampleSchema = new mongoose.Schema({
   collectionTime: {
     type: Date,
   },
-});
+  },
+  { timestamps: true }
+);
 
 const Sample = mongoose.model('Sample', sampleSchema);
 
