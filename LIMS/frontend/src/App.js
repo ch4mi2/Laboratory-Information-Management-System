@@ -87,7 +87,10 @@ function App() {
                     path="/addExpenses"
                     element ={<AddExpenses/>}
                     />
-                  <Route path="/expenseslist" element ={<Expenseslist/>}/>
+                  <Route 
+                  path="/expenseslist" 
+                  element ={<Expenseslist/>}
+                  />
           </Routes>
               </div>
             </div>
