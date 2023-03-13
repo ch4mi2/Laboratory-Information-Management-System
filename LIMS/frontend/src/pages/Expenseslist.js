@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 //components
 import ExpensesDetails from "../components/ExpensesComponent/expensesDetails"
 
+
 import '../css/expensesStyles/expenses.css'
 
 const Expenseslist = () => {
@@ -33,6 +34,7 @@ const Expenseslist = () => {
                 
             ))}
            </div>
+           
         </div>
     )
 }

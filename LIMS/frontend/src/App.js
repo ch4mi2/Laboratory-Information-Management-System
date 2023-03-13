@@ -10,6 +10,7 @@ import PendingAccession from './pages/PendingAccession';
 import Expenseslist from './pages/Expenseslist';
 import Accessed from './pages/Accessed';
 import SideNavBar from './components/SideNavComponent/SideNavBar';
+import AddExpenses from './pages/AddExpenses';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -56,7 +57,14 @@ function App() {
                     path="/accessed"
                     element={<Accessed />}
                   />
-                  <Route path="/expenseslist" element ={<Expenseslist/>}/>
+                  <Route 
+                    path="/expenseslist" 
+                    element ={<Expenseslist/>}
+                    />
+                  <Route 
+                    path="/addExpenses"
+                    element ={<AddExpenses/>}
+                    />
           </Routes>
               </div>
             </div>

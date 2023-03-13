@@ -16,7 +16,8 @@ const expensesSchema = new mongoose.Schema(
         type: Number,
         require: true,
     }
-}
+},
+{timestamps: true}
 )
 
 const Expense = mongoose.model('Expense', expensesSchema)
