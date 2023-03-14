@@ -20,7 +20,6 @@ import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
 import Machines from './pages/machineHistory';
 
-
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
 import AddBill from './pages/AddBill';
@@ -75,8 +74,7 @@ function App() {
 
                   <Route path="/expenseslist" element={<Expenseslist />} />
                   <Route path="/addExpenses" element={<AddExpenses />} />
-                  
-                  
+
                   <Route
                     path="/pendingTests"
                     element={<PendingTestResults />}
