@@ -132,20 +132,48 @@ const deleteTest = async(req,res) => {
 
 const updateTest = async(req,res) => {
     const { id } = req.params
+    const { testID,outsourced,testName,shortName,specimen,price,heading,remarks} = req.body;
+    let emptyFields = []
 
-    if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: "Not a vlid object ID"})
+    if(!testID) {
+        emptyFields.push('testID')
+    }
+    if(!outsourced) {
+        emptyFields.push('outsourced')
+    }
+    if(!testName) {
+        emptyFields.push('testName')
+    }
+    if(!shortName) {
+        emptyFields.push('shortName')
+    }
+    if(!specimen) {
+        emptyFields.push('specimen')
+    }
+    if(!price) {
+        emptyFields.push('price')
+    }
+    if(!heading) {
+        emptyFields.push('heading')
     }
 
-    const test = await Test.findOneAndUpdate({_id: id }, {
-        ...req.body
-    });
-
-    if(!test) {
-        return res.status(400).json({error: "No such test"})
+    if(emptyFields.length > 0) {
+        return res.status(400).json({error: 'Please fill in the highlighted fields', emptyFields})
+    } else {
+        if(!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({error: "Not a vlid object ID"})
+        }
+    
+        const test = await Test.findOneAndUpdate({_id: id }, {
+            ...req.body
+        });
+    
+        if(!test) {
+            return res.status(400).json({error: "No such test"})
+        }
+    
+        res.status(200).json(test)
     }
-
-    res.status(200).json(test)
 }
 
 module.exports = {
