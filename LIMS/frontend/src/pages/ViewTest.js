@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SingleTestDetails from "../components/TestDataComponents/SingleTestDetails";
 import TestSubCategoryDetails from "../components/TestDataComponents/TestSubCategoryDetails";
@@ -37,10 +37,6 @@ const ViewTest = () => {
                         ))
                         : <div className="loading">Loading...</div> 
                             : <div className="loading">Loading...</div>}
-
-                <Link to={`/UpdateTest`} state={Test}>
-                    <button>Edit Test</button>
-                </Link>
             </div>
             
         </div>

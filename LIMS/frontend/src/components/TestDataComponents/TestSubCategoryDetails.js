@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+
 const TestSubCategoryDetails = ({ subCategory }) => {
     return (  
+        <Link to={`/UpdateCategory`} state={subCategory}>
         <div className="firstSection">
                 <h4>
                     {subCategory.category}
@@ -48,7 +51,8 @@ const TestSubCategoryDetails = ({ subCategory }) => {
                 </div>
                 }
                     
-            </div>
+        </div>
+        </Link>
     );
 }
  
