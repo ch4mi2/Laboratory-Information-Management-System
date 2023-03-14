@@ -35,7 +35,7 @@ const Expensesform = () => {
             dispatch({type: 'expenses_created', payload: json})
         }
     }
-  };
+  
 
   return (
     <form className="create" onSubmit={handlesubmit}>
