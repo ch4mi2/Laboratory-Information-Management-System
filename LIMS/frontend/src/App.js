@@ -15,12 +15,10 @@ import AddExpenses from './pages/AddExpenses';
 import CreateTest from './pages/CreateTest';
 import ViewTest from './pages/ViewTest';
 import UpdateTest from './pages/UpdateTest';
-
 import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
+import Machines from './pages/machineHistory';
 
-import Machines from './pages/machineHistory';
-import Machines from './pages/machineHistory';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -72,21 +70,11 @@ function App() {
                   <Route path="/createTest" element={<CreateTest />} />
                   <Route path="/viewTest/:id" element={<ViewTest />} />
                   <Route path="/updateTest" element={<UpdateTest />} />
+
                   <Route path="/expenseslist" element={<Expenseslist />} />
                   <Route path="/addExpenses" element={<AddExpenses />} />
                   <Route path="/expenseslist" element={<Expenseslist />} />
-
-                  <Route path="/accessed" element={<Accessed />} />
-                  <Route path="/machines" element={<Machines />} />
-                  <Route path="/addMachines" element={<AddMachines />}></Route>
-
-                  <Route path="/testData" element={<TestData />} />
-                  <Route path="/createTest" element={<CreateTest />} />
-                  <Route path="/viewTest/:id" element={<ViewTest />} />
-                  <Route path="/updateTest" element={<UpdateTest />} />
-                  <Route path="/expenseslist" element={<Expenseslist />} />
-                  <Route path="/addExpenses" element={<AddExpenses />} />
-                  <Route path="/expenseslist" element={<Expenseslist />} />
+                  
                   <Route
                     path="/pendingTests"
                     element={<PendingTestResults />}
