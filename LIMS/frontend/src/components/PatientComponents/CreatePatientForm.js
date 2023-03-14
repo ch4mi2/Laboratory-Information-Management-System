@@ -51,7 +51,7 @@ const CreatePatientForm = () => {
   };
 
   return (
-    <div className="container createPatientFormContainer">
+    <div className="createPatientFormContainer">
       <div id="form-container-div" className="mt-5">
         <form className="createPatientForm" onSubmit={handleSubmit}>
           <center>

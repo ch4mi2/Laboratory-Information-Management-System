@@ -22,7 +22,7 @@ const PatientDetails = ({ edit, patient }) => {
   };
 
   return (
-    <div className="container patientDetailBlock">
+    <div className="patientDetailBlock">
       <div className="row">
         {edit === true ? (
           <center>
