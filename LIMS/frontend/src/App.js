@@ -73,7 +73,7 @@ function App() {
 
                   <Route path="/expenseslist" element={<Expenseslist />} />
                   <Route path="/addExpenses" element={<AddExpenses />} />
-                  <Route path="/expenseslist" element={<Expenseslist />} />
+                  
                   
                   <Route
                     path="/pendingTests"
