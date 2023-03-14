@@ -15,9 +15,14 @@ import AddExpenses from './pages/AddExpenses';
 import CreateTest from './pages/CreateTest';
 import ViewTest from './pages/ViewTest';
 import UpdateTest from './pages/UpdateTest';
+<<<<<<< HEAD
 
 import Machines from './pages/machineHistory';
+=======
+import Machines from './pages/machineHistory'
+>>>>>>> 5517234b03a22426bba63de64e4e0f95e23506b0
 import AddMachines from './pages/AddMachines';
+import PendingTestResults from './pages/PendingTestResults';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -60,6 +65,7 @@ function App() {
                     path="/pendingAccession"
                     element={<PendingAccession />}
                   />
+
                   <Route path="/accessed" element={<Accessed />} />
                   <Route path="/machines" element={<Machines />} />
                   <Route path="/addMachines" element={<AddMachines />}></Route>
@@ -71,7 +77,48 @@ function App() {
                   <Route path="/expenseslist" element={<Expenseslist />} />
                   <Route path="/addExpenses" element={<AddExpenses />} />
                   <Route path="/expenseslist" element={<Expenseslist />} />
-                </Routes>
+                
+                  <Route
+                    path="/accessed"
+                    element={<Accessed />}
+                  />
+                  <Route path="/machines" element={<Machines />}/>
+                  <Route path="/addMachines" element={<AddMachines/>}></Route>
+                  
+                  <Route
+                    path='/testData'
+                    element={ <TestData /> }
+                  />
+                  <Route
+                    path='/createTest'
+                    element={ <CreateTest /> }
+                  />
+                  <Route 
+                    path='/viewTest/:id'
+                    element={ <ViewTest /> }
+                  />
+                  <Route 
+                    path='/updateTest'
+                    element={ <UpdateTest /> }
+                  />
+                  <Route 
+                    path="/expenseslist" 
+                    element ={<Expenseslist/>}
+                    />
+                  <Route 
+                    path="/addExpenses"
+                    element ={<AddExpenses/>}
+                    />
+                  <Route 
+                  path="/expenseslist" 
+                  element ={<Expenseslist/>}
+                  />
+                  <Route
+                    path="/pendingTests"
+                    element={<PendingTestResults/>}
+                  />
+          </Routes>
+
               </div>
             </div>
             <div className="col-0 col-sm-1 col-md-2 col-lg-2"></div>
