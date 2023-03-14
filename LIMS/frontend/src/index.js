@@ -13,16 +13,19 @@ import App from './App';
 import { PatientContextProvider } from './context/PatientContext';
 import { SamplesContextProvider } from './context/SampleContext';
 import { MachinesContextProvider } from './context/MachineContext';
+import { ExpensesContextProvider} from './context/ExpensesContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PatientContextProvider>
       <SamplesContextProvider>
+        <ExpensesContextProvider>
         <MachinesContextProvider>
-          <App />
-        </MachinesContextProvider>
-      </SamplesContextProvider>
+      <App />
+      </MachinesContextProvider>
+      </ExpensesContextProvider>
+      </SamplesContextProvider>  
     </PatientContextProvider>
   </React.StrictMode>
 );

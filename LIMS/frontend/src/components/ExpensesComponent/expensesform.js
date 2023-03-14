@@ -1,11 +1,14 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+import { useExpensesContext } from "../../hooks/useExpensesContext"
 
 const Expensesform = () => {
-  const [description, setdescription] = useState('');
-  const [amount, setamount] = useState('');
-  const [error, seterror] = useState(null);
-  const navigate = useNavigate();
+    const { dispatch } = useExpensesContext()
+    const [description, setdescription] = useState('')
+    const [amount, setamount] = useState('')
+    const [error, seterror] = useState(null)
+    const navigate = useNavigate()
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -20,17 +23,19 @@ const Expensesform = () => {
     });
     const json = await response.json();
 
-    if (!response.ok) {
-      seterror(json.error);
+        if(!response.ok){
+            seterror(json.error)
+        }
+        if(response.ok){
+            setdescription('')
+            setamount('')
+            seterror(null)
+            console.log('new workout added', json)
+            navigate ('/expenseslist')
+            dispatch({type: 'expenses_created', payload: json})
+        }
     }
-    if (response.ok) {
-      setdescription('');
-      setamount('');
-      seterror(null);
-      console.log('new workout added', json);
-      navigate('/expenseslist');
-    }
-  };
+  
 
   return (
     <form className="create" onSubmit={handlesubmit}>
