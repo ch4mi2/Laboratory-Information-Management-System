@@ -1,0 +1,83 @@
+.machine-details{
+    background: #E8E9EB;
+    border-radius: 20px;
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0, 0,0,0,05);
+}
+
+.machine-details h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    color: var(--primary);
+}
+
+.machine-details p{
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.machine-details button{
+    left: 683px;
+    top: 905px;
+    background: #FF5252;
+    border-radius: 50px;
+}
+
+.container{
+    max-width : 700px;
+    width: 100%;
+    padding: 25px , 30px ;
+    margin : 30px;
+}
+
+.container .title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .title::before{
+    content: '';
+    position: absolute;
+    height : 3px;
+    width : 30px;
+}
+
+.container form .machinelabels{
+    display : flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+form .machinelabels .input-box{
+    margin: 20px 0 20px 0;
+    width: calc(100% / 2 - 20px);
+}
+
+.machinelabels .input-box input{
+    height: 35px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #E8E9EB;
+    background-color: #E8E9EB;
+    padding-left : 15px;
+    font-size: 16
+}
+
+form  .button{
+    outline: none;
+    color:#E8E9EB;
+    border:#FF5252;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+
+form .button::hover{
+    background:#FF5252 ;
+}

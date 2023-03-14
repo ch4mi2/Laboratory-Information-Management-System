@@ -9,7 +9,14 @@ import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import PendingAccession from './pages/PendingAccession';
 import Expenseslist from './pages/Expenseslist';
 import Accessed from './pages/Accessed';
+import TestData from './pages/TestData';
 import SideNavBar from './components/SideNavComponent/SideNavBar';
+import AddExpenses from './pages/AddExpenses';
+import CreateTest from './pages/CreateTest';
+import ViewTest from './pages/ViewTest';
+import UpdateTest from './pages/UpdateTest';
+import Machines from './pages/machineHistory'
+import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
 
 // assets
@@ -57,7 +64,37 @@ function App() {
                     path="/accessed"
                     element={<Accessed />}
                   />
-                  <Route path="/expenseslist" element ={<Expenseslist/>}/>
+                  <Route path="/machines" element={<Machines />}/>
+                  <Route path="/addMachines" element={<AddMachines/>}></Route>
+                  
+                  <Route
+                    path='/testData'
+                    element={ <TestData /> }
+                  />
+                  <Route
+                    path='/createTest'
+                    element={ <CreateTest /> }
+                  />
+                  <Route 
+                    path='/viewTest/:id'
+                    element={ <ViewTest /> }
+                  />
+                  <Route 
+                    path='/updateTest'
+                    element={ <UpdateTest /> }
+                  />
+                  <Route 
+                    path="/expenseslist" 
+                    element ={<Expenseslist/>}
+                    />
+                  <Route 
+                    path="/addExpenses"
+                    element ={<AddExpenses/>}
+                    />
+                  <Route 
+                  path="/expenseslist" 
+                  element ={<Expenseslist/>}
+                  />
                   <Route
                     path="/pendingTests"
                     element={<PendingTestResults/>}
@@ -70,6 +107,7 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
+    
   );
 }
 

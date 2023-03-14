@@ -75,9 +75,15 @@ function SideNavBar() {
                         <NavText>Inventory</NavText>
                     </NavItem> 
 
-                    <NavItem eventKey="">
+                    <NavItem eventKey="machines">
                         <NavIcon><MdIcons.MdBiotech size={30}/></NavIcon>
                         <NavText>Machines</NavText>
+                        <NavItem className = 'subNav' eventKey="AddMachines">
+                        <NavText>Add Machines</NavText>
+                        </NavItem>
+                        <NavItem className = 'subNav' eventKey="Machines">
+                        <NavText>Machine History</NavText>
+                        </NavItem>
                     </NavItem>
 
                     <NavItem eventKey="">
