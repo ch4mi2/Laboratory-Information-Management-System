@@ -15,7 +15,9 @@ import AddExpenses from './pages/AddExpenses';
 import CreateTest from './pages/CreateTest';
 import ViewTest from './pages/ViewTest';
 import UpdateTest from './pages/UpdateTest';
-
+import Machines from './pages/machineHistory'
+import AddMachines from './pages/AddMachines';
+import PendingTestResults from './pages/PendingTestResults';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -62,6 +64,8 @@ function App() {
                     path="/accessed"
                     element={<Accessed />}
                   />
+                  <Route path="/machines" element={<Machines />}/>
+                  <Route path="/addMachines" element={<AddMachines/>}></Route>
                   
                   <Route
                     path='/testData'
@@ -91,6 +95,10 @@ function App() {
                   path="/expenseslist" 
                   element ={<Expenseslist/>}
                   />
+                  <Route
+                    path="/pendingTests"
+                    element={<PendingTestResults/>}
+                  />
           </Routes>
               </div>
             </div>
@@ -99,6 +107,7 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
+    
   );
 }
 
