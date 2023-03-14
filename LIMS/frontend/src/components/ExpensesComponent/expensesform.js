@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
+import { useExpensesContext } from "../../hooks/useExpensesContext"
 
 const Expensesform = () => {
+    const { dispatch } = useExpensesContext()
     const [description, setdescription] = useState('')
     const [amount, setamount] = useState('')
     const [error, seterror] = useState(null)
@@ -30,6 +32,7 @@ const Expensesform = () => {
             seterror(null)
             console.log('new workout added', json)
             navigate ('/expenseslist')
+            dispatch({type: 'expenses_created', payload: json})
         }
     }
 
