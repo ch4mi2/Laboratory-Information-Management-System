@@ -1,5 +1,9 @@
+import { Link } from "react-router-dom";
+
 const SingleTestDetails = ({ Test }) => {
     return (
+        <Link to={`/UpdateTest`} state={Test}>
+                    
         <div className="firstSection">
                 <h4>
                     {Test.testName}
@@ -52,6 +56,8 @@ const SingleTestDetails = ({ Test }) => {
                     </div>
                 </div>
             </div>
+
+            </Link>
     );
 }
  

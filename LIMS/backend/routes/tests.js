@@ -4,7 +4,8 @@ const {
     getTest,
     createTest,
     deleteTest,
-    updateTest
+    updateTest,
+    updateCategory
 } = require('../controllers/testController')
 
 const router = express.Router();
@@ -16,13 +17,16 @@ router.get('/', getTests);
 router.get('/:id', getTest);
 
 //post a new test
-router.post('/',createTest);
+router.post('/', createTest);
 
 //delete a test
 router.delete('/:id', deleteTest);
 
 //update a test
-router.patch('/:id',updateTest)
+router.patch('/:id', updateTest);
+
+//update a category
+router.patch('/category/:id', updateCategory)
 
 
 module.exports = router;

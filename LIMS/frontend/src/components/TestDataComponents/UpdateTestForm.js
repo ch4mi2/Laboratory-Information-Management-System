@@ -100,7 +100,6 @@ const UpdateTestForm = ({Test}) => {
                         //var path = '/viewTest/' + Test._id;
                         navigate('/testData');
                     })
-                    // dispatch({type: 'CREATE_TEST', payload: json})
                 }
             }
           })
