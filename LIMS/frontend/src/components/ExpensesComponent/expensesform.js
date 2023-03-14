@@ -10,18 +10,18 @@ const Expensesform = () => {
     const [error, seterror] = useState(null)
     const navigate = useNavigate()
 
-    const handlesubmit = async (e) =>{
-        e.preventDefault()
+  const handlesubmit = async (e) => {
+    e.preventDefault();
 
-        const expenses = {description, amount}
-        const response = await fetch('/api/expenses', {
-            method: 'POST', 
-            body: JSON.stringify(expenses),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json()
+    const expenses = { description, amount };
+    const response = await fetch('/api/expenses', {
+      method: 'POST',
+      body: JSON.stringify(expenses),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const json = await response.json();
 
         if(!response.ok){
             seterror(json.error)
@@ -35,30 +35,30 @@ const Expensesform = () => {
             dispatch({type: 'expenses_created', payload: json})
         }
     }
+  };
 
-    return(
-        <form className="create" onSubmit={handlesubmit}>
-            <h3>Insert Expense</h3>
+  return (
+    <form className="create" onSubmit={handlesubmit}>
+      <h3>Insert Expense</h3>
 
-          <label>description:</label>
-          <input
-            type = "text"
-            onChange={(e) => setdescription(e.target.value)}
-            value={description}
-            />
+      <label>description:</label>
+      <input
+        type="text"
+        onChange={(e) => setdescription(e.target.value)}
+        value={description}
+      />
 
-          <label>amount:</label>
-          <input
-            type = "number"
-            onChange={(e) => setamount(e.target.value)}
-            value={amount}
-            /> 
+      <label>amount:</label>
+      <input
+        type="number"
+        onChange={(e) => setamount(e.target.value)}
+        value={amount}
+      />
 
-            <button>submit</button>
-            {error && <div className="error">{error}</div>}
+      <button>submit</button>
+      {error && <div className="error">{error}</div>}
+    </form>
+  );
+};
 
-        </form>
-    )
-}
-
-export default Expensesform
+export default Expensesform;

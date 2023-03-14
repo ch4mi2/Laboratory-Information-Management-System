@@ -69,7 +69,7 @@ const EditPatientForm = () => {
   };
 
   return (
-    <div className="container createPatientFormContainer">
+    <div className="createPatientFormContainer">
       <div id="form-container-div" className="mt-5">
         {updated ? (
           <div>

@@ -1,6 +1,9 @@
 const HeaderComponent = ({ profileImgSrc, logoImgSrc, username }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav
+      className="navbar navbar-expand-lg navbar-light bg-light"
+      style={{ zIndex: 25555 }}
+    >
       <a className="navbar-brand" href="#">
         <img style={{ width: '150px', marginLeft: '1rem' }} src={logoImgSrc} />
       </a>

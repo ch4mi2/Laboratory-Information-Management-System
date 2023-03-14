@@ -25,7 +25,7 @@ const PatientList = () => {
   }, []);
 
   return (
-    <div className="container patientList">
+    <div className=" patientList">
       {noOfPatients ? (
         <div className="row mt-5 text-danger">
           <p style={{ textAlign: 'right' }}>{noOfPatients} Patients Found</p>
