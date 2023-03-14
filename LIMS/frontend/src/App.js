@@ -20,7 +20,6 @@ import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
 
 import Machines from './pages/machineHistory';
-import Machines from './pages/machineHistory';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
