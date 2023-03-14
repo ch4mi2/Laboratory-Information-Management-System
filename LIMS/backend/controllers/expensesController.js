@@ -31,6 +31,18 @@ const createexpenses = async (req,res) => {
     const { description, amount } = req.body;
     const date = new Date()
 
+    let emptyFields = []
+
+    if(!description){
+        emptyFields.push('description')
+    }
+    if(!amount){
+        emptyFields.push('amount')
+    }
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: "please fill in the all the fields", emptyFields })
+    }
+
 //add doc to db
 try{
     const expenses = await Expenses.create({date, description, amount})
