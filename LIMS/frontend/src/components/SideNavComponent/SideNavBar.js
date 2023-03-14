@@ -91,9 +91,15 @@ function SideNavBar() {
                         <NavText>Staff</NavText>
                     </NavItem>
 
-                    <NavItem eventKey="">
+                    <NavItem eventKey="Finance">
                         <NavIcon><BsIcons.BsCashCoin size={30}/></NavIcon>
                         <NavText>Finance</NavText>
+                        <NavItem className = 'subNav' eventKey="AddExpenses">
+                        <NavText>Add Expenses</NavText>
+                        </NavItem>
+                        <NavItem className = 'subNav' eventKey="Expenseslist">
+                        <NavText>View Expenses</NavText>
+                        </NavItem>
                     </NavItem>
                 </SideNav.Nav>
             </SideNav>

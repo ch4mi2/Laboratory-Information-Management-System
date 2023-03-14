@@ -39,7 +39,7 @@ const Expensesform = () => {
 
   return (
     <form className="create" onSubmit={handlesubmit}>
-      <h3>Insert Expense</h3>
+      <h1>Insert Expense</h1>
 
       <label>description:</label>
       <input
