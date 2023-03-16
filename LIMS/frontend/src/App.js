@@ -19,10 +19,12 @@ import UpdateCategory from './pages/UpdateCategory'
 import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
 import Machines from './pages/machineHistory';
+import UpdateExpenses from './pages/UpdateExpenses';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
 import AddBill from './pages/AddBill';
+
 function App() {
   return (
     <div className="App">
@@ -74,6 +76,7 @@ function App() {
 
                   <Route path="/expenseslist" element={<Expenseslist />} />
                   <Route path="/addExpenses" element={<AddExpenses />} />
+                  <Route path='/editExpenses/:id' element={<UpdateExpenses />} />
 
                   <Route
                     path="/pendingTests"

@@ -17,7 +17,7 @@ const getAexpense = async (req, res) => {
         return res.status(404).json({error: 'no such expense'})
     }
 
-    const expense = await Expense.findbyid(id)
+    const expense = await Expenses.findById(id)
     if(!expense){
         return res.status(404).jason({error: "no such expense"})
     }
