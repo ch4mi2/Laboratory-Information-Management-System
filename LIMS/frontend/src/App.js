@@ -18,6 +18,7 @@ import UpdateTest from './pages/UpdateTest';
 import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
 import Machines from './pages/machineHistory';
+import TestResultView from './pages/TestResultView';
 
 
 // assets
@@ -78,6 +79,10 @@ function App() {
                   <Route
                     path="/pendingTests"
                     element={<PendingTestResults />}
+                  />
+                  <Route
+                    path="/testResultView/:id"
+                    element={<TestResultView />}
                   />
                 </Routes>
               </div>

@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,11 +6,54 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #EEEEEE;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+.card{
+  border: none;
+  border-radius:0;
+}
+.card-body{
+  padding: 5px;
+}
+.card:hover{
+  background-color: #FAFAFA;
+}
+
+.btnSubmit{
+  background-color: var(--orange);
+  color: #FFFFFF;
+  border: none;
+  width: 100px;
+  height: 30px;
+  border-radius: 25px;
+}
+
+.btnSubmit:hover{
+  background-color: var(--hover);
+}
+
+.form-control{
+  border-radius:25px;
+  width: 100px;
+  height:30px;
 }
 
 :root {
@@ -17,3 +61,6 @@ code {
   --grey: #eeeeee;
   --hover:#FF1744;
 }
+
+
+

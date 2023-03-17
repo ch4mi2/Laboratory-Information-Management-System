@@ -1,5 +1,6 @@
 const Sample = require('../models/sampleModel')
 const mongoose = require('mongoose')
+const { createTestResultParams } = require('../controllers/testResultController')
 const bwipjs = require('bwip-js')
 
 
@@ -59,7 +60,7 @@ const getSample = async (req, res) => {
     const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such workout'})
+        return res.status(404).json({error: 'No such sample'})
       } // this code checks whether its a valid id
 
     const sample = await Sample.findById(id)
@@ -94,7 +95,18 @@ const createSample = async (req, res) => {
         test,
         //collectionTime
       });
-      res.status(201).json(sample);
+
+      //creating testResult
+      const testResult = await createTestResultParams(patient, test, sample._id);
+      if(testResult != null){
+        console.log("test result record created")
+      }
+      
+      res.status(201).json({
+        sample: sample,
+        testResult: testResult
+      });
+      
     } catch(error) {
       res.status(400).json({error: error.message});
     }

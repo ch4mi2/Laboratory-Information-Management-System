@@ -50,15 +50,25 @@ function SideNavBar() {
                             </NavItem>
                     </NavItem>
             
-                    <NavItem eventKey="">
+                    <NavItem eventKey="pendingAccession">
                         <NavIcon><RiIcons.RiTestTubeLine size={30}/></NavIcon>
                         <NavText>Accession</NavText>
+                        <NavItem className = 'subNav' eventKey="pendingAccession">
+                        <NavText>Pending Accession</NavText>
+                        </NavItem>
+                        <NavItem className = 'subNav' eventKey="accessed">
+                        <NavText>Accessed</NavText>
+                        </NavItem> 
                     </NavItem>
 
                     <NavItem eventKey="">
                         <NavIcon><AiIcons.AiOutlineReconciliation size={30}/></NavIcon>
                         <NavText>Operation</NavText>
+                        <NavItem className = 'subNav' eventKey="pendingTests">
+                        <NavText>Pending Tests</NavText>
+                        </NavItem>
                     </NavItem>
+
                     <NavItem eventKey="testData">
                         <NavIcon><AiIcons.AiOutlineExperiment size={30}/></NavIcon>
                         <NavText>Test Data</NavText>
