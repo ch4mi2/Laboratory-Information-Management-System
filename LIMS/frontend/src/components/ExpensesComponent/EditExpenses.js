@@ -1,31 +1,74 @@
-import { useEffect } from "react"
-
-
-
-
+import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const EditExpenses = () => {
-    return(
-        <form className="create" onSubmit={handlesubmit}>
-        <h3>Insert Expense</h3>
+  const [description, setDescription] = useState('')
+  const [amount, setAmount] = useState('')
+  const { id } = useParams();
+  const [expenses, setExpenses] = useState('')
+  const navigate = useNavigate()
 
-      <label>description:</label>
+
+  useEffect(() => {
+    const fetchExpense = async () => {
+      try {
+        const response = await fetch(`/api/expenses/${id}`)
+        const json = await response.json()
+        if (response.ok) {
+          setExpenses(json)
+          setDescription(json.description)
+          setAmount(json.amount)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    };
+    fetchExpense();
+  }, [id])
+
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await fetch(`/api/expenses/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          description,
+          amount
+        })
+      })
+      if (response.ok) {
+        navigate('/expenseslist')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return (
+    <form className="create" onSubmit={handleUpdate}>
+      <h3>Update Expense</h3>
+
+      <label>Description:</label>
       <input
-        type = "text"
-        onChange={(e) => setdescription(e.target.value)}
+        type="text"
+        onChange={(e) => setDescription(e.target.value)}
         value={description}
-        />
+      />
 
-      <label>amount:</label>
+      <label>Amount:</label>
       <input
-        type = "number"
-        onChange={(e) => setamount(e.target.value)}
+        type="number"
+        onChange={(e) => setAmount(e.target.value)}
         value={amount}
-        /> 
+      />
 
-        <button>Edit</button>
-        {error && <div className="error">{error}</div>}
-
+      <button type="submit">Update</button>
     </form>
-    )
+  )
 }
+
+export default EditExpenses

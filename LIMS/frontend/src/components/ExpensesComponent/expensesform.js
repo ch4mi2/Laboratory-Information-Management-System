@@ -9,6 +9,7 @@ const Expensesform = () => {
     const [amount, setamount] = useState('')
     const [error, seterror] = useState(null)
     const navigate = useNavigate()
+    const [emptyFields, setEmptyFields] = useState([])
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -25,11 +26,13 @@ const Expensesform = () => {
 
         if(!response.ok){
             seterror(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if(response.ok){
             setdescription('')
             setamount('')
             seterror(null)
+            setEmptyFields([])
             console.log('new workout added', json)
             navigate ('/expenseslist')
             dispatch({type: 'expenses_created', payload: json})
@@ -39,13 +42,14 @@ const Expensesform = () => {
 
   return (
     <form className="create" onSubmit={handlesubmit}>
-      <h3>Insert Expense</h3>
+      <h1>Insert Expense</h1>
 
       <label>description:</label>
       <input
         type="text"
         onChange={(e) => setdescription(e.target.value)}
         value={description}
+        className={emptyFields.includes('description') ? 'error' : ""}
       />
 
       <label>amount:</label>
@@ -53,6 +57,7 @@ const Expensesform = () => {
         type="number"
         onChange={(e) => setamount(e.target.value)}
         value={amount}
+        className={emptyFields.includes('amount') ? 'error' : ""}
       />
 
       <button>submit</button>
