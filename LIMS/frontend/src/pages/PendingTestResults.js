@@ -47,7 +47,6 @@ const PendingTestResults = () => {
                   type="text"
                   className="form-control"
                   placeholder="Search..."
-                  
                 />
               </div>
             </div>
@@ -57,38 +56,34 @@ const PendingTestResults = () => {
       <div className="row">
         {testResults &&
           testResults.map((testResult) => (
-            
-            
-              <div className="card mb-1" key={testResult._id}>
+            <div className="card mb-1" key={testResult._id}>
               <div className="card-body">
-              <div className="row">
-                <div className="col-md-2">
-                  <p className="card-text">{testResult.sample?.sampleID}</p>
-                </div>
-                <div className="col-md-3">
-                  <p className="card-text">{testResult.patient?.firstName}{testResult.patient?.lastName}</p>
-                </div>
-                <div className="col-md-2">
-                  <p className="card-text">{testResult.test?.testName}</p>
-                </div>
-                <div className="col-md-2">
-                  <p className="card-text">dr.doctor</p>
-                </div>
-                <div className="col-md-2">
-                  <button className='btnSubmit' onClick={() => handleClick(testResult._id)}>
-                    Add Results
-                  </button>
+                <div className="row">
+                  <div className="col-md-2">
+                    <p className="card-text">{testResult.sample?.sampleID}</p>
+                  </div>
+                  <div className="col-md-3">
+                    <p className="card-text">{testResult.patient?.firstName}{testResult.patient?.lastName}</p>
+                  </div>
+                  <div className="col-md-2">
+                    <p className="card-text">{testResult.test?.testName}</p>
+                  </div>
+                  <div className="col-md-2">
+                    <p className="card-text">dr.doctor</p>
+                  </div>
+                  <div className="col-md-2">
+                    <button className='btnSubmit' onClick={() => handleClick(testResult._id)}>
+                      Add Results
+                    </button>
+                  </div>
                 </div>
               </div>
-              </div>
-              </div>
-              
-           
-            
+            </div>
           ))}
-          </div>
       </div>
+    </div>
   );
+  
 };
 
 export default PendingTestResults;
