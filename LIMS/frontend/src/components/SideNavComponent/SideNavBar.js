@@ -61,7 +61,7 @@ function SideNavBar() {
             </NavItem> 
           </NavItem>
 
-          <NavItem eventKey="">
+          <NavItem eventKey="pendingTests">
             <NavIcon>
               <AiIcons.AiOutlineReconciliation size={30} />
             </NavIcon>
