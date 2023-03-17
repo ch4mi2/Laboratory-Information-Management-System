@@ -15,27 +15,11 @@ code {
     monospace;
 }
 
-.container {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+table{
+  background-color: #FFFFFF;
 }
 
-.row {
-  margin: 0;
-  padding: 0;
-}
 
-.card{
-  border: none;
-  border-radius:0;
-}
-.card-body{
-  padding: 5px;
-}
-.card:hover{
-  background-color: #FAFAFA;
-}
 
 .btnSubmit{
   background-color: var(--orange);
@@ -50,11 +34,6 @@ code {
   background-color: var(--hover);
 }
 
-.form-control{
-  border-radius:25px;
-  width: 100px;
-  height:30px;
-}
 
 :root {
   --orange: #ff5252;

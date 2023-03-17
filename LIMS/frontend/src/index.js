@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'datatables.net-bs5'
+import './css/dataTables.css'
+
+
 import './index.css';
 //import './css/PatientDetailStyles/PatientDetailStyles.css';
 //import './css/PatientProfileStyles/patient-profile.css';

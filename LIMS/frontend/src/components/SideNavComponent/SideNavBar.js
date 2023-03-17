@@ -54,7 +54,7 @@ function SideNavBar() {
             </NavIcon>
             <NavText>Accession</NavText>
             <NavItem className = 'subNav' eventKey="pendingAccession">
-                <NavText>Pending Accession</NavText>
+                <NavText>Pending</NavText>
             </NavItem>
             <NavItem className = 'subNav' eventKey="accessed">
                 <NavText>Accessed</NavText>
@@ -65,9 +65,9 @@ function SideNavBar() {
             <NavIcon>
               <AiIcons.AiOutlineReconciliation size={30} />
             </NavIcon>
-            <NavText>Operation</NavText>
+            <NavText>Test Results</NavText>
             <NavItem className = 'subNav' eventKey="pendingTests">
-            <NavText>Pending Tests</NavText>
+            <NavText>Pending</NavText>
             </NavItem>
           </NavItem>
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import $ from 'jquery';
 
 const PendingTestResults = () => {
   const [testResults, setTestResults] = useState(null);
@@ -12,6 +13,10 @@ const PendingTestResults = () => {
 
       if (response.ok) {
         setTestResults(json);
+
+        $(function() {
+          $('#example').DataTable();
+        });
       }
     };
     fetchTestResults();
@@ -26,63 +31,45 @@ const PendingTestResults = () => {
       <div>
         <h4>Pending Tests</h4>
       </div>
-      <div className="row">
-        <div className="card mb-3">
-          <div className="card-body">
-            <div className="row">
-              <div className="col-md-2">
-                <p className="card-text">Sample Id</p>
-              </div>
-              <div className="col-md-3">
-                <p className="card-text">Patient Details</p>
-              </div>
-              <div className="col-md-2">
-                <p className="card-text">Test</p>
-              </div>
-              <div className="col-md-2">
-                <p className="card-text">Reffered Doctor</p>
-              </div>
-              <div className="col-md-2">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search..."
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        {testResults &&
-          testResults.map((testResult) => (
-            <div className="card mb-1" key={testResult._id}>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-md-2">
-                    <p className="card-text">{testResult.sample?.sampleID}</p>
-                  </div>
-                  <div className="col-md-3">
-                    <p className="card-text">{testResult.patient?.firstName}{testResult.patient?.lastName}</p>
-                  </div>
-                  <div className="col-md-2">
-                    <p className="card-text">{testResult.test?.testName}</p>
-                  </div>
-                  <div className="col-md-2">
-                    <p className="card-text">dr.doctor</p>
-                  </div>
-                  <div className="col-md-2">
-                    <button className='btnSubmit' onClick={() => handleClick(testResult._id)}>
-                      Add Results
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
-    </div>
+      <table id="example" className="table" style={{ width: '100%' }}>
+        <thead>
+          <tr>
+            <th>Sample Id</th>
+            <th>Patient</th>
+            <th>Test</th>
+            <th>Referred Doctor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {testResults &&
+            testResults.map((testResult) => (
+              <tr key={testResult._id}>
+                <td>{testResult.sample?.sampleID}</td>
+                <td>{testResult.patient?.firstName}{testResult.patient?.lastName}</td>
+                <td>{testResult.test?.testName}</td>
+                <td></td>
+                <td>
+                  <button className='btnSubmit' onClick={() => handleClick(testResult._id)}>
+                    Add Results
+                  </button>
+                </td> 
+              </tr>
+            ))}
+        </tbody>
+        <tfoot>     
+          <tr>
+            <th>Sample Id</th>
+            <th>Patient</th>
+            <th>Test</th>
+            <th>Referred Doctor</th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>               
   );
+  
   
 };
 
