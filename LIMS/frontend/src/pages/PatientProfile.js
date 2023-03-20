@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePatientContext } from '../hooks/usePatientContext';
 import { SET_PATIENTS } from '../context/patientContextDeclarations';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+import '../css/PatientProfileStyles/patient-profile.css';
 // components
 import PatientDetails from '../components/PatientComponents/PatientDetails';
 

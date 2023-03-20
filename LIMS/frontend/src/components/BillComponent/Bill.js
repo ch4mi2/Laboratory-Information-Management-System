@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ReactDOM from 'react-dom';
 
+import '../../css/BillStyles/bill.css';
 const Bill = ({ patient }) => {
   const [inputList, setInputList] = useState([]);
 
@@ -36,7 +36,13 @@ const Bill = ({ patient }) => {
         <div className="col-md-6">Services</div>
         <div className="col-md-6">
           {inputList}
-          <button onClick={handleClick}>Add service</button>
+          <button
+            id="bill-add-service-btn"
+            className="btn"
+            onClick={handleClick}
+          >
+            Add service
+          </button>
         </div>
       </div>
     </div>

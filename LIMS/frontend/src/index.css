@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,40 +5,33 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
 }
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-table{
-  background-color: #FFFFFF;
+table {
+  background-color: #ffffff;
 }
 
-
-
-.btnSubmit{
+.btnSubmit {
   background-color: var(--orange);
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   width: 100px;
   height: 30px;
   border-radius: 25px;
 }
 
-.btnSubmit:hover{
+.btnSubmit:hover {
   background-color: var(--hover);
 }
-
 
 :root {
   --orange: #ff5252;
   --grey: #eeeeee;
-  --hover:#FF1744;
+  --hover: #ff1744;
 }
-
-
-

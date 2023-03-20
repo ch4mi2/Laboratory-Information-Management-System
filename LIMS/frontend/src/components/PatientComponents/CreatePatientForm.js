@@ -1,6 +1,8 @@
 ///(search function needs to be implemented later)
 //(bug: page redirects when submitting)
 
+import '../../css/PatientDetailStyles/PatientDetailStyles.css';
+
 import { useState } from 'react';
 import { usePatientContext } from '../../hooks/usePatientContext';
 import { CREATE_PATIENT } from '../../context/patientContextDeclarations';

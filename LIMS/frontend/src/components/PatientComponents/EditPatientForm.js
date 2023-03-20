@@ -1,5 +1,5 @@
 // Bug : reload error
-
+import '../../css/PatientDetailStyles/PatientDetailStyles.css';
 import { useEffect, useState } from 'react';
 import { usePatientContext } from '../../hooks/usePatientContext';
 import { UPDATE_PATIENT } from '../../context/patientContextDeclarations';
