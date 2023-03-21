@@ -40,7 +40,7 @@ const createexpenses = async (req,res) => {
         emptyFields.push('amount')
     }
     if(emptyFields.length > 0){
-        return res.status(400).json({error: "please fill in the all the fields", emptyFields })
+        return res.status(400).json({error: "please fill all the fields", emptyFields })
     }
 
 //add doc to db
