@@ -16,6 +16,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-social": "^5.1.1",
     "datatables.net-bs5": "^1.13.4",
+    "datatables.net-dt": "^1.13.4",
     "jquery": "^3.6.4",
     "json-server": "^0.17.1",
     "jspdf": "^2.5.1",

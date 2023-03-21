@@ -1,0 +1,12 @@
+
+  
+  /* Change the background color of the active pagination button */
+  .dataTables_paginate .paginate_button.active a {
+    background-color: var(--orange);
+    border: none;
+    
+  }
+
+ 
+  
+  
