@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 
 import { useExpensesContext } from "../../hooks/useExpensesContext"
 
+import '../../css/expensesStyles/expenses.css'
+
 const Expensesform = () => {
     const { dispatch } = useExpensesContext()
     const [description, setdescription] = useState('')
@@ -41,10 +43,10 @@ const Expensesform = () => {
   
 
   return (
-    <form className="create" onSubmit={handlesubmit}>
+    <form  onSubmit={handlesubmit}>
       <h1>Insert Expense</h1>
 
-      <label>description:</label>
+      <label style={{marginTop:20}}>Description:</label>
       <input
         type="text"
         onChange={(e) => setdescription(e.target.value)}
@@ -52,7 +54,7 @@ const Expensesform = () => {
         className={emptyFields.includes('description') ? 'error' : ""}
       />
 
-      <label>amount:</label>
+      <label style={{marginTop:20}}>Amount:</label>
       <input
         type="number"
         onChange={(e) => setamount(e.target.value)}
@@ -60,7 +62,7 @@ const Expensesform = () => {
         className={emptyFields.includes('amount') ? 'error' : ""}
       />
 
-      <button>submit</button>
+      <button className="expenseSubmit">Submit</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
