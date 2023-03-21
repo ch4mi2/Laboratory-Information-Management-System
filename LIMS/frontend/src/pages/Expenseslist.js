@@ -29,8 +29,8 @@ const Expenseslist = () => {
         fetchExpenses()
     }, [dispatch])
 
-    const handleClick = async () => {
-      const response = await fetch('/api/expenses/' +expenses._id, {
+    const handleClickDelete = async (id) => {
+      const response = await fetch(`/api/expenses/${id}`, {
         method: 'DELETE'
       })
       const json = await response.json()
@@ -67,7 +67,7 @@ const Expenseslist = () => {
               <td>{expenses.description}</td>
               <td>{expenses.amount}</td>
               <td><button className="btnSubmit"  onClick={() => handleClickEdit(expenses._id)}>Edit </button></td>
-              <td><button className="btnDelete" onClick={() => handleClick}>Delete</button></td>
+              <td><button className="btnDelete" onClick={() => handleClickDelete(expenses._id)}>Delete</button></td>
             </tr>
           ))}
         </tbody>

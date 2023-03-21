@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-bs5';
 import '../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css'
-import './css/dataTablesCustom.css'
+
 
 import './index.css';
 
