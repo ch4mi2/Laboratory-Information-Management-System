@@ -7,7 +7,7 @@ aside {
 }
 
 #sideNav {
-  /* background-color: #EEEEEE !important; */
+  background-color:var(--orange); 
   height: 100%;
 
   color: #000000 !important;
