@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eeeeee;
+  background-color: #EEEEEE;
 }
 
 code {
@@ -63,5 +63,5 @@ table.dataTable tbody tr:hover {
 :root {
   --orange: #CC3333;
   --grey: #eeeeee;
-  --hover: #ff1744;
+  --hover: #EF5350;
 }
