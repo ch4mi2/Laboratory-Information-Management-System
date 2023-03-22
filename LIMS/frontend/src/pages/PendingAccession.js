@@ -2,35 +2,35 @@ import { useState, useEffect } from 'react';
 import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
 
-
-
-
 const PendingAccession = () => {
   const { samples, dispatch } = useSampleContext();
- 
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchSamples = async () => {
       try {
+        setIsLoading(true); // Set loading state to true before the fetch
         const response = await fetch('/api/samples/pendingSamples');
         const json = await response.json();
 
         if (response.ok) {
           dispatch({ type: 'SET_SAMPLES', payload: json });
-          
+
           $(function() {
-            $('#example').DataTable();
+            $('#example').DataTable({
+              order: [[0,'desc']],
+              "bDestroy": true
+            });
           });
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false); // Set loading state to false after the fetch
       }
     };
     fetchSamples();
   }, [dispatch]);
-
-
-   
 
   const handleCollectClick = async (id) => {
     try {
@@ -57,15 +57,16 @@ const PendingAccession = () => {
     }
   };
 
- 
-  
+  if (isLoading) {
+    return <div>Loading...</div>; // Render a loading text if loading state is true
+  }
 
   return (
     <div className="container">
       <div>
         <h4>Pending Accession</h4>
       </div>
-  
+
       <table id="example" className="table" style={{ width: '100%' }}>
         <thead>
           <tr>
@@ -106,9 +107,9 @@ const PendingAccession = () => {
       </table>
     </div>
   );
-  
 };
 
 export default PendingAccession;
+
 
 
