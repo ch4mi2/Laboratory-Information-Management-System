@@ -2,9 +2,24 @@ import { useState, useEffect } from 'react';
 import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
 
+const initilizeDataTable = () => {
+  $(function() {
+    // Check if table is already a DataTable
+    if ($.fn.dataTable.isDataTable('#example')) {
+      // Destroy the existing DataTable
+      $('#example').DataTable().destroy();
+    }
+    // Initialize a new DataTable with options
+    $('#example').DataTable({
+      order: [[0,'desc']],
+    });
+  });
+}
+
 const PendingAccession = () => {
   const { samples, dispatch } = useSampleContext();
   const [isLoading, setIsLoading] = useState(true);
+  const [collectingSampleId, setCollectingSampleId] = useState(null);
 
   useEffect(() => {
     const fetchSamples = async () => {
@@ -15,13 +30,9 @@ const PendingAccession = () => {
 
         if (response.ok) {
           dispatch({ type: 'SET_SAMPLES', payload: json });
-
-          $(function() {
-            $('#example').DataTable({
-              order: [[0,'desc']],
-              "bDestroy": true
-            });
-          });
+          
+          initilizeDataTable();
+         
         }
       } catch (error) {
         console.log(error);
@@ -30,10 +41,11 @@ const PendingAccession = () => {
       }
     };
     fetchSamples();
-  }, [dispatch]);
-
+  }, []);
+  
   const handleCollectClick = async (id) => {
     try {
+      setCollectingSampleId(id);
       const response = await fetch(`/api/samples/${id}`, {
         method: 'PATCH',
         headers: {
@@ -44,16 +56,27 @@ const PendingAccession = () => {
           collectionTime: new Date(),
         }),
       });
-
+      
       const updatedSample = await response.json();
-
+      /*
       // Remove the updated sample from the samples state
       const updatedSamples = samples.filter(
         (sample) => sample._id !== updatedSample._id
       );
       dispatch({ type: 'SET_SAMPLES', payload: updatedSamples });
+      initilizeDataTable();
+     */
+    
+      // Use DataTables API to remove the row with the updated sample
+    const table = $('#example').DataTable();
+    const row = table.rows(`[data-id ="${updatedSample._id}"]`);
+    row.remove().draw();
+    
+
     } catch (error) {
       console.error(error);
+    }finally{
+      setCollectingSampleId(null);
     }
   };
 
@@ -79,17 +102,18 @@ const PendingAccession = () => {
         </thead>
         <tbody>
           {samples && samples.map((sample ) => (
-            <tr key={sample._id}>
+            <tr key={sample._id} data-id={sample._id}>
               <td>{sample.sampleID}</td>
-              <td>{sample.patient?.firstName}</td>
-              <td>{sample.test?.testName}</td>
-              <td>{sample.test?.specimen}</td>
+              <td>{sample.patient?.firstName ?? "Record not found"}</td>
+              <td>{sample.test?.testName ?? "Record not found"}</td>
+              <td>{sample.test?.specimen ?? "Record not found"}</td>
               <td>
                 <button
-                  className="card-text btnSubmit"
+                  className="btnSubmit"
                   onClick={() => handleCollectClick(sample._id)}
+                  disabled={collectingSampleId === sample._id}
                 >
-                  Collect
+                  {collectingSampleId === sample._id ? 'Collecting...' : 'Collect'}
                 </button>
               </td>
             </tr>

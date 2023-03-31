@@ -46,6 +46,17 @@ const TestResultView = () => {
   }
 
   return (
+    <div>
+      {testResult && (
+        <div>
+          <h4>{testResult.test?.testName ?? "deleted"}</h4>
+          <div style={{display:"flex" , gap: '10px'}}>
+          <p>{testResult.patient?.firstName ?? "deleted"}</p>
+          <p>{testResult.patient?.lastName ?? "deleted"}</p>
+          </div>
+      </div>
+      
+    )}
     <form onSubmit={handleClickSubmit}>
       <table className="table">
         <thead>
@@ -72,7 +83,9 @@ const TestResultView = () => {
         </tbody>
       </table>
       <button type="submit">Save</button>
+      <button type="submit">Sumbit</button>
     </form>
+    </div>
   )
 }
 

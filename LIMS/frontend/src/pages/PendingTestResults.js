@@ -4,12 +4,15 @@ import $ from 'jquery';
 
 const PendingTestResults = () => {
   const [testResults, setTestResults] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate()
 
   useEffect(() => {
     const fetchTestResults = async () => {
-      const response = await fetch('/api/testResult/pendingTests');
-      const json = await response.json();
+      try {
+        setIsLoading(true);
+        const response = await fetch('/api/testResult/pendingTests');
+        const json = await response.json();
 
       if (response.ok) {
         setTestResults(json);
@@ -18,12 +21,22 @@ const PendingTestResults = () => {
           $('#example').DataTable();
         });
       }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false); // Set loading state to false after the fetch
+      }
+      
     };
     fetchTestResults();
   }, []);
 
   const handleClick = (id) => {
       navigate(`/testResultView/${id}`)
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Render a loading text if loading state is true
   }
 
   return (
@@ -34,23 +47,32 @@ const PendingTestResults = () => {
       <table id="example" className="table" style={{ width: '100%' }}>
         <thead>
           <tr>
-            <th>Sample Id</th>
+            
             <th>Patient</th>
             <th>Test</th>
             <th>Referred Doctor</th>
+            <th>Sample Id</th>
+            <th>Sample Status</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           {testResults &&
             testResults.map((testResult) => (
-              <tr key={testResult._id}>
-                <td>{testResult.sample?.sampleID}</td>
+              <tr key={testResult._id} data-status={testResult.sample?.status}>
+                
                 <td>{testResult.patient?.firstName}{testResult.patient?.lastName}</td>
                 <td>{testResult.test?.testName}</td>
                 <td></td>
+                <td>{testResult.sample?.sampleID}</td>
+                <td>{testResult.sample?.status}</td>
                 <td>
-                  <button className='btnSubmit' onClick={() => handleClick(testResult._id)}>
+                  <button 
+                    className='btnSubmit' 
+                    onClick={() => handleClick(testResult._id)}
+                    disabled={testResult.sample?.status === "pending"}
+                    style={{backgroundColor: testResult.sample?.status === "pending" ? "#aaa" : ""}}
+                  >
                     Add Results
                   </button>
                 </td> 

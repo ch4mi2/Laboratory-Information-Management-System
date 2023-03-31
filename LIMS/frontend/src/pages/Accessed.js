@@ -14,13 +14,6 @@ const Accessed = () => {
         const json = await response.json();
         if (response.ok) {
           dispatch({ type: 'SET_SAMPLES', payload: json });
-          
-          $(function() {
-            $('#example').DataTable({
-              order: [[4,'desc']],
-              "bDestroy": true
-            });
-          });
         }
       } catch (error) {
         console.log(error);
@@ -30,6 +23,15 @@ const Accessed = () => {
     };
     fetchSamples();
   }, [dispatch]);
+
+  useEffect(() => {
+    $(function() {
+      $('#example').DataTable({
+        order: [[4,'desc']],
+        "bDestroy": true
+      });
+    });
+  }, [samples]);
 
   if (isLoading) {
     return <div>Loading...</div>; // Render a loading text if loading state is true
@@ -55,9 +57,9 @@ const Accessed = () => {
               {samples && samples.map((sample) => (
                 <tr key={sample._id}>
                   <td>{sample.sampleID}</td>
-                  <td>{sample.patient?.firstName}</td>
-                  <td>{sample.test?.testName}</td>
-                  <td>{sample.test?.specimen}</td>
+                  <td>{sample.patient?.firstName ?? "Record not found"}</td>
+                  <td>{sample.test?.testName ?? "Record not found"}</td>
+                  <td>{sample.test?.specimen ?? "Record not found"}</td>
                   <td>{formatDate(sample.collectionTime)}</td>
                   <td><button className="btnSubmit">Print</button></td>
                 </tr>
