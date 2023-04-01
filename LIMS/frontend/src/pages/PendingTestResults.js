@@ -31,12 +31,16 @@ const PendingTestResults = () => {
     fetchTestResults();
   }, []);
 
-  const handleClick = (id) => {
-      navigate(`/testResultView/${id}`)
+  const handleAddClick = (id) => {
+      navigate(`/addTestResults/${id}`)
   }
 
   if (isLoading) {
     return <div>Loading...</div>; // Render a loading text if loading state is true
+  }
+
+  const handlePreviewClick = (id) => {
+    navigate(`/testResultPreview/${id}`)
   }
 
   return (
@@ -54,6 +58,7 @@ const PendingTestResults = () => {
             <th>Sample Id</th>
             <th>Sample Status</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -69,12 +74,17 @@ const PendingTestResults = () => {
                 <td>
                   <button 
                     className='btnSubmit' 
-                    onClick={() => handleClick(testResult._id)}
+                    onClick={() => handleAddClick(testResult._id)}
                     disabled={testResult.sample?.status === "pending"}
                     style={{backgroundColor: testResult.sample?.status === "pending" ? "#aaa" : ""}}
                   >
                     Add Results
                   </button>
+                </td>
+                <td>
+                <button onClick={() => handlePreviewClick((testResult._id))}>
+                  Preview
+                </button>
                 </td> 
               </tr>
             ))}
@@ -85,6 +95,7 @@ const PendingTestResults = () => {
             <th>Patient</th>
             <th>Test</th>
             <th>Referred Doctor</th>
+            <th></th>
             <th></th>
           </tr>
         </tfoot>

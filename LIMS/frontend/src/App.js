@@ -20,7 +20,8 @@ import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
 import Machines from './pages/machineHistory';
 import UpdateExpenses from './pages/UpdateExpenses';
-import TestResultView from './pages/TestResultView';
+import AddTestResults from './pages/AddTestResults';
+import TestResultPreview from './pages/TestResultPreview';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -87,8 +88,12 @@ function App() {
                     element={<PendingTestResults />}
                   />
                   <Route
-                    path="/testResultView/:id"
-                    element={<TestResultView />}
+                    path="/addTestResults/:id"
+                    element={<AddTestResults />}
+                  />
+                  <Route
+                    path="/testResultPreview/:id"
+                    element={<TestResultPreview />}
                   />
                 </Routes>
               </div>

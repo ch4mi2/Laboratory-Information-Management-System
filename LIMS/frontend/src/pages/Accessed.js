@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
 import formatDate from '../UtillFuntions/formatDate';
+import JsBarcode from 'jsbarcode';
+
+
 
 const Accessed = () => {
   const { samples, dispatch } = useSampleContext();
@@ -33,6 +36,13 @@ const Accessed = () => {
     });
   }, [samples]);
 
+  const handlePrintClick = (id) => {
+    
+  }
+  
+  
+  
+
   if (isLoading) {
     return <div>Loading...</div>; // Render a loading text if loading state is true
   }
@@ -61,7 +71,7 @@ const Accessed = () => {
                   <td>{sample.test?.testName ?? "Record not found"}</td>
                   <td>{sample.test?.specimen ?? "Record not found"}</td>
                   <td>{formatDate(sample.collectionTime)}</td>
-                  <td><button className="btnSubmit">Print</button></td>
+                  <td><button className="btnSubmit" onClick={() => handlePrintClick(sample.sampleID)}>Print</button></td>
                 </tr>
               ))}
             </tbody>
