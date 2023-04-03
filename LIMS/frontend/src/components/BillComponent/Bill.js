@@ -27,23 +27,45 @@ const Bill = ({ patient }) => {
 
   const Input = () => {
     return (
-      <select
-        onChange={(e) => calTotal(e)}
-        name="services"
-        id="bill-selectServices"
-      >
-        {Tests &&
-          Tests.map((t) => (
-            <option key={t._id} value={t.price}>
-              {t.testName}
-            </option>
-          ))}
-      </select>
+      <>
+        <select
+          onChange={(e) => calTotal(e)}
+          name="services"
+          id="bill-selectServices"
+        >
+          {Tests &&
+            Tests.map((t) => (
+              <option key={t._id} value={t.price}>
+                {t.testName}
+              </option>
+            ))}
+        </select>
+      </>
     );
+  };
+  const removeInputFields = (index) => {
+    const rows = [...inputList];
+    rows.splice(index, 1);
+    setInputList(rows);
   };
 
   const handleClick = (e) => {
-    setInputList(inputList.concat(<Input key={inputList.length} />));
+    console.log(inputList);
+    setInputList(
+      inputList.concat(
+        <div key={inputList.length}>
+          <Input />
+
+          <button
+            value={inputList.length}
+            className="btn btn-outline-danger"
+            onClick={(e) => removeInputFields(e.target.value)}
+          >
+            x
+          </button>
+        </div>
+      )
+    );
   };
 
   return (
