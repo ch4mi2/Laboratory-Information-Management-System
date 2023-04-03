@@ -16,3 +16,8 @@
 #bill-add-service-btn:hover {
   background-color: var(--hover);
 }
+
+#bill-selectServices {
+  display: block;
+  margin-top: 1rem;
+}

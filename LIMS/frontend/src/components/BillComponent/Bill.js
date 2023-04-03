@@ -1,14 +1,44 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import '../../css/BillStyles/bill.css';
 const Bill = ({ patient }) => {
   const [inputList, setInputList] = useState([]);
+  const [Tests, setTests] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const fetchTests = async () => {
+      const response = await fetch('/api/tests');
+      const json = await response.json();
+
+      if (response.ok) {
+        setTests(json);
+      }
+    };
+
+    fetchTests();
+  }, []);
+
+  const calTotal = (e) => {
+    let current = parseFloat(e.target.value);
+    console.log(current);
+    setTotal(total + current);
+  };
 
   const Input = () => {
     return (
-      <div>
-        <input className="p-2" type="text" placeholder="Add service name" />
-      </div>
+      <select
+        onChange={(e) => calTotal(e)}
+        name="services"
+        id="bill-selectServices"
+      >
+        {Tests &&
+          Tests.map((t) => (
+            <option key={t._id} value={t.price}>
+              {t.testName}
+            </option>
+          ))}
+      </select>
     );
   };
 
@@ -43,6 +73,11 @@ const Bill = ({ patient }) => {
           >
             Add service
           </button>
+        </div>
+      </div>
+      <div className="row mt-5">
+        <div className="col-12">
+          <h1>Total : {total}</h1>
         </div>
       </div>
     </div>
