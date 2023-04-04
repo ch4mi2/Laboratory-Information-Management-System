@@ -107,7 +107,7 @@ const Bill = ({ patient }) => {
                 className="btn btn-outline-danger"
                 onClick={(e) => removeInputFields(index)}
               >
-                Delete
+                Delet
               </button>
             </div>
           ))}
