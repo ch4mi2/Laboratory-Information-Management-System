@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 
 import '../../css/BillStyles/bill.css';
 const Bill = ({ patient }) => {
-  const [inputList, setInputList] = useState([]);
   const [Tests, setTests] = useState([]);
   const [total, setTotal] = useState(0);
+  const [selectedVal, setSelectedVal] = useState([]);
+  const [noOfDropdowns, setNoOfDropdowns] = useState([]);
 
   useEffect(() => {
     const fetchTests = async () => {
@@ -19,20 +20,43 @@ const Bill = ({ patient }) => {
     fetchTests();
   }, []);
 
-  const calTotal = (e) => {
-    let current = parseFloat(e.target.value);
-    console.log(current);
-    setTotal(total + current);
+  const calTotal = (e, index) => {
+    const { value } = e.target;
+
+    setSelectedVal((prevState) => {
+      let list = [...prevState];
+      list[index] = value;
+      console.log(list);
+
+      calSum(list);
+      return list;
+    });
   };
 
-  const Input = () => {
+  const calSum = (list) => {
+    // calculate the sum of all selected values
+    let sum = 0;
+    for (let i = 0; i < list.length; i++) {
+      if (list[i] !== null) {
+        sum += Number(list[i]);
+      }
+    }
+    //console.log(selectedVal);
+    setTotal(sum);
+  };
+
+  const Input = ({ index }) => {
     return (
       <>
         <select
-          onChange={(e) => calTotal(e)}
+          onChange={(e) => calTotal(e, index)}
           name="services"
           id="bill-selectServices"
+          value={selectedVal[index] || ''}
         >
+          <option value="" disabled hidden>
+            Select an Item
+          </option>
           {Tests &&
             Tests.map((t) => (
               <option key={t._id} value={t.price}>
@@ -44,28 +68,17 @@ const Bill = ({ patient }) => {
     );
   };
   const removeInputFields = (index) => {
-    const rows = [...inputList];
-    rows.splice(index, 1);
-    setInputList(rows);
+    const newVal = [...selectedVal];
+    newVal.splice(index, 1);
+    calSum(newVal);
+    setSelectedVal(newVal);
+
+    const newDrop = noOfDropdowns.filter((_, i) => i !== index);
+    setNoOfDropdowns(newDrop);
   };
 
   const handleClick = (e) => {
-    console.log(inputList);
-    setInputList(
-      inputList.concat(
-        <div key={inputList.length}>
-          <Input />
-
-          <button
-            value={inputList.length}
-            className="btn btn-outline-danger"
-            onClick={(e) => removeInputFields(e.target.value)}
-          >
-            x
-          </button>
-        </div>
-      )
-    );
+    setNoOfDropdowns((prevState) => [...prevState, '1']);
   };
 
   return (
@@ -87,7 +100,18 @@ const Bill = ({ patient }) => {
       <div className="row mt-5">
         <div className="col-md-6">Services</div>
         <div className="col-md-6">
-          {inputList}
+          {noOfDropdowns.map((data, index) => (
+            <div className="mt-3" key={index}>
+              <Input index={index} />
+              <button
+                className="btn btn-outline-danger"
+                onClick={(e) => removeInputFields(index)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+
           <button
             id="bill-add-service-btn"
             className="btn"
@@ -97,9 +121,10 @@ const Bill = ({ patient }) => {
           </button>
         </div>
       </div>
+      <hr />
       <div className="row mt-5">
         <div className="col-12">
-          <h1>Total : {total}</h1>
+          <h1 className="">Total : Rs. {total}</h1>
         </div>
       </div>
     </div>
