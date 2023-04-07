@@ -22,10 +22,11 @@ import Machines from './pages/machineHistory';
 import UpdateExpenses from './pages/UpdateExpenses';
 import AddTestResults from './pages/AddTestResults';
 import TestResultPreview from './pages/TestResultPreview';
+import AddBill from './pages/AddBill';
+import PrintBill from './pages/PrintBill';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
-import AddBill from './pages/AddBill';
 
 function App() {
   return (
@@ -53,9 +54,14 @@ function App() {
                     path="/patient-profile/:id"
                     element={<PatientProfile />}
                   />
+
                   <Route
                     path="/patient-profile/:id/addBill"
                     element={<AddBill />}
+                  />
+                  <Route
+                    path="/patient-profile/:id/addBill/print-bill"
+                    element={<PrintBill />}
                   />
                   <Route
                     path="/patient-profile/:id/edit"
