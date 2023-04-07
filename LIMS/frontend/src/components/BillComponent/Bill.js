@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css/BillStyles/bill.css';
 
@@ -9,6 +9,7 @@ const Bill = ({ patient }) => {
   const [noOfDropdowns, setNoOfDropdowns] = useState([]);
   const [services, setServices] = useState([]);
   const [outsourced, setOutsourced] = useState([]);
+  const ref = useRef([]);
 
   const navigate = useNavigate();
 
@@ -71,6 +72,7 @@ const Bill = ({ patient }) => {
     return (
       <>
         <select
+          ref={(el) => (ref.current[index] = el)}
           onChange={(e) => {
             calTotal(e, index);
           }}
@@ -95,11 +97,19 @@ const Bill = ({ patient }) => {
     newVal.splice(index, 1);
     calSum(newVal);
     setSelectedVal(newVal);
-
-    if (Tests[index]?.outsourced === 'true') {
+    console.log('////////////');
+    const refObject = ref.current[index];
+    const refObjectIndex = ref.current[index].selectedIndex;
+    console.log(refObjectIndex);
+    console.log('XXXXXXXX');
+    const isOutsourced = Tests[refObjectIndex - 1].outsourced;
+    console.log(isOutsourced == 'true');
+    console.log('index :' + index);
+    console.log(Tests[refObjectIndex - 1]);
+    if (Tests[refObjectIndex - 1]?.outsourced === 'true') {
       const newOutsourcedArr = [...outsourced];
       newOutsourcedArr.splice(index, 1);
-      setServices(newOutsourcedArr);
+      setOutsourced(newOutsourcedArr);
     } else {
       const newServicesArr = [...services];
       newServicesArr.splice(index, 1);
@@ -120,8 +130,8 @@ const Bill = ({ patient }) => {
 
   const confirmBill = async () => {
     const patientName = patient.firstName + ' ' + patient.lastName;
-    console.log(patientName);
-    console.log(selectedVal);
+    console.log('normal tests : ' + services);
+    console.log('outsourced : ' + outsourced);
     /* const bill = { NIC, patientName, services, outsourceServices, total };
 
     const response = await fetch('/api/patients/', {
