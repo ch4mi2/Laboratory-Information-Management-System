@@ -8,6 +8,7 @@ const Bill = ({ patient }) => {
   const [selectedVal, setSelectedVal] = useState([]);
   const [noOfDropdowns, setNoOfDropdowns] = useState([]);
   const [services, setServices] = useState([]);
+  const [outsourced, setOutsourced] = useState([]);
 
   const navigate = useNavigate();
 
@@ -25,23 +26,33 @@ const Bill = ({ patient }) => {
   }, []);
 
   const calTotal = (e, index) => {
-    const value = e.target.value;
-    const service = e.target.name;
-    console.log(
-      'value : ' + value + '   service : ' + service + '  target : ' + e
-    );
+    const price = e.target.value;
+    const selectedIndex = e.target.selectedIndex;
 
+    console.log('index : ' + selectedIndex);
     setSelectedVal((prevState) => {
       let list = [...prevState];
-      list[index] = value;
+      list[index] = price;
       console.log(list);
-
       calSum(list);
       return list;
     });
 
-    setServices((prevState) => [...prevState, service]);
-    // console.log('Services : ' + services);
+    if (Tests[selectedIndex - 1]?.outsourced == 'true') {
+      setOutsourced((prevState) => {
+        let list = [...prevState];
+        list[index] = Tests[selectedIndex - 1]?.testName;
+        console.log('outsourced tests : ' + list);
+        return list;
+      });
+    } else {
+      setServices((prevState) => {
+        let list = [...prevState];
+        list[index] = Tests[selectedIndex - 1]?.testName;
+        console.log('normal tests : ' + list);
+        return list;
+      });
+    }
   };
 
   const calSum = (list) => {
@@ -60,16 +71,18 @@ const Bill = ({ patient }) => {
     return (
       <>
         <select
-          onChange={(e) => calTotal(e, index)}
+          onChange={(e) => {
+            calTotal(e, index);
+          }}
           id="bill-selectServices"
-          value={selectedVal[0] || ''}
+          value={selectedVal[index] || ''}
         >
           <option value="" disabled hidden>
             Select an Item
           </option>
           {Tests &&
             Tests.map((t) => (
-              <option key={t._id} value={t.price} name={t.testName}>
+              <option key={t._id} value={t.price}>
                 {t.testName}
               </option>
             ))}
@@ -82,6 +95,16 @@ const Bill = ({ patient }) => {
     newVal.splice(index, 1);
     calSum(newVal);
     setSelectedVal(newVal);
+
+    if (Tests[index]?.outsourced === 'true') {
+      const newOutsourcedArr = [...outsourced];
+      newOutsourcedArr.splice(index, 1);
+      setServices(newOutsourcedArr);
+    } else {
+      const newServicesArr = [...services];
+      newServicesArr.splice(index, 1);
+      setServices(newServicesArr);
+    }
 
     const newDrop = noOfDropdowns.filter((_, i) => i !== index);
     setNoOfDropdowns(newDrop);
