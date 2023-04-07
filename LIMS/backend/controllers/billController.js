@@ -27,8 +27,13 @@ const getBill = async (req, res) => {
 
 // create new bill
 const createBill = async (req, res) => {
-  const { patientId, patientName, services, outsourceServices, total } =
-    req.body;
+  const {
+    NIC: patientId,
+    patientName,
+    normalServices: services,
+    outsourceServices,
+    Total: total,
+  } = req.body;
 
   let emptyFields = [];
 

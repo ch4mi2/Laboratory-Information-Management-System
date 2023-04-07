@@ -39,11 +39,17 @@ const Bill = ({ patient }) => {
       return list;
     });
 
-    if (Tests[selectedIndex - 1]?.outsourced == 'true') {
+    if (Tests[selectedIndex - 1]?.outsourced === 'true') {
       setOutsourced((prevState) => {
         let list = [...prevState];
         list[index] = Tests[selectedIndex - 1]?.testName;
         console.log('outsourced tests : ' + list);
+        return list;
+      });
+      setServices((prevState) => {
+        let list = [...prevState];
+        list[index] = 0;
+        console.log('normal tests : ' + list);
         return list;
       });
     } else {
@@ -51,6 +57,12 @@ const Bill = ({ patient }) => {
         let list = [...prevState];
         list[index] = Tests[selectedIndex - 1]?.testName;
         console.log('normal tests : ' + list);
+        return list;
+      });
+      setOutsourced((prevState) => {
+        let list = [...prevState];
+        list[index] = 0;
+        console.log('outsourced tests : ' + list);
         return list;
       });
     }
@@ -98,23 +110,24 @@ const Bill = ({ patient }) => {
     calSum(newVal);
     setSelectedVal(newVal);
     console.log('////////////');
-    const refObject = ref.current[index];
+
     const refObjectIndex = ref.current[index].selectedIndex;
     console.log(refObjectIndex);
     console.log('XXXXXXXX');
     const isOutsourced = Tests[refObjectIndex - 1].outsourced;
-    console.log(isOutsourced == 'true');
+    console.log(isOutsourced === 'true');
     console.log('index :' + index);
     console.log(Tests[refObjectIndex - 1]);
-    if (Tests[refObjectIndex - 1]?.outsourced === 'true') {
-      const newOutsourcedArr = [...outsourced];
-      newOutsourcedArr.splice(index, 1);
-      setOutsourced(newOutsourcedArr);
-    } else {
-      const newServicesArr = [...services];
-      newServicesArr.splice(index, 1);
-      setServices(newServicesArr);
-    }
+
+    const newOutsourcedArr = [...outsourced];
+
+    const newServicesArr = [...services];
+    newServicesArr.splice(index, 1);
+    newOutsourcedArr.splice(index, 1);
+    console.log('normal  : ' + newServicesArr);
+    setServices(newServicesArr);
+    console.log('outsource  : ' + newOutsourcedArr);
+    setOutsourced(newOutsourcedArr);
 
     const newDrop = noOfDropdowns.filter((_, i) => i !== index);
     setNoOfDropdowns(newDrop);
@@ -130,26 +143,40 @@ const Bill = ({ patient }) => {
 
   const confirmBill = async () => {
     const patientName = patient.firstName + ' ' + patient.lastName;
-    console.log('normal tests : ' + services);
-    console.log('outsourced : ' + outsourced);
-    /* const bill = { NIC, patientName, services, outsourceServices, total };
+    const NIC = patient.NIC;
+    let outsourceServices = [];
+    let normalServices = [];
+    let Total = Number(total);
 
-    const response = await fetch('/api/patients/', {
+    for (let i = 0; i < outsourced.length; i++) {
+      if (outsourced[i] == 0 || outsourced[i] === '0') continue;
+      else outsourceServices.push(outsourced[i]);
+    }
+
+    for (let i = 0; i < services.length; i++) {
+      if (services[i] == 0 || services[i] === '0') continue;
+      else normalServices.push(services[i]);
+    }
+
+    const bill = { NIC, patientName, normalServices, outsourceServices, Total };
+
+    const response = await fetch('/api/bills/', {
       method: 'POST',
-      body: JSON.stringify(patient),
+      body: JSON.stringify(bill),
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
     const json = await response.json();
-
+    let status = '';
     if (!response.ok) {
-      setError(json.error);
-      setEmptyFields(json.emptyFields);
-      setStatus('Failed to create the account');
+      status = 'Failed to create the account';
+    } else {
+      status = 'Bill Added';
     }
-    navigate('./print-bill');*/
+    console.log('Status : ' + status);
+    navigate('./print-bill', { state: { status: status } });
   };
 
   return (
