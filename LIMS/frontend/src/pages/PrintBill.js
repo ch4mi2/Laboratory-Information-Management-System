@@ -6,7 +6,7 @@ const PrintBill = () => {
 
   return (
     <div>
-      {}
+      {location.state.status}
       <button> Print</button>
     </div>
   );
