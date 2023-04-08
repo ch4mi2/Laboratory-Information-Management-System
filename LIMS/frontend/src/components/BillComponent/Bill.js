@@ -143,7 +143,7 @@ const Bill = ({ patient }) => {
 
   const confirmBill = async () => {
     const patientName = patient.firstName + ' ' + patient.lastName;
-    const NIC = patient.NIC;
+    const patientId = patient._id;
     let outsourceServices = [];
     let normalServices = [];
     let Total = Number(total);
@@ -158,7 +158,13 @@ const Bill = ({ patient }) => {
       else normalServices.push(services[i]);
     }
 
-    const bill = { NIC, patientName, normalServices, outsourceServices, Total };
+    const bill = {
+      patientId,
+      patientName,
+      normalServices,
+      outsourceServices,
+      Total,
+    };
 
     const response = await fetch('/api/bills/', {
       method: 'POST',
@@ -206,7 +212,7 @@ const Bill = ({ patient }) => {
             <div className="mt-3" key={index}>
               <Input index={index} />
               <button
-                className="btnDelete"
+                className="btnDelete mt-1"
                 onClick={(e) => removeInputFields(index)}
               >
                 Delete
