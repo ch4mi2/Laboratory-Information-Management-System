@@ -91,10 +91,11 @@ const PendingTestResults = () => {
         </tbody>
         <tfoot>     
           <tr>
-            <th>Sample Id</th>
             <th>Patient</th>
             <th>Test</th>
             <th>Referred Doctor</th>
+            <th>Sample Id</th>
+            <th>Sample Status</th>
             <th></th>
             <th></th>
           </tr>
