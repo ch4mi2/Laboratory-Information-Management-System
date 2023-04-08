@@ -12,7 +12,7 @@ const Bill = ({ patient }) => {
   const ref = useRef([]);
 
   //save test ids
-  const [billedTests , setBilledTests] = useState([]);
+  const [billedTests, setBilledTests] = useState([]);
 
   const navigate = useNavigate();
 
@@ -33,18 +33,18 @@ const Bill = ({ patient }) => {
     const price = e.target.value;
     const selectedIndex = e.target.selectedIndex;
 
-    console.log('index : ' + selectedIndex);
     setSelectedVal((prevState) => {
       let list = [...prevState];
       list[index] = price;
-      console.log(list);
       calSum(list);
       return list;
     });
 
     if (Tests[selectedIndex - 1]?.outsourced === 'true') {
-
-      setBilledTests(prevArray => [...prevArray, Tests[selectedIndex - 1]?._id]);//setBilledTests
+      setBilledTests((prevArray) => [
+        ...prevArray,
+        Tests[selectedIndex - 1]?._id,
+      ]); //setBilledTests
 
       setOutsourced((prevState) => {
         let list = [...prevState];
@@ -59,19 +59,19 @@ const Bill = ({ patient }) => {
         return list;
       });
     } else {
-
-      setBilledTests(prevArray => [...prevArray, Tests[selectedIndex - 1]?._id]);//setBilledTests
+      setBilledTests((prevArray) => [
+        ...prevArray,
+        Tests[selectedIndex - 1]?._id,
+      ]); //setBilledTests
 
       setServices((prevState) => {
         let list = [...prevState];
         list[index] = Tests[selectedIndex - 1]?.testName;
-        console.log('normal tests : ' + list);
         return list;
       });
       setOutsourced((prevState) => {
         let list = [...prevState];
         list[index] = 0;
-        console.log('outsourced tests : ' + list);
         return list;
       });
     }
@@ -85,7 +85,6 @@ const Bill = ({ patient }) => {
         sum += Number(list[i]);
       }
     }
-    //console.log(selectedVal);
     setTotal(sum);
   };
 
@@ -114,30 +113,23 @@ const Bill = ({ patient }) => {
     );
   };
   const removeInputFields = (index) => {
+    //cal total
     const newVal = [...selectedVal];
     newVal.splice(index, 1);
     calSum(newVal);
     setSelectedVal(newVal);
-    console.log('////////////');
 
-    const refObjectIndex = ref.current[index].selectedIndex;
-    console.log(refObjectIndex);
-    console.log('XXXXXXXX');
-    const isOutsourced = Tests[refObjectIndex - 1].outsourced;
-    console.log(isOutsourced === 'true');
-    console.log('index :' + index);
-    console.log(Tests[refObjectIndex - 1]);
-
+    //outsourced
     const newOutsourcedArr = [...outsourced];
-
-    const newServicesArr = [...services];
-    newServicesArr.splice(index, 1);
     newOutsourcedArr.splice(index, 1);
-    console.log('normal  : ' + newServicesArr);
-    setServices(newServicesArr);
-    console.log('outsource  : ' + newOutsourcedArr);
     setOutsourced(newOutsourcedArr);
 
+    //normal
+    const newServicesArr = [...services];
+    newServicesArr.splice(index, 1);
+    setServices(newServicesArr);
+
+    //dropdown count
     const newDrop = noOfDropdowns.filter((_, i) => i !== index);
     setNoOfDropdowns(newDrop);
   };
@@ -152,7 +144,7 @@ const Bill = ({ patient }) => {
 
   const confirmBill = async () => {
     const patientName = patient.firstName + ' ' + patient.lastName;
-    const NIC = patient.NIC;
+    const patientId = patient._id;
     let outsourceServices = [];
     let normalServices = [];
     let Total = Number(total);
@@ -167,7 +159,13 @@ const Bill = ({ patient }) => {
       else normalServices.push(services[i]);
     }
 
-    const bill = { NIC, patientName, normalServices, outsourceServices, Total };
+    const bill = {
+      patientId,
+      patientName,
+      normalServices,
+      outsourceServices,
+      Total,
+    };
 
     const response = await fetch('/api/bills/', {
       method: 'POST',
@@ -185,10 +183,9 @@ const Bill = ({ patient }) => {
       status = 'Bill Added';
 
       createSample(patient._id, billedTests);
-
     }
     console.log('Status : ' + status);
-    console.log("billed tests" + billedTests)
+    console.log('billed tests' + billedTests);
     navigate('./print-bill', { state: { status: status } });
   };
 
@@ -198,18 +195,17 @@ const Bill = ({ patient }) => {
       const response = await fetch('/api/samples/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ patient, billedTests })
+        body: JSON.stringify({ patient, billedTests }),
       });
-  
+
       const data = await response.json();
       return data;
     } catch (error) {
       console.error(error);
     }
   };
-  
 
   return (
     <div className=" receipt mt-5">

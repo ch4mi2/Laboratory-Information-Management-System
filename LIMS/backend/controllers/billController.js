@@ -28,7 +28,7 @@ const getBill = async (req, res) => {
 // create new bill
 const createBill = async (req, res) => {
   const {
-    NIC: patientId,
+    patientId,
     patientName,
     normalServices: services,
     outsourceServices,
