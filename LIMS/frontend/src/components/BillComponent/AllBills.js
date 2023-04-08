@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
+import { useNavigate } from 'react-router-dom';
 
 const AllBills = () => {
   const [bills, setBills] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBills = async () => {
@@ -20,6 +22,9 @@ const AllBills = () => {
     fetchBills();
   }, []);
 
+  const handleClick = (id) => {
+    navigate(`../bill/${id}`);
+  };
   return (
     <div>
       {bills ? (
@@ -40,7 +45,7 @@ const AllBills = () => {
             <tbody>
               {bills &&
                 bills.map((bill) => (
-                  <tr key={bill._id}>
+                  <tr key={bill._id} onClick={() => handleClick(bill._id)}>
                     <td className="col-3">{bill.patientName}</td>
                     <td className="col-5">{bill.services}</td>
                     <td className="col-1">{bill.outsourceServices}</td>

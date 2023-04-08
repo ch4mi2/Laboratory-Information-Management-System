@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 // pages and components
 import PatientList from './pages/PatientList';
@@ -34,11 +34,13 @@ import TransactionHistory from './pages/TransactionHistory';
 function App() {
   return (
     <div className="App">
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Mediline</title>
-        <meta name="description" content="Mediline LIMS" />
-      </Helmet>
+      <HelmetProvider>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Mediline</title>
+          <meta name="description" content="Mediline LIMS" />
+        </Helmet>
+      </HelmetProvider>
       <HeaderComponent
         profileImgSrc={''}
         logoImgSrc={mediLineLogo}
