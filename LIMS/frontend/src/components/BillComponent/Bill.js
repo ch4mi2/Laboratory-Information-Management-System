@@ -119,10 +119,16 @@ const Bill = ({ patient }) => {
     calSum(newVal);
     setSelectedVal(newVal);
 
+    //billedTests
+    const newBilledTestArr = [...billedTests];
+    newBilledTestArr.splice(index, 1);
+    setBilledTests(newBilledTestArr);
+
     //outsourced
     const newOutsourcedArr = [...outsourced];
     newOutsourcedArr.splice(index, 1);
     setOutsourced(newOutsourcedArr);
+
 
     //normal
     const newServicesArr = [...services];
