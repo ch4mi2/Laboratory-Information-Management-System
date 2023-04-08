@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
 
 // pages and components
 import PatientList from './pages/PatientList';
@@ -25,6 +25,7 @@ import AddTestResults from './pages/AddTestResults';
 import TestResultPreview from './pages/TestResultPreview';
 import AddBill from './pages/AddBill';
 import PrintBill from './pages/PrintBill';
+import AllBills from './pages/AllBills';
 
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
@@ -60,6 +61,7 @@ function App() {
                     path="/patient-profile/:id"
                     element={<PatientProfile />}
                   />
+                  <Route path="/view-bills" element={<AllBills />} />
 
                   <Route
                     path="/patient-profile/:id/addBill"

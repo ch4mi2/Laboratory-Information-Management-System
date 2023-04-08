@@ -40,11 +40,24 @@ function SideNavBar() {
 
           <NavItem eventKey="registration">
             <NavIcon>
-              <FaIcons.FaCashRegister size={25} />
+              <MdIcons.MdOutlinePersonOutline size={30} />
             </NavIcon>
             <NavText>Registration</NavText>
+            <NavItem className="subNav" eventKey="create-patient">
+              <NavText>Add Patients</NavText>
+            </NavItem>
             <NavItem className="subNav" eventKey="patient-list">
-              <NavText>Patient-list</NavText>
+              <NavText>Patient List</NavText>
+            </NavItem>
+          </NavItem>
+
+          <NavItem eventKey="billing">
+            <NavIcon>
+              <FaIcons.FaCashRegister size={25} />
+            </NavIcon>
+            <NavText>Billing</NavText>
+            <NavItem className="subNav" eventKey="view-bills">
+              <NavText>View all Bills</NavText>
             </NavItem>
           </NavItem>
 
@@ -53,12 +66,12 @@ function SideNavBar() {
               <RiIcons.RiTestTubeLine size={30} />
             </NavIcon>
             <NavText>Accession</NavText>
-            <NavItem className = 'subNav' eventKey="pendingAccession">
-                <NavText>Pending</NavText>
+            <NavItem className="subNav" eventKey="pendingAccession">
+              <NavText>Pending</NavText>
             </NavItem>
-            <NavItem className = 'subNav' eventKey="accessed">
-                <NavText>Accessed</NavText>
-            </NavItem> 
+            <NavItem className="subNav" eventKey="accessed">
+              <NavText>Accessed</NavText>
+            </NavItem>
           </NavItem>
 
           <NavItem eventKey="pendingTests">
@@ -66,8 +79,8 @@ function SideNavBar() {
               <AiIcons.AiOutlineReconciliation size={30} />
             </NavIcon>
             <NavText>Test Results</NavText>
-            <NavItem className = 'subNav' eventKey="pendingTests">
-            <NavText>Pending</NavText>
+            <NavItem className="subNav" eventKey="pendingTests">
+              <NavText>Pending</NavText>
             </NavItem>
           </NavItem>
 
@@ -104,22 +117,25 @@ function SideNavBar() {
             </NavItem>
           </NavItem>
 
-                    <NavItem eventKey="">
-                        <NavIcon><MdIcons.MdOutlinePersonOutline size={30}/></NavIcon>
-                        <NavText>Staff</NavText>
-                    </NavItem>
-
+          {/*
+          <NavItem eventKey="">
+            <NavIcon>
+              <MdIcons.MdOutlinePersonOutline size={30} />
+            </NavIcon>
+            <NavText>Staff</NavText>
+          </NavItem>
+        */}
           <NavItem eventKey="Finance">
             <NavIcon>
               <BsIcons.BsCashCoin size={30} />
             </NavIcon>
             <NavText>Finance</NavText>
-                <NavItem className = 'subNav' eventKey="AddExpenses">
-                    <NavText>Add Expenses</NavText>
-                        </NavItem>
-                <NavItem className = 'subNav' eventKey="Expenseslist">
-                    <NavText>View Expenses</NavText>
-                        </NavItem>
+            <NavItem className="subNav" eventKey="AddExpenses">
+              <NavText>Add Expenses</NavText>
+            </NavItem>
+            <NavItem className="subNav" eventKey="Expenseslist">
+              <NavText>View Expenses</NavText>
+            </NavItem>
           </NavItem>
         </SideNav.Nav>
       </SideNav>

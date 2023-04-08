@@ -1,19 +1,20 @@
 import { useRef, useEffect, useState } from 'react';
 import moment from 'moment';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import logo from '../assets/common/mediLineLogo.webp';
 import '../css/TestResultStyles/testResultPreview.css';
 
 const PrintBill = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const componentRef = useRef();
   const { id } = useParams();
   const [bills, setBills] = useState([]);
   const thisBill = bills && bills.filter((bill) => bill.patientId === id)[0];
 
   useEffect(() => {
-    const fetchTests = async () => {
+    const fetchBills = async () => {
       const response = await fetch('/api/bills');
       const json = await response.json();
 
@@ -22,7 +23,7 @@ const PrintBill = () => {
       }
     };
 
-    fetchTests();
+    fetchBills();
   }, []);
   return (
     <>
@@ -145,9 +146,8 @@ const PrintBill = () => {
           </div>
         </div>
       </div>
-      <div className="row mt-3">
+      <div className="row my-3">
         <div className="col-12 d-flex justify-content-center">
-          <button className="btnSubmit mx-3">Edit</button>
           <ReactToPrint
             trigger={() => <button className="btnSubmit">Print</button>}
             content={() => componentRef.current}

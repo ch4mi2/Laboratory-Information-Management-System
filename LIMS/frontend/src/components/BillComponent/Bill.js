@@ -212,7 +212,7 @@ const Bill = ({ patient }) => {
             <div className="mt-3" key={index}>
               <Input index={index} />
               <button
-                className="btnDelete mt-1"
+                className="btnDelete"
                 onClick={(e) => removeInputFields(index)}
               >
                 Delete
