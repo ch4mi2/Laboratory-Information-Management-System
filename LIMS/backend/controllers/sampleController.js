@@ -75,42 +75,46 @@ const getSample = async (req, res) => {
 
 //create a new sample
 const createSample = async (req, res) => {
-    const { patient, test } = req.body;
-  
-    // Generate sample ID using current year and a sequential number
-    const currentYear = new Date().getFullYear().toString().slice(-2);
-    const lastSample = await Sample.findOne({}).sort({ sampleID: -1 }).exec();
-    const lastNumber = lastSample ? parseInt(lastSample.sampleID.slice(-6)) : 0;
-    const newNumber = (lastNumber + 1).toString().padStart(6, '0');
-    const sampleID = `${currentYear}${newNumber}`;
-  
-    // Generate collection time as current date and time
-    //const collectionTime = new Date();
-  
-    // Create new sample with generated ID and collection time
-    try {
+  const { patient, billedTests } = req.body;
+
+  try {
+    const samples = [];
+    const testResults = [];
+
+    for (const test of billedTests) {
+      // Generate sample ID using current year and a sequential number
+      const currentYear = new Date().getFullYear().toString().slice(-2);
+      const lastSample = await Sample.findOne({}).sort({ sampleID: -1 }).exec();
+      const lastNumber = lastSample ? parseInt(lastSample.sampleID.slice(-6)) : 0;
+      const newNumber = (lastNumber + 1).toString().padStart(6, '0');
+      const sampleID = `${currentYear}${newNumber}`;
+
+      // Create new sample with generated ID and patient and test information
       const sample = await Sample.create({
         sampleID,
         patient,
         test,
-        //collectionTime
       });
 
-      //creating testResult
+      // Create new test result record for the sample
       const testResult = await createTestResultParams(patient, test, sample._id);
-      if(testResult != null){
-        console.log("test result record created")
+      if (testResult != null) {
+        console.log("Test result record created");
+        testResults.push(testResult);
       }
-      
-      res.status(201).json({
-        sample: sample,
-        testResult: testResult
-      });
-      
-    } catch(error) {
-      res.status(400).json({error: error.message});
+
+      samples.push(sample);
     }
-  };
+
+    res.status(201).json({
+      samples: samples,
+      testResults: testResults
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
   
 //delete a sample
 const deleteSample = async (req, res) => {
