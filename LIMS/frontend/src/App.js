@@ -25,10 +25,11 @@ import AddTestResults from './pages/AddTestResults';
 import TestResultPreview from './pages/TestResultPreview';
 import AddBill from './pages/AddBill';
 import PrintBill from './pages/PrintBill';
-import AllBills from './pages/AllBills';
-
+import AllBills from './components/BillComponent/AllBills';
+import ShowABill from './components/BillComponent/ShowABill';
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
+import TransactionHistory from './pages/TransactionHistory';
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
                     path="/patient-profile/:id/addBill"
                     element={<AddBill />}
                   />
+                  <Route path="/bill/:id" element={<ShowABill />} />
                   <Route
                     path="/patient-profile/:id/addBill/print-bill"
                     element={<PrintBill />}
@@ -74,6 +76,10 @@ function App() {
                   <Route
                     path="/patient-profile/:id/edit"
                     element={<EditPatientForm />}
+                  />
+                  <Route
+                    path="/patient-profile/:id/transactionHistory"
+                    element={<TransactionHistory />}
                   />
                   <Route
                     path="/pendingAccession"

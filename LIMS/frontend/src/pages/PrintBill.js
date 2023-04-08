@@ -1,17 +1,20 @@
 import { useRef, useEffect, useState } from 'react';
 import moment from 'moment';
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import logo from '../assets/common/mediLineLogo.webp';
 import '../css/TestResultStyles/testResultPreview.css';
 
-const PrintBill = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+const PrintBill = ({ billID }) => {
   const componentRef = useRef();
   const { id } = useParams();
   const [bills, setBills] = useState([]);
-  const thisBill = bills && bills.filter((bill) => bill.patientId === id)[0];
+  let thisBill = [];
+  if (billID) {
+    thisBill = bills && bills.filter((bill) => bill._id === billID)[0];
+  } else {
+    thisBill = bills && bills.filter((bill) => bill.patientId === id)[0];
+  }
 
   useEffect(() => {
     const fetchBills = async () => {
@@ -27,21 +30,6 @@ const PrintBill = () => {
   }, []);
   return (
     <>
-      <div className="row">
-        <div className="col-12 d-flex justify-content-center">
-          <span
-            style={{
-              border: '4px solid red',
-              padding: '20px',
-              backgroundColor: '#F48FB1',
-              fontWeight: 'bold',
-            }}
-          >
-            {location.state.status}
-          </span>
-        </div>
-      </div>
-
       <div>
         <div className="report mt-3" ref={componentRef}>
           <div className="reportHeader">
@@ -88,15 +76,17 @@ const PrintBill = () => {
                       <b>Requested Services :</b>
                       <ul style={{ listStyleType: 'none', margin: '20px' }}>
                         <li>
-                          {thisBill.services.map((service) => {
+                          {thisBill &&
+                          thisBill.services.map((service) => {
                             return <li>{service}</li>;
                           }).length > 0 ? (
                             <>
                               <b>Services :</b>
                               <ul style={{ listStyleType: 'disc' }}>
-                                {thisBill.services.map((service, index) => {
-                                  return <li key={index}>{service}</li>;
-                                })}
+                                {thisBill &&
+                                  thisBill.services.map((service, index) => {
+                                    return <li key={index}>{service}</li>;
+                                  })}
                               </ul>
                             </>
                           ) : (
@@ -104,17 +94,19 @@ const PrintBill = () => {
                           )}
                         </li>
                         <li className="mt-3">
-                          {thisBill.outsourceServices.map((service) => {
+                          {thisBill &&
+                          thisBill.outsourceServices.map((service) => {
                             return <li>{service}</li>;
                           }).length > 0 ? (
                             <>
                               <b>Outsource :</b>
                               <ul style={{ listStyleType: 'disc' }}>
-                                {thisBill.outsourceServices.map(
-                                  (service, index) => {
-                                    return <li key={index}>{service}</li>;
-                                  }
-                                )}
+                                {thisBill &&
+                                  thisBill.outsourceServices.map(
+                                    (service, index) => {
+                                      return <li key={index}>{service}</li>;
+                                    }
+                                  )}
                               </ul>
                             </>
                           ) : (
