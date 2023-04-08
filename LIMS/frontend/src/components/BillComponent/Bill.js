@@ -11,6 +11,9 @@ const Bill = ({ patient }) => {
   const [outsourced, setOutsourced] = useState([]);
   const ref = useRef([]);
 
+  //save test ids
+  const [billedTests , setBilledTests] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +43,9 @@ const Bill = ({ patient }) => {
     });
 
     if (Tests[selectedIndex - 1]?.outsourced === 'true') {
+
+      setBilledTests(prevArray => [...prevArray, Tests[selectedIndex - 1]?._id]);//setBilledTests
+
       setOutsourced((prevState) => {
         let list = [...prevState];
         list[index] = Tests[selectedIndex - 1]?.testName;
@@ -53,6 +59,9 @@ const Bill = ({ patient }) => {
         return list;
       });
     } else {
+
+      setBilledTests(prevArray => [...prevArray, Tests[selectedIndex - 1]?._id]);//setBilledTests
+
       setServices((prevState) => {
         let list = [...prevState];
         list[index] = Tests[selectedIndex - 1]?.testName;
@@ -174,10 +183,33 @@ const Bill = ({ patient }) => {
       status = 'Failed to create the account';
     } else {
       status = 'Bill Added';
+
+      createSample(patient._id, billedTests);
+
     }
     console.log('Status : ' + status);
+    console.log("billed tests" + billedTests)
     navigate('./print-bill', { state: { status: status } });
   };
+
+  //create sample and test result
+  const createSample = async (patient, billedTests) => {
+    try {
+      const response = await fetch('/api/samples/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ patient, billedTests })
+      });
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   return (
     <div className=" receipt mt-5">
