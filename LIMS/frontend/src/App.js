@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 
 // pages and components
 import PatientList from './pages/PatientList';
@@ -31,6 +32,11 @@ import mediLineLogo from './assets/common/mediLineLogo.webp';
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Mediline</title>
+        <meta name="description" content="Mediline LIMS" />
+      </Helmet>
       <HeaderComponent
         profileImgSrc={''}
         logoImgSrc={mediLineLogo}
