@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
+import formatDate from '../UtillFuntions/formatDate';
 
 const initilizeDataTable = () => {
   $(function() {
@@ -11,7 +12,7 @@ const initilizeDataTable = () => {
     }
     // Initialize a new DataTable with options
     $('#example').DataTable({
-      order: [[0,'desc']],
+      order: [[4,'desc']],
     });
   });
 }
@@ -58,24 +59,27 @@ const PendingAccession = () => {
       });
       
       const updatedSample = await response.json();
-      /*
-      // Remove the updated sample from the samples state
-      const updatedSamples = samples.filter(
-        (sample) => sample._id !== updatedSample._id
-      );
-      dispatch({ type: 'SET_SAMPLES', payload: updatedSamples });
-      initilizeDataTable();
-     */
-    
+      
       // Use DataTables API to remove the row with the updated sample
     const table = $('#example').DataTable();
-    const row = table.rows(`[data-id ="${updatedSample._id}"]`);
+    const row = table.rows(`[data-id ="${id}"]`);
     row.remove().draw();
+
+    /*
+    // Remove the updated sample from the samples state
+    const updatedSamples = samples.filter(
+      (sample) => sample._id !== updatedSample._id
+    );
+    dispatch({ type: 'SET_SAMPLES', payload: updatedSamples });
+    //initilizeDataTable();
+    */
+    
     
 
     } catch (error) {
       console.error(error);
     }finally{
+      
       setCollectingSampleId(null);
     }
   };
@@ -97,7 +101,9 @@ const PendingAccession = () => {
             <th>Patient</th>
             <th>Test</th>
             <th>Specimen</th>
-            <th></th>
+            <th>Billing Date</th>
+            <th>Barcode</th>
+            <th>Mark Collected</th>
           </tr>
         </thead>
         <tbody>
@@ -107,6 +113,14 @@ const PendingAccession = () => {
               <td>{sample.patient?.firstName ?? "Record not found"}</td>
               <td>{sample.test?.testName ?? "Record not found"}</td>
               <td>{sample.test?.specimen ?? "Record not found"}</td>
+              <td>{formatDate(sample.createdAt) ?? "Record not found"}</td>
+              <td>
+                <button 
+                  className="btnSubmit" 
+                  >
+                  Print
+                </button>
+              </td>
               <td>
                 <button
                   className="btnSubmit"
@@ -125,7 +139,9 @@ const PendingAccession = () => {
             <th>Patient</th>
             <th>Test</th>
             <th>Specimen</th>
-            <th></th>
+            <th>Billing Date</th>
+            <th>Barcode</th>
+            <th>Mark Collected</th>
           </tr>
         </tfoot>
       </table>

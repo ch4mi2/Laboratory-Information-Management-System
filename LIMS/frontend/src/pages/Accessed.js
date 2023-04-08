@@ -3,6 +3,7 @@ import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
 import formatDate from '../UtillFuntions/formatDate';
 import JsBarcode from 'jsbarcode';
+import Swal from 'sweetalert2';
 
 
 
@@ -39,6 +40,38 @@ const Accessed = () => {
   const handlePrintClick = (id) => {
     
   }
+
+  const handleDeleteClick = async (id) => {
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this item!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true,
+    });
+  
+    if (confirmed.isConfirmed) {
+      const response = await fetch(`/api/samples/${id}`, {
+        method: "DELETE",
+      });
+      const json = await response.json();
+  
+      if (response.ok) {
+        const table = $('#example').DataTable();
+        const row = table.rows(`[data-id ="${id}"]`);
+        row.remove().draw();
+
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    }
+  };
+  
   
   
   
@@ -60,18 +93,34 @@ const Accessed = () => {
                 <th>Test</th>
                 <th>Specimen</th>
                 <th>Collection Time</th>
-                <th></th>
+                <th>Barcode</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
               {samples && samples.map((sample) => (
-                <tr key={sample._id}>
+                <tr key={sample._id} data-id={sample._id}>
                   <td>{sample.sampleID}</td>
                   <td>{sample.patient?.firstName ?? "Record not found"}</td>
                   <td>{sample.test?.testName ?? "Record not found"}</td>
                   <td>{sample.test?.specimen ?? "Record not found"}</td>
                   <td>{formatDate(sample.collectionTime)}</td>
-                  <td><button className="btnSubmit" onClick={() => handlePrintClick(sample.sampleID)}>Print</button></td>
+                  <td>
+                    <button 
+                      className="btnSubmit" 
+                      onClick={() => handlePrintClick(sample.sampleID)}
+                      >
+                      Print
+                      </button>
+                  </td>
+                  <td>
+                    <button
+                      className="btnDelete"
+                      onClick={() => handleDeleteClick(sample._id)}
+                      >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -82,7 +131,8 @@ const Accessed = () => {
                 <th>Test</th>
                 <th>Specimen</th>
                 <th>Collection Time</th>
-                <th></th>
+                <th>Barcode</th>
+                <th>Delete</th>
               </tr>
             </tfoot>
           </table>
