@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const AllBills = () => {
   const [bills, setBills] = useState([]);
@@ -25,6 +27,49 @@ const AllBills = () => {
   const handleClick = (id) => {
     navigate(`../bill/${id}`);
   };
+
+  useEffect(() => {
+    $(function () {
+      $('#example').DataTable({
+        order: [[4, 'desc']],
+        bDestroy: true,
+      });
+    });
+  }, []);
+
+  const clickDelete = async (id) => {
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: 'alerts',
+    });
+
+    if (confirmed.isConfirmed) {
+      const response = await fetch('/api/bills/' + id, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        const table = $('#bill-list').DataTable();
+        const row = table.rows(`[data-id ="${id}"]`);
+        row.remove().draw();
+
+        Swal.fire({
+          title: 'Success',
+          text: 'Record has been deleted',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
+    }
+    navigate('/view-bills');
+  };
+
   return (
     <div>
       {bills ? (
@@ -36,20 +81,31 @@ const AllBills = () => {
           <table id="bill-list" className="table" style={{ width: '100%' }}>
             <thead>
               <tr>
-                <th className="col-3">Patient Name</th>
-                <th className="col-5">Services</th>
-                <th className="col-1">OutSourced</th>
-                <th className="col-2">Total</th>
+                <th>Time</th>
+                <th>Patient Name</th>
+                <th>Services</th>
+                <th>OutSourced</th>
+                <th>Total</th>
+                <th>Delete Bills</th>
               </tr>
             </thead>
             <tbody>
               {bills &&
                 bills.map((bill) => (
                   <tr key={bill._id} onClick={() => handleClick(bill._id)}>
-                    <td className="col-3">{bill.patientName}</td>
-                    <td className="col-5">{bill.services}</td>
-                    <td className="col-1">{bill.outsourceServices}</td>
-                    <td className="col-2">{bill.total}</td>
+                    <td>{moment(bill.createdAt).format('YYYY-MM-DD')}</td>
+                    <td>{bill.patientName}</td>
+                    <td>{bill.services}</td>
+                    <td>{bill.outsourceServices}</td>
+                    <td>{bill.total}</td>
+                    <td>
+                      <button
+                        className="btnDelete"
+                        onClick={() => clickDelete(bill._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
             </tbody>

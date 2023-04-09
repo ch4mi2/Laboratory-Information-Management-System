@@ -6,6 +6,7 @@ import {
 } from '../context/patientContextDeclarations';
 import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
+import Swal from 'sweetalert2';
 
 const PatientList = () => {
   const navigate = useNavigate();
@@ -32,19 +33,46 @@ const PatientList = () => {
     navigate(`../patient-profile/${id}`);
   };
 
+  useEffect(() => {
+    $(function () {
+      $('#example').DataTable({
+        order: [[4, 'desc']],
+        bDestroy: true,
+      });
+    });
+  }, []);
+
   const clickDelete = async (id) => {
-    const response = await fetch('/api/patients/' + id, {
-      method: 'DELETE',
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: 'alerts',
     });
 
-    const json = await response.json();
+    if (confirmed.isConfirmed) {
+      const response = await fetch('/api/patients/' + id, {
+        method: 'DELETE',
+      });
 
-    if (response.ok) {
-      dispatch({ type: DELETE_PATIENT, payload: json });
+      if (response.ok) {
+        const table = $('#patient-list').DataTable();
+        const row = table.rows(`[data-id ="${id}"]`);
+        row.remove().draw();
+
+        Swal.fire({
+          title: 'Success',
+          text: 'Record has been deleted',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
     }
-
     navigate('/patient-list');
-    console.log('Patient Deleted');
   };
 
   return (
@@ -80,7 +108,7 @@ const PatientList = () => {
                     <td>{patient.tpNo}</td>
                     <td>
                       <button
-                        className="btnSubmit"
+                        className="btnDelete"
                         onClick={() => clickDelete(patient._id)}
                       >
                         Delete

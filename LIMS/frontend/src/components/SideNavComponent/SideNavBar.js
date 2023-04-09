@@ -20,7 +20,7 @@ function SideNavBar() {
   const [current, setCurrent] = useState(localStorage.getItem('location'));
 
   return (
-    <aside>
+    <aside style={{ zIndex: '10000' }}>
       <SideNav
         onSelect={(selected) => {
           localStorage.setItem('location', selected);

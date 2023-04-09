@@ -1,24 +1,42 @@
 import { usePatientContext } from '../../hooks/usePatientContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { DELETE_PATIENT } from '../../context/patientContextDeclarations';
+import Swal from 'sweetalert2';
 
 const PatientDetails = ({ edit, patient }) => {
   const { dispatch } = usePatientContext();
   const navigate = useNavigate();
 
   const handleDelete = async () => {
-    const response = await fetch('/api/patients/' + patient._id, {
-      method: 'DELETE',
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: 'alerts',
     });
 
-    const json = await response.json();
+    if (confirmed.isConfirmed) {
+      const response = await fetch('/api/patients/' + patient._id, {
+        method: 'DELETE',
+      });
+      const json = await response.json();
 
-    if (response.ok) {
-      dispatch({ type: DELETE_PATIENT, payload: json });
+      if (response.ok) {
+        Swal.fire({
+          title: 'Success',
+          text: 'Record has been deleted',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        });
+
+        dispatch({ type: DELETE_PATIENT, payload: json });
+        navigate('/patient-list');
+      }
     }
-
-    navigate('/patient-list');
-    console.log('Patient Deleted');
   };
 
   return (
