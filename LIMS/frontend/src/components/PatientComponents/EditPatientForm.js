@@ -3,7 +3,7 @@ import '../../css/PatientDetailStyles/PatientDetailStyles.css';
 import { useEffect, useState } from 'react';
 import { usePatientContext } from '../../hooks/usePatientContext';
 import { UPDATE_PATIENT } from '../../context/patientContextDeclarations';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const EditPatientForm = () => {
   const { patients, dispatch } = usePatientContext();
@@ -19,10 +19,13 @@ const EditPatientForm = () => {
   const [gender, setGender] = useState('Male');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
-  const [updated, setUpdated] = useState(false);
+  const [updated, setUpdated] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (updated === 'Account Updated') {
+      setUpdated('');
+    }
 
     const patient = { firstName, lastName, NIC, tpNo, gender };
 
@@ -39,18 +42,13 @@ const EditPatientForm = () => {
     if (!response.ok) {
       setError(json.error);
       setEmptyFields(json.emptyFields);
+      setUpdated('Could not update the Account');
     }
     if (response.ok) {
-      setFirstName('');
-      setLastName('');
-      setNIC('');
-      setGender('');
-      setTpNo('');
       setError(null);
       setEmptyFields([]);
-      console.log('patient updated', json);
       dispatch({ type: UPDATE_PATIENT, payload: json });
-      setUpdated(true);
+      setUpdated('Account Updated');
     }
   };
 
@@ -70,21 +68,20 @@ const EditPatientForm = () => {
 
   return (
     <div className="createPatientFormContainer">
+      <div className="row my-3">
+        <div
+          className={
+            updated === 'Account Updated'
+              ? 'showSuccessBox py-2'
+              : updated === 'Could not update the Account'
+              ? 'showWarningBox py-2'
+              : 'd-none'
+          }
+        >
+          {updated && <div>{updated}</div>}
+        </div>
+      </div>
       <div id="form-container-div" className="mt-5">
-        {updated ? (
-          <div>
-            <h5
-              style={{
-                textAlign: 'center',
-                color: '#FF5252',
-              }}
-            >
-              Profile updated
-            </h5>
-          </div>
-        ) : (
-          <></>
-        )}
         <form className="createPatientForm" onSubmit={handleSubmit}>
           <center>
             <h3 className="">Edit Profile</h3>

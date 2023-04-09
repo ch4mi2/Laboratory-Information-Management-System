@@ -5,13 +5,11 @@ import '../../css/PatientDetailStyles/PatientDetailStyles.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useState } from 'react';
-import { usePatientContext } from '../../hooks/usePatientContext';
-import { CREATE_PATIENT } from '../../context/patientContextDeclarations';
 import { useNavigate } from 'react-router-dom';
 
 const CreatePatientForm = () => {
   const navigate = useNavigate();
-  const { dispatch } = usePatientContext();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [NIC, setNIC] = useState('');
@@ -74,7 +72,15 @@ const CreatePatientForm = () => {
   return (
     <div className="createPatientFormContainer">
       <div className="row my-3">
-        <div className={status ? 'showWarningBox py-2' : 'd-none'}>
+        <div
+          className={
+            status === 'New Account Created'
+              ? 'showSuccessBox py-2'
+              : status === 'Failed to create the account'
+              ? 'showWarningBox py-2'
+              : 'd-none'
+          }
+        >
           {status && <div>{status}</div>}
         </div>
       </div>

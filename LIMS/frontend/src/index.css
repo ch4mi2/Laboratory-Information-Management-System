@@ -104,3 +104,20 @@ table.dataTable tbody tr:hover {
   font-weight: bold;
   text-align: center;
 }
+
+.showSuccessBox {
+  display: block;
+  background-color: #e0f2f1;
+  border: 3px solid #00bfa5;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btnSubmit-disabled {
+  background-color: var(--grey);
+  color: #000000;
+  border: 1px dashed black;
+  width: 100px;
+  height: 30px;
+  border-radius: 25px;
+}

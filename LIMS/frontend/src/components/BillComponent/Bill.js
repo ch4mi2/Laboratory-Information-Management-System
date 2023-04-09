@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css/BillStyles/bill.css';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const Bill = ({ patient }) => {
   const [Tests, setTests] = useState([]);
@@ -10,6 +12,7 @@ const Bill = ({ patient }) => {
   const [services, setServices] = useState([]);
   const [outsourced, setOutsourced] = useState([]);
   const ref = useRef([]);
+  const MySwal = withReactContent(Swal);
 
   //save test ids
   const [billedTests, setBilledTests] = useState([]);
@@ -49,13 +52,11 @@ const Bill = ({ patient }) => {
       setOutsourced((prevState) => {
         let list = [...prevState];
         list[index] = Tests[selectedIndex - 1]?.testName;
-        console.log('outsourced tests : ' + list);
         return list;
       });
       setServices((prevState) => {
         let list = [...prevState];
         list[index] = 0;
-        console.log('normal tests : ' + list);
         return list;
       });
     } else {
@@ -183,14 +184,26 @@ const Bill = ({ patient }) => {
     const json = await response.json();
     let status = '';
     if (!response.ok) {
-      status = 'Failed to create the account';
+      status = 'Failed to create the bill';
+      MySwal.fire({
+        title: 'Error',
+        text: status,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000,
+      });
     } else {
       status = 'Bill Added';
+      MySwal.fire({
+        title: 'Success',
+        text: status,
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+      });
 
       createSample(patient._id, billedTests);
     }
-    console.log('Status : ' + status);
-    console.log('billed tests' + billedTests);
     navigate('./print-bill', { state: { status: status } });
   };
 
@@ -264,7 +277,15 @@ const Bill = ({ patient }) => {
       </div>
       <div className="row mt-3">
         <div className="col-6 col-lg-12 mx-auto d-flex justify-content-end">
-          <button className="btnSubmit mx-2" onClick={confirmBill}>
+          <button
+            className={
+              selectedVal.length > 0
+                ? 'btnSubmit mx-2'
+                : 'btnSubmit-disabled mx-2'
+            }
+            onClick={confirmBill}
+            disabled={noOfDropdowns < 1}
+          >
             Confirm
           </button>
           <button className="btnDelete" onClick={cancelBill}>
