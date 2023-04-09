@@ -1,5 +1,5 @@
 // Bug : reload error
-
+import '../../css/PatientDetailStyles/PatientDetailStyles.css';
 import { useEffect, useState } from 'react';
 import { usePatientContext } from '../../hooks/usePatientContext';
 import { UPDATE_PATIENT } from '../../context/patientContextDeclarations';
@@ -69,7 +69,7 @@ const EditPatientForm = () => {
   };
 
   return (
-    <div className="container createPatientFormContainer">
+    <div className="createPatientFormContainer">
       <div id="form-container-div" className="mt-5">
         {updated ? (
           <div>

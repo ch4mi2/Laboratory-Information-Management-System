@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePatientContext } from '../hooks/usePatientContext';
 import { SET_PATIENTS } from '../context/patientContextDeclarations';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+import '../css/PatientProfileStyles/patient-profile.css';
 // components
 import PatientDetails from '../components/PatientComponents/PatientDetails';
 
@@ -27,7 +28,7 @@ const PatientProfile = () => {
     patients && patients.filter((patient) => patient._id === id)[0];
 
   return (
-    <div className="container">
+    <div className="">
       <div className="patient-profile mt-5 p">
         {patient ? (
           <PatientDetails edit={true} patient={patient} />

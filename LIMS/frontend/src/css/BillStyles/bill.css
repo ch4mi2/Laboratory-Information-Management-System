@@ -1,6 +1,23 @@
 .receipt {
-  background-color: var(--grey);
+  background-color: white;
   border: 1px dashed black;
   border-width: thick;
   padding: 2rem;
+}
+
+#bill-add-service-btn {
+  margin-top: 10px;
+  font-size: 1rem;
+  background: var(--orange);
+  color: white;
+  border-radius: 66px;
+}
+
+#bill-add-service-btn:hover {
+  background-color: var(--hover);
+}
+
+#bill-selectServices {
+  margin-right: 1rem;
+  margin-top: 1rem;
 }

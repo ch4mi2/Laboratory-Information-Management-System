@@ -176,10 +176,60 @@ const updateTest = async(req,res) => {
     }
 }
 
+const updateCategory = async(req,res) => {
+    const { id } = req.params
+    const {categoryHeading,category,UOM,startMRef,operatorM,endMRef,startFRef,operatorF,endFRef,startBRef,operatorB,endBRef } =  req.body;
+    let emptyFields = []
+
+    if(!category) {
+        emptyFields.push('category')
+    }
+    if(!UOM) {
+        emptyFields.push('UOM')
+    }
+    if(!startMRef) {
+        emptyFields.push('startMRef')
+    }
+    if(!operatorM) {
+        emptyFields.push('operatorM')
+    }
+    if(!endMRef) {
+        emptyFields.push('endMRef')
+    }
+    if(!startFRef) {
+        emptyFields.push('startFRef')
+    }
+    if(!operatorF) {
+        emptyFields.push('operatorF')
+    }
+    if(!endFRef) {
+        emptyFields.push('endFRef')
+    }
+
+    if(emptyFields.length > 0) {
+        return res.status(400).json({error: 'Please fill in the highlighted fields', emptyFields})
+    } else {
+        if(!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({error: "Not a vlid object ID"})
+        }
+    
+        const category = await Category.findOneAndUpdate({_id: id }, {
+            ...req.body
+        });
+    
+        if(!category) {
+            return res.status(400).json({error: "No such Category"})
+        }
+    
+        res.status(200).json(category)
+    }
+}
+
 module.exports = {
     getTests,
     getTest,
     createTest,
     deleteTest,
-    updateTest
+    updateTest,
+    updateCategory
 }

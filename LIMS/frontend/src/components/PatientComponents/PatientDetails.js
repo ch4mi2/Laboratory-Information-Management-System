@@ -22,7 +22,7 @@ const PatientDetails = ({ edit, patient }) => {
   };
 
   return (
-    <div className="container patientDetailBlock">
+    <div className="patientDetailBlock pt-2 px-5">
       <div className="row">
         {edit === true ? (
           <center>
@@ -59,7 +59,7 @@ const PatientDetails = ({ edit, patient }) => {
         </div>
       </div>
       {edit === true ? (
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-6">
               <Link style={{ textDecoration: 'none' }} to={'./edit'}>

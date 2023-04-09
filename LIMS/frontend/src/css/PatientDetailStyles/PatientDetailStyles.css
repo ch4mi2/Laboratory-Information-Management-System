@@ -1,9 +1,11 @@
 .patientDetailBlock {
   border: 1px solid black;
-  background: var(--grey);
+  background: white;
   margin-top: 1vh;
 }
-
+.btn:hover {
+  background-color: var(--hover);
+}
 .error {
   border: 1px solid red;
   background-color: #e6b9b9;
@@ -11,6 +13,7 @@
 
 .createPatientForm label,
 input {
+  padding: 5px 20px;
   display: block;
   width: 100%;
   margin-top: 2vh;
@@ -29,7 +32,8 @@ input {
 }
 
 #form-container-div {
-  background: var(--grey);
+  background: white;
+  border: 1px solid black;
   padding: 1rem;
   border-radius: 20px;
 }

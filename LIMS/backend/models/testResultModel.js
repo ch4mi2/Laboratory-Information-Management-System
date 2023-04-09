@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const Patient = require('../models/patientModel');
-const Test = require('../models/testModel');
-const Category = require('../models/categoryModel');
+
 
 const testResultSchema = new mongoose.Schema({
     patient: {
@@ -12,6 +10,10 @@ const testResultSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Test',
     },
+    sample:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Sample'
+    },
     result: [
       {
         category: {
@@ -20,7 +22,7 @@ const testResultSchema = new mongoose.Schema({
         },
         value: {
           type: Number,
-          required: true,
+          
         },
       },
     ],

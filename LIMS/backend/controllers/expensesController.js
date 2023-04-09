@@ -17,7 +17,7 @@ const getAexpense = async (req, res) => {
         return res.status(404).json({error: 'no such expense'})
     }
 
-    const expense = await Expense.findbyid(id)
+    const expense = await Expenses.findById(id)
     if(!expense){
         return res.status(404).jason({error: "no such expense"})
     }
@@ -30,6 +30,18 @@ const getAexpense = async (req, res) => {
 const createexpenses = async (req,res) => {
     const { description, amount } = req.body;
     const date = new Date()
+
+    let emptyFields = []
+
+    if(!description){
+        emptyFields.push('description')
+    }
+    if(!amount){
+        emptyFields.push('amount')
+    }
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: "please fill all the fields", emptyFields })
+    }
 
 //add doc to db
 try{
