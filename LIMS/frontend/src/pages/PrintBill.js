@@ -1,12 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
 import moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import logo from '../assets/common/mediLineLogo.webp';
 import '../css/TestResultStyles/testResultPreview.css';
 
 const PrintBill = ({ billID }) => {
   const componentRef = useRef();
+  const navigate = useNavigate();
   const { id } = useParams();
   const [bills, setBills] = useState([]);
   let thisBill = [];
@@ -28,6 +29,11 @@ const PrintBill = ({ billID }) => {
 
     fetchBills();
   }, []);
+
+  const handleEditClick = () => {
+    navigate(`/view-bills/${thisBill._id}/edit`);
+  };
+
   return (
     <>
       <div>
@@ -144,6 +150,9 @@ const PrintBill = ({ billID }) => {
             trigger={() => <button className="btnSubmit">Print</button>}
             content={() => componentRef.current}
           />
+          <button className="btnSubmit mx-3" onClick={handleEditClick}>
+            Edit
+          </button>
         </div>
       </div>
     </>
