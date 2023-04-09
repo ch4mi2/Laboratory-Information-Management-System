@@ -39,13 +39,34 @@ form {
 .btnDelete {
   background-color: var(--ash);
   color: #ffffff;
-
+  border: none;
   width: 100px;
   height: 30px;
   border-radius: 25px;
 }
 
 .btnDelete:hover {
+  background-color: var(--hoverDelete);
+}
+
+.btnConfirm{
+  border-radius: 25px;
+  background-color: var(--orange);
+  color: #ffffff;
+  border: none;
+}
+
+.btnConfirm:hover{
+  background-color: var(--hoverSubmit);
+}
+
+.btnCancel{
+  border-radius: 25px;
+  background-color: var(--ash);
+  color: #ffffff;
+  border: none;
+}
+.btnCancel:hover{
   background-color: var(--hoverDelete);
 }
 
