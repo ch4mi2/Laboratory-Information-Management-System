@@ -2,21 +2,23 @@
 //(bug: page redirects when submitting)
 
 import '../../css/PatientDetailStyles/PatientDetailStyles.css';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { useState } from 'react';
-import { usePatientContext } from '../../hooks/usePatientContext';
-import { CREATE_PATIENT } from '../../context/patientContextDeclarations';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePatientForm = () => {
-  const { dispatch } = usePatientContext();
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [NIC, setNIC] = useState('');
   const [tpNo, setTpNo] = useState('');
-  const [gender, setGender] = useState('Male');
+  const [gender, setGender] = useState('');
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const MySwal = withReactContent(Swal);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +39,13 @@ const CreatePatientForm = () => {
       setError(json.error);
       setEmptyFields(json.emptyFields);
       setStatus('Failed to create the account');
+      MySwal.fire({
+        title: 'Error',
+        text: error,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
     if (response.ok) {
       setStatus('New Account Created');
@@ -48,14 +57,30 @@ const CreatePatientForm = () => {
       setError(null);
       setEmptyFields([]);
       console.log('new patient added', json);
-      dispatch({ type: CREATE_PATIENT, payload: json });
+
+      MySwal.fire({
+        title: 'Success',
+        text: 'Successfully Created',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      navigate('/create-patient');
     }
   };
 
   return (
     <div className="createPatientFormContainer">
       <div className="row my-3">
-        <div className={status ? 'showWarningBox py-2' : 'd-none'}>
+        <div
+          className={
+            status === 'New Account Created'
+              ? 'showSuccessBox py-2'
+              : status === 'Failed to create the account'
+              ? 'showWarningBox py-2'
+              : 'd-none'
+          }
+        >
           {status && <div>{status}</div>}
         </div>
       </div>
@@ -109,6 +134,9 @@ const CreatePatientForm = () => {
             onChange={(e) => setGender(e.target.value)}
             className={emptyFields.includes('gender') ? 'error' : ''}
           >
+            <option value="" disabled hidden>
+              Select an Item
+            </option>
             <option value="Male"> Male</option>
             <option value="Female"> Female</option>
           </select>

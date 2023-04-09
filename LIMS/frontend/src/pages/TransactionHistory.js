@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const TransactionHistory = () => {
   const [bills, setBills] = useState([]);
@@ -24,6 +25,50 @@ const TransactionHistory = () => {
 
     fetchBills();
   }, []);
+
+  useEffect(() => {
+    $(function () {
+      $('#example').DataTable({
+        order: [[4, 'desc']],
+        bDestroy: true,
+      });
+    });
+  }, []);
+
+  const clickDelete = async (id, pid) => {
+    const patientID = pid;
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: 'alerts',
+    });
+
+    if (confirmed.isConfirmed) {
+      const response = await fetch('/api/bills/' + id, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        const table = $('#bill-list').DataTable();
+        const row = table.rows(`[data-id ="${id}"]`);
+        row.remove().draw();
+
+        Swal.fire({
+          title: 'Success',
+          text: 'Record has been deleted',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
+    }
+    navigate(`/patient-profile/${patientID}/transactionHistory`);
+  };
+
   const handleClick = (id) => {
     navigate(`../bill/${id}`);
   };
@@ -44,6 +89,7 @@ const TransactionHistory = () => {
                 <th>Services</th>
                 <th>OutSourced</th>
                 <th>Total</th>
+                <th>Delete Bills</th>
               </tr>
             </thead>
             <tbody>
@@ -57,6 +103,14 @@ const TransactionHistory = () => {
                       {bill.outsourceServices.map((service) => service + ', ')}
                     </td>
                     <td>{bill.total}</td>
+                    <td>
+                      <button
+                        className="btnDelete"
+                        onClick={() => clickDelete(bill._id, bill.patientId)}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
             </tbody>

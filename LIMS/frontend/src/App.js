@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
+// assets
+import mediLineLogo from './assets/common/mediLineLogo.webp';
+
 // pages and components
 import PatientList from './pages/PatientList';
 import PatientProfile from './pages/PatientProfile';
@@ -27,9 +30,8 @@ import AddBill from './pages/AddBill';
 import PrintBill from './pages/PrintBill';
 import AllBills from './components/BillComponent/AllBills';
 import ShowABill from './components/BillComponent/ShowABill';
-// assets
-import mediLineLogo from './assets/common/mediLineLogo.webp';
 import TransactionHistory from './pages/TransactionHistory';
+import EditBill from './pages/EditBill';
 
 function App() {
   return (
@@ -63,6 +65,10 @@ function App() {
                   <Route
                     path="/patient-profile/:id"
                     element={<PatientProfile />}
+                  />
+                  <Route
+                    path="/view-bills/:billId/edit"
+                    element={<EditBill />}
                   />
                   <Route path="/view-bills" element={<AllBills />} />
 
