@@ -20,15 +20,18 @@ const EditBill = () => {
 
   const handleSelect = (selectedList, selectedItem) => {
     setSelectedValues(selectedList);
-    const fee = parseFloat(selectedItem.price);
-    setTotal(total + fee);
+    if (selectedItem.price) {
+      const fee = parseFloat(selectedItem.price);
+      setTotal(total + fee);
+    }
   };
 
   const handleSelectOut = (selectedList, selectedItem) => {
     setSelectedValuesOut(selectedList);
-    const fee = parseFloat(selectedItem.price);
-
-    setTotal(total + fee);
+    if (selectedItem.price) {
+      const fee = parseFloat(selectedItem.price);
+      setTotal(total + fee);
+    }
   };
 
   const loadPreValues = (json) => {
@@ -36,10 +39,12 @@ const EditBill = () => {
     setThisBill(bill);
 
     const preService = bill.services.map((test) => {
+      const similar = options.filter((test) => test.name === test)[0];
+      console.log(similar);
       return {
         nameAndId: test,
         id: '',
-        price: parseFloat(test.price),
+        price: test.total,
       };
     });
     setPreServices(preService);
@@ -48,7 +53,7 @@ const EditBill = () => {
       return {
         nameAndId: test,
         id: '',
-        price: parseFloat(test.price),
+        price: test.total,
       };
     });
     setPreOutsourced(preOut);
@@ -66,6 +71,7 @@ const EditBill = () => {
         const options = normalArr.map((test) => {
           const p = parseFloat(test.price);
           return {
+            name: test.testName,
             nameAndId: test.testID + ' - ' + test.testName,
             id: test.testID,
             price: p,
@@ -76,10 +82,11 @@ const EditBill = () => {
         const outArr = json.filter((test) => test.outsourced === 'Yes');
         const optionsOuts = outArr.map((test) => {
           const p = parseFloat(test.price);
-          console.log(typeof test.price);
+
           const price = parseFloat(test.price);
-          console.log('price after:', price);
+
           return {
+            name: test.testName,
             nameAndId: test.testName + ' - ' + test.testID,
             id: test.testID,
             price: p,
@@ -106,12 +113,9 @@ const EditBill = () => {
 
   useEffect(() => {
     const preServiceTotal = preServices.reduce((acc, item) => {
-      console.log(typeof item.price);
       return acc + parseFloat(item.price);
     }, 0);
     const preOutsourcedTotal = preOutsourced.reduce((acc, item) => {
-      console.log('preOutsourced:', item);
-
       return acc + parseFloat(item.price);
     }, 0);
     const newTotal = preServiceTotal + preOutsourcedTotal;
