@@ -66,10 +66,10 @@ const PendingTestResults = () => {
             testResults.map((testResult) => (
               <tr key={testResult._id} data-status={testResult.sample?.status}>
                 
-                <td>{testResult.patient?.firstName}{testResult.patient?.lastName}</td>
-                <td>{testResult.test?.testName}</td>
+                <td>{testResult.patient?.firstName ?? "Record not found"}{testResult.patient?.lastName}</td>
+                <td>{testResult.test?.testName ?? "Record not found"}</td>
                 <td></td>
-                <td>{testResult.sample?.sampleID}</td>
+                <td>{testResult.sample?.sampleID ?? "Record not found"}</td>
                 <td>{testResult.sample?.status}</td>
                 <td>
                   <button 

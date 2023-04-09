@@ -65,7 +65,7 @@ const Accessed = () => {
 
         Swal.fire(
           'Deleted!',
-          'Your file has been deleted.',
+          'Record has been deleted.',
           'success'
         )
       }
