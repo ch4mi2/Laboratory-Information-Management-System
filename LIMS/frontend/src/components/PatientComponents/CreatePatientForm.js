@@ -39,7 +39,7 @@ const CreatePatientForm = () => {
       setStatus('Failed to create the account');
     }
     if (response.ok) {
-      setStatus('New account created');
+      setStatus('New Account Created');
       setFirstName('');
       setLastName('');
       setNIC('');
@@ -54,6 +54,12 @@ const CreatePatientForm = () => {
 
   return (
     <div className="createPatientFormContainer">
+      <div className="row my-3">
+        <div className={status ? 'showWarningBox py-2' : 'd-none'}>
+          {status && <div>{status}</div>}
+        </div>
+      </div>
+
       <div id="form-container-div" className="mt-5">
         <form className="createPatientForm" onSubmit={handleSubmit}>
           <center>
@@ -108,12 +114,8 @@ const CreatePatientForm = () => {
           </select>
 
           <button
-            style={{
-              background: 'var(--orange)',
-              color: 'white',
-              borderRadius: '66px',
-            }}
-            className="btn mt-4 px-4 d-block m-auto"
+            style={{ width: 'auto' }}
+            className="btnSubmit mt-4 px-4 d-block m-auto"
           >
             Add Patient
           </button>
@@ -121,7 +123,6 @@ const CreatePatientForm = () => {
           {error && <div className="error">{error}</div>}
         </form>
       </div>
-      {status && <div>{status}</div>}
     </div>
   );
 };

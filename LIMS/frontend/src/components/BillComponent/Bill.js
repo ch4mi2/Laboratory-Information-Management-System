@@ -129,7 +129,6 @@ const Bill = ({ patient }) => {
     newOutsourcedArr.splice(index, 1);
     setOutsourced(newOutsourcedArr);
 
-
     //normal
     const newServicesArr = [...services];
     newServicesArr.splice(index, 1);
@@ -240,7 +239,7 @@ const Bill = ({ patient }) => {
             <div className="mt-3" key={index}>
               <Input index={index} />
               <button
-                className="btnDelete"
+                className="btnDelete mt-1"
                 onClick={(e) => removeInputFields(index)}
               >
                 Delete
@@ -249,8 +248,8 @@ const Bill = ({ patient }) => {
           ))}
 
           <button
-            id="bill-add-service-btn"
-            className="btn"
+            style={{ width: 'auto' }}
+            className="btnSubmit mt-3"
             onClick={handleClick}
           >
             Add service

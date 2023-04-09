@@ -19,10 +19,9 @@ table {
 
 form {
   background-color: var(--contentBackground);
-  padding : 20px;
+  padding: 20px;
   border-radius: 25px;
 }
-
 
 .btnSubmit {
   background-color: var(--orange);
@@ -39,8 +38,8 @@ form {
 
 .btnDelete {
   background-color: var(--ash);
-  color: #FFFFFF;
-  
+  color: #ffffff;
+
   width: 100px;
   height: 30px;
   border-radius: 25px;
@@ -54,13 +53,10 @@ form {
   background-color: var(--orange);
   border: none;
   color: #ffffff;
-  
 }
 
 .dataTables_paginate .paginate_button a {
   color: var(--orange);
-  
-  
 }
 
 table.dataTable tbody tr:hover {
@@ -68,27 +64,43 @@ table.dataTable tbody tr:hover {
 }
 
 .alerts .swal2-confirm {
- background-color: var(--orange) !important; /* set the background color to green */
+  background-color: var(
+    --orange
+  ) !important; /* set the background color to green */
   color: white; /* set the text color to white */
 }
 .alerts .swal2-confirm:hover {
-  background-color: var(--hoverSubmit) !important; /* set the hover color to a darker shade of green */
+  background-color: var(
+    --hoverSubmit
+  ) !important; /* set the hover color to a darker shade of green */
 }
 .alerts .swal2-cancel {
-  background-color: var(--ash) !important; /* set the background color to green */
-   color: white; /* set the text color to white */
- }
+  background-color: var(
+    --ash
+  ) !important; /* set the background color to green */
+  color: white; /* set the text color to white */
+}
 .alerts .swal2-cancel:hover {
-  background-color: var(--hoverDelete) !important; /* set the hover color to a darker shade of green */
+  background-color: var(
+    --hoverDelete
+  ) !important; /* set the hover color to a darker shade of green */
 }
 
 :root {
-  --orange: #CC3333;
+  --orange: #cc3333;
   --grey: #eeeeee;
-  --ash:#424242;
-  --hoverSubmit: #EF5350;
-  --hoverDelete:#000000;
+  --ash: #424242;
+  --hoverSubmit: #ef5350;
+  --hoverDelete: #000000;
   --contentBackground: #ffffff;
-  --contentHover:#FAFAFA;
-  --background:#EEEEEE ;
+  --contentHover: #fafafa;
+  --background: #eeeeee;
+}
+
+.showWarningBox {
+  display: block;
+  background-color: #fce4ec;
+  border: 3px solid #ff0000;
+  font-weight: bold;
+  text-align: center;
 }

@@ -139,24 +139,17 @@ const EditPatientForm = () => {
 
           <button
             style={{
-              background: 'var(--orange)',
-              color: 'white',
-              borderRadius: '66px',
               width: '100%',
             }}
-            className="btn mt-4 px-4 d-block m-auto"
+            className="btnSubmit mt-4 px-4 d-block m-auto"
           >
             {' '}
             Confirm{' '}
           </button>
           <span
             onClick={goBack}
-            style={{
-              background: 'var(--orange)',
-              color: 'white',
-              borderRadius: '66px',
-            }}
-            className="btn mt-3 px-4 d-block m-auto"
+            style={{ width: 'auto', textAlign: 'center' }}
+            className="btnSubmit mt-3 px-4 d-block m-auto"
           >
             {'<-'} Go Back
           </span>

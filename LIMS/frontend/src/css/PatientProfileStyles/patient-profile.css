@@ -20,5 +20,5 @@
 #editProfileButton:hover,
 #deleteProfileButton:hover {
   background: var(--orange) !important;
-  color: black;
+  color: white;
 }

@@ -94,11 +94,8 @@ const PatientDetails = ({ edit, patient }) => {
                     width: '100%',
                     minHeight: '50px',
                     fontSize: '1rem',
-                    background: 'var(--orange)',
-                    color: 'white',
-                    borderRadius: '66px',
                   }}
-                  className="btn mt-4 px-4 d-block m-auto"
+                  className="btnSubmit mt-4 px-4 d-block m-auto"
                 >
                   Transaction History
                 </button>
@@ -111,11 +108,8 @@ const PatientDetails = ({ edit, patient }) => {
                     width: '100%',
                     minHeight: '50px',
                     fontSize: '1rem',
-                    background: 'var(--orange)',
-                    color: 'white',
-                    borderRadius: '66px',
                   }}
-                  className="btn mt-4 px-4 d-block m-auto"
+                  className="btnSubmit mt-4 px-4 d-block m-auto"
                 >
                   Add Bill
                 </button>
