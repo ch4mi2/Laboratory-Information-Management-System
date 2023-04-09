@@ -47,7 +47,7 @@ mongoose
     //listen for requests
     app.listen(process.env.PORT, () => {
       //process is a global object available in node
-      console.log(`connected to db and listening on port ${process.env.PORT}`);
+      console.log(`connected to db and listening  on port ${process.env.PORT}`);
     });
   })
   .catch((error) => {
