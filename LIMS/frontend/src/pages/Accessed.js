@@ -44,12 +44,11 @@ const Accessed = () => {
   const handleDeleteClick = async (id) => {
     const confirmed = await Swal.fire({
       title: 'Are you sure?',
-      text: 'You will not be able to recover this item!',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true,
+      customClass:'alerts'
     });
   
     if (confirmed.isConfirmed) {
@@ -64,9 +63,15 @@ const Accessed = () => {
         row.remove().draw();
 
         Swal.fire(
-          'Deleted!',
-          'Record has been deleted.',
-          'success'
+          {
+            title: 'Success',
+            text: 'Record has been deleted',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+            
+        }
         )
       }
     }

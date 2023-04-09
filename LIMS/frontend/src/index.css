@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #EEEEEE;
+  background-color: var(--background);
 }
 
 code {
@@ -14,11 +14,11 @@ code {
 }
 
 table {
-  background-color: #ffffff;
+  background-color: var(--contentBackground);
 }
 
 form {
-  background-color: #ffffff;
+  background-color: var(--contentBackground);
   padding : 20px;
   border-radius: 25px;
 }
@@ -34,11 +34,11 @@ form {
 }
 
 .btnSubmit:hover {
-  background-color: var(--hover);
+  background-color: var(--hoverSubmit);
 }
 
 .btnDelete {
-  background-color: #424242;
+  background-color: var(--ash);
   color: #FFFFFF;
   
   width: 100px;
@@ -47,7 +47,7 @@ form {
 }
 
 .btnDelete:hover {
-  background-color: #000000;
+  background-color: var(--hoverDelete);
 }
 
 .dataTables_paginate .paginate_button.active a {
@@ -64,11 +64,31 @@ form {
 }
 
 table.dataTable tbody tr:hover {
-  background-color: #FAFAFA;
+  background-color: var(--contentHover);
+}
+
+.alerts .swal2-confirm {
+ background-color: var(--orange) !important; /* set the background color to green */
+  color: white; /* set the text color to white */
+}
+.alerts .swal2-confirm:hover {
+  background-color: var(--hoverSubmit) !important; /* set the hover color to a darker shade of green */
+}
+.alerts .swal2-cancel {
+  background-color: var(--ash) !important; /* set the background color to green */
+   color: white; /* set the text color to white */
+ }
+.alerts .swal2-cancel:hover {
+  background-color: var(--hoverDelete) !important; /* set the hover color to a darker shade of green */
 }
 
 :root {
   --orange: #CC3333;
   --grey: #eeeeee;
-  --hover: #EF5350;
+  --ash:#424242;
+  --hoverSubmit: #EF5350;
+  --hoverDelete:#000000;
+  --contentBackground: #ffffff;
+  --contentHover:#FAFAFA;
+  --background:#EEEEEE ;
 }
