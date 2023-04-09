@@ -1,7 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
 import formatDate from '../UtillFuntions/formatDate';
+import JsBarcode from 'jsbarcode';
+import jsPDF from 'jspdf';
+
+
 
 const initilizeDataTable = () => {
   $(function() {
@@ -17,10 +21,13 @@ const initilizeDataTable = () => {
   });
 }
 
+
+
 const PendingAccession = () => {
   const { samples, dispatch } = useSampleContext();
   const [isLoading, setIsLoading] = useState(true);
   const [collectingSampleId, setCollectingSampleId] = useState(null);
+  const componentRef = useRef();
 
   useEffect(() => {
     const fetchSamples = async () => {
@@ -84,6 +91,52 @@ const PendingAccession = () => {
     }
   };
 
+
+
+  const handlePrintClick = (sample) => {
+    // Generate the barcode image data URL
+    const barcode = generateBarcode(sample);
+  
+    // Create a new PDF document
+    const pdf = new jsPDF({
+      orientation: 'landscape',
+      unit: 'in',
+      format: [1, 2], // Size of the page is reduced to fit a specimen tube
+    });
+  
+    // Add the barcode image to the PDF document
+    pdf.addImage(barcode,  'PNG', 0, 0, 2, 1);
+  
+    // Save the PDF document
+    window.open(pdf.output('bloburl'), '_blank')
+    //pdf.output('dataurlnewwindow');
+    //pdf.save(`barcode-${id}.pdf`);
+  };
+  
+
+  const generateBarcode = (sample) => {
+    // Create a canvas element to render the barcode
+    const canvas = document.createElement('canvas');
+  
+    // Set the barcode options
+    const options = {
+      format: 'CODE39',
+      width: 2,
+      height: 40,
+      displayValue: true,
+      fontSize: 24
+    };
+  
+    // Generate the barcode and render it on the canvas
+    JsBarcode(canvas, sample.sampleID, options);
+  
+    // Return the canvas as an image data URL
+    return canvas.toDataURL();
+  };
+  
+ 
+  
+
   if (isLoading) {
     return <div>Loading...</div>; // Render a loading text if loading state is true
   }
@@ -117,6 +170,7 @@ const PendingAccession = () => {
               <td>
                 <button 
                   className="btnSubmit" 
+                  onClick={() => handlePrintClick(sample)}
                   >
                   Print
                 </button>
