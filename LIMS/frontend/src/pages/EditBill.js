@@ -1,6 +1,8 @@
 import Multiselect from 'multiselect-react-dropdown';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const EditBill = () => {
   const navigate = useNavigate();
@@ -9,14 +11,13 @@ const EditBill = () => {
   const [Bills, setBills] = useState([]);
   const [options, setOptions] = useState([]);
   const [optionsOut, setOptionsOut] = useState([]);
-  const [preServices, setPreServices] = useState([]);
-  const [preOutsourced, setPreOutsourced] = useState([]);
   const serviceRef = useRef();
   const outsourceRef = useRef();
-  const [thisBill, setThisBill] = useState([]);
+  const thisBill = Bills && Bills.filter((bill) => bill._id === billId)[0];
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedValuesOut, setSelectedValuesOut] = useState([]);
   const [total, setTotal] = useState(0);
+  const MySwal = withReactContent(Swal);
 
   const handleSelect = (selectedList, selectedItem) => {
     setSelectedValues(selectedList);
@@ -32,33 +33,6 @@ const EditBill = () => {
       const fee = parseFloat(selectedItem.price);
       setTotal(total + fee);
     }
-  };
-
-  const loadPreValues = (json) => {
-    const bill = json.filter((bill) => bill._id === billId)[0];
-    setThisBill(bill);
-
-    const preService = bill.services.map((test) => {
-      const similar = options.filter((test) => test.name === test)[0];
-      console.log(similar);
-      return {
-        nameAndId: test,
-        id: '',
-        price: test.total,
-      };
-    });
-    setPreServices(preService);
-
-    const preOut = bill.outsourceServices.map((test) => {
-      return {
-        nameAndId: test,
-        id: '',
-        price: test.total,
-      };
-    });
-    setPreOutsourced(preOut);
-
-    setTotal(parseFloat(bill.total));
   };
 
   useEffect(() => {
@@ -82,9 +56,6 @@ const EditBill = () => {
         const outArr = json.filter((test) => test.outsourced === 'Yes');
         const optionsOuts = outArr.map((test) => {
           const p = parseFloat(test.price);
-
-          const price = parseFloat(test.price);
-
           return {
             name: test.testName,
             nameAndId: test.testName + ' - ' + test.testID,
@@ -104,23 +75,11 @@ const EditBill = () => {
 
       if (response.ok) {
         setBills(json);
-        loadPreValues(json);
       }
     };
 
     fetchBills();
   }, []);
-
-  useEffect(() => {
-    const preServiceTotal = preServices.reduce((acc, item) => {
-      return acc + parseFloat(item.price);
-    }, 0);
-    const preOutsourcedTotal = preOutsourced.reduce((acc, item) => {
-      return acc + parseFloat(item.price);
-    }, 0);
-    const newTotal = preServiceTotal + preOutsourcedTotal;
-    setTotal(newTotal);
-  }, [preServices, preOutsourced]);
 
   const handleCancelClick = () => {
     navigate('/view-bills');
@@ -133,18 +92,17 @@ const EditBill = () => {
 
     const patientId = thisBill.patientId;
     const patientName = thisBill.patientName;
-    const normalServices = serviceRef.current.getSelectedItems;
-    const outsourceServices = outsourceRef.current.getSelectedItems;
-    console.log(total);
-    //const total = '';
-    //const Total = 0;
+    const normal = selectedValues;
+    const outsource = selectedValuesOut;
+    const services = normal.map((s) => s.name);
+    const outsourceServices = outsource.map((s) => s.name);
 
-    /* const bill = {
+    const bill = {
       patientId,
       patientName,
-      normalServices,
+      services,
       outsourceServices,
-      Total,
+      total,
     };
 
     const response = await fetch('/api/bills/' + billId, {
@@ -157,14 +115,30 @@ const EditBill = () => {
 
     if (!response.ok) {
       setUpdated('Could not update the Bill');
+      MySwal.fire({
+        title: 'Error',
+        text: updated,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
     if (response.ok) {
       setUpdated('Bill Updated');
-    }*/
+      MySwal.fire({
+        title: 'Success',
+        text: updated,
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      //navigate('/view-bills');
+    }
   };
 
   return (
     <>
+      {updated}
       {thisBill && (
         <>
           <div className="row">
@@ -179,7 +153,6 @@ const EditBill = () => {
                 onSelect={handleSelect}
                 ref={serviceRef}
                 options={options} // Options to display in the dropdown
-                selectedValues={preServices} // Preselected value to persist in dropdown
                 displayValue="nameAndId" // Property name to display in the dropdown options
               />
             </div>
@@ -189,7 +162,6 @@ const EditBill = () => {
                 onSelect={handleSelectOut}
                 ref={outsourceRef}
                 options={optionsOut} // Options to display in the dropdown
-                selectedValues={preOutsourced} // Preselected value to persist in dropdown
                 displayValue="nameAndId" // Property name to display in the dropdown options
               />
             </div>
