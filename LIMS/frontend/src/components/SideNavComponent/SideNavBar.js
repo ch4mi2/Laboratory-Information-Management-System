@@ -82,7 +82,10 @@ function SideNavBar() {
                         <NavText>Add Machines</NavText>
                         </NavItem>
                         <NavItem className = 'subNav' eventKey="Machines">
-                        <NavText>Machine History</NavText>
+                        <NavText>History</NavText>
+                        </NavItem>
+                        <NavItem className = 'subNav' eventKey="MachineMaintenance">
+                        <NavText>Service</NavText>
                         </NavItem>
                     </NavItem>
 

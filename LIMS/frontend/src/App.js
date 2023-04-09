@@ -15,8 +15,8 @@ import AddExpenses from './pages/AddExpenses';
 import CreateTest from './pages/CreateTest';
 import ViewTest from './pages/ViewTest';
 import UpdateTest from './pages/UpdateTest';
-
-import Machines from './pages/machineHistory'
+import MachineMaintenance from './pages/machineMaintenance';
+import Machines from './pages/machineHistory';
 import AddMachines from './pages/AddMachines';
 
 // assets
@@ -66,7 +66,7 @@ function App() {
                   />
                   <Route path="/machines" element={<Machines />}/>
                   <Route path="/addMachines" element={<AddMachines/>}></Route>
-                  
+                  <Route path="/MaintainMachines" element={<MachineMaintenance/>}></Route>
                   <Route
                     path='/testData'
                     element={ <TestData /> }
