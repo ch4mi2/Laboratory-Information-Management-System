@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SingleTestDetails from "../components/TestDataComponents/SingleTestDetails";
 import TestSubCategoryDetails from "../components/TestDataComponents/TestSubCategoryDetails";
+import '../css/TestDataStyles/testData.css';
 
 const ViewTest = () => {
 

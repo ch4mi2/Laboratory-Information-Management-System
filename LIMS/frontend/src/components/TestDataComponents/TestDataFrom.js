@@ -338,7 +338,7 @@ const TestDataForm = () => {
                 </div>
             </div>
 
-            <button>Add Test</button>
+            <button className="btnConfirm">Add Test</button>
         </form>
     )
 }

@@ -8,7 +8,6 @@ import '../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css'
 import './index.css';
 
 import './css/SideNavStyles/sideNavBar.css';
-//import './css/TestDataStyles/testData.css';
 //import './css/MachineStyles/machineDetails.css';
 ///import './css/MachineStyles/machineDetails.css';
 import App from './App';

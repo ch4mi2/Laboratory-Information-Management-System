@@ -209,8 +209,8 @@ const UpdateTestForm = ({Test}) => {
                 </div>
         </div>
         <div className="row">
-        <button className="col-5" onClick={handleUpdate}>Update Test</button>
-        <button className="col-4 delete" onClick={handleDelete}>Delete Test</button>
+        <button className="btnSubmit col-5" onClick={handleUpdate}>Update Test</button>
+        <button className="col-4 btnDelete" onClick={handleDelete}>Delete Test</button>
         </div>
         
         </form>

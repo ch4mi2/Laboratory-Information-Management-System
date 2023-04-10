@@ -93,7 +93,7 @@ const createTest = async(req,res) => {
                     test.subCategories.push(createdCategory)
                     test.save();
                     res.status(200).json(test);
-                } else { // Code to be xecuted if a test is already present and test subcategories need to be added
+                } else { // Code to be executed if a test is already present and test subcategories need to be added
                     test = await Test.findOne({ testID: testID });
                     test.subCategories.push(createdCategory)
                     await test.save();

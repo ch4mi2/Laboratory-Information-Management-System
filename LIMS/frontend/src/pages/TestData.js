@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import TestDataDetails from "../components/TestDataComponents/TestDataDetails";
+import '../css/TestDataStyles/testData.css';
+
 
 const TestData = () => {
 

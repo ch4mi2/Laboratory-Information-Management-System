@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import UpdateTestForm from "../components/TestDataComponents/UpdateTestForm";
+import '../css/TestDataStyles/testData.css';
 
 const UpdateTest = () => {
     const location = useLocation();
