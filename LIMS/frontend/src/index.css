@@ -23,6 +23,11 @@ form {
   border-radius: 25px;
 }
 
+form input {
+  border-radius: 20px !important;
+}
+
+
 .btnSubmit {
   background-color: var(--orange);
   color: #ffffff;

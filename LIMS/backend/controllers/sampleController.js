@@ -1,7 +1,7 @@
 const Sample = require('../models/sampleModel')
 const mongoose = require('mongoose')
 const { createTestResultParams } = require('../controllers/testResultController')
-const bwipjs = require('bwip-js')
+
 
 
 

@@ -9,7 +9,7 @@ const {
 
 const router = express.Router()
 
-//GET pending samples
+//GET pending testResults
 router.get('/pendingTests', getPendingTestResults)
 
 //GET completed testResults

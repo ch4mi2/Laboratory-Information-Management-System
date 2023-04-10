@@ -82,7 +82,7 @@ const PendingTestResults = () => {
                   </button>
                 </td>
                 <td>
-                <button onClick={() => handlePreviewClick((testResult._id))}>
+                <button className='btnSubmit' onClick={() => handlePreviewClick((testResult._id))}>
                   Preview
                 </button>
                 </td> 
