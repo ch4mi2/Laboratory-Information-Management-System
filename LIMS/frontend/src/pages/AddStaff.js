@@ -1,7 +1,6 @@
-import { useEffect,useState } from "react";
 
 //components 
-import StaffForm from '../components/StaffForm';
+import StaffForm from '../components/StaffComponent/StaffForm';
 
 const AddStaff= () =>{
 
