@@ -6,9 +6,12 @@ const UpdateTest = () => {
     const location = useLocation();
     const state = location.state;
 
-    return ( 
-        <div className="updateTest">
-            < UpdateTestForm Test = {state} />
+    return (
+        <div>
+            <h4>Manage Test</h4>
+            <div className="updateTest">
+                < UpdateTestForm Test = {state} />
+            </div>
         </div>
     );
 }

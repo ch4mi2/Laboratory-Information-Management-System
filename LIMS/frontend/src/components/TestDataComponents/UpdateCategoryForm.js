@@ -63,6 +63,45 @@ const UpdateCategoryForm = ({subCategory}) => {
             }
         }
     }
+
+    const handleDelete = async (e) => {
+        e.preventDefault()
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!'
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+                const response = await fetch('/api/tests/category/' + subCategory._id, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                const json = await response.json()
+        
+                if(!response.ok) {
+                    setError(json.error)
+                }
+                if(response.ok) {
+                    MySwal.fire({
+                        title: 'Success',
+                        text: 'Successfully Deleted Category',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    }).then(() => {
+                        navigate(-1);
+                    })
+                }
+            }
+          })
+
+    }
     
     return (
         <form className="secondSection">
@@ -200,8 +239,8 @@ const UpdateCategoryForm = ({subCategory}) => {
                     </div>
                 </div>
                 <div className="row">
-                <button className="col-5" onClick={handleUpdate}>Update Category</button>
-                {/* <button className="col-4 delete" onClick={handleDelete}>Delete Test</button> */}
+                <button className="col-5 submit btnConfirm" onClick={handleUpdate}>Update Category</button>
+                <button className="col-4 delete btnCancel" onClick={handleDelete}>Delete Category</button>
                 </div>
             </form>
     );

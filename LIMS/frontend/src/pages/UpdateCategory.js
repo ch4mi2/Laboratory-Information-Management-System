@@ -6,8 +6,11 @@ const UpdateCategory = () => {
     const state = location.state;
 
     return ( 
-        <div className="updateTest">
-            < UpdateCategoryForm subCategory = {state} />
+        <div>
+            <h4>Manage Test Subcategory</h4>
+            <div className="updateTest">
+                < UpdateCategoryForm subCategory = {state} />
+            </div>
         </div>
     );
 }

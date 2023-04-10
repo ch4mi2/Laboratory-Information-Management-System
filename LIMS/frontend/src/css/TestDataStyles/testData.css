@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 .test-data-details{
@@ -65,15 +65,15 @@
 
 
 
-input, select {
-  /* padding: 10px; */
+/* input, select {
+  padding: 10px;
   width:100%;
   margin-top: 10px;
   margin-bottom: 20px;
   border: 1px solid #ddd;
-  border-radius: 15px;
+  border-radius: 20px;
   box-sizing: border-box;
-}
+} */
 
 
 div.error {
@@ -96,4 +96,12 @@ a {
 
 a:hover {
   color:#000000;
+}
+
+.submit,
+.delete {
+  padding: 10px;
+  margin: 10px;
+  margin-left:22px;
+  margin-top:20px;
 }

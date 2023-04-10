@@ -223,6 +223,25 @@ const updateCategory = async(req,res) => {
     
         res.status(200).json(category)
     }
+
+}
+
+const deleteCategory = async(req,res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: "Not a vlid object ID"})
+    }
+
+    const category = await Category.findById(id)
+
+    if(!category) {
+        return res.status(400).json({error: "No such Test"})
+    }
+
+    const deletedCategory = await Category.findOneAndDelete({_id: id}) ;
+
+    res.status(200).json(deletedCategory);
 }
 
 module.exports = {
@@ -231,5 +250,6 @@ module.exports = {
     createTest,
     deleteTest,
     updateTest,
-    updateCategory
+    updateCategory,
+    deleteCategory
 }

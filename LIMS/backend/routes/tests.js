@@ -5,7 +5,8 @@ const {
     createTest,
     deleteTest,
     updateTest,
-    updateCategory
+    updateCategory,
+    deleteCategory
 } = require('../controllers/testController')
 
 const router = express.Router();
@@ -27,6 +28,9 @@ router.patch('/:id', updateTest);
 
 //update a category
 router.patch('/category/:id', updateCategory)
+
+//delete a category
+router.delete('/category/:id', deleteCategory)
 
 
 module.exports = router;

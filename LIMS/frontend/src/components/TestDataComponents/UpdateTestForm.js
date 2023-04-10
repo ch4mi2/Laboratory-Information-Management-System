@@ -71,9 +71,6 @@ const UpdateTestForm = ({Test}) => {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#ff5252',
-            cancelButtonColor: '#eeeeee',
-            color:'#000000',
             confirmButtonText: 'Yes, delete it!'
           }).then(async(result) => {
             if (result.isConfirmed) {
@@ -108,7 +105,7 @@ const UpdateTestForm = ({Test}) => {
 
 
     return ( 
-        <form className = "form" >
+        <form>
             <div className="firstSection">
             <div className="row">
                     <div className="col-6">
@@ -198,19 +195,21 @@ const UpdateTestForm = ({Test}) => {
                 <div className="row">
                     <div className="col-6">
                         <label>Outsourced: </label>
-                        <input 
+                        <select
                             type = "text"
                             onChange={(e) => setOutsourced(e.target.value)}
                             value={outsourced}
                             className={emptyFields.includes('outsourced') ? 'error' : ''}
-
-                        />
+                        >
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
                     </div>
                 </div>
         </div>
         <div className="row">
-        <button className="btnSubmit col-5" onClick={handleUpdate}>Update Test</button>
-        <button className="col-4 btnDelete" onClick={handleDelete}>Delete Test</button>
+        <button className="col-5 submit btnConfirm" onClick={handleUpdate}>Update Test</button>
+        <button className="col-4 delete btnCancel" onClick={handleDelete}>Delete Test</button>
         </div>
         
         </form>

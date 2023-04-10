@@ -4,8 +4,11 @@ import '../css/TestDataStyles/testData.css';
 
 const CreateTest = () => {
     return ( 
-        <div className="createTest">
-            <TestDataForm />
+        <div>
+            <h4>Add New Test</h4>
+            <div className="createTest">
+                <TestDataForm />
+            </div>
         </div>
     );
 }

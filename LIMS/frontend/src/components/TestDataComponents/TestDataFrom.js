@@ -96,8 +96,7 @@ const TestDataForm = () => {
 
     return (
         <form className = "form" onSubmit={handleSubmit}>
-            <h3>Add a New Test</h3>
-
+            
             <fieldset className="firstSection">
                 {/* <legend>Test Data</legend> */}
                 <div className="row">
@@ -190,13 +189,15 @@ const TestDataForm = () => {
                 <div className="row">
                     <div className="col-6">
                         <label>Outsourced: </label>
-                        <input 
+                        <select
                             type = "text"
                             onChange={(e) => setOutsourced(e.target.value)}
                             value={outsourced}
                             className={emptyFields.includes('outsourced') ? 'error' : ''}
-
-                        />
+                        >
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
                     </div>
                 </div>
             </fieldset>
@@ -338,7 +339,7 @@ const TestDataForm = () => {
                 </div>
             </div>
 
-            <button className="btnConfirm">Add Test</button>
+            <button className="col-5 submit btnConfirm">Add Test</button>
         </form>
     )
 }
