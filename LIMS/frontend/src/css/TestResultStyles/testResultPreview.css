@@ -1,7 +1,8 @@
 .report{
     background-color: white;
-    width: 210mm;
+    /*width: 210mm;
     height: 297mm;
+    */
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -34,4 +35,8 @@
 
 .reportBody {
     padding: 40px;
+}
+
+.info{
+    margin: 0;
 }

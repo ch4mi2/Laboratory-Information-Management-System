@@ -32,6 +32,8 @@ import AllBills from './components/BillComponent/AllBills';
 import ShowABill from './components/BillComponent/ShowABill';
 import TransactionHistory from './pages/TransactionHistory';
 import EditBill from './pages/EditBill';
+import AddStaff from './pages/AddStaff';
+import LabInfo from './pages/LabInfo';
 
 function App() {
   return (
@@ -122,6 +124,14 @@ function App() {
                   <Route
                     path="/testResultPreview/:id"
                     element={<TestResultPreview />}
+                  />
+                  <Route
+                    path='/addStaff'
+                    element={<AddStaff/>}
+          />
+                  <Route
+                    path="/labInfo"
+                    element={<LabInfo />}
                   />
                 </Routes>
               </div>

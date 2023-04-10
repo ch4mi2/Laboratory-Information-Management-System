@@ -13,7 +13,7 @@ const machineRoutes = require('./routes/machineRoutes')
 const inventoryRoutes = require('./routes/inventoryRoutes');
 const StaffRoutes = require('./routes/StaffRoutes.js');
 const AdminRoute = require('./routes/AdminRoute.js');
-
+const LabInfoRoutes = require('./routes/LabInfoRoutes.js');
 
 //express app
 const app = express(); //invokes the function
@@ -39,6 +39,7 @@ app.use('/api/inventoryRoutes', inventoryRoutes);
 app.use('/api/machines' , machineRoutes );
 app.use('/api/Staff', StaffRoutes);
 app.use('/api/Admin', AdminRoute);
+app.use('/api/labInfo', LabInfoRoutes);
 
 //connect to db
 mongoose

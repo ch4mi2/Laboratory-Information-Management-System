@@ -137,6 +137,13 @@ function SideNavBar() {
               <NavText>View Expenses</NavText>
             </NavItem>
           </NavItem>
+
+          <NavItem eventKey="LabInfo">
+            <NavIcon>
+              <BsIcons.BsGear size={30} />
+            </NavIcon>
+            <NavText>Settings</NavText>
+          </NavItem>
         </SideNav.Nav>
       </SideNav>
     </aside>
