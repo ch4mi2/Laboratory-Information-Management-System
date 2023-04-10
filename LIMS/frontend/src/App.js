@@ -32,6 +32,7 @@ import AllBills from './components/BillComponent/AllBills';
 import ShowABill from './components/BillComponent/ShowABill';
 import TransactionHistory from './pages/TransactionHistory';
 import EditBill from './pages/EditBill';
+import AddStaff from './pages/AddStaff';
 
 function App() {
   return (
@@ -123,6 +124,10 @@ function App() {
                     path="/testResultPreview/:id"
                     element={<TestResultPreview />}
                   />
+                  <Route
+                    path='/addStaff'
+                    element={<AddStaff/>}
+          />
                 </Routes>
               </div>
             </div>
