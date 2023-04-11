@@ -195,8 +195,9 @@ const TestDataForm = () => {
                             value={outsourced}
                             className={emptyFields.includes('outsourced') ? 'error' : ''}
                         >
-                            <option value="Yes">Yes</option>
+                            <option value=""></option>
                             <option value="No">No</option>
+                            <option value="Yes">Yes</option>
                         </select>
                     </div>
                 </div>

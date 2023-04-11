@@ -99,8 +99,7 @@ const UpdateTestForm = ({Test}) => {
                     })
                 }
             }
-          })
-
+        })
     }
 
 

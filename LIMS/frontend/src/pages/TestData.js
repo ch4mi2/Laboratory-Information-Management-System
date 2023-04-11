@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-// import { Link } from 'react-router-dom';
-// import TestDataDetails from "../components/TestDataComponents/TestDataDetails";
-import $ from 'jquery';
 import { useNavigate } from "react-router-dom";
+import { useTestDataContext } from "../hooks/useTestDataContext";
+import Swal from 'sweetalert2';
+// import withReactContent from 'sweetalert2-react-content';
+import $ from 'jquery';
 // import '../css/TestDataStyles/testData.css';
 
 
 const TestData = () => {
 
-    const [Tests,setTests] = useState(null);
+    // const [Tests,setTests] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const navigate = useNavigate();
+    const { Tests, dispatch } = useTestDataContext()
 
     useEffect(() => {
         const fetchTests = async() => {
@@ -18,7 +20,8 @@ const TestData = () => {
             const json = await response.json();
 
             if( response.ok ) {
-                setTests(json);
+                // setTests(json);
+                dispatch({type:'SET_TESTS', payload: json})
                 $(function () {
                     $('#test-list').DataTable();
                 });
@@ -29,17 +32,63 @@ const TestData = () => {
         fetchTests();
     }, []);
 
-    useEffect(() => {
-        $(function () {
-          $('#example').DataTable({
-            order: [[4, 'desc']],
-            bDestroy: true,
-          });
-        });
-      }, []);
+    // useEffect(() => {
+    //     $(function () {
+    //       $('#example').DataTable({
+    //         order: [[4, 'desc']],
+    //         bDestroy: true,
+    //       });
+    //     });
+    // }, []);
 
     const handleClick = (id) => {
         navigate(`/viewTest/${id}`, {state:{id}})
+    }
+
+    const clickDelete = (id) => {
+        Swal.fire({
+            title: 'Delete this test and related subcategories?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!'
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+                const response = await fetch('/api/tests/' + id, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                const json = await response.json()
+        
+                if(!response.ok) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: json.error,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true
+                    })
+                }
+                if(response.ok) {
+                    dispatch({type: 'DELETE_TEST', payload: json})
+                    const table = $('#test-list').DataTable();
+                    const row = table.rows(`[data-id ="${id}"]`);
+                    row.remove().draw();
+                    
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Successfully Deleted Test',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    })
+                }
+            }
+          })
     }
 
     return (
@@ -64,16 +113,16 @@ const TestData = () => {
                     <tbody>
                     {Tests &&
                         Tests.map((test) => (
-                        <tr key={test._id} onClick={() => handleClick(test._id)}>
-                            <td>{test.testID}</td>
-                            <td>{test.testName}</td>
-                            <td>{test.shortName}</td>
-                            <td>{test.outsourced}</td>
-                            <td>{test.price}</td>
+                        <tr key={test._id} /*onClick={() => handleClick(test._id)}*/>
+                            <td onClick={() => handleClick(test._id)}>{test.testID}</td>
+                            <td onClick={() => handleClick(test._id)}>{test.testName}</td>
+                            <td onClick={() => handleClick(test._id)}>{test.shortName}</td>
+                            <td onClick={() => handleClick(test._id)}>{test.outsourced}</td>
+                            <td onClick={() => handleClick(test._id)}>{test.price}</td>
                             <td>
                             <button
                                 className="btnDelete"
-                            //   onClick={() => clickDelete(bill._id, bill.patientId)}
+                              onClick={() => clickDelete(test._id)}
                             >
                                 Delete
                             </button>
@@ -90,8 +139,5 @@ const TestData = () => {
     );
 }
 
-{/* <Link to={`/viewTest/${Test._id}`} key={Test._id}>
-                        <TestDataDetails key={Test._id} Test = {Test} />
-                    </Link> */}
  
 export default TestData;
