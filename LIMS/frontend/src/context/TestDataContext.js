@@ -23,7 +23,7 @@ export const TestDataReducer = (state,action) => {
 
 export const  TestDataContextProvider = ({children}) => {
     const [state,dispatch] = useReducer(TestDataReducer, {
-        tests: null
+        Tests: null
     })   
 
     return(

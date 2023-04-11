@@ -6,7 +6,7 @@ const CreateTest = () => {
     return ( 
         <div>
             <h4>Add New Test</h4>
-            <div className="createTest">
+            <div >
                 <TestDataForm />
             </div>
         </div>

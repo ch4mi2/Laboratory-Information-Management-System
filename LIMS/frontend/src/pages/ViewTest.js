@@ -14,6 +14,7 @@ const ViewTest = () => {
         const fetchTest = async() => {
             const response = await fetch('/api/tests/' + id);
             const json = await response.json();
+            console.log(json);
 
             if( response.ok ) {
                 await setTest(json);
