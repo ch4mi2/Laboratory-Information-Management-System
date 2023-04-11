@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TestSubCategoryDetails from "./TestSubCategoryDetails";
@@ -29,6 +30,7 @@ const TestDataForm = () => {
     const [inputTest,setTest] = useState(null)
     const [error, setError] = useState(null)
     const[emptyFields, setEmptyFields] = useState([])
+    const navigate = useNavigate();
     const MySwal = withReactContent(Swal); 
 
     const handleSubmit = async (e) => {
@@ -45,7 +47,6 @@ const TestDataForm = () => {
             }
         })
         const json = await response.json()
-        setTest(json)
 
         if(!response.ok) {
             setError(json.error)
@@ -59,6 +60,7 @@ const TestDataForm = () => {
             })
         }
         if(response.ok) {
+            setTest(json)
             setCategoryHeading('')
             setCategory('')
             setUOM('')
@@ -75,20 +77,32 @@ const TestDataForm = () => {
             setEmptyFields([])
             if( response.status === 200 ) {
                 MySwal.fire({
-                    title: 'Success',
-                    text: 'Successfully Added Test',
+                    title: 'Successfully Added Test',
+                    text: 'Do you want to add subcategories?',
                     icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500,
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText:'No'
+                }).then((result) => {
+                    if(!result.isConfirmed) {
+                        navigate('/testData');
+                    }
                 })
             }
             if( response.status === 201 ) {
                 MySwal.fire({
-                    title: 'Success',
-                    text: 'Successfully Added Test Subcategory',
+                    title: 'Successfully Added Test Subcategory',
+                    text: 'Do you want to add more?',
                     icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500,
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText:'No'
+                }).then((result) => {
+                    if(!result.isConfirmed) {
+                        navigate('/testData');
+                    }
                 })
             }
             
@@ -102,10 +116,11 @@ const TestDataForm = () => {
 
         if( response.ok ) {
             const test = await json.filter((t) => t.testID === Number(id))
-            setTest(await (await fetch('/api/tests/' + test[0]._id)).json())
+            
             // console.log(test[0]);
             
             if( test.length > 0 ) {
+                setTest(await (await fetch('/api/tests/' + test[0]._id)).json())
                 setShortName(test[0].shortName)
                 setTestName(test[0].testName)
                 setPrice(test[0].price)
@@ -121,6 +136,7 @@ const TestDataForm = () => {
                 setHeading('')
                 setRemarks('')
                 setOutsourced('')
+                setTest(null)
             }
         }
     }
