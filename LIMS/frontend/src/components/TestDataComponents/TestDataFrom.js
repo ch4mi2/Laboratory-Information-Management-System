@@ -120,6 +120,14 @@ const TestDataForm = () => {
             // console.log(test[0]);
             
             if( test.length > 0 ) {
+                MySwal.fire({
+                    title: 'Fetching Test',
+                    showConfirmButton: false,
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    timer: 1500 ,
+                })
+                Swal.showLoading();
                 setTest(await (await fetch('/api/tests/' + test[0]._id)).json())
                 setShortName(test[0].shortName)
                 setTestName(test[0].testName)
