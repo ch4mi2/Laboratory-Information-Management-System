@@ -15,11 +15,36 @@ const initilizeDataTable = () => {
       $('#example').DataTable().destroy();
     }
     // Initialize a new DataTable with options
-    $('#example').DataTable({
+    var table = $('#example').DataTable({
       order: [[4,'desc']],
+      buttons: [
+        {
+          extend: 'copy',
+          className: 'dt-export'
+        },
+        {
+          extend: 'csv',
+          className: 'dt-export'
+        },
+        {
+          extend: 'pdf',
+          className: 'dt-export'
+        },
+        {
+          extend: 'print',
+          className: 'dt-export'
+        },
+        {
+          extend: 'colvis',
+          className: 'dt-export'
+        }
+      ]
     });
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
   });
 }
+
 
 
 

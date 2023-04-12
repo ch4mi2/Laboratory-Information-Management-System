@@ -147,3 +147,23 @@ table.dataTable tbody tr:hover {
   height: 30px;
   border-radius: 25px;
 }
+
+.dt-export {
+  background-color: #757575;
+  color: white;
+  opacity: 1;
+  border-radius: 25px;
+  margin-top: 5px;
+  /* Add any other styles here */
+
+}
+
+.dt-export:hover {
+  
+  color: var(--orange);
+}
+.dropdown-item.active {
+  background: #cc3333 !important;
+}
+
+
