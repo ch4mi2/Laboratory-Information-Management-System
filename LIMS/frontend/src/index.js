@@ -31,6 +31,10 @@ import { PatientContextProvider } from './context/PatientContext';
 import { SamplesContextProvider } from './context/SampleContext';
 import { MachinesContextProvider } from './context/MachineContext';
 import { ExpensesContextProvider } from './context/ExpensesContext';
+import { TestDataContextProvider } from './context/TestDataContext';
+
+
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -39,7 +43,9 @@ root.render(
       <SamplesContextProvider>
         <ExpensesContextProvider>
           <MachinesContextProvider>
-            <App />
+            <TestDataContextProvider>
+              <App />
+            </TestDataContextProvider>
           </MachinesContextProvider>
         </ExpensesContextProvider>
       </SamplesContextProvider>

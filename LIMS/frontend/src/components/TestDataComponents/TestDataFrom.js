@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import TestSubCategoryDetails from "./TestSubCategoryDetails";
 
 const TestDataForm = () => {
 
@@ -25,19 +27,21 @@ const TestDataForm = () => {
     const [operatorB, setOperatorB] = useState('')
     const [endBRef, setEndBRef] = useState('')
 
+    const [inputTest,setTest] = useState(null)
     const [error, setError] = useState(null)
     const[emptyFields, setEmptyFields] = useState([])
+    const navigate = useNavigate();
     const MySwal = withReactContent(Swal); 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const test = {testID, testName, outsourced, shortName, specimen, price, heading, remarks, 
+        const Test = {testID, testName, outsourced, shortName, specimen, price, heading, remarks, 
             categoryHeading, category, UOM, startMRef, operatorM, endMRef, startFRef, operatorF, endFRef, startBRef, operatorB, endBRef}
 
         const response = await fetch('/api/tests', {
             method: 'POST',
-            body: JSON.stringify(test),
+            body: JSON.stringify(Test),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -56,6 +60,7 @@ const TestDataForm = () => {
             })
         }
         if(response.ok) {
+            setTest(json)
             setCategoryHeading('')
             setCategory('')
             setUOM('')
@@ -72,20 +77,32 @@ const TestDataForm = () => {
             setEmptyFields([])
             if( response.status === 200 ) {
                 MySwal.fire({
-                    title: 'Success',
-                    text: 'Successfully Added Test',
+                    title: 'Successfully Added Test',
+                    text: 'Do you want to add subcategories?',
                     icon: 'success',
-                    showConfirmButton: false,
-                    timer: 2000,
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText:'No'
+                }).then((result) => {
+                    if(!result.isConfirmed) {
+                        navigate('/testData');
+                    }
                 })
             }
             if( response.status === 201 ) {
                 MySwal.fire({
-                    title: 'Success',
-                    text: 'Successfully Added Test Subcategory',
+                    title: 'Successfully Added Test Subcategory',
+                    text: 'Do you want to add more?',
                     icon: 'success',
-                    showConfirmButton: false,
-                    timer: 2000,
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText:'No'
+                }).then((result) => {
+                    if(!result.isConfirmed) {
+                        navigate('/testData');
+                    }
                 })
             }
             
@@ -93,9 +110,51 @@ const TestDataForm = () => {
         }
     }
 
+    const updateForm = async(id) => {
+        const response = await fetch('/api/tests/')
+        const json = await response.json()
+
+        if( response.ok ) {
+            const test = await json.filter((t) => t.testID === Number(id))
+            
+            // console.log(test[0]);
+            
+            if( test.length > 0 ) {
+                MySwal.fire({
+                    title: 'Fetching Test',
+                    showConfirmButton: false,
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    timer: 1500 ,
+                })
+                Swal.showLoading();
+                setTest(await (await fetch('/api/tests/' + test[0]._id)).json())
+                setShortName(test[0].shortName)
+                setTestName(test[0].testName)
+                setPrice(test[0].price)
+                setSpecimen(test[0].specimen)
+                setHeading(test[0].heading)
+                setRemarks(test[0].remarks)
+                setOutsourced(test[0].outsourced)
+            } else {
+                setShortName('')
+                setTestName('')
+                setPrice('')
+                setSpecimen('')
+                setHeading('')
+                setRemarks('')
+                setOutsourced('')
+                setTest(null)
+            }
+        }
+    }
+
+
+
 
     return (
-        <form className = "form" onSubmit={handleSubmit}>
+        <div className="createTest">
+        <form className = "form " onSubmit={handleSubmit}>
             
             <fieldset className="firstSection">
                 {/* <legend>Test Data</legend> */}
@@ -104,7 +163,10 @@ const TestDataForm = () => {
                         <label>Test ID: </label>
                         <input 
                             type = "number"
-                            onChange={(e) => setTestID(e.target.value)}
+                            onChange={(e) => {
+                                setTestID(e.target.value)
+                                updateForm(e.target.value)
+                            }}
                             value={testID}
                             className={emptyFields.includes('testID') ? 'error' : ''}
                         />
@@ -184,7 +246,6 @@ const TestDataForm = () => {
                     </div>
                 </div>
                 
-                    
                 
                 <div className="row">
                     <div className="col-6">
@@ -195,8 +256,9 @@ const TestDataForm = () => {
                             value={outsourced}
                             className={emptyFields.includes('outsourced') ? 'error' : ''}
                         >
-                            <option value="Yes">Yes</option>
+                            <option value=""></option>
                             <option value="No">No</option>
+                            <option value="Yes">Yes</option>
                         </select>
                     </div>
                 </div>
@@ -341,6 +403,15 @@ const TestDataForm = () => {
 
             <button className="col-5 submit btnConfirm">Add Test</button>
         </form>
+        <div className="thirdSection">
+            {inputTest && <h5>Related subcategories</h5>}
+            {inputTest && inputTest.subCategories &&
+            inputTest.subCategories.map((subCategory) => (
+                <TestSubCategoryDetails key={subCategory._id} subCategory = { subCategory } />
+            ))
+            }
+        </div>
+        </div>
     )
 }
  
