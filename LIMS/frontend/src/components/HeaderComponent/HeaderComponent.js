@@ -21,7 +21,6 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
           </a>
           <ul className="dropdown-menu" aria-labelledby="user-dropdown">
             <li><a className="dropdown-item" href="#">Profile</a></li>
-            <li><a className="dropdown-item" href="#">Settings</a></li>
             <li><hr className="dropdown-divider" /></li>
             <li><a className="dropdown-item" href="#">Logout</a></li>
           </ul>
