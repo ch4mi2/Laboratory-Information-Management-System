@@ -1,5 +1,6 @@
 const Test = require('../models/testModel');
 const Category = require('../models/categoryModel');
+const Bill = require('../models/BillModel');
 const mongoose = require('mongoose');
 
 //retrieve All tests
@@ -117,17 +118,21 @@ const deleteTest = async(req,res) => {
         return res.status(404).json({error: "Not a vlid object ID"})
     }
 
-    const test = await Test.findById(id)
+    try {
+        const test = await Test.findById(id)
 
-    if(!test) {
-        return res.status(400).json({error: "No such Test"})
+        if(!test) {
+            return res.status(400).json({error: "No such Test"})
+        }
+
+        await Category.remove({_id: { $in: test.subCategories }});
+
+        const deletedTest = await Test.findOneAndDelete({_id: id}) ;
+
+        res.status(200).json(deletedTest);
+    } catch(error) {
+        res.status(400).json({error: error.message})
     }
-
-    await Category.remove({_id: { $in: test.subCategories }});
-
-    const deletedTest = await Test.findOneAndDelete({_id: id}) ;
-
-    res.status(200).json(deletedTest);
 }
 
 const updateTest = async(req,res) => {
@@ -164,15 +169,20 @@ const updateTest = async(req,res) => {
             return res.status(404).json({error: "Not a vlid object ID"})
         }
     
-        const test = await Test.findOneAndUpdate({_id: id }, {
-            ...req.body
-        });
-    
-        if(!test) {
-            return res.status(400).json({error: "No such test"})
+        try {
+            const test = await Test.findOneAndUpdate({_id: id }, {
+                ...req.body
+            });
+        
+            if(!test) {
+                return res.status(400).json({error: "No such test"})
+            }
+        
+            res.status(200).json(test)
+        } catch(error) {
+            res.status(400).json({error: error.message})
         }
-    
-        res.status(200).json(test)
+        
     }
 }
 
@@ -213,15 +223,19 @@ const updateCategory = async(req,res) => {
             return res.status(404).json({error: "Not a vlid object ID"})
         }
     
-        const category = await Category.findOneAndUpdate({_id: id }, {
-            ...req.body
-        });
-    
-        if(!category) {
-            return res.status(400).json({error: "No such Category"})
+        try {
+            const category = await Category.findOneAndUpdate({_id: id }, {
+                ...req.body
+            });
+        
+            if(!category) {
+                return res.status(400).json({error: "No such Category"})
+            }
+        
+            res.status(200).json(category)
+        } catch(error) {
+            res.status(400).json({error: error.message})
         }
-    
-        res.status(200).json(category)
     }
 
 }
@@ -233,15 +247,58 @@ const deleteCategory = async(req,res) => {
         return res.status(404).json({error: "Not a vlid object ID"})
     }
 
-    const category = await Category.findById(id)
+    try {
+        const category = await Category.findById(id)
 
-    if(!category) {
-        return res.status(400).json({error: "No such Test"})
+        if(!category) {
+            return res.status(400).json({error: "No such Test"})
+        }
+
+        const deletedCategory = await Category.findOneAndDelete({_id: id}) ;
+
+        res.status(200).json(deletedCategory);
+    } catch(error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+const getTestCount = async(req,res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: "Not a vlid object ID"})
     }
 
-    const deletedCategory = await Category.findOneAndDelete({_id: id}) ;
+    try {
+        const test = await Test.findById(id)
 
-    res.status(200).json(deletedCategory);
+        if( test.outsourced === "No" ) {
+            var testCount = await Bill.aggregate([
+                {$unwind: "$services"},
+                {$match: {
+                    'services': test.testName
+                }},
+                { $count: 'Count' }
+            ])
+        } else {
+            var testCount = await Bill.aggregate([
+                {$unwind: "$outsourceServices"},
+                {$match: {
+                    'outsourceServices': test.testName
+                }},
+                { $count: 'Count' }
+            ])
+        }
+        if( testCount.length > 0 ) {
+            res.status(200).json(testCount[0].Count)
+        } else {
+            testCount = 0
+            res.status(200).json(testCount)
+        }
+    } catch(error) {
+        res.status(400).json({error: error.message})
+    }
+    
 }
 
 module.exports = {
@@ -251,5 +308,6 @@ module.exports = {
     deleteTest,
     updateTest,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    getTestCount
 }
