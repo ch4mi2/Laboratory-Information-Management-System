@@ -3,7 +3,7 @@ import { FaUserCircle } from 'react-icons/fa';
 const HeaderComponent = ({ logoImgSrc, username }) => {
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light bg-light"
+      className="navbar navbar-expand-lg navbar-light bg-light sticky-top"
       style={{ zIndex: 25555 , justifyContent:'space-between'}}
     >
       <a className="navbar-brand" href="#">
@@ -12,7 +12,7 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
 
       <div 
         className="" id="navbarText"
-        style={{ display:'flex',marginRight:'2rem', gap:'1rem'}}
+        style={{ display:'flex',marginRight:'2rem'}}
       >
         <div className="navbar-text dropdown">
           <a className="dropdown-toggle d-flex align-items-center" href="#" role="button" id="user-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,7 +26,7 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
           </ul>
         </div>
         <div>
-        <span className="ms-2">{username} temporary@gmail.com </span>
+        <span className="ms-3">{username} temporary@gmail.com </span>
         </div>
         
       </div>
