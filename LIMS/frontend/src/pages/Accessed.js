@@ -5,8 +5,9 @@ import formatDate from '../UtillFuntions/formatDate';
 import JsBarcode from 'jsbarcode';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
-
-
+import moment from 'moment';
+import * as FaIcons from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 const Accessed = () => {
   const { samples, dispatch } = useSampleContext();
@@ -135,6 +136,7 @@ const Accessed = () => {
                 <th>Patient</th>
                 <th>Test</th>
                 <th>Specimen</th>
+                <th>Billing Date</th>
                 <th>Collection Time</th>
                 <th>Barcode</th>
                 <th>Delete</th>
@@ -147,7 +149,8 @@ const Accessed = () => {
                   <td>{sample.patient?.firstName ?? "Record not found"}</td>
                   <td>{sample.test?.testName ?? "Record not found"}</td>
                   <td>{sample.test?.specimen ?? "Record not found"}</td>
-                  <td>{formatDate(sample.collectionTime)}</td>
+                  <td>{moment(sample.createdAt).format('DD-MM-YYYY HH:mm a')}</td>
+                  <td>{moment(sample.collectionTime).format('DD-MM-YYYY HH:mm a')}</td>
                   <td>
                     <button 
                       className="btnSubmit" 
@@ -161,23 +164,12 @@ const Accessed = () => {
                       className="btnDelete"
                       onClick={() => handleDeleteClick(sample._id)}
                       >
-                      Delete
+                      <FaTrash />
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
-            <tfoot>
-              <tr>
-                <th>Sample Id</th>
-                <th>Patient</th>
-                <th>Test</th>
-                <th>Specimen</th>
-                <th>Collection Time</th>
-                <th>Barcode</th>
-                <th>Delete</th>
-              </tr>
-            </tfoot>
           </table>
         </div>
     </div>

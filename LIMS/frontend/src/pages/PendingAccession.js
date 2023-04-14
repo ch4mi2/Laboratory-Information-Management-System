@@ -4,7 +4,7 @@ import $ from 'jquery';
 import formatDate from '../UtillFuntions/formatDate';
 import JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
-
+import moment from 'moment';
 
 
 const initilizeDataTable = () => {
@@ -20,19 +20,31 @@ const initilizeDataTable = () => {
       buttons: [
         {
           extend: 'copy',
-          className: 'dt-export'
+          className: 'dt-export',
+          exportOptions: {
+            columns: ':visible :not(.js-not-exportable)'
+        }
         },
         {
           extend: 'csv',
-          className: 'dt-export'
+          className: 'dt-export',
+          exportOptions: {
+            columns: ':visible :not(.js-not-exportable)'
+        }
         },
         {
           extend: 'pdf',
-          className: 'dt-export'
+          className: 'dt-export',
+          exportOptions: {
+            columns: ':visible :not(.js-not-exportable)'
+        }
         },
         {
           extend: 'print',
-          className: 'dt-export'
+          className: 'dt-export',
+          exportOptions: {
+            columns: ':visible :not(.js-not-exportable)'
+        }
         },
         {
           extend: 'colvis',
@@ -191,7 +203,7 @@ const PendingAccession = () => {
               <td>{sample.patient?.firstName ?? "Record not found"}</td>
               <td>{sample.test?.testName ?? "Record not found"}</td>
               <td>{sample.test?.specimen ?? "Record not found"}</td>
-              <td>{formatDate(sample.createdAt) ?? "Record not found"}</td>
+              <td>{moment(sample.createdAt).format('DD-MM-YYYY HH:mm a') ?? "Record not found"}</td>
               <td>
                 <button 
                   className="btnSubmit" 
@@ -212,17 +224,6 @@ const PendingAccession = () => {
             </tr>
           ))}
         </tbody>
-        <tfoot>
-          <tr>
-            <th>Sample Id</th>
-            <th>Patient</th>
-            <th>Test</th>
-            <th>Specimen</th>
-            <th>Billing Date</th>
-            <th>Barcode</th>
-            <th>Mark Collected</th>
-          </tr>
-        </tfoot>
       </table>
     </div>
   );
