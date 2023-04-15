@@ -95,6 +95,9 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="createTest">
               <NavText>Add Test</NavText>
             </NavItem>
+            <NavItem className="subNav" eventKey="viewStats">
+              <NavText>Statistics</NavText>
+            </NavItem>
           </NavItem>
 
           <NavItem eventKey="">

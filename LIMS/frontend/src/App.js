@@ -20,6 +20,7 @@ import CreateTest from './pages/CreateTest';
 import ViewTest from './pages/ViewTest';
 import UpdateTest from './pages/UpdateTest';
 import UpdateCategory from './pages/UpdateCategory';
+import ViewStat from './pages/ViewStats'
 import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
 import Machines from './pages/machineHistory';
@@ -105,6 +106,7 @@ function App() {
                   <Route path="/viewTest/:id" element={<ViewTest />} />
                   <Route path="/updateTest" element={<UpdateTest />} />
                   <Route path="/updateCategory" element={<UpdateCategory />} />
+                  <Route path="/viewStats" element={<ViewStat />} />
 
                   <Route path="/expenseslist" element={<Expenseslist />} />
                   <Route path="/addExpenses" element={<AddExpenses />} />

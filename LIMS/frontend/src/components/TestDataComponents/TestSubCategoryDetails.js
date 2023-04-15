@@ -42,7 +42,7 @@ const TestSubCategoryDetails = ({ subCategory }) => {
 
                 {(subCategory.startBRef || subCategory.operatorB || subCategory.endBRef) &&
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-12">
                         <strong>Baby Ref Range: </strong>
                         {subCategory.startBRef}
                         {subCategory.operatorB}
