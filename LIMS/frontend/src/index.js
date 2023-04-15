@@ -24,6 +24,7 @@ import '../node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.cs
 //styles
 import './css/SideNavStyles/sideNavBar.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './index.css';
 
 import App from './App';
