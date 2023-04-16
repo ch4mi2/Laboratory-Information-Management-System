@@ -4,7 +4,7 @@ const {
     createMachine,
     getMachines,
     getMachine,
-    //deleteMachine,
+    deleteMachine,
     //updateMachine
 } = require ('../controllers/machineController')
 
@@ -20,9 +20,9 @@ router.get('/:id' , getMachine)
 router.post('/' , createMachine)
 
 /*UPDATE a machine
-router.patch('/:id' , updateMachine)
+router.patch('/:id' , updateMachine)*/
 
 //DELETE a machine
-router.delete('/:id' , deleteMachine)*/
+router.delete('/:id' , deleteMachine)
 
 module.exports = router
