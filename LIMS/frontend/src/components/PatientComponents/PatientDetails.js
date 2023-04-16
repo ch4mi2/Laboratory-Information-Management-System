@@ -68,6 +68,13 @@ const PatientDetails = ({ edit, patient }) => {
             <strong>Gender : </strong> {patient.gender}
           </p>
         </div>
+        <div className="row">
+          <div className="col-12">
+            <p>
+              <strong>Email : </strong> {patient.email}
+            </p>
+          </div>
+        </div>
       </div>
       <div className="row">
         <div className="col-12">
@@ -76,6 +83,14 @@ const PatientDetails = ({ edit, patient }) => {
           </p>
         </div>
       </div>
+      <div className="row">
+        <div className="col-12">
+          <p>
+            <strong>Age : </strong> {patient.age}
+          </p>
+        </div>
+      </div>
+
       {edit === true ? (
         <div className="container-fluid">
           <div className="row">

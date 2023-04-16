@@ -76,7 +76,16 @@ const PrintBill = ({ billID }) => {
                       {moment(thisBill.createdAt).format('LT')}
                     </p>
                   </div>
+                  <div className="row">
+                    <div className="col-12">
+                      <p>
+                        <b>Referred Doctor : </b>
+                        {thisBill.referredDoctor}
+                      </p>
+                    </div>
+                  </div>
                   <hr />
+
                   <div className="row">
                     <div className="col-12">
                       <b>Requested Services :</b>
