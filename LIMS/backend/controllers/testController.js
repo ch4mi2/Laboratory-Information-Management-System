@@ -69,7 +69,7 @@ const createTest = async(req,res) => {
         if(!operatorM) {
             emptyFields.push('operatorM')
         }
-        if(!endMRef) {
+        if(!endMRef && operatorM == "-") {
             emptyFields.push('endMRef')
         }
         if(!startFRef) {
@@ -78,7 +78,7 @@ const createTest = async(req,res) => {
         if(!operatorF) {
             emptyFields.push('operatorF')
         }
-        if(!endFRef) {
+        if(!endFRef && operatorF == "-") {
             emptyFields.push('endFRef')
         }
 
@@ -105,7 +105,7 @@ const createTest = async(req,res) => {
                 }
                 
             } catch(error) {
-                res.status(400).json({error: error.message})
+                res.status(401).json({error: error.message})
             }
         }   
 }
