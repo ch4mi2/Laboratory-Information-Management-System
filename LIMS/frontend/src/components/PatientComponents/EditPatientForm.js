@@ -1,25 +1,23 @@
-// Bug : reload error
 import '../../css/PatientDetailStyles/PatientDetailStyles.css';
-import { useEffect, useState } from 'react';
-import { usePatientContext } from '../../hooks/usePatientContext';
-import { UPDATE_PATIENT } from '../../context/patientContextDeclarations';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
-const EditPatientForm = () => {
-  const { patients, dispatch } = usePatientContext();
+const EditPatientForm = ({ patient }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const currentPatient = patients.filter((p) => p._id === id)[0];
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [NIC, setNIC] = useState('');
-  const [tpNo, setTpNo] = useState('');
-  const [gender, setGender] = useState('Male');
+  const [age, setAge] = useState(patient.age);
+  const [email, setEmail] = useState(patient.email);
+  const [firstName, setFirstName] = useState(patient.firstName);
+  const [lastName, setLastName] = useState(patient.lastName);
+  const [NIC, setNIC] = useState(patient.NIC);
+  const [tpNo, setTpNo] = useState(patient.tpNo);
+  const [gender, setGender] = useState(patient.gender);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const [updated, setUpdated] = useState('');
+  const MySwal = withReactContent(Swal);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +25,7 @@ const EditPatientForm = () => {
       setUpdated('');
     }
 
-    const patient = { firstName, lastName, NIC, tpNo, gender };
+    const patient = { firstName, lastName, NIC, tpNo, gender, age, email };
 
     const response = await fetch('/api/patients/' + id, {
       method: 'PATCH',
@@ -43,24 +41,31 @@ const EditPatientForm = () => {
       setError(json.error);
       setEmptyFields(json.emptyFields);
       setUpdated('Could not update the Account');
+
+      if (!response.ok) {
+        MySwal.fire({
+          title: 'Error',
+          text: error,
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+      }
     }
     if (response.ok) {
       setError(null);
       setEmptyFields([]);
-      dispatch({ type: UPDATE_PATIENT, payload: json });
       setUpdated('Account Updated');
+      MySwal.fire({
+        title: 'Success',
+        text: 'Successfully Created',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      goBack();
     }
   };
-
-  useEffect(() => {
-    if (currentPatient) {
-      setFirstName(currentPatient.firstName);
-      setLastName(currentPatient.lastName);
-      setNIC(currentPatient.NIC);
-      setGender(currentPatient.gender);
-      setTpNo(currentPatient.tpNo);
-    }
-  }, []);
 
   const goBack = () => {
     navigate(`/patient-profile/${id}`);
@@ -121,6 +126,24 @@ const EditPatientForm = () => {
             onChange={(e) => setTpNo(e.target.value)}
             value={tpNo}
             className={emptyFields.includes('tpNo') ? 'error' : ''}
+          />
+
+          <label>Age :</label>
+          <input
+            required
+            type="text"
+            onChange={(e) => setAge(e.target.value)}
+            value={age}
+            className={emptyFields.includes('age') ? 'error' : ''}
+          />
+
+          <label>Email :</label>
+          <input
+            required
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            className={emptyFields.includes('email') ? 'error' : ''}
           />
 
           <label style={{ display: 'inline' }}>Gender :</label>

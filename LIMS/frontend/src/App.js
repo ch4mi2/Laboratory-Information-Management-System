@@ -7,7 +7,6 @@ import mediLineLogo from './assets/common/mediLineLogo.webp';
 // pages and components
 import PatientList from './pages/PatientList';
 import PatientProfile from './pages/PatientProfile';
-import EditPatientForm from './components/PatientComponents/EditPatientForm';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import PendingAccession from './pages/PendingAccession';
@@ -20,7 +19,7 @@ import CreateTest from './pages/CreateTest';
 import ViewTest from './pages/ViewTest';
 import UpdateTest from './pages/UpdateTest';
 import UpdateCategory from './pages/UpdateCategory';
-import ViewStat from './pages/ViewStats'
+import ViewStat from './pages/ViewStats';
 import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
 import Machines from './pages/machineHistory';
@@ -36,8 +35,9 @@ import EditBill from './pages/EditBill';
 import AddStaff from './pages/AddStaff';
 import LabInfo from './pages/LabInfo';
 import MachineList from './pages/machineList';
-import MachineHistory from'./pages/machineHistory';
+import MachineHistory from './pages/machineHistory';
 import FinancialReport from './pages/FinancialReport';
+import EditPatient from './pages/EditPatient';
 
 function App() {
   return (
@@ -89,7 +89,7 @@ function App() {
                   />
                   <Route
                     path="/patient-profile/:id/edit"
-                    element={<EditPatientForm />}
+                    element={<EditPatient />}
                   />
                   <Route
                     path="/patient-profile/:id/transactionHistory"
@@ -103,8 +103,11 @@ function App() {
                   <Route path="/accessed" element={<Accessed />} />
                   <Route path="/machines" element={<Machines />} />
                   <Route path="/addMachines" element={<AddMachines />}></Route>
-                  <Route path="/machineList" element={<MachineList/>}></Route>
-                  <Route path="/machineHistory/:id" element={<MachineHistory/>}></Route>
+                  <Route path="/machineList" element={<MachineList />}></Route>
+                  <Route
+                    path="/machineHistory/:id"
+                    element={<MachineHistory />}
+                  ></Route>
 
                   <Route path="/testData" element={<TestData />} />
                   <Route path="/createTest" element={<CreateTest />} />
@@ -132,14 +135,8 @@ function App() {
                     path="/testResultPreview/:id"
                     element={<TestResultPreview />}
                   />
-                  <Route
-                    path='/addStaff'
-                    element={<AddStaff/>}
-          />
-                  <Route
-                    path="/labInfo"
-                    element={<LabInfo />}
-                  />
+                  <Route path="/addStaff" element={<AddStaff />} />
+                  <Route path="/labInfo" element={<LabInfo />} />
                   <Route
                     path="/financialReport"
                     element={<FinancialReport />}
