@@ -44,7 +44,7 @@ const Bill = ({ patient }) => {
       return list;
     });
 
-    if (Tests[selectedIndex - 1]?.outsourced === 'true') {
+    if (Tests[selectedIndex - 1]?.outsourced === 'Yes') {
       setBilledTests((prevArray) => [
         ...prevArray,
         Tests[selectedIndex - 1]?._id,
@@ -172,6 +172,7 @@ const Bill = ({ patient }) => {
       normalServices,
       outsourceServices,
       Total,
+      referredDoctor,
     };
 
     const response = await fetch('/api/bills/', {

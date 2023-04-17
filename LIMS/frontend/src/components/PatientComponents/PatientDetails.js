@@ -95,7 +95,11 @@ const PatientDetails = ({ edit, patient }) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-6">
-              <Link style={{ textDecoration: 'none' }} to={'./edit'}>
+              <Link
+                style={{ textDecoration: 'none' }}
+                to={'./edit'}
+                state={patient}
+              >
                 <button
                   id="editProfileButton"
                   className="btn mt-4 px-4 d-block m-auto"

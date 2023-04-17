@@ -89,7 +89,7 @@ const CreatePatientForm = () => {
         </div>
       </div>
 
-      <div id="form-container-div" className="mt-5">
+      <div id="form-container-div" className="my-3">
         <form className="createPatientForm" onSubmit={handleSubmit}>
           <center>
             <h3 className="">Register a new Patient</h3>
