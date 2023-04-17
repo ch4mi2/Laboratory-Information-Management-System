@@ -27,6 +27,8 @@ const TestDataForm = () => {
     const [operatorB, setOperatorB] = useState('')
     const [endBRef, setEndBRef] = useState('')
 
+    const [disableID, setDisableID] = useState(false)
+    const [disable, setDisable] = useState(false)
     const [inputTest,setTest] = useState(null)
     const [error, setError] = useState(null)
     const[emptyFields, setEmptyFields] = useState([])
@@ -136,6 +138,8 @@ const TestDataForm = () => {
                 setHeading(test[0].heading)
                 setRemarks(test[0].remarks)
                 setOutsourced(test[0].outsourced)
+                setDisable(true)
+                setDisableID(false)
             } else {
                 setShortName('')
                 setTestName('')
@@ -145,6 +149,8 @@ const TestDataForm = () => {
                 setRemarks('')
                 setOutsourced('')
                 setTest(null)
+                setDisable(false)
+                setDisableID(false)
             }
         }
     }
@@ -164,11 +170,15 @@ const TestDataForm = () => {
                         <input 
                             type = "number"
                             onChange={(e) => {
+                                setDisableID(true)
                                 setTestID(e.target.value)
                                 updateForm(e.target.value)
+                                
                             }}
                             value={testID}
                             className={emptyFields.includes('testID') ? 'error' : ''}
+                            disabled = {disableID}
+
                         />
                     </div>
                     
@@ -179,6 +189,7 @@ const TestDataForm = () => {
                         onChange={(e) => setShortName(e.target.value)}
                         value={shortName}
                         className={emptyFields.includes('shortName') ? 'error' : ''}
+                        disabled = {disable}
                     />
                     </div>
                     
@@ -192,7 +203,7 @@ const TestDataForm = () => {
                             onChange={(e) => setTestName(e.target.value)}
                             value={testName}
                             className={emptyFields.includes('testName') ? 'error' : ''}
-
+                            disabled = {disable}
                         />
                     </div>
                 </div>
@@ -201,21 +212,21 @@ const TestDataForm = () => {
                     <div className="col-6">
                         <label>Price: </label>
                         <input 
-                        type = "number"
-                        onChange={(e) => setPrice(e.target.value)}
-                        value={price}
-                        className={emptyFields.includes('price') ? 'error' : ''}
-
+                            type = "number"
+                            onChange={(e) => setPrice(e.target.value)}
+                            value={price}
+                            className={emptyFields.includes('price') ? 'error' : ''}
+                            disabled = {disable}
                         />
                     </div>
                     <div className="col-6">
                         <label>Specimen: </label>
                         <input 
-                        type = "text"
-                        onChange={(e) => setSpecimen(e.target.value)}
-                        value={specimen}
-                        className={emptyFields.includes('specimen') ? 'error' : ''}
-
+                            type = "text"
+                            onChange={(e) => setSpecimen(e.target.value)}
+                            value={specimen}
+                            className={emptyFields.includes('specimen') ? 'error' : ''}
+                            disabled = {disable}
                         />
                     </div>
                 </div>
@@ -228,7 +239,7 @@ const TestDataForm = () => {
                             onChange={(e) => setHeading(e.target.value)}
                             value={heading}
                             className={emptyFields.includes('heading') ? 'error' : ''}
-
+                            disabled = {disable}
                         />
                     </div>
                 </div>
@@ -241,7 +252,7 @@ const TestDataForm = () => {
                             onChange={(e) => setRemarks(e.target.value)}
                             value={remarks}
                             // className={emptyFields.includes('remarks') ? 'error' : ''}
-
+                            disabled = {disable}
                         />
                     </div>
                 </div>
@@ -255,6 +266,8 @@ const TestDataForm = () => {
                             onChange={(e) => setOutsourced(e.target.value)}
                             value={outsourced}
                             className={emptyFields.includes('outsourced') ? 'error' : ''}
+                            disabled = {disable}
+
                         >
                             <option value=""></option>
                             <option value="No">No</option>
@@ -270,7 +283,9 @@ const TestDataForm = () => {
                         <label>Category: </label>
                         <input 
                             type = "text"
-                            onChange={(e) => setCategory(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('category')] = '';
+                                setCategory(e.target.value)}}
                             value={category}
                             className={emptyFields.includes('category') ? 'error' : ''}
                         />
@@ -316,13 +331,20 @@ const TestDataForm = () => {
                     </div>
                     <div className="col-2">
                         {/* <label>Operator: </label> */}
-                        <input 
+                        <select 
                             type = "text"
                             onChange={(e) => setOperatorM(e.target.value)}
                             value={operatorM}
                             className={emptyFields.includes('operatorM') ? 'error' : ''}
                             
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="-">-</option>
+                            <option value=">">&#62;</option>
+                            <option value="<">&#60;</option>
+                            <option value=">=">&#8805;</option>
+                            <option value="<=">&#8924;</option>
+                        </select>
                     </div>
                     <div className="col-4">
                         {/* <label>Ending Range:</label> */}
@@ -349,12 +371,19 @@ const TestDataForm = () => {
                     </div>
                     <div className="col-2">
                         {/* <label>Operator: </label> */}
-                        <input 
+                        <select 
                             type = "text"
                             onChange={(e) => setOperatorF(e.target.value)}
                             value={operatorF}
                             className={emptyFields.includes('operatorF') ? 'error' : ''}
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="-">-</option>
+                            <option value=">">&#62;</option>
+                            <option value="<">&#60;</option>
+                            <option value=">=">&#8805;</option>
+                            <option value="<=">&#8924;</option>
+                        </select>
                     </div>
                     <div className="col-4">
                         {/* <label>Ending Range:</label> */}
@@ -380,13 +409,20 @@ const TestDataForm = () => {
                     </div>
                     <div className="col-2">
                         {/* <label>Operator: </label> */}
-                        <input 
+                        <select 
                             type = "text"
                             onChange={(e) => setOperatorB(e.target.value)}
                             value={operatorB}
                             className={emptyFields.includes('operatorB') ? 'error' : ''}
                             
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="-">-</option>
+                            <option value=">">&#62;</option>
+                            <option value="<">&#60;</option>
+                            <option value=">=">&#8805;</option>
+                            <option value="<=">&#8924;</option>
+                        </select>
                     </div>
                     <div className="col-4">
                         {/* <label>Ending Range:</label> */}

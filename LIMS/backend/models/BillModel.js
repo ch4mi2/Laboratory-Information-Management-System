@@ -24,6 +24,10 @@ const billSchema = new Schema(
       type: Number,
       required: true,
     },
+    referredDoctor: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

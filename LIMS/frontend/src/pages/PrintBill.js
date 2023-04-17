@@ -31,7 +31,9 @@ const PrintBill = ({ billID }) => {
   }, []);
 
   const handleEditClick = () => {
-    navigate(`/view-bills/${thisBill._id}/edit`);
+    navigate(`/view-bills/${thisBill._id}/edit`, {
+      state: { bill: thisBill },
+    });
   };
 
   return (
@@ -76,7 +78,16 @@ const PrintBill = ({ billID }) => {
                       {moment(thisBill.createdAt).format('LT')}
                     </p>
                   </div>
+                  <div className="row">
+                    <div className="col-12">
+                      <p>
+                        <b>Referred Doctor : </b>
+                        {thisBill.referredDoctor}
+                      </p>
+                    </div>
+                  </div>
                   <hr />
+
                   <div className="row">
                     <div className="col-12">
                       <b>Requested Services :</b>

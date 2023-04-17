@@ -11,6 +11,7 @@ const Bill = ({ patient }) => {
   const [noOfDropdowns, setNoOfDropdowns] = useState([]);
   const [services, setServices] = useState([]);
   const [outsourced, setOutsourced] = useState([]);
+  const [referredDoctor, setReferredDoctor] = useState([]);
   const ref = useRef([]);
   const MySwal = withReactContent(Swal);
 
@@ -43,7 +44,7 @@ const Bill = ({ patient }) => {
       return list;
     });
 
-    if (Tests[selectedIndex - 1]?.outsourced === 'true') {
+    if (Tests[selectedIndex - 1]?.outsourced === 'Yes') {
       setBilledTests((prevArray) => [
         ...prevArray,
         Tests[selectedIndex - 1]?._id,
@@ -106,7 +107,7 @@ const Bill = ({ patient }) => {
           {Tests &&
             Tests.map((t) => (
               <option key={t._id} value={t.price}>
-                {t.testName}
+                {t.testID} - {t.testName}
               </option>
             ))}
         </select>
@@ -171,6 +172,7 @@ const Bill = ({ patient }) => {
       normalServices,
       outsourceServices,
       Total,
+      referredDoctor,
     };
 
     const response = await fetch('/api/bills/', {
@@ -240,6 +242,17 @@ const Bill = ({ patient }) => {
         </div>
         <div className="col-md-6">
           <b>NIC :</b> {patient.NIC}
+        </div>
+      </div>
+      <div className="row mt-3">
+        <div className="col-12">
+          <input
+            placeholder="Referred Doctor"
+            required
+            type="text"
+            onChange={(e) => setReferredDoctor(e.target.value)}
+            value={referredDoctor}
+          />
         </div>
       </div>
       <hr />

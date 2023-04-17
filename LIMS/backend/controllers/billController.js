@@ -33,6 +33,7 @@ const createBill = async (req, res) => {
     normalServices: services,
     outsourceServices,
     Total: total,
+    referredDoctor,
   } = req.body;
 
   let emptyFields = [];
@@ -52,6 +53,9 @@ const createBill = async (req, res) => {
   if (!total) {
     emptyFields.push('total');
   }
+  if (!referredDoctor) {
+    emptyFields.push('referredDoctor');
+  }
   if (emptyFields.length > 0) {
     return res
       .status(400)
@@ -65,6 +69,7 @@ const createBill = async (req, res) => {
       services,
       outsourceServices,
       total,
+      referredDoctor,
     });
     res.status(200).json(bill);
   } catch (error) {
@@ -108,7 +113,7 @@ const updateBill = async (req, res) => {
     return res.status(400).json({ error: 'No such bill' });
   }
 
-  res.status(200).json(bill);
+  return res.status(200).json(bill);
 };
 
 module.exports = {

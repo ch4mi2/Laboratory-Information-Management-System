@@ -12,6 +12,8 @@ const CreatePatientForm = () => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [age, setAge] = useState('');
+  const [email, setEmail] = useState('');
   const [NIC, setNIC] = useState('');
   const [tpNo, setTpNo] = useState('');
   const [gender, setGender] = useState('');
@@ -23,7 +25,7 @@ const CreatePatientForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const patient = { firstName, lastName, NIC, tpNo, gender };
+    const patient = { firstName, lastName, NIC, tpNo, gender, age, email };
 
     const response = await fetch('/api/patients/', {
       method: 'POST',
@@ -54,6 +56,8 @@ const CreatePatientForm = () => {
       setNIC('');
       setGender('');
       setTpNo('');
+      setAge('');
+      setEmail('');
       setError(null);
       setEmptyFields([]);
       console.log('new patient added', json);
@@ -85,7 +89,7 @@ const CreatePatientForm = () => {
         </div>
       </div>
 
-      <div id="form-container-div" className="mt-5">
+      <div id="form-container-div" className="my-3">
         <form className="createPatientForm" onSubmit={handleSubmit}>
           <center>
             <h3 className="">Register a new Patient</h3>
@@ -125,6 +129,24 @@ const CreatePatientForm = () => {
             onChange={(e) => setTpNo(e.target.value)}
             value={tpNo}
             className={emptyFields.includes('tpNo') ? 'error' : ''}
+          />
+
+          <label>Age :</label>
+          <input
+            required
+            type="text"
+            onChange={(e) => setAge(e.target.value)}
+            value={age}
+            className={emptyFields.includes('age') ? 'error' : ''}
+          />
+
+          <label>Email :</label>
+          <input
+            required
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            className={emptyFields.includes('email') ? 'error' : ''}
           />
 
           <label style={{ display: 'inline' }}>Gender :</label>
