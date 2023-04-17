@@ -164,7 +164,7 @@ const Accessed = () => {
                       className="btnDelete"
                       onClick={() => handleDeleteClick(sample._id)}
                       >
-                      <FaTrash />
+                      Delete
                     </button>
                   </td>
                 </tr>

@@ -79,7 +79,7 @@ const LabInfo = () => {
       }
 
     return(
-        <form onSubmit={handleUpdate}>
+        <form className="form" onSubmit={handleUpdate}>
             <h3>Lab Information</h3>
             <label>Name</label>
             <input
