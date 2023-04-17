@@ -62,7 +62,7 @@ const PrintBill = ({ billID }) => {
                 <div className="row">
                   <div className="col-4">
                     <p>
-                      <b>Name : </b>
+                      <b>Patient's Name : </b>
                       {thisBill.patientName}
                     </p>
                   </div>

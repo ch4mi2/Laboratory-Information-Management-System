@@ -153,7 +153,7 @@ const EditBill = () => {
         <div className="row">
           <div className="col-4">
             <p>
-              <b>Name : </b>
+              <b>Patient's Name : </b>
               {location.state.bill.patientName}
             </p>
           </div>
