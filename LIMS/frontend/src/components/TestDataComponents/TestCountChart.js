@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';  
 import {Chart,ArgumentAxis,Label,Legend,Series} from 'devextreme-react/chart';
 
-class TestCount extends Component {
+class TestCountChart extends Component {
     // const [isLoaded,setIsLoaded] = useState(false)
     // const [testData1,setData] = useState(null)
     // // const [test,setTest] = useState(null)
@@ -52,4 +52,4 @@ class TestCount extends Component {
     }
 } 
 
-export default TestCount 
+export default TestCountChart 

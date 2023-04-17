@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import TestCount from "../components/TestDataComponents/TestCount";
+import TestCountChart from "../components/TestDataComponents/TestCountChart";
 import React from 'react';
 // import Chart, {
 //     ArgumentAxis,
@@ -40,11 +40,9 @@ const ViewStats = () => {
         var testCount = []
         
         if( tests !== null && testCount.length <= 0) {
-            // console.log("Entered");
             tests.map(async(test) => {
                 // console.log(test._id);
                 var count = await(await fetch('/api/tests/count/' + test._id)).json()
-                console.log(count);
                 testCount.push({ arg: test.testName, val: count })
             })
             
@@ -53,7 +51,6 @@ const ViewStats = () => {
             setTimeout(() => {
                 testCount = testCount.sort((t1, t2) => (t1.val < t2.val) ? 1 : (t1.val > t2.val) ? -1 : 0)
                 console.log(testCount)
-
                 setData(testCount) 
             },1000)
             // setData(testCount)
@@ -61,18 +58,31 @@ const ViewStats = () => {
         } 
     }
 
+    const handleClick = () => {
+        setTimeout(() => {
+            setData([data[0]]) 
+
+        },1000)
+    }
+
     // console.log(data)
     if(data !== null) {
         // console.log(data);
         return(
             <div>
+                <button onClick={() => handleClick()}>Test</button>
+                {/* <h4>Heading</h4> */}
+
                 {isLoaded ?
+                
                 <div id="stat">
-                   <TestCount data = {data} />
+                    {console.log(data)}
+                    <TestCountChart data = {data} />
                 </div>:<div>Loading</div>}
+
             </div>
         )
-    }
+    } 
     
 }
 
