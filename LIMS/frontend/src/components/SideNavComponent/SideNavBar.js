@@ -118,9 +118,6 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="MachineList">
               <NavText>Machine List</NavText>
             </NavItem>
-            <NavItem className="subNav" eventKey="AddMachineParts">
-              <NavText>Add Parts</NavText>
-            </NavItem>
           </NavItem>
 
           {/*

@@ -1,8 +1,8 @@
+import ServiceMachineForm from "../components/machineComponent/serviceMachinesForm"
 import { useLocation } from "react-router-dom";
 import { useEffect , useState } from "react";
-import MachinePartsForm from "../components/machineComponent/machinePartsForm"
 
-const AddMachineParts = () => {
+const AddServiceDates = () => {
 
     const  {state} = useLocation()
     const [machine,setMachine] = useState(null);
@@ -18,17 +18,16 @@ const AddMachineParts = () => {
         }
              
         fetchMachineHistory();
-        
+        // eslint-disable-next-line
     }, [])
-    // console.log(state.id);
 
      return ( 
         <div className="history">
             <div className="machines">
-                {machine && <MachinePartsForm machine = {machine}/>}
+                {machine && <ServiceMachineForm machine = {machine}/>}
             </div>
         </div>
      );
 }
  
-export default AddMachineParts
+export default AddServiceDates

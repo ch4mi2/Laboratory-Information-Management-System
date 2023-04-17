@@ -27,11 +27,11 @@ const getMachinePart = async (req , res) => {
 
 //create a machine part
 const createMachinePart = async (req , res) =>{
-    const {machineId , MaintenanceDate , Issue ,MachinePart , brandOfMachinePart , PriceOfMachinePart , TechnicianName , TechTelno , TechnicianPayment} = req.body
+    const {machineId, machineName,MaintenanceDate , Issue ,MachinePart , brandOfMachinePart , PriceOfMachinePart , TechnicianName , TechTelno , TechnicianPayment} = req.body
 
     //add doc to db
     try {
-        const machinePart = await MachineParts.create({machineId , MaintenanceDate , Issue ,MachinePart , brandOfMachinePart , PriceOfMachinePart , TechnicianName , TechTelno , TechnicianPayment})
+        const machinePart = await MachineParts.create({machineId,machineName,MaintenanceDate , Issue ,MachinePart , brandOfMachinePart , PriceOfMachinePart , TechnicianName , TechTelno , TechnicianPayment})
         res.status(200).json(machinePart)
     }catch (error){
         res.status(400).json({error: error.message})

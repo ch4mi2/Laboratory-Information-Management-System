@@ -10,23 +10,11 @@ const machineMaintenanceSchema = new Schema({
         type: String,
         required:true
     },
-    MaintenanceDate:{
+    LastserviceDate:{
         type: String,
         required:true
     },
-    Issue:{
-        type: String,
-        required:true
-    },
-    MachinePart:{
-        type: String,
-        required:true
-    },
-    brandOfMachinePart:{
-        type: String,
-        required:true
-    },
-    PriceOfMachinePart:{
+    NextServiceDate:{
         type: String,
         required:true
     },
@@ -44,5 +32,5 @@ const machineMaintenanceSchema = new Schema({
     }
 } , {timestamps : true})
 
-module.exports = mongoose.model('Maintenance' , machineMaintenanceSchema)
+module.exports = mongoose.model('servicemachines' , machineMaintenanceSchema)
 
