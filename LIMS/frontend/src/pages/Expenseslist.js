@@ -3,6 +3,8 @@ import { useExpensesContext } from "../hooks/useExpensesContext";
 import $ from "jquery";
 import { useNavigate } from "react-router-dom";
 import formatDate from "../UtillFuntions/formatDate";
+import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const Expenseslist = () => {
   const { expenses, dispatch } = useExpensesContext();
@@ -18,7 +20,7 @@ const Expenseslist = () => {
         dispatch({ type: "SET_EXPENSES", payload: json });
         $(function () {
           $("#example").DataTable({
-            order: [[0, "desc"]],
+            order: [[0, "asc"]],
             bDestroy: true,
           });
         });
@@ -29,15 +31,43 @@ const Expenseslist = () => {
   }, []);
 
   const handleClickDelete = async (id) => {
-    const response = await fetch(`/api/expenses/${id}`, {
-      method: "DELETE",
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass:'alerts'
     });
-    const json = await response.json();
+  
+    if (confirmed.isConfirmed) {
+      const response = await fetch(`/api/expenses/${id}`, {
+        method: "DELETE",
+      });
+      const json = await response.json();
 
-    if (response.ok) {
-      dispatch({ type: "DELETE_EXPENSES", payload: json });
-    }
-  };
+  
+      if (response.ok) {
+        const table = $('#example').DataTable();
+        const row = table.rows(`[data-id ="${id}"]`);
+        row.remove().draw();
+
+        Swal.fire(
+          {
+            title: 'Success',
+            text: 'Record has been deleted',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+            
+        }
+        )
+        //dispatch({ type: "DELETE_EXPENSES", payload: json });
+      }
+    }
+
+  };
 
   const handleClickEdit = (id) => {
     navigate(`/editExpenses/${id}`);
@@ -65,8 +95,8 @@ const Expenseslist = () => {
         <tbody>
           {expenses &&
             expenses.map((expenses) => (
-              <tr key={expenses._id}>
-                <td>{formatDate(expenses.date)}</td>
+              <tr key={expenses._id} data-id={expenses._id}>
+                <td>{moment(expenses.date).format('DD-MM-YYYY')}</td>
                 <td>{expenses.description}</td>
                 <td>{expenses.amount}</td>
                 <td>

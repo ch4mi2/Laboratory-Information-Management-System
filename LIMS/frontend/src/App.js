@@ -37,6 +37,7 @@ import AddStaff from './pages/AddStaff';
 import LabInfo from './pages/LabInfo';
 import MachineList from './pages/machineList';
 import MachineHistory from'./pages/machineHistory';
+import FinancialReport from './pages/FinancialReport';
 
 function App() {
   return (
@@ -138,6 +139,10 @@ function App() {
                   <Route
                     path="/labInfo"
                     element={<LabInfo />}
+                  />
+                  <Route
+                    path="/financialReport"
+                    element={<FinancialReport />}
                   />
                 </Routes>
               </div>

@@ -142,6 +142,9 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="Expenseslist">
               <NavText>View Expenses</NavText>
             </NavItem>
+            <NavItem className="subNav" eventKey="FinancialReport">
+              <NavText>Financial Report</NavText>
+            </NavItem>
           </NavItem>
 
           <NavItem eventKey="LabInfo">
