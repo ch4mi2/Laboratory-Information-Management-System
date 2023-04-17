@@ -12,7 +12,6 @@ import React from 'react';
 const ViewStats = () => {
     const [data,setData] = useState(null)    
     const [isLoaded,setIsLoaded] = useState(false)
-    var testData
 
     useEffect(() => {
 
@@ -48,24 +47,28 @@ const ViewStats = () => {
                 console.log(count);
                 testCount.push({ arg: test.testName, val: count })
             })
-            console.log(testCount)
+            
 
             // localStorage.setItem('data', JSON.stringify(testCount))
-            setData(testCount)
+            setTimeout(() => {
+                testCount = testCount.sort((t1, t2) => (t1.val < t2.val) ? 1 : (t1.val > t2.val) ? -1 : 0)
+                console.log(testCount)
+
+                setData(testCount) 
+            },1000)
+            // setData(testCount)
             setIsLoaded(true)
         } 
     }
 
     // console.log(data)
     if(data !== null) {
-        console.log(testData);
+        // console.log(data);
         return(
             <div>
                 {isLoaded ?
                 <div id="stat">
-                <div>
                    <TestCount data = {data} />
-                </div>
                 </div>:<div>Loading</div>}
             </div>
         )
