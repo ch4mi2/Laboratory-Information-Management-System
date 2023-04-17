@@ -1,34 +1,37 @@
-import { useEffect} from "react"
-import { useMachineContext } from "../hooks/useMachineContext"
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import MachineDetails from "../components/machineComponent/machineDetails";
 
-//components
-import MachineDetails from "../components/machineComponent/machineDetails"
+const ViewMachineHistory = () => {
 
-const MachineHistory = () => {
-    const {machines , dispatch} = useMachineContext()
+    const { id } = useParams();
+
+    const [machine,setMachine] = useState(null);
 
     useEffect(() => {
-        const fetchMachines = async () => {
-            const response = await fetch('/api/machines')
-            const json = await response.json() 
+        const fetchMachineHistory = async() => {
+            const response = await fetch('/api/machines/' + id);
+            const json = await response.json();
 
-            if(response.ok){
-                dispatch({type: 'SET_MACHINES' ,payload: json})
+            if( response.ok ) {
+                await setMachine(json);
             }
         }
+             
+        fetchMachineHistory();
+        // eslint-disable-next-line 
+    }, [])
 
-        fetchMachines()
-    } , [])
 
-    return ( 
-        <div className="history">
-            <div className="machines">
-                {machines && machines.map((machine) => (
-                    <MachineDetails key={machine._id} machine = {machine}/>
-                ))}
+    return (
+        <div className="viewTest">
+            <div className="tests">
+                <h4>Machine History</h4>
+                { machine ? <MachineDetails key={machine._id} machine = {machine} /> : <div className="loading">Loading...</div>}
             </div>
+            
         </div>
-     );
+    );
 }
  
-export default MachineHistory
+export default ViewMachineHistory;

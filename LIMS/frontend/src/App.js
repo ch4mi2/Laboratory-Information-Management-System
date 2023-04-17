@@ -35,6 +35,9 @@ import TransactionHistory from './pages/TransactionHistory';
 import EditBill from './pages/EditBill';
 import AddStaff from './pages/AddStaff';
 import LabInfo from './pages/LabInfo';
+import MachineList from './pages/machineList';
+import MachineHistory from'./pages/machineHistory';
+import FinancialReport from './pages/FinancialReport';
 
 function App() {
   return (
@@ -100,6 +103,8 @@ function App() {
                   <Route path="/accessed" element={<Accessed />} />
                   <Route path="/machines" element={<Machines />} />
                   <Route path="/addMachines" element={<AddMachines />}></Route>
+                  <Route path="/machineList" element={<MachineList/>}></Route>
+                  <Route path="/machineHistory/:id" element={<MachineHistory/>}></Route>
 
                   <Route path="/testData" element={<TestData />} />
                   <Route path="/createTest" element={<CreateTest />} />
@@ -134,6 +139,10 @@ function App() {
                   <Route
                     path="/labInfo"
                     element={<LabInfo />}
+                  />
+                  <Route
+                    path="/financialReport"
+                    element={<FinancialReport />}
                   />
                 </Routes>
               </div>

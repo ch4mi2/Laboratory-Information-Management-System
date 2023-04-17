@@ -51,7 +51,7 @@ const Expensesform = () => {
         type="text"
         onChange={(e) => setdescription(e.target.value)}
         value={description}
-        className={emptyFields.includes('description') ? 'error' : ""}
+        className={`form-control ${emptyFields.includes('description') ? 'error' : ''}`}
       />
 
       <label style={{marginTop:20}}>Amount:</label>
@@ -59,7 +59,7 @@ const Expensesform = () => {
         type="number"
         onChange={(e) => setamount(e.target.value)}
         value={amount}
-        className={emptyFields.includes('amount') ? 'error' : ""}
+        className={`form-control ${emptyFields.includes('amount') ? 'error' : ''}`}
       />
 
       <button className="expenseSubmit">Submit</button>
