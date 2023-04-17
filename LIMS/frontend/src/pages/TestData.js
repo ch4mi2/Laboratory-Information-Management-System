@@ -51,7 +51,8 @@ const TestData = () => {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, delete it!',
+            customClass: "alerts",
           }).then(async(result) => {
             if (result.isConfirmed) {
                 const response = await fetch('/api/tests/' + id, {

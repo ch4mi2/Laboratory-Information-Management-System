@@ -152,6 +152,7 @@ const TestDataForm = () => {
                 setOutsourced(test[0].outsourced)
                 setDisable(true)
                 setDisableID(false)
+                document.getElementById("submitButton").innerHTML = "Add subcategory"
             } else {
                 setShortName('')
                 setTestName('')
@@ -163,6 +164,7 @@ const TestDataForm = () => {
                 setTest(null)
                 setDisable(false)
                 setDisableID(false)
+                document.getElementById("submitButton").innerHTML = "Add Test"
             }
         }
     }
@@ -476,7 +478,7 @@ const TestDataForm = () => {
                 </div>
             </div>
 
-            <button className="col-5 submit btnConfirm">Add Test</button>
+            <button className="col-5 submit btnConfirm" id="submitButton">Add Test</button>
         </form>
         <div className="thirdSection">
             {inputTest && <h5>Related subcategories</h5>}

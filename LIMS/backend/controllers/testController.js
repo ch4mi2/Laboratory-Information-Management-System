@@ -131,7 +131,7 @@ const deleteTest = async(req,res) => {
             return res.status(400).json({error: "No such Test"})
         }
 
-        await Category.remove({_id: { $in: test.subCategories }});
+        await Category.deleteMany({_id: { $in: test.subCategories }});
 
         const deletedTest = await Test.findOneAndDelete({_id: id}) ;
 
