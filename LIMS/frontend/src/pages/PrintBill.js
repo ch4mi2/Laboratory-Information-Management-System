@@ -4,12 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import logo from '../assets/common/mediLineLogo.webp';
 import '../css/TestResultStyles/testResultPreview.css';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 const PrintBill = ({ billID }) => {
   const componentRef = useRef();
   const navigate = useNavigate();
   const { id } = useParams();
   const [bills, setBills] = useState([]);
+  const MySwal = withReactContent(Swal);
   let thisBill = [];
   if (billID) {
     thisBill = bills && bills.filter((bill) => bill._id === billID)[0];
@@ -34,6 +36,46 @@ const PrintBill = ({ billID }) => {
     navigate(`/view-bills/${thisBill._id}/edit`, {
       state: { bill: thisBill },
     });
+  };
+
+  const clickDelete = async () => {
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: 'alerts',
+    });
+
+    if (confirmed.isConfirmed) {
+      const response = await fetch('/api/bills/' + thisBill._id, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          title: 'Success',
+          text: 'Record has been deleted',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
+
+      if (!response.ok) {
+        MySwal.fire({
+          title: 'Error',
+          text: 'An error occurred',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
+        });
+      }
+    }
+    navigate('/view-bills');
   };
 
   return (
@@ -163,6 +205,10 @@ const PrintBill = ({ billID }) => {
           />
           <button className="btnSubmit mx-3" onClick={handleEditClick}>
             Edit
+          </button>
+
+          <button className="btnDelete" onClick={clickDelete}>
+            Delete
           </button>
         </div>
       </div>

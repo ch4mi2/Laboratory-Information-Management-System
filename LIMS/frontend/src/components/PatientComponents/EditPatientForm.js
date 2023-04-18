@@ -122,10 +122,11 @@ const EditPatientForm = ({ patient }) => {
           <label>Telephone Number :</label>
           <input
             required
-            type="text"
+            type="tel"
             onChange={(e) => setTpNo(e.target.value)}
             value={tpNo}
             className={emptyFields.includes('tpNo') ? 'error' : ''}
+            pattern="[0-9]{10}"
           />
 
           <label>Age :</label>
@@ -135,12 +136,13 @@ const EditPatientForm = ({ patient }) => {
             onChange={(e) => setAge(e.target.value)}
             value={age}
             className={emptyFields.includes('age') ? 'error' : ''}
+            min="0"
           />
 
           <label>Email :</label>
           <input
             required
-            type="text"
+            type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             className={emptyFields.includes('email') ? 'error' : ''}
