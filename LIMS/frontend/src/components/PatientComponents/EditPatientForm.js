@@ -131,7 +131,7 @@ const EditPatientForm = ({ patient }) => {
           <label>Age :</label>
           <input
             required
-            type="text"
+            type="number"
             onChange={(e) => setAge(e.target.value)}
             value={age}
             className={emptyFields.includes('age') ? 'error' : ''}
