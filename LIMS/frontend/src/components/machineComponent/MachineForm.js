@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useMachineContext } from '../../hooks/useMachineContext';
 import '../../css/MachineStyles/machineDetails.css'
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const MachineForm = () => {
   const { dispatch } = useMachineContext();
+  const navigate = useNavigate();
 
   const [MachineType, setMachineType] = useState('');
   const [Brand, setBrand] = useState('');
@@ -41,6 +44,13 @@ const MachineForm = () => {
     if (!response.ok) {
       setError(json.error);
       console.log('error');
+      Swal.fire({
+        title: 'Error',
+        text: error,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000,
+    })
     }
     if (response.ok) {
       setError(null);
@@ -54,13 +64,23 @@ const MachineForm = () => {
       setTelNo('');
       console.log('new machine added:', json);
       dispatch({ type: 'CREATE_MACHINE', payload: json });
+      // if( response.status === 200 ) {
+        Swal.fire({
+            title: 'Success',
+            text: 'Machine Added Successfully',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+        })
+        
     }
+    navigate('/addMachines');
   };
 
   return (
-    <div className="">
-      <div className="title">Add a New Machine</div>
-      <hr />
+    <div>
+      <hr/>
       <form className="create" onSubmit={handleSubmit}>
         <div className="machinelabels">
           <div className="input-box">
@@ -135,8 +155,9 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div className="Add-button">
-            <button>Add Machine</button>
+          <br/>
+          <div>
+            <button className='subBtn'>Add New Machine</button>
           </div>
           {error && <div className="error">{error}</div>}
         </div>
@@ -145,4 +166,4 @@ const MachineForm = () => {
   );
 };
 
-export default MachineForm;
+export default MachineForm

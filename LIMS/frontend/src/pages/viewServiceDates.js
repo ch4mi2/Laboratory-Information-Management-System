@@ -40,9 +40,8 @@ const handleClickService = (id) => {
 };
 
 return (
-        <div className="viewTest">
-            <div className="tests">
-                <h4>Machine History</h4>
+        <div>
+            <div>
                 {/* { serviceMachine ? <ServiceDetails key={serviceMachine._id} service = {serviceMachine} /> : <div className="loading">Loading...</div>} */}
                 <div>
     {/* {console.log(serviceMachines)} */}
@@ -70,10 +69,10 @@ return (
                     <td >{service.TechnicianName}</td>
                     <td >{service.TechTelno}</td>
                     <td >{service.TechnicianPayment}</td>
-                    <td><button >
+                    <td><button className="btnTable" >
                         {/* key={machinePart._id} onClick={() => handleClick(machinePart._id)}> */}
                         Receipt</button></td>
-                    <td><button
+                    <td><button className="btnTable" 
                          onClick={() => handleClickService(service._id)}>
                          Update</button></td>
                   </tr>

@@ -2,6 +2,7 @@ import { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import { useMachineContext } from '../hooks/useMachineContext'; 
+import Swal from 'sweetalert2';
 
 const MachineList = () => {
   const navigate = useNavigate();
@@ -34,6 +35,16 @@ const MachineList = () => {
   };
 
   const handleDelete = async(id) => {
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete this machine!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: 'alerts',
+    });
+
+    if (confirmed.isConfirmed){
     const response = await fetch('/api/machines/' + id , {
       method: 'DELETE'
     })
@@ -41,6 +52,15 @@ const MachineList = () => {
 
     if(response.ok){
       dispatch({type: 'DELETE_MACHINE' , payload:json})
+      Swal.fire({
+        title: 'Success',
+        text: 'Record has been deleted',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+    }
     }
   }
 
@@ -72,7 +92,7 @@ const MachineList = () => {
                     <td onClick={() => handleClick(machine._id)}>{machine.MachineType}</td>
                     <td onClick={() => handleClick(machine._id)}>{machine.Brand}</td>
                     <td onClick={() => handleClick(machine._id)}>{machine.PurchaseDate}</td>
-                    <td><button onClick={() => handleDelete(machine._id)}>Delete</button></td>
+                    <td><button className="btnDelete" onClick={() => handleDelete(machine._id)}>Delete</button></td>
                   </tr>
                 ))}
             </tbody>

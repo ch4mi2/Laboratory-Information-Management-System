@@ -18,13 +18,14 @@ const AddMachineParts = () => {
         }
              
         fetchMachineHistory();
-        
+        // eslint-disable-next-line
     }, [])
     // console.log(state.id);
 
      return ( 
         <div className="history">
             <div className="machines">
+                <h4>Add Machine Parts</h4>
                 {machine && <MachinePartsForm machine = {machine}/>}
             </div>
         </div>

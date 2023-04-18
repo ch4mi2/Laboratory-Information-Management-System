@@ -26,6 +26,7 @@ const EditMachinePartsDetails = () => {
      return ( 
         <div className="history">
             <div className="machines">
+                <h4>Update Machine Parts Details</h4>
                 {machine && <UpdateMachinePart machine = {machine}/>}
             </div>
         </div>

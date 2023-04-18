@@ -1,8 +1,10 @@
 import { useState} from 'react';
 //import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const ServiceMachineForm = ({machine}) => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   //const { machines, setMachines } = useState(null);
   //const { id } = useParams();
 
@@ -42,6 +44,13 @@ const ServiceMachineForm = ({machine}) => {
     if (!response.ok) {
       setError(json.error);
       console.log('error');
+      Swal.fire({
+        title: 'Error',
+        text: error,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000,
+    })
     }
     if (response.ok) {
       setError(null);
@@ -54,6 +63,15 @@ const ServiceMachineForm = ({machine}) => {
       setTechnicianPayment('');
       console.log('new machine service added:', json);
       //setMachines(json)
+      Swal.fire({
+        title: 'Success',
+        text: 'Machine Service Details added Successfully',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true
+    })
+    navigate('/machineHistory/' + machine._id);
     }
   };
 
@@ -67,7 +85,6 @@ const ServiceMachineForm = ({machine}) => {
 
   return (
     <div class="">
-      <div class="title">Add Machine Service Dates</div>
       <hr />
       <form className="create" onSubmit={handleSubmit}>
         <div class="machinelabels">
@@ -135,7 +152,7 @@ const ServiceMachineForm = ({machine}) => {
             />
           </div>
           <div class="Add-button">
-            <button>Add Service Dates</button>
+            <button className='subBtn'>Add Service Dates</button>
           </div>
           {error && <div className="error">{error}</div>}
         </div>
