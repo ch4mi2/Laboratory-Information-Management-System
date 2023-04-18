@@ -16,8 +16,9 @@ const AllStaff = () =>  {
             })
             const json = await response.json()
 
+
             if(response.ok)
-            {
+            {  
                 setStaff(json)
                 $(function() {
                     $('#example').DataTable({
@@ -27,6 +28,7 @@ const AllStaff = () =>  {
                   });
                 
             }
+            
 
         }
         if(user){
@@ -36,9 +38,7 @@ const AllStaff = () =>  {
         
     }, [user])
 
-    useEffect(() => {
-        
-      }, []);
+    
 
     
 
@@ -78,11 +78,11 @@ const AllStaff = () =>  {
                 
                 <tbody>
                 {Staff && Staff.map((staff) => (
-                    <tr key={staff._id} data-id="{staff._id}">
+                    <tr key={staff._id} data-id={staff._id}>
                          <td>{staff.name}</td>
                         <td>{staff.Eid}</td>
                         <td>{staff.post}</td>
-                        <td><button className="btnDelete" onClick={ ()=>handleClick(staff._id) }>delete</button></td>
+                        <td><button className="btnDelete" onClick={ () => handleClick(staff._id) }>delete</button></td>
                     </tr>
                 ))}
                 </tbody>
