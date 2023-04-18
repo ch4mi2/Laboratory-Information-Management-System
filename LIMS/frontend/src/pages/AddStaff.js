@@ -6,7 +6,7 @@ const AddStaff= () =>{
 
     return(
         <div className="AddStaff">
-            <h3>WELCOME</h3>
+            
             <StaffForm/>
         </div>
     )

@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 // assets
@@ -34,9 +35,17 @@ import TransactionHistory from './pages/TransactionHistory';
 import EditBill from './pages/EditBill';
 import AddStaff from './pages/AddStaff';
 import LabInfo from './pages/LabInfo';
+import LoginAdmin from './pages/LoginAdmin';
+import LoginStaff from './pages/LoginStaff';
+import Welcome from './pages/Welcome';
+import AllStaff from './pages/AllStaff';
+import StaffProfile from './pages/StaffPorfile';
+
 
 function App() {
+  const {user} = useAuthContext()
   return (
+    <Router>
     <div className="App">
       <HelmetProvider>
         <Helmet>
@@ -50,7 +59,7 @@ function App() {
         logoImgSrc={mediLineLogo}
         username={''}
       />
-      <BrowserRouter>
+      
         <div className="container-fluid">
           <div className="row">
             <div className="col-3 col-sm-3 col-md-2 col-lg-2">
@@ -133,14 +142,36 @@ function App() {
                     path="/labInfo"
                     element={<LabInfo />}
                   />
+                  <Route
+                    path="/StaffLogin"
+                    element={!user ? <LoginStaff /> : <Navigate to ="/"/>}
+                  />
+                  <Route
+                    path="/AdminLogin"
+                    element={<LoginAdmin />}
+                  />
+                  <Route
+                    path="/Welcome"
+                    element={<Welcome/>}
+                  />
+                  <Route
+                    path="/AllStaff"
+                    element={<AllStaff/>}
+                  />
+                  <Route
+                    path="/StaffProfile"
+                    element={<StaffProfile/>}
+                  />
+
                 </Routes>
               </div>
             </div>
             <div className="col-0 col-sm-1 col-md-2 col-lg-2"></div>
           </div>
         </div>
-      </BrowserRouter>
+      
     </div>
+    </Router>
   );
 }
 
