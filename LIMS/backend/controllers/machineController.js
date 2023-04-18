@@ -55,7 +55,7 @@ const updateMachine = async (req , res) => {
     const {id} = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such machine'})
+        return res.status(404).json({error: 'Not a valid object ID'})
       }
 
     const machine = await Machine.findOneAndUpdate({_id : id},{

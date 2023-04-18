@@ -1,10 +1,11 @@
 import Multiselect from 'multiselect-react-dropdown';
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-
+import moment from 'moment';
 const EditBill = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [updated, setUpdated] = useState('');
   const { billId } = useParams();
@@ -13,10 +14,17 @@ const EditBill = () => {
   const [optionsOut, setOptionsOut] = useState([]);
   const serviceRef = useRef();
   const outsourceRef = useRef();
-  const thisBill = Bills && Bills.filter((bill) => bill._id === billId)[0];
-  const [selectedValues, setSelectedValues] = useState([]);
-  const [selectedValuesOut, setSelectedValuesOut] = useState([]);
+
+  const [selectedValues, setSelectedValues] = useState(
+    location.state.bill.services
+  );
+  const [selectedValuesOut, setSelectedValuesOut] = useState(
+    location.state.bill.outsourceServices
+  );
   const [total, setTotal] = useState(0);
+  const [referredDoctor, setReferredDoctor] = useState(
+    location.state.bill.referredDoctor
+  );
   const MySwal = withReactContent(Swal);
 
   const handleSelect = (selectedList, selectedItem) => {
@@ -90,8 +98,8 @@ const EditBill = () => {
       setUpdated('');
     }
 
-    const patientId = thisBill.patientId;
-    const patientName = thisBill.patientName;
+    const patientId = location.state.bill.patientId;
+    const patientName = location.state.bill.patientName;
     const normal = selectedValues;
     const outsource = selectedValuesOut;
     const services = normal.map((s) => s.name);
@@ -103,6 +111,7 @@ const EditBill = () => {
       services,
       outsourceServices,
       total,
+      referredDoctor,
     };
 
     const response = await fetch('/api/bills/' + billId, {
@@ -132,59 +141,87 @@ const EditBill = () => {
         showConfirmButton: false,
         timer: 2000,
       });
-      //navigate('/view-bills');
+      navigate('/view-bills');
     }
   };
 
   return (
     <>
       {updated}
-      {thisBill && (
-        <>
-          <div className="row">
-            <div className="col-6">
-              <p>Name : {thisBill.patientName}</p>
-            </div>
+
+      <div className="report p-5">
+        <div className="row">
+          <div className="col-4">
+            <p>
+              <b>Patient's Name : </b>
+              {location.state.bill.patientName}
+            </p>
           </div>
-          <div className="row mt-3">
-            <div className="col-6">
-              <h3>Normal Services</h3>
-              <Multiselect
-                onSelect={handleSelect}
-                ref={serviceRef}
-                options={options} // Options to display in the dropdown
-                displayValue="nameAndId" // Property name to display in the dropdown options
-              />
-            </div>
-            <div className="col-6">
-              <h3>Outsourced Services</h3>
-              <Multiselect
-                onSelect={handleSelectOut}
-                ref={outsourceRef}
-                options={optionsOut} // Options to display in the dropdown
-                displayValue="nameAndId" // Property name to display in the dropdown options
-              />
-            </div>
+          <div className="col-4">
+            <p>
+              <b>Date : </b>
+              {moment(location.state.bill.createdAt).format('YYYY-MM-DD')}
+            </p>
           </div>
-          <div className="row mt-3">
-            {total}
-            <button
-              style={{ width: 'auto' }}
-              className="btnSubmit mx-3"
-              onClick={handleUpdateClick}
-            >
-              Update Bill
-            </button>
-            <button
-              style={{ width: 'auto' }}
-              className="btnDelete"
-              onClick={handleCancelClick}
-            >
-              Cancel
-            </button>
+          <div className="col-4">
+            <p>
+              <b>Time : </b>
+              {moment(location.state.bill.createdAt).format('LT')}
+            </p>
           </div>
-        </>
-      )}
+        </div>
+        <div className="row my-3">
+          <div className="col-12">
+            <input
+              placeholder="Referred Doctor"
+              required
+              type="text"
+              onChange={(e) => setReferredDoctor(e.target.value)}
+              value={referredDoctor}
+            />
+          </div>
+        </div>
+        <div className="row my-5">
+          <div className="col-6">
+            <h3>Normal Services</h3>
+            <Multiselect
+              onSelect={handleSelect}
+              ref={serviceRef}
+              options={options} // Options to display in the dropdown
+              displayValue="nameAndId" // Property name to display in the dropdown options
+            />
+          </div>
+          <div className="col-6">
+            <h3>Outsourced Services</h3>
+            <Multiselect
+              onSelect={handleSelectOut}
+              ref={outsourceRef}
+              options={optionsOut} // Options to display in the dropdown
+              displayValue="nameAndId" // Property name to display in the dropdown options
+            />
+          </div>
+        </div>
+        <div className="row my-3">
+          <div className="mb-3">
+            <h2>Total = Rs. {total}</h2>
+          </div>
+
+          <button
+            style={{ width: 'auto' }}
+            className="btnSubmit mx-3"
+            onClick={handleUpdateClick}
+          >
+            Update Bill
+          </button>
+          <button
+            style={{ width: 'auto' }}
+            className="btnDelete"
+            onClick={handleCancelClick}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </>
   );
 };

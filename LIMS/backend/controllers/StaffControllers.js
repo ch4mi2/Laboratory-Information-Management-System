@@ -84,9 +84,10 @@ const createStaff = async (req,res) => {
 
       //create token
       const token = createToken(staffMember._id)
+      const userid = staffMember._id
       
       console.log(staffMember);
-      res.status(200).json({staffMember,token})
+      res.status(200).json({staffMember,token,userid})
 
   } catch(error){
       res.status(400).json({error:error.message})

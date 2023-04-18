@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SingleTestDetails from "../components/TestDataComponents/SingleTestDetails";
 import TestSubCategoryDetails from "../components/TestDataComponents/TestSubCategoryDetails";
+import '../css/TestDataStyles/testData.css';
 
 const ViewTest = () => {
 
@@ -13,6 +14,7 @@ const ViewTest = () => {
         const fetchTest = async() => {
             const response = await fetch('/api/tests/' + id);
             const json = await response.json();
+            console.log(json);
 
             if( response.ok ) {
                 await setTest(json);

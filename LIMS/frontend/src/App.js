@@ -8,7 +8,6 @@ import mediLineLogo from './assets/common/mediLineLogo.webp';
 // pages and components
 import PatientList from './pages/PatientList';
 import PatientProfile from './pages/PatientProfile';
-import EditPatientForm from './components/PatientComponents/EditPatientForm';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import PendingAccession from './pages/PendingAccession';
@@ -21,9 +20,10 @@ import CreateTest from './pages/CreateTest';
 import ViewTest from './pages/ViewTest';
 import UpdateTest from './pages/UpdateTest';
 import UpdateCategory from './pages/UpdateCategory';
+import ViewStat from './pages/ViewStats';
 import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
-import Machines from './pages/machineHistory';
+//import Machines from './pages/machineHistory';
 import UpdateExpenses from './pages/UpdateExpenses';
 import AddTestResults from './pages/AddTestResults';
 import TestResultPreview from './pages/TestResultPreview';
@@ -35,6 +35,16 @@ import TransactionHistory from './pages/TransactionHistory';
 import EditBill from './pages/EditBill';
 import AddStaff from './pages/AddStaff';
 import LabInfo from './pages/LabInfo';
+import MachineList from './pages/machineList';
+import MachineHistory from './pages/machineHistory';
+import AddMachineParts from './pages/AddMachineParts';
+import MachineServiceDates from './pages/AddServiceDates';
+import ViewMachineService from './pages/viewServiceDates';
+import FinancialReport from './pages/FinancialReport';
+import EditPatient from './pages/EditPatient';
+import UpdateMachine from './pages/UpdateMachines'
+import UpdateMachineParts from './pages/UpdateMachineParts'
+import UpdateMachineService from './pages/UpdateMachineServices'
 import LoginAdmin from './pages/LoginAdmin';
 import LoginStaff from './pages/LoginStaff';
 import Welcome from './pages/Welcome';
@@ -66,7 +76,7 @@ function App() {
               <SideNavBar />
             </div>
             <div className="col-9 col-sm-8 col-md-8 col-lg-8 mt-4">
-              <div className="pages mt-5">
+              <div className="pages">
                 <Routes>
                   <Route path="/patient-list" element={<PatientList />} />
                   <Route
@@ -94,7 +104,7 @@ function App() {
                   />
                   <Route
                     path="/patient-profile/:id/edit"
-                    element={<EditPatientForm />}
+                    element={<EditPatient />}
                   />
                   <Route
                     path="/patient-profile/:id/transactionHistory"
@@ -106,14 +116,24 @@ function App() {
                   />
 
                   <Route path="/accessed" element={<Accessed />} />
-                  <Route path="/machines" element={<Machines />} />
+
+                  {/* <Route path="/machines" element={<Machines />} /> */}
                   <Route path="/addMachines" element={<AddMachines />}></Route>
+                  <Route path="/machineList" element={<MachineList />}></Route>
+                  <Route path="/machineHistory/:id" element={<MachineHistory />}></Route>
+                  <Route path="/AddMachineParts" element={<AddMachineParts/>}></Route>
+                  <Route path="/AddServiceDates" element={<MachineServiceDates />}></Route>
+                  <Route path="/viewServiceDetails/:id" element={<ViewMachineService/>}></Route>
+                  <Route path="/updateMachine/:id" element={<UpdateMachine/>}></Route>
+                  <Route path="/updateMachineParts/:id" element={<UpdateMachineParts/>}></Route>
+                  <Route path="/updateMachineService/:id" element={<UpdateMachineService/>}></Route>
 
                   <Route path="/testData" element={<TestData />} />
                   <Route path="/createTest" element={<CreateTest />} />
                   <Route path="/viewTest/:id" element={<ViewTest />} />
                   <Route path="/updateTest" element={<UpdateTest />} />
                   <Route path="/updateCategory" element={<UpdateCategory />} />
+                  <Route path="/viewStats" element={<ViewStat />} />
 
                   <Route path="/expenseslist" element={<Expenseslist />} />
                   <Route path="/addExpenses" element={<AddExpenses />} />
@@ -135,6 +155,18 @@ function App() {
                     element={<TestResultPreview />}
                   />
                   <Route
+                    path="/AllStaff"
+                    element={<AllStaff/>}
+                  />
+                  <Route
+                    path="/StaffProfile"
+                    element={<StaffProfile/>}
+                  />
+                  <Route
+                    path="/financialReport"
+                    element={<FinancialReport />}
+                  />
+                  <Route
                     path='/addStaff'
                     element={<AddStaff/>}
           />
@@ -153,14 +185,6 @@ function App() {
                   <Route
                     path="/Welcome"
                     element={<Welcome/>}
-                  />
-                  <Route
-                    path="/AllStaff"
-                    element={<AllStaff/>}
-                  />
-                  <Route
-                    path="/StaffProfile"
-                    element={<StaffProfile/>}
                   />
 
                 </Routes>

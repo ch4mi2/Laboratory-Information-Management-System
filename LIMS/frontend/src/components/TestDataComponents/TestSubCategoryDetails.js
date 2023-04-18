@@ -16,14 +16,14 @@ const TestSubCategoryDetails = ({ subCategory }) => {
                     </div>
                 }
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-12">
                         <strong>UOM: </strong>
                         {subCategory.UOM}
                     </div>
                 </div>
                 
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-12">
                         <strong>Male Ref Range: </strong>
                         {subCategory.startMRef}
                         {subCategory.operatorM}
@@ -32,7 +32,7 @@ const TestSubCategoryDetails = ({ subCategory }) => {
                 </div>
                 
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-12">
                         <strong>Female Ref Range: </strong>
                         {subCategory.startFRef}
                         {subCategory.operatorF}
@@ -42,7 +42,7 @@ const TestSubCategoryDetails = ({ subCategory }) => {
 
                 {(subCategory.startBRef || subCategory.operatorB || subCategory.endBRef) &&
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-12">
                         <strong>Baby Ref Range: </strong>
                         {subCategory.startBRef}
                         {subCategory.operatorB}

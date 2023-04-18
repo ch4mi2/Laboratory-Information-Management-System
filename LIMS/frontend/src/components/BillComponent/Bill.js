@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../../css/BillStyles/bill.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -11,8 +11,10 @@ const Bill = ({ patient }) => {
   const [noOfDropdowns, setNoOfDropdowns] = useState([]);
   const [services, setServices] = useState([]);
   const [outsourced, setOutsourced] = useState([]);
+  const [referredDoctor, setReferredDoctor] = useState([]);
   const ref = useRef([]);
   const MySwal = withReactContent(Swal);
+  const { id } = useParams();
 
   //save test ids
   const [billedTests, setBilledTests] = useState([]);
@@ -43,7 +45,7 @@ const Bill = ({ patient }) => {
       return list;
     });
 
-    if (Tests[selectedIndex - 1]?.outsourced === 'true') {
+    if (Tests[selectedIndex - 1]?.outsourced === 'Yes') {
       setBilledTests((prevArray) => [
         ...prevArray,
         Tests[selectedIndex - 1]?._id,
@@ -106,7 +108,7 @@ const Bill = ({ patient }) => {
           {Tests &&
             Tests.map((t) => (
               <option key={t._id} value={t.price}>
-                {t.testName}
+                {t.testID} - {t.testName}
               </option>
             ))}
         </select>
@@ -171,6 +173,7 @@ const Bill = ({ patient }) => {
       normalServices,
       outsourceServices,
       Total,
+      referredDoctor,
     };
 
     const response = await fetch('/api/bills/', {
@@ -192,6 +195,8 @@ const Bill = ({ patient }) => {
         showConfirmButton: false,
         timer: 1000,
       });
+
+      navigate(`/patient-profile/${id}`);
     } else {
       status = 'Bill Added';
       MySwal.fire({
@@ -242,6 +247,17 @@ const Bill = ({ patient }) => {
           <b>NIC :</b> {patient.NIC}
         </div>
       </div>
+      <div className="row mt-3">
+        <div className="col-12">
+          <input
+            placeholder="Referred Doctor"
+            required
+            type="text"
+            onChange={(e) => setReferredDoctor(e.target.value)}
+            value={referredDoctor}
+          />
+        </div>
+      </div>
       <hr />
       <div className="row mt-5">
         <div className="col-md-6">
@@ -279,7 +295,7 @@ const Bill = ({ patient }) => {
         <div className="col-6 col-lg-12 mx-auto d-flex justify-content-end">
           <button
             className={
-              selectedVal.length > 0
+              selectedVal.length > 0 && referredDoctor.trim().length !== 0
                 ? 'btnSubmit mx-2'
                 : 'btnSubmit-disabled mx-2'
             }

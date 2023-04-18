@@ -41,7 +41,7 @@ const PatientDetails = ({ edit, patient }) => {
 
   return (
     <div className="patientDetailBlock pt-2 px-5">
-      <div className="row">
+      <div className="row mt-2">
         {edit === true ? (
           <center>
             <h3 className="mb-3">Patient Profile</h3>
@@ -49,38 +49,56 @@ const PatientDetails = ({ edit, patient }) => {
         ) : (
           <div></div>
         )}
-        <div className="col-12">
-          <p>
-            <strong>Name : </strong> {patient.firstName} {patient.lastName}
-          </p>
+      </div>
+      <hr />
+      <div className="">
+        <div className="row">
+          <div className="col-12 col-md-6">
+            <p>
+              <strong>NIC : </strong> {patient.NIC}
+            </p>
+          </div>
+          <div className="col-12 col-md-6">
+            <p>
+              <strong>Name : </strong> {patient.firstName} {patient.lastName}
+            </p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-md-6">
+            <p>
+              <strong>Email : </strong> {patient.email}
+            </p>
+          </div>
+          <div className="col-12 col-md-6">
+            <p>
+              <strong>Telephone : </strong> {patient.tpNo}
+            </p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-md-6">
+            <p>
+              <strong>Gender : </strong> {patient.gender}
+            </p>
+          </div>
+          <div className="col-12 col-md-6">
+            <p>
+              <strong>Age : </strong> {patient.age}
+            </p>
+          </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col-12">
-          <p>
-            <strong>NIC : </strong> {patient.NIC}
-          </p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12">
-          <p>
-            <strong>Gender : </strong> {patient.gender}
-          </p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12">
-          <p>
-            <strong>Telephone Number : </strong> {patient.tpNo}
-          </p>
-        </div>
-      </div>
+      <hr />
       {edit === true ? (
         <div className="container-fluid">
           <div className="row">
             <div className="col-6">
-              <Link style={{ textDecoration: 'none' }} to={'./edit'}>
+              <Link
+                style={{ textDecoration: 'none' }}
+                to={'./edit'}
+                state={patient}
+              >
                 <button
                   id="editProfileButton"
                   className="btn mt-4 px-4 d-block m-auto"

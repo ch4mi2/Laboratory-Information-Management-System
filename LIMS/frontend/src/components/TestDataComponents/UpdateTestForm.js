@@ -71,9 +71,7 @@ const UpdateTestForm = ({Test}) => {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#ff5252',
-            cancelButtonColor: '#eeeeee',
-            color:'#000000',
+            customClass: "alerts",
             confirmButtonText: 'Yes, delete it!'
           }).then(async(result) => {
             if (result.isConfirmed) {
@@ -94,7 +92,7 @@ const UpdateTestForm = ({Test}) => {
                         text: 'Successfully Deleted Test',
                         icon: 'success',
                         showConfirmButton: false,
-                        timer: 2000,
+                        timer: 1500,
                         timerProgressBar: true
                     }).then(() => {
                         //var path = '/viewTest/' + Test._id;
@@ -102,20 +100,46 @@ const UpdateTestForm = ({Test}) => {
                     })
                 }
             }
-          })
+        })
+    }
 
+    const updateForm = async(id) => {
+        const response = await fetch('/api/tests/')
+        const json = await response.json()
+
+        if( response.ok ) {
+            const test = await json.filter((t) => t.testID === Number(id))
+            
+            // console.log(test[0]);
+            
+            if( test.length > 0 && Number(id) !== Test.testID) {
+                MySwal.fire({
+                    icon: 'warning',
+                    title: 'Please choose another ID',
+                    text: 'Test with the given test ID is alredy available',
+                    showConfirmButton: true,
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    customClass: "alerts"
+                })
+                setTestID(Test.testID)
+            }
+        }
     }
 
 
     return ( 
-        <form className = "form" >
+        <form>
             <div className="firstSection">
             <div className="row">
                     <div className="col-6">
                         <label>Test ID: </label>
                         <input 
                             type = "number"
-                            onChange={(e) => setTestID(e.target.value)}
+                            onChange={(e) => {
+                                setTestID(e.target.value)
+                                updateForm(e.target.value)
+                            }}
                             value={testID}
                             className={emptyFields.includes('testID') ? 'error' : ''}
                             // placeholder={Test.testID}
@@ -126,7 +150,9 @@ const UpdateTestForm = ({Test}) => {
                     <label>Short Name: </label>
                     <input 
                         type = "text"
-                        onChange={(e) => setShortName(e.target.value)}
+                        onChange={(e) => {
+                            emptyFields[emptyFields.indexOf('shortName')] = '';
+                            setShortName(e.target.value)}}
                         value={shortName}
                         className={emptyFields.includes('shortName') ? 'error' : ''}
                     />
@@ -139,7 +165,9 @@ const UpdateTestForm = ({Test}) => {
                         <label>Test Name: </label>
                         <input 
                             type = "text"
-                            onChange={(e) => setTestName(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('testName')] = '';
+                                setTestName(e.target.value)}}
                             value={testName}
                             className={emptyFields.includes('testName') ? 'error' : ''}
 
@@ -152,7 +180,9 @@ const UpdateTestForm = ({Test}) => {
                         <label>Price: </label>
                         <input 
                         type = "number"
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) => {
+                            emptyFields[emptyFields.indexOf('price')] = '';
+                            setPrice(e.target.value)}}
                         value={price}
                         className={emptyFields.includes('price') ? 'error' : ''}
 
@@ -162,7 +192,9 @@ const UpdateTestForm = ({Test}) => {
                         <label>Specimen: </label>
                         <input 
                         type = "text"
-                        onChange={(e) => setSpecimen(e.target.value)}
+                        onChange={(e) => {
+                            emptyFields[emptyFields.indexOf('specimen')] = '';
+                            setSpecimen(e.target.value)}}
                         value={specimen}
                         className={emptyFields.includes('specimen') ? 'error' : ''}
 
@@ -175,7 +207,9 @@ const UpdateTestForm = ({Test}) => {
                         <label>Heading: </label>
                         <input 
                             type = "text"
-                            onChange={(e) => setHeading(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('heading')] = '';
+                                setHeading(e.target.value)}}
                             value={heading}
                             className={emptyFields.includes('heading') ? 'error' : ''}
 
@@ -198,19 +232,23 @@ const UpdateTestForm = ({Test}) => {
                 <div className="row">
                     <div className="col-6">
                         <label>Outsourced: </label>
-                        <input 
+                        <select
                             type = "text"
-                            onChange={(e) => setOutsourced(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('outsourced')] = '';
+                                setOutsourced(e.target.value)}}
                             value={outsourced}
                             className={emptyFields.includes('outsourced') ? 'error' : ''}
-
-                        />
+                        >
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
                     </div>
                 </div>
         </div>
         <div className="row">
-        <button className="col-5" onClick={handleUpdate}>Update Test</button>
-        <button className="col-4 delete" onClick={handleDelete}>Delete Test</button>
+        <button className="col-5 submit btnConfirm" onClick={handleUpdate}>Update Test</button>
+        <button className="col-4 delete btnCancel" onClick={handleDelete}>Delete Test</button>
         </div>
         
         </form>

@@ -9,12 +9,14 @@ const LabInfo = () => {
     const [tel3,setTel3] = useState('')
     const [email,setEmail] = useState('')
     const [id,setId] = useState('')
+    const [error,setError] = useState('')
 
     useEffect(() => {
         const fetchLabInfo = async () => {
             try {
                 const response = await fetch('/api/labInfo')
                 const json = await response.json()
+
                 if(response.ok){
                     setName(json.name)
                     setAddress(json.address)
@@ -48,6 +50,8 @@ const LabInfo = () => {
               email
             })
           })
+
+          
           if (response.ok) {
             Swal.fire(
                 {
@@ -59,6 +63,15 @@ const LabInfo = () => {
                   timerProgressBar: true  
               }
               )
+              setError(null)
+          }else{
+            Swal.fire({
+              title: 'Error',
+              text: 'Record could not be updated',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              customClass: 'alerts'
+            });
           }
         } catch (error) {
           console.log(error)
@@ -66,7 +79,7 @@ const LabInfo = () => {
       }
 
     return(
-        <form onSubmit={handleUpdate}>
+        <form className="form" onSubmit={handleUpdate}>
             <h3>Lab Information</h3>
             <label>Name</label>
             <input
@@ -74,6 +87,7 @@ const LabInfo = () => {
              type="text"
              onChange={(e) => setName(e.target.value)}
              value={name}
+             required
             />
             <label>Address</label>
             <input
@@ -81,6 +95,7 @@ const LabInfo = () => {
              type="textarea"
              onChange={(e) => setAddress(e.target.value)}
              value={address}
+             required
             />  
             <label>Tel 1</label>
             <input
@@ -88,6 +103,7 @@ const LabInfo = () => {
              type="tel"
              onChange={(e) => setTel1(e.target.value)}
              value={tel1}
+             pattern="[0-9]*"
             />  
             <label>Tel 2</label>
             <input

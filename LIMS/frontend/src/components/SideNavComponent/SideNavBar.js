@@ -95,6 +95,9 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="createTest">
               <NavText>Add Test</NavText>
             </NavItem>
+            <NavItem className="subNav" eventKey="viewStats">
+              <NavText>Statistics</NavText>
+            </NavItem>
           </NavItem>
 
           <NavItem eventKey="">
@@ -112,8 +115,8 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="AddMachines">
               <NavText>Add Machines</NavText>
             </NavItem>
-            <NavItem className="subNav" eventKey="Machines">
-              <NavText>Machine History</NavText>
+            <NavItem className="subNav" eventKey="MachineList">
+              <NavText>Machine List</NavText>
             </NavItem>
           </NavItem>
 
@@ -135,6 +138,9 @@ function SideNavBar() {
             </NavItem>
             <NavItem className="subNav" eventKey="Expenseslist">
               <NavText>View Expenses</NavText>
+            </NavItem>
+            <NavItem className="subNav" eventKey="FinancialReport">
+              <NavText>Financial Report</NavText>
             </NavItem>
           </NavItem>
 

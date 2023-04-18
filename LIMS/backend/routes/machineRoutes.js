@@ -4,8 +4,8 @@ const {
     createMachine,
     getMachines,
     getMachine,
-    //deleteMachine,
-    //updateMachine
+    deleteMachine,
+    updateMachine
 } = require ('../controllers/machineController')
 
 const router = express.Router()
@@ -19,10 +19,10 @@ router.get('/:id' , getMachine)
 //POST a new machine
 router.post('/' , createMachine)
 
-/*UPDATE a machine
+//UPDATE a machine
 router.patch('/:id' , updateMachine)
 
 //DELETE a machine
-router.delete('/:id' , deleteMachine)*/
+router.delete('/:id' , deleteMachine)
 
 module.exports = router

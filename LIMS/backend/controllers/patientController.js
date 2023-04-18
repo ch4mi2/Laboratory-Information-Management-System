@@ -27,7 +27,7 @@ const getAPatient = async (req, res) => {
 
 // create a patient
 const createPatient = async (req, res) => {
-  const { firstName, lastName, NIC, tpNo, gender } = req.body;
+  const { firstName, lastName, NIC, tpNo, gender, age, email } = req.body;
 
   let emptyFields = [];
 
@@ -46,6 +46,12 @@ const createPatient = async (req, res) => {
   if (!gender) {
     emptyFields.push('gender');
   }
+  if (!age) {
+    emptyFields.push('age');
+  }
+  if (!email) {
+    emptyFields.push('email');
+  }
   if (emptyFields.length > 0) {
     return res
       .status(400)
@@ -60,6 +66,8 @@ const createPatient = async (req, res) => {
       NIC,
       tpNo,
       gender,
+      age,
+      email,
     });
     res.status(200).json(patient);
   } catch (error) {

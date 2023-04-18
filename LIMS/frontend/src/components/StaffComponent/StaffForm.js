@@ -121,7 +121,7 @@ const StaffForm = () => {
 
             <label>Password:</label>
             <input
-                type="text"
+                type="password"
                 onChange={(e) => setPW(e.target.value)}
                 value={pw}/><br/>
 
