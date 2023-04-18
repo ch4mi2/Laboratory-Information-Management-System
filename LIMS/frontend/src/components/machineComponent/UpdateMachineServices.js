@@ -54,7 +54,7 @@ const UpdateMachineService = ({machine}) => {
                 if( response.status === 200 ) {
                     Swal.fire({
                         title: 'Success',
-                        text: 'Successfully Machine',
+                        text: 'Service Details updated Successfully',
                         icon: 'success',
                         showConfirmButton: false,
                         timer: 2000,
@@ -72,7 +72,6 @@ const UpdateMachineService = ({machine}) => {
 
   return (
     <div className="">
-      <div className="title">Update Machine Services</div>
       <hr />
       <form className="create" onSubmit={handleMachineUpdate}>
         <div className="machinelabels">
@@ -122,7 +121,7 @@ const UpdateMachineService = ({machine}) => {
             />
           </div>
           <div className="Add-button">
-            <button>Update</button>
+            <button className='subBtn'>Update</button>
           </div>
           {error && <div className="error">{error}</div>}
         </div>

@@ -231,7 +231,6 @@ const UpdateMachine = ({machine}) => {
     
             const updatedMachine = {MachineType ,Brand , PurchaseDate ,Model , SerialNo , WarrantyExp , Manufacturer , TelNo} 
             
-            console.log(machine._id);
             const response = await fetch(`/api/machines/` + machine._id, {
                 method: 'PATCH',
                 body: JSON.stringify(updatedMachine),
@@ -256,7 +255,7 @@ const UpdateMachine = ({machine}) => {
                 if( response.status === 200 ) {
                     Swal.fire({
                         title: 'Success',
-                        text: 'Successfully Machine',
+                        text: 'Machine updated Successfully',
                         icon: 'success',
                         showConfirmButton: false,
                         timer: 2000,
@@ -274,7 +273,6 @@ const UpdateMachine = ({machine}) => {
 
   return (
     <div className="">
-      <div className="title">Update Machine</div>
       <hr />
       <form className="create" onSubmit={handleMachineUpdate}>
         <div className="machinelabels">
@@ -351,7 +349,7 @@ const UpdateMachine = ({machine}) => {
             />
           </div>
           <div className="Add-button">
-            <button>Update Machine</button>
+            <button className='subBtn'>Update Machine</button>
           </div>
           {/* {error && <div className="error">{error}</div>} */}
         </div>

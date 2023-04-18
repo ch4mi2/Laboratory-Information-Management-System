@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useMachinePartsContext } from '../../hooks/useMachinePartsContext'
 import ViewServiceHistory from '../../pages/viewServiceDates'
 import $ from 'jquery';
+import Swal from 'sweetalert2';
 
 const MachineHistory = ({ machine}) => {
   const navigate = useNavigate();
@@ -57,7 +58,18 @@ const MachineHistory = ({ machine}) => {
     navigate(`../machinePartsReceipt/${id}`);
   };
 
+  //Delete Machine Parts
   const handleDelete = async(id) => {
+    const confirmed = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete this machine part!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: 'alerts',
+    });
+
+    if (confirmed.isConfirmed){
     const response = await fetch('/api/machineParts/' + id , {
       method: 'DELETE'
     })
@@ -66,47 +78,80 @@ const MachineHistory = ({ machine}) => {
     if(response.ok){
       console.log(json)
       dispatch({type: 'DELETE_MACHINEPART' , payload:json})
+
+      Swal.fire({
+        title: 'Success',
+        text: 'Record has been deleted',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+    }
     }
   }
 
    return (
-    <div className="">
+    <div>
       <div className="machine-details">
-        <h4>{machine.MachineType}</h4>
+        <h3 className="machineName">Machine Name : <b>{machine.MachineType}</b></h3>
+        <div className="row">
+        <div className="col-6">
         <p>
           <strong>Brand : </strong>
           {machine.Brand}
         </p>
+        </div>
+        <div className="col-6">
         <p>
           <strong>Model : </strong>
           {machine.Model}
         </p>
+        </div>
+        <div className="col-6">
         <p>
           <strong>Serial No : </strong>
           {machine.SerialNo}
         </p>
-        <p>
-          <strong>Manufacturer : </strong>
-          {machine.Manufacturer}
-        </p>
-        <p>
-          <strong>Purchased Date : </strong>
-          {machine.PurchaseDate}
-        </p>
-        <p>
-          <strong>Warranty Expiration : </strong>
-          {machine.WarrantyExp}
-        </p>
-        <p>
+        </div>
+        <div className="col-6">
+          <p>
+            <strong>Manufacturer : </strong>
+            {machine.Manufacturer}
+          </p>
+        </div>  
+        <div className="col-6">
+          <p>
+            <strong>Purchased Date : </strong>
+            {machine.PurchaseDate}
+          </p>
+        </div>  
+        <div className="col-6">
+          <p>
           <strong>Tel. No : </strong>
           {machine.TelNo}
+          </p>
+        </div> 
+        </div>
+        <p>
+        <strong>Warranty Expiration : </strong>
+            {machine.WarrantyExp}
+          
         </p>
-        <button onClick={() => handleClickMachineParts (machine._id)}>Machine Parts</button>
-        <button onClick={() => handleClickService(machine._id)}>Service Machines</button>
-        <button onClick={() => handleClickupdateMachine (machine._id)}>Update Machine Details</button>
+        <div className="row">
+        <div className="col-12">
+        <button className = "subBtn" onClick={() => handleClickupdateMachine (machine._id)}>Update Machine Details</button>
+        <button className = "subBtn"  onClick={() => handleClickService(machine._id)}>Service Machines</button>        
+        <button className = "subBtn"  onClick={() => handleClickMachineParts (machine._id)}> Replace Machine Parts</button>
+        </div>
+        </div>
         <p>{machine.createdAt}</p>
       </div>
       <div>
+        <hr/>
+        <div>
+          <h3>Replace Machine Parts</h3>
+        </div>
       <table id="machineparts-list" className="table" style={{ width: '100%' }}>  
                   <thead>
                   <tr>
@@ -137,15 +182,20 @@ const MachineHistory = ({ machine}) => {
                     <td >{machinePart.TechnicianName}</td>
                     <td >{machinePart.TechTelno}</td>
                     <td >{machinePart.TechnicianPayment}</td>
-                    <td><button key={machinePart._id} onClick={() => handleClick(machinePart._id)}>Receipt</button></td>
-                    <td><button onClick={() => handleClickupdateMachinePart(machinePart._id)}>Update</button></td>
-                    <td><button onClick={() => handleDelete(machinePart._id)}>Delete</button></td>
+                    <td><button className="btnTable" key={machinePart._id} onClick={() => handleClick(machinePart._id)}>Receipt</button></td>
+                    <td><button className="btnTable" onClick={() => handleClickupdateMachinePart(machinePart._id)}>Update</button></td>
+                    <td><button className="btnDelete" onClick={() => handleDelete(machinePart._id)}>Delete</button></td>
                   </tr>
               
                 ))}
                 </tbody>    
                   </table>
+                  
       </div>
+      <hr/>
+      <div>
+          <h3>Machine Service Details</h3>
+        </div>
       <div>
         <ViewServiceHistory/>
       </div>

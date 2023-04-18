@@ -24,6 +24,7 @@ const AddServiceDates = () => {
      return ( 
         <div className="history">
             <div className="machines">
+                <h4>Add Service Details</h4>
                 {machine && <ServiceMachineForm machine = {machine}/>}
             </div>
         </div>
