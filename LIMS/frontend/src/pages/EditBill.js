@@ -141,7 +141,7 @@ const EditBill = () => {
         showConfirmButton: false,
         timer: 2000,
       });
-      //navigate('/view-bills');
+      navigate('/view-bills');
     }
   };
 
