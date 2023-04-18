@@ -50,6 +50,7 @@ import LoginStaff from './pages/LoginStaff';
 import Welcome from './pages/Welcome';
 import AllStaff from './pages/AllStaff';
 import StaffProfile from './pages/StaffPorfile';
+import UpdateProfile from './pages/UpdateProfile';
 
 
 function App() {
@@ -185,6 +186,10 @@ function App() {
                   <Route
                     path="/Welcome"
                     element={<Welcome/>}
+                  />
+                  <Route
+                    path="/UpdateProfile"
+                    element={<UpdateProfile/>}
                   />
 
                 </Routes>

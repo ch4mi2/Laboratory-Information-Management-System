@@ -18,7 +18,7 @@ const StaffLogin = () =>{
 
     return(
         <form className="create" onSubmit={handleSubmit}>
-            <h3>Staff Login</h3>
+            
 
             <label>Username:</label>
             <input
@@ -32,8 +32,9 @@ const StaffLogin = () =>{
                 onChange={(e) => setPW(e.target.value)}
                 value={pw}  
             />
+            <br/>
 
-            <button disabled = {isLoading}>Login</button>
+            <button className="btnSubmit" disabled = {isLoading}>Login</button>
         {error && <div className="error">{error}</div>}
 
 

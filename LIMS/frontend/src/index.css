@@ -196,5 +196,48 @@ table.dataTable tbody tr:hover {
 .dropdown-item.active {
   background: #cc3333 !important;
 }
+.userdiv{
+  position: absolute;
+  top: 15px;
+  right: 60px;
+  
+  
+}
 
+.formbox{
+  width: 90%;
+  max-width: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: #ffffff;
+  padding: 50px 60px 70px;
+  text-align: center;
+  border-radius: 25px;
+}
+.formbox1{
+  width: 1000px;
+  
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: #ffffff;
+  padding: 50px 60px 70px;
+  text-align:left;
+  border-radius: 25px;
+}
+
+.btnupdate{
+  background-color: var(--orange);
+  position: absolute;
+  top: 85%;
+  left: 18%;
+  color: #ffffff;
+  border: none;
+  width: 250px;
+  height: 50px;
+  border-radius: 25px;
+}
 

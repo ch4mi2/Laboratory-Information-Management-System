@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-import Swal from 'sweetalert2';
+
 
 
 
 const  StaffProfile = () => {
     const [Staff,setStaff] = useState(null)
-    const [name,setName] = useState(null)
+    
     
     const {user} = useAuthContext()
 
@@ -21,41 +21,13 @@ const  StaffProfile = () => {
             if(response.ok)
             {
                 setStaff(json)
-                setName(json.name)
+                
             }
         }
         fetchProfile()
     },[user])
 
-    const handleUpdate = async (e) => {
-        e.preventDefault()
-        try {
-          const response = await fetch(`/api/Staff/${user.userid}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              name,
-              
-            })
-          })
-          if (response.ok) {
-            Swal.fire(
-                {
-                  title: 'Success',
-                  text: 'Record has been updated',
-                  icon: 'success',
-                  showConfirmButton: false,
-                  timer: 2000,
-                  timerProgressBar: true  
-              }
-              )
-          }
-        } catch (error) {
-          console.log(error)
-        }
-      }
+    
 
 
     return(
@@ -63,18 +35,24 @@ const  StaffProfile = () => {
         <div className="container">
             
         
-            <h1>{Staff?.name ?? 'null'}</h1>
+            <h1>HELLO {Staff?.name ?? 'null'}!</h1><br/>
+            <h2>Here is your profile details</h2>
+            <br/><br/>
 
-            <form onSubmit = {handleUpdate} className="form">
-            <label>Name</label>
-            <input
-            class="form-control"
-             type="text"
-             onChange={(e) => setName(e.target.value)}
-             value={name}
-            />
-            <button type="submit"></button>
-            </form>
+            <div className="formbox1">
+                <p>Name           : {Staff?.name ?? 'null'}</p>
+                <p>Employee ID    : {Staff?.Eid ?? 'null'}</p>
+                <p>Position       : {Staff?.post ?? 'null'}</p>
+                <p>Contact Number : {Staff?.contact ?? 'null'}</p>
+                <p>NIC Number     : {Staff?.NIC ?? 'null'}</p>
+                <p>Email     : {Staff?.email ?? 'null'}</p>
+
+
+            </div><br></br>
+            <br/>
+            <a href="/UpdateProfile"><button className="btnupdate">Edit Profile</button></a>
+
+            
             
         
     </div>
