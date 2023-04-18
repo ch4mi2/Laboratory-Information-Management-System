@@ -56,6 +56,7 @@ const UpdateCategoryForm = ({subCategory}) => {
                     icon: 'success',
                     showConfirmButton: false,
                     timer: 2000,
+                    customClass: "alerts",
                     timerProgressBar: true
                 }).then(() => {
                     navigate(-1);
@@ -72,6 +73,7 @@ const UpdateCategoryForm = ({subCategory}) => {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
+            customClass: "alerts",
             confirmButtonText: 'Yes, delete it!'
           }).then(async(result) => {
             if (result.isConfirmed) {
@@ -134,7 +136,9 @@ const UpdateCategoryForm = ({subCategory}) => {
                         <label>UOM: </label>
                         <input 
                             type = "text"
-                            onChange={(e) => setUOM(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('UOM')] = '';
+                                setUOM(e.target.value)}}
                             value={UOM}
                             className={emptyFields.includes('UOM') ? 'error' : ''}
 
@@ -148,26 +152,39 @@ const UpdateCategoryForm = ({subCategory}) => {
                         {/* <label>Starting Range: </label> */}
                         <input 
                                 type = "number"
-                                onChange={(e) => setStartMRef(e.target.value)}
+                                onChange={(e) => {
+                                    emptyFields[emptyFields.indexOf('startMRef')] = '';
+                                    setStartMRef(e.target.value)}}
                                 value={startMRef}
                                 className={emptyFields.includes('startMRef') ? 'error' : ''}
                         />
                     </div>
                     <div className="col-2">
                         {/* <label>Operator: </label> */}
-                        <input 
+                        <select 
                             type = "text"
-                            onChange={(e) => setOperatorM(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('operatorM')] = '';
+                                setOperatorM(e.target.value)}}
                             value={operatorM}
                             className={emptyFields.includes('operatorM') ? 'error' : ''}
                             
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="-">-</option>
+                            <option value=">">&#62;</option>
+                            <option value="<">&#60;</option>
+                            <option value=">=">&#8805;</option>
+                            <option value="<=">&#8924;</option>
+                        </select>
                     </div>
                     <div className="col-4">
                         {/* <label>Ending Range:</label> */}
                         <input 
                             type = "number"
-                            onChange={(e) => setEndMRef(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('endMRef')] = '';
+                                setEndMRef(e.target.value)}}
                             value={endMRef}
                             className={emptyFields.includes('endMRef') ? 'error' : ''}
                             
@@ -181,25 +198,38 @@ const UpdateCategoryForm = ({subCategory}) => {
                         {/* <label>Starting Range: </label> */}
                         <input 
                             type = "number"
-                            onChange={(e) => setStartFRef(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('startFRef')] = '';
+                                setStartFRef(e.target.value)}}
                             value={startFRef}
                             className={emptyFields.includes('startFRef') ? 'error' : ''}
                         />
                     </div>
                     <div className="col-2">
                         {/* <label>Operator: </label> */}
-                        <input 
+                        <select 
                             type = "text"
-                            onChange={(e) => setOperatorF(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('operatorF')] = '';
+                                setOperatorF(e.target.value)}}
                             value={operatorF}
                             className={emptyFields.includes('operatorF') ? 'error' : ''}
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="-">-</option>
+                            <option value=">">&#62;</option>
+                            <option value="<">&#60;</option>
+                            <option value=">=">&#8805;</option>
+                            <option value="<=">&#8924;</option>
+                        </select>
                     </div>
                     <div className="col-4">
                         {/* <label>Ending Range:</label> */}
                         <input 
                             type = "number"
-                            onChange={(e) => setEndFRef(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('endFRef')] = '';
+                                setEndFRef(e.target.value)}}
                             value={endFRef}
                             className={emptyFields.includes('endFRef') ? 'error' : ''}
                         />
@@ -219,13 +249,20 @@ const UpdateCategoryForm = ({subCategory}) => {
                     </div>
                     <div className="col-2">
                         {/* <label>Operator: </label> */}
-                        <input 
+                        <select 
                             type = "text"
                             onChange={(e) => setOperatorB(e.target.value)}
                             value={operatorB}
                             className={emptyFields.includes('operatorB') ? 'error' : ''}
                             
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="-">-</option>
+                            <option value=">">&#62;</option>
+                            <option value="<">&#60;</option>
+                            <option value=">=">&#8805;</option>
+                            <option value="<=">&#8924;</option>
+                        </select>
                     </div>
                     <div className="col-4">
                         {/* <label>Ending Range:</label> */}

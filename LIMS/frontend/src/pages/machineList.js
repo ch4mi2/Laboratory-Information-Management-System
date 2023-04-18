@@ -1,12 +1,12 @@
-import { useEffect , useState} from 'react';
+import { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import { useMachineContext } from '../hooks/useMachineContext'; 
 
 const MachineList = () => {
   const navigate = useNavigate();
-  const [machines,setMachines] = useState(null);
-  const {dispatch} = useMachineContext();
+  // const [machines,setMachines] = useState(null);
+  const {machines, dispatch} = useMachineContext();
 
   useEffect(() => {
     const fetchMachines = async () => {
@@ -14,7 +14,8 @@ const MachineList = () => {
       const json = await response.json();
 
       if (response.ok) {
-        setMachines(json);
+        // setMachines(json);
+        dispatch({type:'SET_MACHINES' , payload:json})
         $(function () {
           $('#machine-list').DataTable({
           //order: [[4, 'desc']],
@@ -25,6 +26,7 @@ const MachineList = () => {
     };
 
     fetchMachines();
+    // eslint-disable-next-line
   }, []);
 
   const handleClick = (id) => {
@@ -40,8 +42,6 @@ const MachineList = () => {
     if(response.ok){
       dispatch({type: 'DELETE_MACHINE' , payload:json})
     }
-
-    navigate('/MachineList');
   }
 
 
@@ -66,12 +66,12 @@ const MachineList = () => {
                 machines.map((machine) => (
                   <tr
                     key={machine._id}
-                    onClick={() => handleClick(machine._id)}
+                    
                   >
-                    <td >{machine._id}</td>
-                    <td >{machine.MachineType}</td>
-                    <td >{machine.Brand}</td>
-                    <td >{machine.PurchaseDate}</td>
+                    <td onClick={() => handleClick(machine._id)}>{machine._id}</td>
+                    <td onClick={() => handleClick(machine._id)}>{machine.MachineType}</td>
+                    <td onClick={() => handleClick(machine._id)}>{machine.Brand}</td>
+                    <td onClick={() => handleClick(machine._id)}>{machine.PurchaseDate}</td>
                     <td><button onClick={() => handleDelete(machine._id)}>Delete</button></td>
                   </tr>
                 ))}

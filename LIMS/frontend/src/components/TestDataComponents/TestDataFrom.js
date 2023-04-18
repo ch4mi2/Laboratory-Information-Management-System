@@ -53,13 +53,25 @@ const TestDataForm = () => {
         if(!response.ok) {
             setError(json.error)
             setEmptyFields(json.emptyFields)
-            MySwal.fire({
-                title: 'Error',
-                text: error,
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 1000,
-            })
+            if(response.status == 400) {
+                MySwal.fire({
+                    title: 'Error',
+                    text: error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+            }else {
+                MySwal.fire({
+                    title: 'Error',
+                    text: json.error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then(() => {  
+                    navigate('/testData');
+                })
+            }     
         }
         if(response.ok) {
             setTest(json)
@@ -140,6 +152,7 @@ const TestDataForm = () => {
                 setOutsourced(test[0].outsourced)
                 setDisable(true)
                 setDisableID(false)
+                document.getElementById("submitButton").innerHTML = "Add subcategory"
             } else {
                 setShortName('')
                 setTestName('')
@@ -151,6 +164,7 @@ const TestDataForm = () => {
                 setTest(null)
                 setDisable(false)
                 setDisableID(false)
+                document.getElementById("submitButton").innerHTML = "Add Test"
             }
         }
     }
@@ -186,7 +200,9 @@ const TestDataForm = () => {
                     <label>Short Name: </label>
                     <input 
                         type = "text"
-                        onChange={(e) => setShortName(e.target.value)}
+                        onChange={(e) => {
+                            emptyFields[emptyFields.indexOf('shortName')] = '';
+                            setShortName(e.target.value)}}
                         value={shortName}
                         className={emptyFields.includes('shortName') ? 'error' : ''}
                         disabled = {disable}
@@ -200,7 +216,9 @@ const TestDataForm = () => {
                         <label>Test Name: </label>
                         <input 
                             type = "text"
-                            onChange={(e) => setTestName(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('testName')] = '';
+                                setTestName(e.target.value)}}
                             value={testName}
                             className={emptyFields.includes('testName') ? 'error' : ''}
                             disabled = {disable}
@@ -213,7 +231,9 @@ const TestDataForm = () => {
                         <label>Price: </label>
                         <input 
                             type = "number"
-                            onChange={(e) => setPrice(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('price')] = '';
+                                setPrice(e.target.value)}}
                             value={price}
                             className={emptyFields.includes('price') ? 'error' : ''}
                             disabled = {disable}
@@ -223,7 +243,9 @@ const TestDataForm = () => {
                         <label>Specimen: </label>
                         <input 
                             type = "text"
-                            onChange={(e) => setSpecimen(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('specimen')] = '';
+                                setSpecimen(e.target.value)}}
                             value={specimen}
                             className={emptyFields.includes('specimen') ? 'error' : ''}
                             disabled = {disable}
@@ -236,7 +258,9 @@ const TestDataForm = () => {
                         <label>Heading: </label>
                         <input 
                             type = "text"
-                            onChange={(e) => setHeading(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('heading')] = '';
+                                setHeading(e.target.value)}}
                             value={heading}
                             className={emptyFields.includes('heading') ? 'error' : ''}
                             disabled = {disable}
@@ -263,7 +287,9 @@ const TestDataForm = () => {
                         <label>Outsourced: </label>
                         <select
                             type = "text"
-                            onChange={(e) => setOutsourced(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('outsourced')] = '';
+                                setOutsourced(e.target.value)}}
                             value={outsourced}
                             className={emptyFields.includes('outsourced') ? 'error' : ''}
                             disabled = {disable}
@@ -297,7 +323,8 @@ const TestDataForm = () => {
                         <label>Category Heading:</label>
                         <input 
                             type = "text"
-                            onChange={(e) => setCategoryHeading(e.target.value)}
+                            onChange={(e) => {
+                                setCategoryHeading(e.target.value)}}
                             value={categoryHeading}
                             // className={emptyFields.includes('categoryHeading') ? 'error' : ''}
 
@@ -310,7 +337,9 @@ const TestDataForm = () => {
                         <label>UOM: </label>
                         <input 
                             type = "text"
-                            onChange={(e) => setUOM(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('UOM')] = '';
+                                setUOM(e.target.value)}}
                             value={UOM}
                             className={emptyFields.includes('UOM') ? 'error' : ''}
 
@@ -324,7 +353,9 @@ const TestDataForm = () => {
                         {/* <label>Starting Range: </label> */}
                         <input 
                                 type = "number"
-                                onChange={(e) => setStartMRef(e.target.value)}
+                                onChange={(e) => {
+                                    emptyFields[emptyFields.indexOf('startMRef')] = '';
+                                    setStartMRef(e.target.value)}}
                                 value={startMRef}
                                 className={emptyFields.includes('startMRef') ? 'error' : ''}
                         />
@@ -333,7 +364,9 @@ const TestDataForm = () => {
                         {/* <label>Operator: </label> */}
                         <select 
                             type = "text"
-                            onChange={(e) => setOperatorM(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('operatorM')] = '';
+                                setOperatorM(e.target.value)}}
                             value={operatorM}
                             className={emptyFields.includes('operatorM') ? 'error' : ''}
                             
@@ -350,7 +383,9 @@ const TestDataForm = () => {
                         {/* <label>Ending Range:</label> */}
                         <input 
                             type = "number"
-                            onChange={(e) => setEndMRef(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('endMRef')] = '';
+                                setEndMRef(e.target.value)}}
                             value={endMRef}
                             className={emptyFields.includes('endMRef') ? 'error' : ''}
                             
@@ -364,7 +399,9 @@ const TestDataForm = () => {
                         {/* <label>Starting Range: </label> */}
                         <input 
                             type = "number"
-                            onChange={(e) => setStartFRef(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('startFRef')] = '';
+                                setStartFRef(e.target.value)}}
                             value={startFRef}
                             className={emptyFields.includes('startFRef') ? 'error' : ''}
                         />
@@ -373,7 +410,9 @@ const TestDataForm = () => {
                         {/* <label>Operator: </label> */}
                         <select 
                             type = "text"
-                            onChange={(e) => setOperatorF(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('operatorF')] = '';
+                                setOperatorF(e.target.value)}}
                             value={operatorF}
                             className={emptyFields.includes('operatorF') ? 'error' : ''}
                         >
@@ -389,7 +428,9 @@ const TestDataForm = () => {
                         {/* <label>Ending Range:</label> */}
                         <input 
                             type = "number"
-                            onChange={(e) => setEndFRef(e.target.value)}
+                            onChange={(e) => {
+                                emptyFields[emptyFields.indexOf('endFRef')] = '';
+                                setEndFRef(e.target.value)}}
                             value={endFRef}
                             className={emptyFields.includes('endFRef') ? 'error' : ''}
                         />
@@ -437,7 +478,7 @@ const TestDataForm = () => {
                 </div>
             </div>
 
-            <button className="col-5 submit btnConfirm">Add Test</button>
+            <button className="col-5 submit btnConfirm" id="submitButton">Add Test</button>
         </form>
         <div className="thirdSection">
             {inputTest && <h5>Related subcategories</h5>}

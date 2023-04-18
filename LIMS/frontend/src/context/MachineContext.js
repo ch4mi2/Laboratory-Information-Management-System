@@ -8,7 +8,7 @@ export const MachinesReducer = (state, action) => {
       return { 
         machines: action.payload 
       }
-    case 'CREATE_WORKOUT':
+    case 'CREATE_MACHINE':
       return { 
         machines: [action.payload, ...state.machines] 
       }

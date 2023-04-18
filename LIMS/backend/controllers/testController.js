@@ -69,18 +69,24 @@ const createTest = async(req,res) => {
         if(!operatorM) {
             emptyFields.push('operatorM')
         }
-        if(!endMRef && operatorM == "-") {
+        if(!endMRef) {
             emptyFields.push('endMRef')
         }
+        // if(!endMRef && operatorM == ">") {
+        //     endMRef = null
+        // }
         if(!startFRef) {
             emptyFields.push('startFRef')
         }
         if(!operatorF) {
             emptyFields.push('operatorF')
         }
-        if(!endFRef && operatorF == "-") {
+        if(!endFRef ) {
             emptyFields.push('endFRef')
         }
+        // if(!endFRef && operatorF == ">") {
+        //     endFRef = null
+        // }
 
         if(emptyFields.length > 0) {
             return res.status(400).json({error: 'Please fill in the highlighted fields', emptyFields})
@@ -125,7 +131,7 @@ const deleteTest = async(req,res) => {
             return res.status(400).json({error: "No such Test"})
         }
 
-        await Category.remove({_id: { $in: test.subCategories }});
+        await Category.deleteMany({_id: { $in: test.subCategories }});
 
         const deletedTest = await Test.findOneAndDelete({_id: id}) ;
 

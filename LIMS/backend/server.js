@@ -14,7 +14,8 @@ const inventoryRoutes = require('./routes/inventoryRoutes');
 const StaffRoutes = require('./routes/StaffRoutes.js');
 const AdminRoute = require('./routes/AdminRoute.js');
 const LabInfoRoutes = require('./routes/LabInfoRoutes.js');
-const machinePartsRoute = require('./routes/machinePartsRoute')
+const machinePartsRoute = require('./routes/machinePartsRoute');
+const serviceMachineRoute = require('./routes/serviceMachineRoutes')
 
 //express app
 const app = express(); //invokes the function
@@ -42,6 +43,7 @@ app.use('/api/Staff', StaffRoutes);
 app.use('/api/Admin', AdminRoute);
 app.use('/api/labInfo', LabInfoRoutes);
 app.use('/api/machineParts' , machinePartsRoute)
+app.use('/api/serviceMachines' , serviceMachineRoute)
 
 //connect to db
 mongoose

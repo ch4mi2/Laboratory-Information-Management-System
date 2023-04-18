@@ -22,7 +22,7 @@ import UpdateCategory from './pages/UpdateCategory';
 import ViewStat from './pages/ViewStats';
 import AddMachines from './pages/AddMachines';
 import PendingTestResults from './pages/PendingTestResults';
-import Machines from './pages/machineHistory';
+//import Machines from './pages/machineHistory';
 import UpdateExpenses from './pages/UpdateExpenses';
 import AddTestResults from './pages/AddTestResults';
 import TestResultPreview from './pages/TestResultPreview';
@@ -36,6 +36,9 @@ import AddStaff from './pages/AddStaff';
 import LabInfo from './pages/LabInfo';
 import MachineList from './pages/machineList';
 import MachineHistory from './pages/machineHistory';
+import AddMachineParts from './pages/AddMachineParts';
+import MachineServiceDates from './pages/AddServiceDates';
+import ViewMachineService from './pages/viewServiceDates';
 import FinancialReport from './pages/FinancialReport';
 import EditPatient from './pages/EditPatient';
 
@@ -101,13 +104,17 @@ function App() {
                   />
 
                   <Route path="/accessed" element={<Accessed />} />
-                  <Route path="/machines" element={<Machines />} />
+
+                  {/* <Route path="/machines" element={<Machines />} /> */}
                   <Route path="/addMachines" element={<AddMachines />}></Route>
                   <Route path="/machineList" element={<MachineList />}></Route>
                   <Route
                     path="/machineHistory/:id"
                     element={<MachineHistory />}
                   ></Route>
+                  <Route path="/AddMachineParts" element={<AddMachineParts/>}></Route>
+                  <Route path="/AddServiceDates" element={<MachineServiceDates />}></Route>
+                  <Route path="/viewServiceDetails/:id" element={<ViewMachineService/>}></Route>
 
                   <Route path="/testData" element={<TestData />} />
                   <Route path="/createTest" element={<CreateTest />} />

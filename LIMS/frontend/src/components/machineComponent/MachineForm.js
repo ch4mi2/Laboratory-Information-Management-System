@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useMachineContext } from '../../hooks/useMachineContext';
+import '../../css/MachineStyles/machineDetails.css'
 
 const MachineForm = () => {
   const { dispatch } = useMachineContext();
@@ -13,7 +14,7 @@ const MachineForm = () => {
   const [Manufacturer, setManufacturer] = useState('');
   const [TelNo, setTelNo] = useState('');
   const [error, setError] = useState(null);
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -51,18 +52,18 @@ const MachineForm = () => {
       setWarrantyExp('');
       setManufacturer('');
       setTelNo('');
-      console.log('new workout added:', json);
+      console.log('new machine added:', json);
       dispatch({ type: 'CREATE_MACHINE', payload: json });
     }
   };
 
   return (
-    <div class="">
-      <div class="title">Add a New Machine</div>
+    <div className="">
+      <div className="title">Add a New Machine</div>
       <hr />
       <form className="create" onSubmit={handleSubmit}>
-        <div class="machinelabels">
-          <div class="input-box">
+        <div className="machinelabels">
+          <div className="input-box">
             <label>Machine :</label>
             <input
               type="text"
@@ -71,7 +72,7 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div class="input-box">
+          <div className="input-box">
             <label>Brand:</label>
             <input
               type="text"
@@ -80,7 +81,7 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div class="input-box">
+          <div className="input-box">
             <label>Model:</label>
             <input
               type="text"
@@ -89,7 +90,7 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div class="input-box">
+          <div className="input-box">
             <label>Serial No :</label>
             <input
               type="text"
@@ -98,7 +99,7 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div class="input-box">
+          <div className="input-box">
             <label>Purchased Date:</label>
             <input
               type="date"
@@ -107,7 +108,7 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div class="input-box">
+          <div className="input-box">
             <label>Warranty Expiration:</label>
             <input
               type="date"
@@ -116,7 +117,7 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div class="input-box">
+          <div className="input-box">
             <label>Manufacturer</label>
             <input
               type="text"
@@ -125,7 +126,7 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div class="input-box">
+          <div className="input-box">
             <label>Tel No:</label>
             <input
               type="text"
@@ -134,7 +135,7 @@ const MachineForm = () => {
               required
             />
           </div>
-          <div class="Add-button">
+          <div className="Add-button">
             <button>Add Machine</button>
           </div>
           {error && <div className="error">{error}</div>}
