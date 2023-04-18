@@ -51,23 +51,23 @@ const createMachine = async (req , res) => {
 
 
 //update a machine
-// const updateMachine = async (req , res) => {
-//     const {id} = req.params
+const updateMachine = async (req , res) => {
+    const {id} = req.params
 
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//         return res.status(404).json({error: 'No such machine'})
-//       }
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Not a valid object ID'})
+      }
 
-//     const machine = await Machine.findOneAndUpdate({_id : id},{
-//         ...req.body
-//     })
+    const machine = await Machine.findOneAndUpdate({_id : id},{
+        ...req.body
+    })
 
-//     if (!machine){
-//         return res.status(404).json({error: 'No such machine'})
-//     }
+    if (!machine){
+        return res.status(404).json({error: 'No such machine'})
+    }
 
-//     res.status(200).json(machine)
-// }
+    res.status(200).json(machine)
+}
 
 
 //delete a workout
@@ -92,5 +92,5 @@ module.exports = {
     getMachines,
     getMachine,
     deleteMachine,
-    //updateMachine
+    updateMachine
 }

@@ -41,6 +41,9 @@ import MachineServiceDates from './pages/AddServiceDates';
 import ViewMachineService from './pages/viewServiceDates';
 import FinancialReport from './pages/FinancialReport';
 import EditPatient from './pages/EditPatient';
+import UpdateMachine from './pages/UpdateMachines'
+import UpdateMachineParts from './pages/UpdateMachineParts'
+import UpdateMachineService from './pages/UpdateMachineServices'
 
 function App() {
   return (
@@ -108,13 +111,13 @@ function App() {
                   {/* <Route path="/machines" element={<Machines />} /> */}
                   <Route path="/addMachines" element={<AddMachines />}></Route>
                   <Route path="/machineList" element={<MachineList />}></Route>
-                  <Route
-                    path="/machineHistory/:id"
-                    element={<MachineHistory />}
-                  ></Route>
+                  <Route path="/machineHistory/:id" element={<MachineHistory />}></Route>
                   <Route path="/AddMachineParts" element={<AddMachineParts/>}></Route>
                   <Route path="/AddServiceDates" element={<MachineServiceDates />}></Route>
                   <Route path="/viewServiceDetails/:id" element={<ViewMachineService/>}></Route>
+                  <Route path="/updateMachine/:id" element={<UpdateMachine/>}></Route>
+                  <Route path="/updateMachineParts/:id" element={<UpdateMachineParts/>}></Route>
+                  <Route path="/updateMachineService/:id" element={<UpdateMachineService/>}></Route>
 
                   <Route path="/testData" element={<TestData />} />
                   <Route path="/createTest" element={<CreateTest />} />

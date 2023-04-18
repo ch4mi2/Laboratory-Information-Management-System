@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useMachinePartsContext } from '../../hooks/useMachinePartsContext'
+import ViewServiceHistory from '../../pages/viewServiceDates'
+import $ from 'jquery';
 
 const MachineHistory = ({ machine}) => {
   const navigate = useNavigate();
@@ -21,12 +23,19 @@ const MachineHistory = ({ machine}) => {
         var current = await json.filter((m) => m.machineId === machine._id);
         dispatch({type:'SET_MACHINEPART' , payload:current})
         // console.log(current);
-      }
-    };
 
+        $(function () {
+          $('#machineparts-list').DataTable({
+          //order: [[4, 'desc']],
+          bDestroy: true,
+          });
+        })
+      };
+    }
     fetchMachineParts();
+
     // eslint-disable-next-line
-  }, []);
+  }, []); 
 
   const handleClickMachineParts = (id) => {
     navigate(`../AddMachineParts`, {state:{id}});
@@ -36,8 +45,12 @@ const MachineHistory = ({ machine}) => {
     navigate(`../AddServiceDates`, {state:{id}});
   };
 
-  const handleClickViewService = (id) => {
-    navigate(`../viewServiceDetails/${id}`);
+  const handleClickupdateMachine = (id) => {
+    navigate(`../updateMachine/${id}`);
+  };
+
+  const handleClickupdateMachinePart = (id) => {
+    navigate(`../UpdateMachineParts/${id}`);
   };
 
   const handleClick = (id) => {
@@ -88,24 +101,25 @@ const MachineHistory = ({ machine}) => {
           <strong>Tel. No : </strong>
           {machine.TelNo}
         </p>
-        <button onClick={() => handleClickMachineParts (machine._id)}>Add Machine Parts</button>
-        <button onClick={() => handleClickService(machine._id)}>Add Service Dates</button>
-        <button onClick={() => handleClickViewService(machine._id)}>Service machine</button>
+        <button onClick={() => handleClickMachineParts (machine._id)}>Machine Parts</button>
+        <button onClick={() => handleClickService(machine._id)}>Service Machines</button>
+        <button onClick={() => handleClickupdateMachine (machine._id)}>Update Machine Details</button>
         <p>{machine.createdAt}</p>
       </div>
       <div>
-      <table>  
+      <table id="machineparts-list" className="table" style={{ width: '100%' }}>  
                   <thead>
                   <tr>
-                    <th >Machine ID</th>
-                    <th >Machine Type</th>
                     <th >Maintenance Date</th>
                     <th >Machine Part</th>
+                    <th >Issue</th>
                     <th >Brand</th>
+                    <th >Price </th>
                     <th >Technician Name</th>
                     <th >Technician tel No</th>
                     <th >Technician Payment</th>
                     <th >Print receipt</th>
+                    <th>Update</th>
                     <th >Delete Machine</th>
                   </tr>
                 </thead>
@@ -115,9 +129,8 @@ const MachineHistory = ({ machine}) => {
                   <tr
                     key={machinePart._id}
                   >
-                    <td >{machinePart.machineId}</td>
-                    <td >{machinePart.machineName}</td>
                     <td >{machinePart.MaintenanceDate}</td>
+                    <td >{machinePart.Issue}</td>
                     <td >{machinePart.MachinePart}</td>
                     <td >{machinePart.brandOfMachinePart}</td>
                     <td >{machinePart.PriceOfMachinePart}</td>
@@ -125,12 +138,16 @@ const MachineHistory = ({ machine}) => {
                     <td >{machinePart.TechTelno}</td>
                     <td >{machinePart.TechnicianPayment}</td>
                     <td><button key={machinePart._id} onClick={() => handleClick(machinePart._id)}>Receipt</button></td>
+                    <td><button onClick={() => handleClickupdateMachinePart(machinePart._id)}>Update</button></td>
                     <td><button onClick={() => handleDelete(machinePart._id)}>Delete</button></td>
                   </tr>
               
                 ))}
                 </tbody>    
                   </table>
+      </div>
+      <div>
+        <ViewServiceHistory/>
       </div>
     </div>
   );

@@ -1,10 +1,14 @@
-//import { useParams } from "react-router-dom";
-import { useEffect} from "react";
+import { useParams } from "react-router-dom";
+import { useEffect , useState} from "react";
 //import ServiceDetails from "../components/machineComponent/serviceDetails";
-import { useMachineServiceContext } from '../hooks/useMachineServiceContext'
+//import { useMachineServiceContext } from '../hooks/useMachineServiceContext'
+import $ from 'jquery';
+import { useNavigate } from "react-router-dom";
 
-const ViewServiceHistory = ({ machine}) => {
-    const {serviceMachines, dispatch} = useMachineServiceContext();
+const ViewServiceHistory = () => {
+    const { id } = useParams()
+    const [serviceMachines, setServiceMachines] = useState(null);
+    const navigate = useNavigate();
 
     //Service Machine Details
   useEffect(() => {
@@ -13,10 +17,17 @@ const ViewServiceHistory = ({ machine}) => {
         const json = await response.json();
 
         if( response.ok ) {
-          console.log(json);
-          var current = await json.filter((m) => m.machineId === machine._id);
-          dispatch({type:'SET_MACHINESERVICE' , payload:current})
-          console.log(current)
+          //console.log(json);
+          var current = await json.filter((m) => m.machineId === id);
+          setServiceMachines(current)
+          //console.log(current)
+
+          $(function () {
+            $('#service-list').DataTable({
+            //order: [[4, 'desc']],
+            bDestroy: true,
+          });
+        })
         }
     }
          
@@ -24,47 +35,58 @@ const ViewServiceHistory = ({ machine}) => {
     // eslint-disable-next-line 
 }, [])
 
+const handleClickService = (id) => {
+  navigate(`../updateMachineService/${id}` );
+};
+
 return (
         <div className="viewTest">
             <div className="tests">
                 <h4>Machine History</h4>
                 {/* { serviceMachine ? <ServiceDetails key={serviceMachine._id} service = {serviceMachine} /> : <div className="loading">Loading...</div>} */}
                 <div>
+    {/* {console.log(serviceMachines)} */}
+    <div>
+      <table id="service-list" className="table" style={{ width: '100%' }}>  
+                  <thead>
+                  <tr>
+                    <th >Last Service Date</th>
+                    <th >Next Service Date</th>
+                    <th >Technician Name</th>
+                    <th >Technician tel No</th>
+                    <th >Technician Payment</th>
+                    <th >Print receipt</th>
+                    <th>Update Service</th>
+                  </tr>
+                </thead>
+                <tbody>
       {serviceMachines &&
                 serviceMachines.map((service) => (
-                  <div className="machine-details">
-                    <h4>Service Dates</h4>
-                    <p>
-                    <strong> Last Service Date: </strong>
-                        {service.LastserviceDate}
-                    </p>
-                    <p>
-                    <strong>Next Service Date: </strong>
-                        {service.NextServiceDate}
-                    </p>
-                    <p>
-                    <strong>Technician's Name : </strong>
-                        {service.TechnicianName}
-                    </p>
-                    <p>
-                    <strong>Technician's Tel No : </strong>
-                        {service.TechTelno}
-                    </p>
-                    <p>
-                    <strong>Technician's Payment : </strong>
-                        {service.TechnicianPayment}
-                    </p>
-                    <button >
-                        {/* onClick={() => handleClick(service._id)}> */}
-                        Update Service Details</button>
-                    <p>{service.createdAt}</p>
-                </div>
+                  <tr
+                    key={service._id}
+                  >
+                    <td >{service.LastserviceDate}</td>
+                    <td >{service.NextServiceDate}</td>
+                    <td >{service.TechnicianName}</td>
+                    <td >{service.TechTelno}</td>
+                    <td >{service.TechnicianPayment}</td>
+                    <td><button >
+                        {/* key={machinePart._id} onClick={() => handleClick(machinePart._id)}> */}
+                        Receipt</button></td>
+                    <td><button
+                         onClick={() => handleClickService(service._id)}>
+                         Update</button></td>
+                  </tr>
+              
                 ))}
-      </div> 
+                </tbody>    
+                  </table>
+      </div>
             </div>
-            
+        </div>
         </div>
     );
+    
 }
  
 export default ViewServiceHistory;

@@ -5,7 +5,7 @@ const {
     getMachines,
     getMachine,
     deleteMachine,
-    //updateMachine
+    updateMachine
 } = require ('../controllers/machineController')
 
 const router = express.Router()
@@ -19,8 +19,8 @@ router.get('/:id' , getMachine)
 //POST a new machine
 router.post('/' , createMachine)
 
-/*UPDATE a machine
-router.patch('/:id' , updateMachine)*/
+//UPDATE a machine
+router.patch('/:id' , updateMachine)
 
 //DELETE a machine
 router.delete('/:id' , deleteMachine)
