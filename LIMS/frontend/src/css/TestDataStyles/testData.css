@@ -107,3 +107,7 @@ a:hover {
   margin-left:22px;
   margin-top:20px;
 }
+
+#chart {
+  height: 440px;
+}

@@ -23,10 +23,8 @@ class TestCountChart extends Component {
   
     render() {
         
-        // console.log(Array.from(this.props.data))
+        console.log(this.props.data)
         return(
-            <div>
-                 { this.props ?
                  <Chart 
                     title="Usage of Tests"
                     dataSource={this.props.data}
@@ -45,9 +43,7 @@ class TestCountChart extends Component {
                     visible={false}
                     />
         
-                    </Chart>: <div className="loading">Loading...</div>}
-
-            </div>
+                    </Chart>
         )
     }
 } 
