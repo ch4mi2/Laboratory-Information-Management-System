@@ -167,7 +167,7 @@ const CreatePatientForm = () => {
 
           <button
             style={{ width: 'auto' }}
-            className="btnSubmit mt-4 px-4 d-block m-auto"
+            className="btnConfirm mt-4 px-4 d-block m-auto"
           >
             Add Patient
           </button>

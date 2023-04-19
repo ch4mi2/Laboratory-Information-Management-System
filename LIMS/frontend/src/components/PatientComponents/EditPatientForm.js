@@ -163,7 +163,7 @@ const EditPatientForm = ({ patient }) => {
             style={{
               width: '100%',
             }}
-            className="btnSubmit mt-4 px-4 d-block m-auto"
+            className="btnConfirm mt-4 px-4 d-block m-auto"
           >
             {' '}
             Confirm{' '}
@@ -171,7 +171,7 @@ const EditPatientForm = ({ patient }) => {
           <span
             onClick={goBack}
             style={{ width: 'auto', textAlign: 'center' }}
-            className="btnSubmit mt-3 px-4 d-block m-auto"
+            className="btnConfirm mt-3 px-4 d-block m-auto"
           >
             {'<-'} Go Back
           </span>
