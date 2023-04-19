@@ -14,7 +14,7 @@ const createAdmin = async (req, res) => {
     const admin = await Admin.create({ username, pw, user_id });
     res.status(200).json(admin);
   } catch (error) {
-    res.status(400).json({ error: error.mesage });
+    res.status(400).json({ error: error.message });
   }
 };
 const getaAdmin = async (req, res) => {
@@ -50,7 +50,7 @@ const loginAdmin = async (req,res) => {
     res.status(200).json({username,token})
 
 } catch(error){
-    res.status(400).json({error:error.mesage})
+    res.status(400).json({error:error.message})
 
 }
 }
