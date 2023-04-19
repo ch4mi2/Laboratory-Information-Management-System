@@ -51,6 +51,7 @@ import Welcome from './pages/Welcome';
 import AllStaff from './pages/AllStaff';
 import StaffProfile from './pages/StaffPorfile';
 import UpdateProfile from './pages/UpdateProfile';
+import AdminProfile from './pages/AdminProfile';
 
 
 function App() {
@@ -92,6 +93,7 @@ function App() {
                     path="/view-bills/:billId/edit"
                     element={<EditBill />}
                   />
+                  <Route path="/AdminProfile" element={<AdminProfile />} />
                   <Route path="/view-bills" element={<AllBills />} />
 
                   <Route

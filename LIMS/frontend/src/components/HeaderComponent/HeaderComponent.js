@@ -29,10 +29,12 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
         <span>{user.username}                                                                                       </span>
         <button className="btnDelete" onClick={handleClick}>Log out</button>
       </div>)}
+      <div className="userdiv">
 
       {!user && (
-        <div className="userdiv"><Link to ="/Welcome">Login</Link></div>
+        <a href='/Welcome'><button className="btnLogin">Login</button></a>
       )}
+      </div>
       
 
       
