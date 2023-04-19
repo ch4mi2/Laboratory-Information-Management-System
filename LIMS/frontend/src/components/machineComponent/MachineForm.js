@@ -2,11 +2,9 @@ import { useState } from 'react';
 import { useMachineContext } from '../../hooks/useMachineContext';
 import '../../css/MachineStyles/machineDetails.css'
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 
 const MachineForm = () => {
   const { dispatch } = useMachineContext();
-  const navigate = useNavigate();
 
   const [MachineType, setMachineType] = useState('');
   const [Brand, setBrand] = useState('');
@@ -75,7 +73,6 @@ const MachineForm = () => {
         })
         
     }
-    navigate('/addMachines');
   };
 
   return (

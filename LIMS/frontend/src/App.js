@@ -50,6 +50,8 @@ import LoginStaff from './pages/LoginStaff';
 import Welcome from './pages/Welcome';
 import AllStaff from './pages/AllStaff';
 import StaffProfile from './pages/StaffPorfile';
+import UpdateProfile from './pages/UpdateProfile';
+import AdminProfile from './pages/AdminProfile';
 
 
 function App() {
@@ -91,6 +93,7 @@ function App() {
                     path="/view-bills/:billId/edit"
                     element={<EditBill />}
                   />
+                  <Route path="/AdminProfile" element={<AdminProfile />} />
                   <Route path="/view-bills" element={<AllBills />} />
 
                   <Route
@@ -160,7 +163,7 @@ function App() {
                   />
                   <Route
                     path="/StaffProfile"
-                    element={<StaffProfile/>}
+                    element={user ? <StaffProfile /> : <Navigate to ="/Welcome"/>}
                   />
                   <Route
                     path="/financialReport"
@@ -176,15 +179,19 @@ function App() {
                   />
                   <Route
                     path="/StaffLogin"
-                    element={!user ? <LoginStaff /> : <Navigate to ="/"/>}
+                    element={!user ? <LoginStaff /> : <Navigate to ="/StaffProfile"/>}
                   />
                   <Route
                     path="/AdminLogin"
-                    element={<LoginAdmin />}
+                    element={!user ? <LoginAdmin /> : <Navigate to ="/AdminProfile"/>}
                   />
                   <Route
                     path="/Welcome"
                     element={<Welcome/>}
+                  />
+                  <Route
+                    path="/UpdateProfile"
+                    element={<UpdateProfile />}
                   />
 
                 </Routes>

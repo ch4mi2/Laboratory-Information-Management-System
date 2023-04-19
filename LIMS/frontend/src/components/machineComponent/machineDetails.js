@@ -182,8 +182,8 @@ const MachineHistory = ({ machine}) => {
                     <td >{machinePart.TechnicianName}</td>
                     <td >{machinePart.TechTelno}</td>
                     <td >{machinePart.TechnicianPayment}</td>
-                    <td><button className="btnTable" key={machinePart._id} onClick={() => handleClick(machinePart._id)}>Receipt</button></td>
-                    <td><button className="btnTable" onClick={() => handleClickupdateMachinePart(machinePart._id)}>Update</button></td>
+                    <td><button className="btnSubmit" key={machinePart._id} onClick={() => handleClick(machinePart._id)}>Receipt</button></td>
+                    <td><button className="btnSubmit" onClick={() => handleClickupdateMachinePart(machinePart._id)}>Update</button></td>
                     <td><button className="btnDelete" onClick={() => handleDelete(machinePart._id)}>Delete</button></td>
                   </tr>
               

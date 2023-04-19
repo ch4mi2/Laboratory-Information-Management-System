@@ -29,8 +29,9 @@ const AdminLogin = () =>{
                 onChange={(e) => setPW(e.target.value)}
                 value={pw}  
             />
+            <br/>
 
-<button disabled = {isLoading}>Login</button>
+<button className="btnSubmit" disabled = {isLoading}>Login</button>
         {error && <div className="error">{error}</div>}
 
 
