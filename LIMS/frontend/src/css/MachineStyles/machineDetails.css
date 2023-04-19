@@ -116,17 +116,17 @@ form .button::hover{
     margin-top:10px;
 }
 
-.btnDelete{
+/* .btnDelete{
     outline: none;
     background-color:var(--hoverDelete);
     color:#ffffff;
     border:var(--hoverDelete);
     font-size: 15px;
-    /* font-weight: 400; */
+    font-weight: 400; 
     border-radius: 20px;
     letter-spacing: 1px;
     padding: 5px 10px;
     margin: 5px;
     margin-left:25px;
     margin-top:10px;
-}
+} */

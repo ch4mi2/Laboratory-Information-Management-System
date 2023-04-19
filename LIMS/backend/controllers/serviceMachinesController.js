@@ -29,6 +29,33 @@ const getServiceDate = async (req , res) => {
 const createServiceDates = async (req , res) =>{
     const {machineId, machineName,LastserviceDate, NextServiceDate , TechnicianName , TechTelno , TechnicianPayment} = req.body
 
+    let emptyFields = []
+
+        if(!machineId) {
+            emptyFields.push('machineId')
+        }
+        if(!machineName) {
+            emptyFields.push('machineName')
+        }
+        if(!LastserviceDate) {
+            emptyFields.push('LastserviceDate')
+        }
+        if(!NextServiceDate) {
+            emptyFields.push('NextServiceDate')
+        }
+        if(!TechnicianName) {
+            emptyFields.push('TechnicianName')
+        }
+        if(!TechTelno) {
+            emptyFields.push('TechTelno')
+        }
+        if(!TechnicianPayment) {
+            emptyFields.push('TechnicianPayment')
+        }
+        if(emptyFields.length > 0) {
+            return res.status(400).json({error: 'Please fill in the highlighted fields', emptyFields})
+        } 
+
     //add doc to db
     try {
         const serviceMachine = await ServiceMachines.create({machineId,machineName,LastserviceDate, NextServiceDate , TechnicianName , TechTelno , TechnicianPayment})

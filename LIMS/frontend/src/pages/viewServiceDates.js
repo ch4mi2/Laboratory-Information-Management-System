@@ -69,10 +69,10 @@ return (
                     <td >{service.TechnicianName}</td>
                     <td >{service.TechTelno}</td>
                     <td >{service.TechnicianPayment}</td>
-                    <td><button className="btnTable" >
+                    <td><button className="btnSubmit" >
                         {/* key={machinePart._id} onClick={() => handleClick(machinePart._id)}> */}
                         Receipt</button></td>
-                    <td><button className="btnTable" 
+                    <td><button className="btnSubmit" 
                          onClick={() => handleClickService(service._id)}>
                          Update</button></td>
                   </tr>
