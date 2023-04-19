@@ -1,5 +1,6 @@
 import {  useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Swal from 'sweetalert2';
 
 const StaffForm = () => {
     const [name, setName] = useState('')
@@ -66,6 +67,16 @@ const StaffForm = () => {
             dispatch({type:'LOGIN',payload: json})
 
             setIsLoading(false)
+            Swal.fire(
+                {
+                  title: 'Success',
+                  text: 'Record has been updated',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true  
+              }
+              )
         }
 
 
@@ -87,43 +98,50 @@ const StaffForm = () => {
             <input
                 type="text"
                 onChange={(e) => setNIC(e.target.value)}
-                value={NIC}/><br/>
+                value={NIC}
+                className={emptyFields.includes('NIC') ? 'error' : ""}/><br/>
 
             <label>Employee ID:</label>
             <input
                 type="text"
                 onChange={(e) => setEid(e.target.value)}
-                value={Eid}/><br/>
+                value={Eid}
+                className={emptyFields.includes('Eid') ? 'error' : ""}/><br/>
 
             <label>Contact Num:</label>
             <input
                 type="number"
                 onChange={(e) => setContact(e.target.value)}
-                value={contact}/><br/>
+                value={contact}
+                className={emptyFields.includes('contact') ? 'error' : ""}/><br/>
 
             <label>Position:</label>
             <input
                 type="text"
                 onChange={(e) => setPost(e.target.value)}
-                value={post}/><br/>
+                value={post}
+                className={emptyFields.includes('post') ? 'error' : ""}/><br/>
 
             <label>Email:</label>
             <input
                 type="text"
                 onChange={(e) => setEmail(e.target.value)}
-                value={email}/><br/>
+                value={email}
+                className={emptyFields.includes('email') ? 'error' : ""}/><br/>
 
             <label>Username:</label>
             <input
                 type="text"
                 onChange={(e) => setUser(e.target.value)}
-                value={username}/>  <br/>  
+                value={username}
+                className={emptyFields.includes('username') ? 'error' : ""}/>  <br/>  
 
             <label>Password:</label>
             <input
                 type="password"
                 onChange={(e) => setPW(e.target.value)}
-                value={pw}/><br/>
+                value={pw}
+                className={emptyFields.includes('pw') ? 'error' : ""}/><br/>
 
             
 

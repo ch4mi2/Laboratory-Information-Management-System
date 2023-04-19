@@ -107,7 +107,7 @@ const AllStaff = () =>  {
                          <td>{staff.name}</td>
                         <td>{staff.Eid}</td>
                         <td>{staff.post}</td>
-                        <td><button className="btnDelete" onClick={ () => handleClickDelete(staff._id) }>delete</button></td>
+                        <td><button className="btnDelete" onClick={ () => handleClickDelete(staff._id) }>DELETE</button></td>
                     </tr>
                 ))}
                 </tbody>
