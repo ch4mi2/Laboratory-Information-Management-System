@@ -148,7 +148,7 @@ const loginStaff = async (req,res) => {
     res.status(200).json({username,token,userid})
 
 } catch(error){
-    res.status(400).json({error:error.mesage})
+    res.status(400).json({error:error.message})
 
 }
 
