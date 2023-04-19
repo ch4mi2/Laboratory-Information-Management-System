@@ -41,6 +41,7 @@ const ViewStats = () => {
         fetchTest()
         // setTestCount()
         // console.log(localStorage.getItem('data'));
+        // eslint-disable-next-line
     }, [])
     // const data = localStorage.getItem("data")
     const setTestCount = async(tests) => {

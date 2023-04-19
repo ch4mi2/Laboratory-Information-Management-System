@@ -94,24 +94,24 @@ const PatientDetails = ({ edit, patient }) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-6">
-              <Link
-                style={{ textDecoration: 'none' }}
+              <Link 
+                style={{ textDecoration: 'none',backgroundColor:"white" }}
                 to={'./edit'}
                 state={patient}
               >
-                <button
+                <button style={{backgroundColor:"white"}}
                   id="editProfileButton"
-                  className="btn mt-4 px-4 d-block m-auto"
+                  className=" mt-4 px-4 d-block m-auto"
                 >
                   Edit Account
                 </button>
               </Link>
             </div>
             <div className="col-6">
-              <Link style={{ textDecoration: 'none' }} to={''}>
-                <button
+              <Link style={{ textDecoration: 'none',backgroundColor:"white" }} to={''}>
+                <button style={{backgroundColor:"white"}}
                   id="deleteProfileButton"
-                  className="btn mt-4 px-4 d-block m-auto"
+                  className=" mt-4 px-4 d-block m-auto"
                   onClick={handleDelete}
                 >
                   Delete Account
@@ -131,7 +131,7 @@ const PatientDetails = ({ edit, patient }) => {
                     minHeight: '50px',
                     fontSize: '1rem',
                   }}
-                  className="btnSubmit mt-4 px-4 d-block m-auto"
+                  className="btnConfirm mt-4 px-4 d-block m-auto"
                 >
                   Transaction History
                 </button>
@@ -145,7 +145,7 @@ const PatientDetails = ({ edit, patient }) => {
                     minHeight: '50px',
                     fontSize: '1rem',
                   }}
-                  className="btnSubmit mt-4 px-4 d-block m-auto"
+                  className="btnConfirm mt-4 px-4 d-block m-auto"
                 >
                   Add Bill
                 </button>
