@@ -101,22 +101,22 @@ form .button::hover{
     background: var(--hoverDelete);
 } 
 
-.btnTable{
+/* .btnTable{
     outline: none;
     background-color:var(--orange);
     color:#ffffff;
     border:var(--orange);
     font-size: 15px;
-    /* font-weight: 400; */
+    /* font-weight: 400; 
     border-radius: 20px;
     letter-spacing: 1px;
     padding: 5px 10px;
     margin: 5px;
     margin-left:25px;
     margin-top:10px;
-}
+} 
 
-/* .btnDelete{
+ .btnDelete{
     outline: none;
     background-color:var(--hoverDelete);
     color:#ffffff;

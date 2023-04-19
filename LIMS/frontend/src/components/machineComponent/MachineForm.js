@@ -146,10 +146,11 @@ const MachineForm = () => {
           <div className="input-box">
             <label>Tel No:</label>
             <input
-              type="text"
+              type="tel"
               onChange={(e) => setTelNo(e.target.value)}
               value={TelNo}
               required
+              pattern="[0-9]{10}"
             />
           </div>
           <br/>

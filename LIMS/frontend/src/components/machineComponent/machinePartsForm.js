@@ -355,7 +355,7 @@ const MachinePartsForm = ({machine}) => {
           <div className="input-box">
             <label>Price of machine Part:</label>
             <input
-              type="text"
+              type="number"
               onChange={(e) => setPriceOfMachinePart(e.target.value)}
               value={PriceOfMachinePart}
               required
@@ -373,10 +373,11 @@ const MachinePartsForm = ({machine}) => {
           <div className="input-box">
             <label>Technician's Tel No</label>
             <input
-              type="text"
+              type="tel"
               onChange={(e) => setTechTelno(e.target.value)}
               value={TechTelno}
               required
+              pattern="[0-9]{10}"
             />
           </div>
           <div className="input-box">
