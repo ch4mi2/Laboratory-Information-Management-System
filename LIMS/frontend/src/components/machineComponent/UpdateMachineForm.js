@@ -342,10 +342,11 @@ const UpdateMachine = ({machine}) => {
           <div className="input-box">
             <label>Tel No:</label>
             <input
-              type="text"
+              type="telno"
               onChange={(e) => setTelNo(e.target.value)}
               value={TelNo}
               required
+              pattern="[0-9]{10}"
             />
           </div>
           <div className="Add-button">

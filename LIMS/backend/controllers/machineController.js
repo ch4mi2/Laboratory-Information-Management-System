@@ -51,9 +51,7 @@ const createMachine = async (req , res) => {
         if(!Manufacturer) {
             emptyFields.push('Manufacturer')
         }
-        if(!heading) {
-            emptyFields.push('heading')
-        }
+
         if(!TelNo) {
             emptyFields.push('TelNo')
         }

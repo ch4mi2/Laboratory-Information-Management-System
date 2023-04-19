@@ -87,7 +87,7 @@ const UpdateMachineService = ({machine}) => {
           <div className="input-box">
             <label>Next Service Date:</label>
             <input
-              type="text"
+              type="date"
               onChange={(e) => setNextServiceDate(e.target.value)}
               value={NextServiceDate}
               required
@@ -109,12 +109,13 @@ const UpdateMachineService = ({machine}) => {
               onChange={(e) => setTechTelno(e.target.value)}
               value={TechTelno}
               required
+              pattern="[0-9]{10}"
             />
           </div>
           <div className="input-box">
             <label>Technician's Payment:</label>
             <input
-              type="text"
+              type="number"
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
               required

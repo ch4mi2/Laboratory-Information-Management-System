@@ -136,16 +136,17 @@ const ServiceMachineForm = ({machine}) => {
           <div class="input-box">
             <label>Technician's Tel No</label>
             <input
-              type="text"
+              type="telno"
               onChange={(e) => setTechTelno(e.target.value)}
               value={TechTelno}
               required
+              pattern="[0-9]{10}"
             />
           </div>
           <div class="input-box">
             <label>Technician's Payment:</label>
             <input
-              type="text"
+              type="number"
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
               required
