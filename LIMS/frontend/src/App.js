@@ -163,7 +163,7 @@ function App() {
                   />
                   <Route
                     path="/StaffProfile"
-                    element={<StaffProfile/>}
+                    element={user ? <StaffProfile /> : <Navigate to ="/Welcome"/>}
                   />
                   <Route
                     path="/financialReport"
@@ -179,11 +179,11 @@ function App() {
                   />
                   <Route
                     path="/StaffLogin"
-                    element={!user ? <LoginStaff /> : <Navigate to ="/"/>}
+                    element={!user ? <LoginStaff /> : <Navigate to ="/StaffProfile"/>}
                   />
                   <Route
                     path="/AdminLogin"
-                    element={<LoginAdmin />}
+                    element={!user ? <LoginAdmin /> : <Navigate to ="/AdminProfile"/>}
                   />
                   <Route
                     path="/Welcome"
@@ -191,7 +191,7 @@ function App() {
                   />
                   <Route
                     path="/UpdateProfile"
-                    element={<UpdateProfile/>}
+                    element={<UpdateProfile />}
                   />
 
                 </Routes>
