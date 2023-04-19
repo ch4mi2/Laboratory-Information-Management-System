@@ -111,6 +111,7 @@ const LabInfo = () => {
              type="tel"
              onChange={(e) => setTel2(e.target.value)}
              value={tel2}
+             pattern="[0-9]*"
             />  
             <label>Tel 3</label>
             <input
@@ -118,6 +119,7 @@ const LabInfo = () => {
              type="tel"
              onChange={(e) => setTel3(e.target.value)}
              value={tel3}
+             pattern="[0-9]*"
             /> 
             <label>Email</label>
             <input

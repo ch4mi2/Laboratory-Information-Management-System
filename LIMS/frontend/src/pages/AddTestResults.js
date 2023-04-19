@@ -70,15 +70,15 @@ const TestResultView = () => {
         <tbody>
           {testResult && testResult.result.map((resultObj, index) => (
             <tr  key={index}>
-                <td>{resultObj.category.category}</td>
+                <td>{resultObj.category?.category}</td>
                 <td><input type="text" onChange={(e) => {
                     const updatedResults = [...testResult.result];
                     updatedResults[index].value = e.target.value;
                     setTestResult({ ...testResult, result: updatedResults });
                     }} value={resultObj.value || ''} /></td>
-                <td>{resultObj.category.UOM}</td>
-                {testResult.patient.gender === 'Male' && <td>{resultObj.category.startMRef}{resultObj.category.operatorM}{resultObj.category.endMRef}</td>}
-              {testResult.patient.gender === 'Female' && <td>{resultObj.category.startFRef}{resultObj.category.operatorF}{resultObj.category.endFRef}</td>}
+                <td>{resultObj.category?.UOM}</td>
+                {testResult.patient?.gender === 'Male' && <td>{resultObj.category?.startMRef}{resultObj.category?.operatorM}{resultObj.category?.endMRef}</td>}
+              {testResult.patient?.gender  === 'Female' && <td>{resultObj.category?.startFRef}{resultObj.category?.operatorF}{resultObj.category?.endFRef}</td>}
             </tr>
           ))}
         </tbody>
