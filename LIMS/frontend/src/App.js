@@ -163,7 +163,7 @@ function App() {
                   />
                   <Route
                     path="/StaffProfile"
-                    element={user ? <StaffProfile /> : <Navigate to ="/Welcome"/>}
+                    element={<StaffProfile /> }
                   />
                   <Route
                     path="/financialReport"

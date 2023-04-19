@@ -29,7 +29,7 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
       </a>
       {user && (
       <div className="userdiv">
-        <span>{user.username}                                                                                       </span>
+        <span style={{marginRight:"10px"}}>{user.username}                                                                                     </span>
         <button className="btnDelete" onClick={handleClick}>Log out</button>
       </div>)}
       <div className="userdiv">
