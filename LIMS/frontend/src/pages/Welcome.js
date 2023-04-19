@@ -11,8 +11,8 @@ const Welcome = () => {
                 <br/>
                 <nav>
                     <div >
-                    <a href='/StaffLogin'><button className="btn">StaffLogin</button></a><br/><br/>
-                    <a href='/AdminLogin'><button className="btn">AdminLogin</button></a>
+                    <a href='/StaffLogin'><button className="btn11">StaffLogin</button></a><br/><br/>
+                    <a href='/AdminLogin'><button className="btn11">AdminLogin</button></a>
                     </div>
                 </nav>
             </div>
