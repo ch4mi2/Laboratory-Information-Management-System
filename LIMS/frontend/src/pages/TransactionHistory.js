@@ -78,7 +78,7 @@ const TransactionHistory = () => {
       {bills ? (
         <div className="container">
           <div>
-            <h4>Bills</h4>
+            <h4>Transaction History</h4>
           </div>
 
           <table id="bill-list" className="table" style={{ width: '100%' }}>
