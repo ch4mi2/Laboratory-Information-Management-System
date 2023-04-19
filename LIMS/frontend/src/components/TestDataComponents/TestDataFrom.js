@@ -97,7 +97,8 @@ const TestDataForm = () => {
                     showConfirmButton: true,
                     showCancelButton: true,
                     confirmButtonText: 'Yes',
-                    cancelButtonText:'No'
+                    cancelButtonText:'No',
+                    customClass:'alerts'
                 }).then((result) => {
                     if(!result.isConfirmed) {
                         navigate('/testData');
@@ -112,7 +113,8 @@ const TestDataForm = () => {
                     showConfirmButton: true,
                     showCancelButton: true,
                     confirmButtonText: 'Yes',
-                    cancelButtonText:'No'
+                    cancelButtonText:'No',
+                    customClass:'alerts'
                 }).then((result) => {
                     if(!result.isConfirmed) {
                         navigate('/testData');
