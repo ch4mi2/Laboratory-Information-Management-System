@@ -107,21 +107,21 @@ const  UpdateProfile = () => {
              onChange={(e) => setPost(e.target.value)}
              value={post}
             />
-            <label>Name</label>
+            <label>Contact</label>
             <input
             class="form-control"
              type="text"
              onChange={(e) => setContact(e.target.value)}
              value={contact}
             />
-            <label>Name</label>
+            <label>NIC</label>
             <input
             class="form-control"
              type="text"
              onChange={(e) => setNIC(e.target.value)}
              value={NIC}
             />
-            <label>Name</label>
+            <label>Email</label>
             <input
             class="form-control"
              type="text"

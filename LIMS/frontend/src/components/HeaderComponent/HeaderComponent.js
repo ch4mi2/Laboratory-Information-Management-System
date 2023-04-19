@@ -1,24 +1,27 @@
 
 
-import { Link } from 'react-router-dom';
+// import { Link, Navigate } from 'react-router-dom';
 import {useLogout} from '../../hooks/useLogout'
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const HeaderComponent = ({ logoImgSrc, username }) => {
   const { logout } = useLogout()
   const { user } = useAuthContext()
+  const navigate = useNavigate()
 
   const handleClick = () =>
   {
     logout()
+    navigate("/Welcome")
   }
 
 
 
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light bg-light"
+      className="navbar navbar-expand-lg navbar-light bg-light sticky-top"
       style={{ zIndex: 25555 }}
     >
       <a className="navbar-brand" href="#">
@@ -26,7 +29,7 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
       </a>
       {user && (
       <div className="userdiv">
-        <span>{user.username}                                                                                       </span>
+        <span style={{marginRight:"10px"}}>{user.username}                                                                                     </span>
         <button className="btnDelete" onClick={handleClick}>Log out</button>
       </div>)}
       <div className="userdiv">
