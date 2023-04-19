@@ -60,50 +60,50 @@ input {
  
 
 .btnSubmit {
-  background-color: var(--orange) !important;
-  color: #ffffff !important;
-  border: none !important;
-  width: 100px !important;
-  height: 30px !important;
-  border-radius: 25px !important;
+  background-color: var(--orange);
+  color: #ffffff;
+  border: none;
+  width: 100px;
+  height: 30px;
+  border-radius: 25px;
 }
 
 .btnSubmit:hover {
-  background-color: var(--hoverSubmit) !important;
+  background-color: var(--hoverSubmit);
 }
 
 .btnDelete {
-  background-color: var(--ash) !important;
-  color: #ffffff !important;
-  border: none !important;
-  width: 100px !important;
-  height: 30px !important;
-  border-radius: 25px !important;
+  background-color: var(--ash);
+  color: #ffffff;
+  border: none;
+  width: 100px;
+  height: 30px;
+  border-radius: 25px;
 }
 
 .btnDelete:hover {
-  background-color: var(--hoverDelete) !important;
+  background-color: var(--hoverDelete);
 }
 
 .btnConfirm{
-  border-radius: 25px !important;
-  background-color: var(--orange) !important;
-  color: #ffffff !important;
-  border: none !important;
+  border-radius: 25px;
+  background-color: var(--orange);
+  color: #ffffff;
+  border: none;
 }
 
 .btnConfirm:hover{
-  background-color: var(--hoverSubmit) !important;
+  background-color: var(--hoverSubmit);
 }
 
 .btnCancel{
-  border-radius: 25px !important;
-  background-color: var(--ash) !important;
-  color: #ffffff !important;
-  border: none !important;
+  border-radius: 25px;
+  background-color: var(--ash);
+  color: #ffffff;
+  border: none;
 }
 .btnCancel:hover{
-  background-color: var(--hoverDelete) !important;
+  background-color: var(--hoverDelete);
 }
 
 .dataTables_paginate .paginate_button.active a {
@@ -241,11 +241,12 @@ table.dataTable tbody tr:hover {
   border-radius: 25px;
 }
 
-.btn{
+.btn11{
   background-color: var(--orange);
   color: #ffffff;
   border: none;
-
+  width: 250px;
+  height: 50px;
   border-radius: 25px;
 }
 
