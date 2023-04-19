@@ -88,7 +88,7 @@ const ServiceMachineForm = ({machine}) => {
       <hr />
       <form className="create" onSubmit={handleSubmit}>
         <div class="machinelabels">
-        <div class="input-box">
+        {/* <div class="input-box">
             <label>Machine ID :</label>
             <input
               type="text"
@@ -96,7 +96,7 @@ const ServiceMachineForm = ({machine}) => {
               value={machineId}
               required
             />
-          </div>
+          </div> */}
           <div class="input-box">
             <label>Machine Name :</label>
             <input
@@ -104,6 +104,7 @@ const ServiceMachineForm = ({machine}) => {
               onChange={(e) => setmachineName(e.target.value)}
               value={machineName}
               required
+              disabled
             />
           </div>
           <div class="input-box">

@@ -299,12 +299,13 @@ const MachinePartsForm = ({machine}) => {
       <form className="create" onSubmit={handleSubmit}>
         <div className="machinelabels">
         <div className="input-box">
-            <label>Machine ID :</label>
+            {/* <label>Machine ID :</label> */}
             <input
               type="text"
               onChange={(e) => setMachineId(e.target.value)}
               value={machineId}
               required
+              hidden
             />
           </div>
           <div className="input-box">
@@ -314,6 +315,7 @@ const MachinePartsForm = ({machine}) => {
               onChange={(e) => setmachineName(e.target.value)}
               value={machineName}
               required
+              disabled
             />
           </div>
           <div className="input-box">
