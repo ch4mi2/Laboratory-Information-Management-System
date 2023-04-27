@@ -52,62 +52,57 @@ const FinancialReport = () => {
             <thead>
               <tr>
                 <th scope="col">Description</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Total</th>
+                <th scope="col">Income</th>
+                <th scope="col">Expenses</th>
                 
               </tr>
              
             </thead>
-           <thead>
-            <tr>
-              <th scope="col">income</th>
-              <th></th>
-              <th></th>
-              </tr>
-              
-           </thead>
+           
            <tbody>
             <tr>
                 <td>sales</td>
                 <td>2000</td>
-                <td></td>
+                <td>-</td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
-                <td>2000</td>
+                <td></td>
             </tr>
 
            </tbody>
 
-           <thead>
-            <tr>
-              <th scope="col">expenses</th>
-              <th></th>
-              <th></th>
-              </tr>
-           </thead>
+          
 
            <tbody>
                <tr>
                 <td>inventry</td>
+                <td>-</td>
                 <td>500</td>
-                <td></td>
                 </tr> 
 
                 <tr>
                 <td>machine</td>
+                <td>-</td>
                 <td>500</td>
-                <td></td>
                 </tr>
 
                 <tr>
                 <td></td>
                 <td></td>
-                <td>1000</td>
+                <td></td>
                 </tr>
 
            </tbody>
+
+           <thead>
+              <tr>
+                <th>Total</th>
+                <th>2000</th>
+                <th>1000</th>
+              </tr>
+           </thead>
 
 
 
