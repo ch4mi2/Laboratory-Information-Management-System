@@ -100,11 +100,11 @@ const TestResultPreview = () => {
             <tbody>
           {testResult && testResult.result.map((resultObj, index) => (
             <tr key={index}>
-              <td>{resultObj.category?.category}</td>
-              <td>{resultObj.value}</td>
-              <td>{resultObj.category?.UOM}</td>
-              {testResult.patient?.gender === 'Male' && <td>{resultObj.category?.startMRef}{resultObj.category?.operatorM}{resultObj.category?.endMRef}</td>}
-              {testResult.patient?.gender === 'Female' && <td>{resultObj.category?.startFRef}{resultObj.category?.operatorF}{resultObj.category?.endFRef}</td>}
+              <td>{resultObj.category?.category ?? "deleted"}</td>
+              <td>{resultObj.value ?? "deleted"}</td>
+              <td>{resultObj.category?.UOM ?? "deleted"}</td>
+              {testResult.patient?.gender  === 'Male' && <td>{resultObj.category?.startMRef ?? "deleted"}{resultObj.category?.operatorM ?? "deleted"}{resultObj.category?.endMRef ?? "deleted"}</td>}
+              {testResult.patient?.gender === 'Female' && <td>{resultObj.category?.startFRef ?? "deleted"}{resultObj.category?.operatorF ?? "deleted"}{resultObj.category?.endFRef ?? "deleted"}</td>}
             </tr>
           ))}
             </tbody>
