@@ -52,7 +52,7 @@ import AllStaff from './pages/AllStaff';
 import StaffProfile from './pages/StaffPorfile';
 import UpdateProfile from './pages/UpdateProfile';
 import AdminProfile from './pages/AdminProfile';
-
+import CompletedTestResults from './pages/CompletedTestResults'
 
 function App() {
   const {user} = useAuthContext()
@@ -72,7 +72,7 @@ function App() {
         username={''}
       />
       
-        <div className="container-fluid">
+        <div className="container-fluid mt-5">
           <div className="row">
             <div className="col-3 col-sm-3 col-md-2 col-lg-2">
               <SideNavBar />
@@ -192,6 +192,10 @@ function App() {
                   <Route
                     path="/UpdateProfile"
                     element={<UpdateProfile />}
+                  />
+                  <Route
+                    path="/completedTests"
+                    element={<CompletedTestResults />}
                   />
 
                 </Routes>
