@@ -53,6 +53,7 @@ import StaffProfile from './pages/StaffPorfile';
 import UpdateProfile from './pages/UpdateProfile';
 import AdminProfile from './pages/AdminProfile';
 import CompletedTestResults from './pages/CompletedTestResults'
+import Dashboard from './pages/Dashboard';
 
 function App() {
   const {user} = useAuthContext()
@@ -196,6 +197,14 @@ function App() {
                   <Route
                     path="/completedTests"
                     element={<CompletedTestResults />}
+                  />
+                  <Route
+                    path="/completedTests"
+                    element={<CompletedTestResults />}
+                  />
+                  <Route
+                    path="/dashboard"
+                    element={<Dashboard/>}
                   />
 
                 </Routes>
