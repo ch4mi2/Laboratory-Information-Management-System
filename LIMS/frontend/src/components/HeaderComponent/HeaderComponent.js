@@ -21,7 +21,7 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
 
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light bg-light sticky-top"
+      className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
       style={{ zIndex: 25555 }}
     >
       <a className="navbar-brand" href="#">
