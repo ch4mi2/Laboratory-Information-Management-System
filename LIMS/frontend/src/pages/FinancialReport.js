@@ -65,11 +65,7 @@ const FinancialReport = () => {
                 <td>2000</td>
                 <td>-</td>
             </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            
 
            </tbody>
 
@@ -88,11 +84,7 @@ const FinancialReport = () => {
                 <td>500</td>
                 </tr>
 
-                <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                </tr>
+                
 
            </tbody>
 
