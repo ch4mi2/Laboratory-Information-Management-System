@@ -127,7 +127,7 @@ const updateTestResult = async (req, res) => {
 
   const testResult = await TestResult.findOneAndUpdate({_id: id}, {
     ...req.body // spreading the object
-  })
+  },{ new: true })
 
   if (!testResult) {
     return res.status(400).json({error: 'No such testResult'})

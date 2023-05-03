@@ -34,7 +34,8 @@ const TestResultView = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          result: updatedResult
+          result: updatedResult,
+          status: 'completed'
         })
       });
       if (response.ok) {
@@ -44,6 +45,8 @@ const TestResultView = () => {
       console.log(error);
     }
   }
+
+  
 
   return (
     <div>
@@ -71,11 +74,11 @@ const TestResultView = () => {
           {testResult && testResult.result.map((resultObj, index) => (
             <tr  key={index}>
                 <td>{resultObj.category?.category}</td>
-                <td><input type="text" onChange={(e) => {
+                <td><input type="number" onChange={(e) => {
                     const updatedResults = [...testResult.result];
                     updatedResults[index].value = e.target.value;
                     setTestResult({ ...testResult, result: updatedResults });
-                    }} value={resultObj.value || ''} /></td>
+                    }} value={resultObj.value || ''} required/></td>
                 <td>{resultObj.category?.UOM}</td>
                 {testResult.patient?.gender === 'Male' && <td>{resultObj.category?.startMRef}{resultObj.category?.operatorM}{resultObj.category?.endMRef}</td>}
               {testResult.patient?.gender  === 'Female' && <td>{resultObj.category?.startFRef}{resultObj.category?.operatorF}{resultObj.category?.endFRef}</td>}
@@ -83,8 +86,7 @@ const TestResultView = () => {
           ))}
         </tbody>
       </table>
-      <button type="submit">Save</button>
-      <button type="submit">Sumbit</button>
+      <button className="btnSubmit" style={{marginRight:"10px"}} type="submit">Submit</button>
     </form>
     </div>
   )

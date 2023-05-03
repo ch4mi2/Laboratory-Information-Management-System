@@ -82,6 +82,9 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="pendingTests">
               <NavText>Pending</NavText>
             </NavItem>
+            <NavItem className="subNav" eventKey="completedTests">
+              <NavText>Completed</NavText>
+            </NavItem>
           </NavItem>
 
           <NavItem eventKey="testData">
