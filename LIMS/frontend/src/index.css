@@ -66,6 +66,7 @@ input {
   width: 100px;
   height: 30px;
   border-radius: 25px;
+  font-weight: bold;
 }
 
 .btnSubmit:hover {
@@ -79,6 +80,7 @@ input {
   width: 100px;
   height: 30px;
   border-radius: 25px;
+  font-weight: bold;
 }
 
 .btnDelete:hover {
@@ -90,6 +92,7 @@ input {
   background-color: var(--orange);
   color: #ffffff;
   border: none;
+  font-weight: bold;
 }
 
 .btnConfirm:hover{
@@ -101,6 +104,7 @@ input {
   background-color: var(--ash);
   color: #ffffff;
   border: none;
+  font-weight: bold;
 }
 .btnCancel:hover{
   background-color: var(--hoverDelete);
