@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const CustomerLeaderBoard = () => {
+const CustomerLeaderBoard = ({ top }) => {
   const [customers, setCustomers] = useState([]);
   const navigate = useNavigate();
 
@@ -40,6 +40,10 @@ const CustomerLeaderBoard = () => {
               }
             }
           }
+          if (top) {
+            A.slice(0, top);
+          }
+
           setCustomers(A);
         };
 
