@@ -92,12 +92,26 @@ const CreatePatientForm = () => {
       isModifierKey;
     if (!isAllowed) {
       e.preventDefault();
-    } else {
-      console.log(value.length);
-      setNIC(value);
     }
   };
 
+  const handleTpNoValidation = (e) => {
+    const value = e.target.value;
+    const key = e.key;
+    const isNumeric = /^\d$/.test(key);
+    const isModifierKey = [
+      'Backspace',
+      'End',
+      'Home',
+      'ArrowLeft',
+      'ArrowRight',
+    ].includes(key);
+
+    const isAllowed = (value.length < 10 && isNumeric) || isModifierKey;
+    if (!isAllowed) {
+      e.preventDefault();
+    }
+  };
   return (
     <div className="createPatientFormContainer">
       <div className="row my-3">
@@ -159,6 +173,7 @@ const CreatePatientForm = () => {
             value={tpNo}
             className={emptyFields.includes('tpNo') ? 'error' : ''}
             pattern="[0-9]{10}"
+            onKeyDown={(e) => handleTpNoValidation(e)}
           />
 
           <label>Age :</label>
