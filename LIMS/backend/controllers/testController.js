@@ -270,31 +270,69 @@ const deleteCategory = async(req,res) => {
 
 const getTestCount = async(req,res) => {
     const { id } = req.params
+    const Array = id.split(" ")
+    const newID = Array[0]
+    const Month = Number(Array[1])
 
-    if(!mongoose.Types.ObjectId.isValid(id)) {
+    if(!mongoose.Types.ObjectId.isValid(newID)) {
         return res.status(404).json({error: "Not a vlid object ID"})
     }
 
     try {
-        const test = await Test.findById(id)
+        const test = await Test.findById(newID)
 
-        if( test.outsourced === "No" ) {
-            var testCount = await Bill.aggregate([
+        if( Month !== 0 ) {
+            if( test.outsourced === "No" ) {
+                var testCount = await Bill.aggregate([
+                {$project:{
+                    month: {$month: '$createdAt'},
+                    services: 1
+                }},
+                {$match:{
+                    month: Month
+                }},
                 {$unwind: "$services"},
                 {$match: {
-                    'services': test.testName
-                }},
+                    'services': test.testName,}
+                },
                 { $count: 'Count' }
             ])
+            } else {
+                var testCount = await Bill.aggregate([
+                    {$project:{
+                        month: {$month: '$createdAt'},
+                        outsourceServices: 1
+                    }},
+                    {$match:{
+                        month: Month
+                    }},
+                    {$unwind: "$outsourceServices"},
+                    {$match: {
+                        'outsourceServices': test.testName,
+                    }},
+                    { $count: 'Count' }
+                ])
+            }
         } else {
-            var testCount = await Bill.aggregate([
-                {$unwind: "$outsourceServices"},
+            if( test.outsourced === "No" ) {
+                var testCount = await Bill.aggregate([
+                {$unwind: "$services"},
                 {$match: {
-                    'outsourceServices': test.testName
-                }},
+                    'services': test.testName,}
+                },
                 { $count: 'Count' }
             ])
+            } else {
+                var testCount = await Bill.aggregate([
+                    {$unwind: "$outsourceServices"},
+                    {$match: {
+                        'outsourceServices': test.testName,
+                    }},
+                    { $count: 'Count' }
+                ])
+            }
         }
+        
         if( testCount.length > 0 ) {
             res.status(200).json(testCount[0].Count)
         } else {

@@ -7,7 +7,9 @@ import Swal from 'sweetalert2';
 
 
 const ViewStats = () => {
-    const [data,setData] = useState(null)    
+    const [data,setData] = useState(null)
+    const [tests, setTests] = useState(null)  
+    const [month, setMonth] = useState("0")
     const [isLoaded,setIsLoaded] = useState(false)
 
     useEffect(() => {
@@ -17,7 +19,7 @@ const ViewStats = () => {
                 showConfirmButton: false,
                 allowEscapeKey: false,
                 allowOutsideClick: false,
-                timer: 2500 ,
+                timer: 3000 ,
             })
             Swal.showLoading();
         }
@@ -28,9 +30,9 @@ const ViewStats = () => {
 
             if( response.ok ) {
                 const tests = await json;
-                setTestCount(tests);
-                // tests = await json
-                // console.log(tests);
+                setTests(tests)
+                setTestCount(tests)
+                
             } else {
                 console.log("Error");
             }
@@ -39,11 +41,9 @@ const ViewStats = () => {
 
         
         fetchTest()
-        // setTestCount()
-        // console.log(localStorage.getItem('data'));
         // eslint-disable-next-line
     }, [])
-    // const data = localStorage.getItem("data")
+
     const setTestCount = async(tests) => {
         
         var testCount = []
@@ -51,7 +51,7 @@ const ViewStats = () => {
         if( tests !== null && testCount.length <= 0) {
             tests.map(async(test) => {
                 // console.log(test._id);
-                var count = await(await fetch('/api/tests/count/' + test._id)).json()
+                var count = await(await fetch('/api/tests/count/' + test._id + " " + month)).json()
                 testCount.push({ arg: test.testName, val: count })
             })
             
@@ -61,34 +61,87 @@ const ViewStats = () => {
                 testCount = testCount.sort((t1, t2) => (t1.val < t2.val) ? 1 : (t1.val > t2.val) ? -1 : 0)
                 // console.log(testCount)
                 setData(testCount) 
-            },2000)
-            // setData(testCount)
-            setIsLoaded(true)
+                setIsLoaded(true)
+            },3000)
         } 
     }
 
-    // const handleClick = () => {
-    //     setTimeout(() => {
-    //         setData([data[0]]) 
+    const getMonthData = async(month) => {
+        Swal.fire({
+            title: 'Fetching Test',
+            showConfirmButton: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            timer: 3000 ,
+        })
+        Swal.showLoading();
 
-    //     },1000)
-    // }
+        var testCount = []
+
+        tests.map(async(test) => {
+            // console.log(test._id);
+            var count = await(await fetch('/api/tests/count/' + test._id + " "+ month)).json()
+            console.log(count);
+            testCount.push({ arg: test.testName, val: count })
+        })
+
+        setTimeout(() => {
+            testCount = testCount.sort((t1, t2) => (t1.val < t2.val) ? 1 : (t1.val > t2.val) ? -1 : 0)
+            setData(testCount) 
+        },3000)
+
+        
+    }
 
 
-    // console.log(data)
-        // console.log(data);
         return(
             <div>
                 {/* <button onClick={() => handleClick()}>Test</button> */}
                 {/* <h4>Heading</h4> */}
 
                 {isLoaded ?
-                
                 <div id="stat" className="dx-swatch-dark">
                     {/* {console.log(data)} */}
                     {data && <TestCountChart data = {data} />}
-                </div>:<div></div>}
-
+                </div>:
+                <div>Loading</div>
+            // <div>
+            //     {
+            //         Swal.fire({
+            //             title: 'Fetching Test',
+            //             showConfirmButton: false,
+            //             // allowEscapeKey: false,
+            //             allowOutsideClick: false,
+            //             // timer: 2500 ,
+            //         })
+            //     }
+            // </div>
+            }
+            <div>
+            <select 
+                type = "text"
+                onChange={(e) => {
+                    setMonth(e.target.value)
+                    getMonthData(e.target.value)}}
+                value={month}
+                // className={}
+                
+            >
+                <option value="0">All time</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            </div>
             </div>
         )
     } 
