@@ -59,6 +59,9 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="view-bills">
               <NavText>View all Bills</NavText>
             </NavItem>
+            <NavItem className="subNav" eventKey="customer-leaderboard">
+              <NavText>Customer Leaderboard</NavText>
+            </NavItem>
           </NavItem>
 
           <NavItem eventKey="pendingAccession">
