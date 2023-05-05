@@ -295,7 +295,9 @@ const Bill = ({ patient }) => {
         <div className="col-6 col-lg-12 mx-auto d-flex justify-content-end">
           <button
             className={
-              selectedVal.length > 0 && referredDoctor.trim().length !== 0
+              selectedVal.length > 0 &&
+              referredDoctor.length > 0 &&
+              referredDoctor.trim().length !== 0
                 ? 'btnSubmit mx-2'
                 : 'btnSubmit-disabled mx-2'
             }

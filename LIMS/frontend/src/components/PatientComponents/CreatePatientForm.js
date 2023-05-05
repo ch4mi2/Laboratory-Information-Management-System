@@ -176,7 +176,7 @@ const CreatePatientForm = () => {
             onKeyDown={(e) => handleTpNoValidation(e)}
           />
 
-          <label>Age :</label>
+          <label>Age (Years):</label>
           <input
             required
             type="number"
