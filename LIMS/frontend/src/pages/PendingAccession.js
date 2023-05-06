@@ -246,7 +246,7 @@ const PendingAccession = () => {
           {samples && samples.map((sample ) => (
             <tr key={sample._id} data-id={sample._id}>
               <td>{moment(sample.createdAt).format('DD-MM-YYYY h:mm a') ?? "Record not found"}</td>
-              <td>{sample.sampleID}</td>
+              <td>{sample.sampleID ?? "Record not found"}</td>
               <td>{sample.patient?.firstName ?? "Record not found"}</td>
               <td>{sample.test?.testName ?? "Record not found"}</td>
               <td>{sample.test?.specimen ?? "Record not found"}</td>

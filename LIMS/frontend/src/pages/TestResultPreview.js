@@ -51,9 +51,9 @@ const TestResultPreview = () => {
             <img src={logo} alt="logo" />
           </div>
           <div className="reportContact">
-            <p className="info">Address : {labInfo?.address ?? 'null'}</p>
-            <p className="info">Tel: {labInfo?.tel1 ?? 'null'} | {labInfo?.tel2 ?? 'null'} | {labInfo?.tel3 ?? 'null'}</p>
-            <p className="info">Email: {labInfo?.email ?? 'null'}</p>
+            <p className="info">Address : {labInfo?.address ?? "Record not found"}</p>
+            <p className="info">Tel: {labInfo?.tel1 ?? "Record not found"} | {labInfo?.tel2 ?? "Record not found"} | {labInfo?.tel3 ?? "Record not found"}</p>
+            <p className="info">Email: {labInfo?.email ?? "Record not found"}</p>
           </div>
         </div>
         <div className="reporthr">
@@ -69,20 +69,20 @@ const TestResultPreview = () => {
               
               <div style={{display:"flex" , gap: '10px'}}>
                 
-                  <p className="info">Patient Name : {testResult.patient?.firstName ?? "deleted"}</p>
-                  <p className="info">{testResult.patient?.lastName ?? "deleted"}</p>   
+                  <p className="info">Patient Name : {testResult.patient?.firstName ?? "Record not found"}</p>
+                  <p className="info">{testResult.patient?.lastName ?? "Record not found"}</p>   
                 
               </div>
               <div >
-                  <p className="info">Sex : {testResult.patient?.gender ?? "deleted"}</p>
-                  <p className="info">Age : {testResult.patient?.age?? "deleted"}</p>
-                  <p className="info">Referred By : {testResult.bill?.referredDoctor ?? "deleted"}</p>
-                  <p className="info">Date: {moment().format('DD-MM-YYYY')}</p>
+                  <p className="info">Sex : {testResult.patient?.gender ?? "Record not found"}</p>
+                  <p className="info">Age : {testResult.patient?.age ?? "Record not found"}</p>
+                  <p className="info">Referred By : {testResult.bill?.referredDoctor ?? "Record not found"}</p>
+                  <p className="info">Date: {moment().format('DD-MM-YYYY') ?? "Record not found"}</p>
                   </div>
                   <hr />
                   <div style={{display:"flex" , gap: '10px'}}>
-                  <h6 className="info">{testResult.test?.testName ?? "deleted"}</h6>
-                  <h6 className="info">Sample Id : {testResult.sample?.sampleID ?? "deleted"}</h6>
+                  <h6 className="info">{testResult.test?.testName ?? "Record not found"}</h6>
+                  <h6 className="info">Sample Id : {testResult.sample?.sampleID ?? "Record not found"}</h6>
                   </div>
             </div>
             )}
@@ -101,18 +101,18 @@ const TestResultPreview = () => {
             <tbody>
           {testResult && testResult.result.map((resultObj, index) => (
             <tr key={index}>
-              <td>{resultObj.category?.category ?? "deleted"}</td>
-              <td>{resultObj.value ?? "deleted"}</td>
-              <td>{resultObj.category?.UOM ?? "deleted"}</td>
-              {testResult.patient?.gender  === 'Male' && <td>{resultObj.category?.startMRef ?? "deleted"}{resultObj.category?.operatorM ?? "deleted"}{resultObj.category?.endMRef ?? "deleted"}</td>}
-              {testResult.patient?.gender === 'Female' && <td>{resultObj.category?.startFRef ?? "deleted"}{resultObj.category?.operatorF ?? "deleted"}{resultObj.category?.endFRef ?? "deleted"}</td>}
+              <td>{resultObj.category?.category ?? "Record not found"}</td>
+              <td>{resultObj.value ?? "Record not found"}</td>
+              <td>{resultObj.category?.UOM ?? "Record not found"}</td>
+              {testResult.patient?.gender  === 'Male' && <td>{resultObj.category?.startMRef ?? "Record not found"}{resultObj.category?.operatorM ?? "Record not found"}{resultObj.category?.endMRef ?? "Record not found"}</td>}
+              {testResult.patient?.gender === 'Female' && <td>{resultObj.category?.startFRef ?? "Record not found"}{resultObj.category?.operatorF ?? "Record not found"}{resultObj.category?.endFRef ?? "Record not found"}</td>}
             </tr>
           ))}
             </tbody>
           </table>
           </div>
           <div>
-            <p>.................</p>
+            <p>........................</p>
             <p>Signature</p>
           </div>
         </div>

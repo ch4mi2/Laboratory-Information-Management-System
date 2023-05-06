@@ -66,7 +66,7 @@ const CompletedTestResults = () => {
             testResults.map((testResult) => (
               <tr key={testResult._id} data-status={testResult.sample?.status}>
                 <td>{moment(testResult.createdAt).format('DD-MM-YYYY h:mm a') ?? "Record not found"}</td>
-                <td>{testResult.patient?.firstName ?? "Record not found"}{testResult.patient?.lastName}</td>
+                <td>{testResult.patient?.firstName ?? "Record not found"}{testResult.patient?.lastName ?? "Record not found"}</td>
                 <td>{testResult.test?.testName ?? "Record not found"}</td>
                 <td>{testResult.bill?.referredDoctor ?? "Record not found"}</td>
                 <td>{testResult.sample?.sampleID ?? "Record not found"}</td>

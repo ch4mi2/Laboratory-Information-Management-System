@@ -74,7 +74,7 @@ const PendingTestResults = () => {
                 <td>{testResult.test?.testName ?? "Record not found"}</td>
                 <td>{testResult.bill?.referredDoctor ?? "Record not found"}</td>
                 <td>{testResult.sample?.sampleID ?? "Record not found"}</td>
-                <td>{testResult.sample?.status}</td>
+                <td>{testResult.sample?.status ?? "Record not found"}</td>
                 <td>
                   <button 
                     className='btnSubmit' 
