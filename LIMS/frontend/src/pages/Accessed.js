@@ -31,7 +31,7 @@ const Accessed = () => {
   useEffect(() => {
     $(function() {
       $('#example').DataTable({
-        order: [[4,'desc']],
+        order: [[0,'desc']],
         "bDestroy": true
       });
     });
@@ -140,12 +140,12 @@ const Accessed = () => {
           <table id="example" className="table" style={{ width: '100%' }}>
             <thead>
               <tr>
+                <th>Collected At</th>
+                <th>Created At</th>
                 <th>Sample Id</th>
                 <th>Patient</th>
                 <th>Test</th>
                 <th>Specimen</th>
-                <th>Billing Date</th>
-                <th>Collection Time</th>
                 <th>Barcode</th>
                 <th>Delete</th>
               </tr>
@@ -153,12 +153,12 @@ const Accessed = () => {
             <tbody>
               {samples && samples.map((sample) => (
                 <tr key={sample._id} data-id={sample._id}>
+                  <td>{moment(sample.collectionTime).format('DD-MM-YYYY h:mm a')}</td>
+                  <td>{moment(sample.createdAt).format('DD-MM-YYYY h:mm a')}</td>
                   <td>{sample.sampleID}</td>
                   <td>{sample.patient?.firstName ?? "Record not found"}</td>
                   <td>{sample.test?.testName ?? "Record not found"}</td>
                   <td>{sample.test?.specimen ?? "Record not found"}</td>
-                  <td>{moment(sample.createdAt).format('DD-MM-YYYY HH:mm a')}</td>
-                  <td>{moment(sample.collectionTime).format('DD-MM-YYYY HH:mm a')}</td>
                   <td>
                     <button 
                       className="btnSubmit" 

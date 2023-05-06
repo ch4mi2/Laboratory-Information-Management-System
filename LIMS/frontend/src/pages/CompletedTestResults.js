@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
+import moment from 'moment';
 
 const CompletedTestResults = () => {
   const [testResults, setTestResults] = useState(null);
@@ -18,7 +19,10 @@ const CompletedTestResults = () => {
         setTestResults(json);
 
         $(function() {
-          $('#example').DataTable();
+          $('#example').DataTable({
+            order: [[0,'desc']],
+            bDestroy: true,
+          });
         });
       }
       } catch (error) {
@@ -49,21 +53,19 @@ const CompletedTestResults = () => {
       <table id="example" className="table" style={{ width: '100%' }}>
         <thead>
           <tr>
-            
+            <th>Created At</th>
             <th>Patient</th>
             <th>Test</th>
             <th>Referred Doctor</th>
             <th>Sample Id</th>
-            
             <th></th>
-            
           </tr>
         </thead>
         <tbody>
           {testResults &&
             testResults.map((testResult) => (
               <tr key={testResult._id} data-status={testResult.sample?.status}>
-                
+                <td>{moment(testResult.createdAt).format('DD-MM-YYYY h:mm a') ?? "Record not found"}</td>
                 <td>{testResult.patient?.firstName ?? "Record not found"}{testResult.patient?.lastName}</td>
                 <td>{testResult.test?.testName ?? "Record not found"}</td>
                 <td></td>

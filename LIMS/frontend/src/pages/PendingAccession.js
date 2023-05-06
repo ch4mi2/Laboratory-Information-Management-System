@@ -15,7 +15,7 @@ const initilizeDataTable = () => {
     }
     // Initialize a new DataTable with options
     var table = $('#example').DataTable({
-      order: [[0,'asc']],
+      order: [[0,'desc']],
       buttons: [
         {
           extend: 'copy',
@@ -232,7 +232,7 @@ const PendingAccession = () => {
       <table id="example" className="table" style={{ width: '100%' }}>
         <thead>
           <tr>
-            <th>Billing Date</th>
+            <th>Created At</th>
             <th>Sample Id</th>
             <th>Patient</th>
             <th>Test</th>
