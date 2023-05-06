@@ -89,17 +89,6 @@ const PendingTestResults = () => {
               </tr>
             ))}
         </tbody>
-        <tfoot>     
-          <tr>
-            <th>Patient</th>
-            <th>Test</th>
-            <th>Referred Doctor</th>
-            <th>Sample Id</th>
-            <th>Sample Status</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </tfoot>
       </table>
     </div>               
   );

@@ -31,9 +31,7 @@ const CompletedTestResults = () => {
     fetchTestResults();
   }, []);
 
-  const handleAddClick = (id) => {
-      navigate(`/addTestResults/${id}`)
-  }
+  
 
   if (isLoading) {
     return <div>Loading...</div>; // Render a loading text if loading state is true
@@ -56,9 +54,9 @@ const CompletedTestResults = () => {
             <th>Test</th>
             <th>Referred Doctor</th>
             <th>Sample Id</th>
-            <th>Sample Status</th>
+            
             <th></th>
-            <th></th>
+            
           </tr>
         </thead>
         <tbody>
@@ -70,17 +68,6 @@ const CompletedTestResults = () => {
                 <td>{testResult.test?.testName ?? "Record not found"}</td>
                 <td></td>
                 <td>{testResult.sample?.sampleID ?? "Record not found"}</td>
-                <td>{testResult.sample?.status}</td>
-                <td>
-                  <button 
-                    className='btnSubmit' 
-                    onClick={() => handleAddClick(testResult._id)}
-                    disabled={testResult.sample?.status === "pending"}
-                    style={{backgroundColor: testResult.sample?.status === "pending" ? "#aaa" : ""}}
-                  >
-                    Add Results
-                  </button>
-                </td>
                 <td>
                 <button className='btnSubmit' onClick={() => handlePreviewClick((testResult._id))}>
                   Preview
@@ -89,17 +76,6 @@ const CompletedTestResults = () => {
               </tr>
             ))}
         </tbody>
-        <tfoot>     
-          <tr>
-            <th>Patient</th>
-            <th>Test</th>
-            <th>Referred Doctor</th>
-            <th>Sample Id</th>
-            <th>Sample Status</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </tfoot>
       </table>
     </div>               
   );
