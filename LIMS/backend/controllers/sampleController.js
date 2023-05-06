@@ -129,7 +129,7 @@ const deleteSample = async (req, res) => {
     //property matches the value of id 
 
     if(!sample) {
-        return res.status(400).json({error: 'No such workout'})
+        return res.status(400).json({error: 'No such sample'})
       }
     
       res.status(200).json(sample)

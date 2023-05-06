@@ -135,6 +135,45 @@ const updateTestResult = async (req, res) => {
 
   res.status(200).json(testResult)
 }  
+
+//delete a testresult
+const deleteTestResult = async (req, res) => {
+  const{ id } = req.params
+
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({error: 'No such testResult'})
+    }
+
+  const testResult = await TestResult.findOneAndDelete({_id: id}) 
+  //explicitly telling Mongoose to search for a document where the _id 
+  //property matches the value of id 
+
+  if(!testResult) {
+      return res.status(400).json({error: 'No such testResult'})
+    }
+  
+    res.status(200).json(testResult)
+}
+
+//delete a testresult with sampleid
+const deleteTestResultWithSample = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid sample ID' });
+  }
+
+  try {
+    const testResult = await TestResult.findOneAndDelete({ sample: id });
+    if (!testResult) {
+      return res.status(404).json({ error: 'TestResult not found' });
+    }
+    return res.status(200).json(testResult);
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
   
     
 module.exports = {
@@ -143,5 +182,7 @@ module.exports = {
     getPendingTestResults,
     getCompletedTestResults,
     getTestResult,
-    updateTestResult
+    updateTestResult,
+    deleteTestResult,
+    deleteTestResultWithSample
 }

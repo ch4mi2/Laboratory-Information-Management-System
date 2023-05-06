@@ -78,7 +78,7 @@ const PendingTestResults = () => {
                     disabled={testResult.sample?.status === "pending"}
                     style={{backgroundColor: testResult.sample?.status === "pending" ? "#aaa" : ""}}
                   >
-                    Add Results
+                    Add
                   </button>
                 </td>
                 <td>

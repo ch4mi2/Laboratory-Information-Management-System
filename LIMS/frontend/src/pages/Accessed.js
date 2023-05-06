@@ -1,13 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
-import formatDate from '../UtillFuntions/formatDate';
 import JsBarcode from 'jsbarcode';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import moment from 'moment';
-import * as FaIcons from 'react-icons/fa';
-import { FaTrash } from 'react-icons/fa';
+
 
 const Accessed = () => {
   const { samples, dispatch } = useSampleContext();
@@ -82,36 +80,46 @@ const Accessed = () => {
 
   const handleDeleteClick = async (id) => {
     const confirmed = await Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Are you sure you want to delete?',
+      text: "Test record corresponding to this sample will be deleted",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
-      customClass:'alerts'
+      customClass: 'alerts'
     });
   
     if (confirmed.isConfirmed) {
-      const response = await fetch(`/api/samples/${id}`, {
-        method: "DELETE",
-      });
-      const json = await response.json();
+      try {
+        const [sampleResponse, testResultResponse] = await Promise.all([
+          fetch(`/api/samples/${id}`, { method: 'DELETE' }),
+          fetch(`/api/testResult/all/${id}`, { method: 'DELETE' })
+        ]);
   
-      if (response.ok) {
-        const table = $('#example').DataTable();
-        const row = table.rows(`[data-id ="${id}"]`);
-        row.remove().draw();
-
-        Swal.fire(
-          {
+        const sampleJson = await sampleResponse.json();
+        const testResultJson = await testResultResponse.json();
+  
+        if (sampleResponse.ok && testResultResponse.ok) {
+          const table = $('#example').DataTable();
+          const row = table.rows(`[data-id ="${id}"]`);
+          row.remove().draw();
+  
+          Swal.fire({
             title: 'Success',
-            text: 'Record has been deleted',
+            text: 'Records has been deleted',
             icon: 'success',
             showConfirmButton: false,
             timer: 2000,
             timerProgressBar: true
-            
+          });
         }
-        )
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Something went wrong',
+          icon: 'error',
+          showConfirmButton: true
+        });
       }
     }
   };
