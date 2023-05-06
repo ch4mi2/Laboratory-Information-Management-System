@@ -8,6 +8,10 @@ body {
   background-color: var(--background);
 }
 
+p{
+  font-size: 18px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -21,6 +25,7 @@ form {
   background-color: var(--contentBackground);
   padding: 20px;
   border-radius: 25px;
+  font-size: 18px;
 }
 
 input {
@@ -67,6 +72,7 @@ input {
   height: 30px;
   border-radius: 25px;
   font-weight: bold;
+  font-size: 18px;
 }
 
 .btnSubmit:hover {
@@ -81,6 +87,7 @@ input {
   height: 30px;
   border-radius: 25px;
   font-weight: bold;
+  font-size: 18px;
 }
 
 .btnDelete:hover {
@@ -93,6 +100,7 @@ input {
   color: #ffffff;
   border: none;
   font-weight: bold;
+  font-size: 18px;
 }
 
 .btnConfirm:hover{
@@ -105,6 +113,7 @@ input {
   color: #ffffff;
   border: none;
   font-weight: bold;
+  font-size: 18px;
 }
 .btnCancel:hover{
   background-color: var(--hoverDelete);
@@ -270,3 +279,8 @@ table {
   height: 50px;
   border-radius: 25px;
 }
+
+.side-nav {
+  font-size: 20px;
+}
+
