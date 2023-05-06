@@ -28,9 +28,10 @@ function SideNavBar() {
           navigate('/' + selected);
         }}
         id="sideNav"
+        class="side-nav"
       >
         <SideNav.Toggle />
-        <SideNav.Nav defaultSelected={current}>
+        <SideNav.Nav defaultSelected="dashboard">
           <NavItem eventKey="dashboard" className="navItems">
             <NavIcon>
               <AiIcons.AiOutlineHome size={30} />
