@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import ReactToPrint from 'react-to-print';
 import logo from '../assets/common/mediLineLogo.webp';
 import '../css/TestResultStyles/testResultPreview.css'
+import moment from 'moment';
 
 const TestResultPreview = () => {
   const componentRef = useRef();
@@ -75,8 +76,8 @@ const TestResultPreview = () => {
               <div >
                   <p className="info">Sex : {testResult.patient?.gender ?? "deleted"}</p>
                   <p className="info">Age : {testResult.patient?.age?? "deleted"}</p>
-                  <p className="info">Referred By : {testResult.patient?.age?? "deleted"}</p>
-                  <p className="info">Date : </p>
+                  <p className="info">Referred By : {testResult.bill?.referredDoctor ?? "deleted"}</p>
+                  <p className="info">Date: {moment().format('DD-MM-YYYY')}</p>
                   </div>
                   <hr />
                   <div style={{display:"flex" , gap: '10px'}}>

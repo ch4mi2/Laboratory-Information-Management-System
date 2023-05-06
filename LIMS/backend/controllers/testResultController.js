@@ -9,6 +9,7 @@ getPendingTestResults = async (req,res) => {
             .populate('patient')
             .populate('test')
             .populate('sample')
+            .populate('bill')
             .populate('result.category')
             .sort({createdAt: -1})
             .exec();
@@ -26,6 +27,7 @@ getCompletedTestResults = async (req,res) => {
             .populate('patient')
             .populate('test')
             .populate('sample')
+            .populate('bill')
             .populate('result.category')
             .sort({createdAt: -1})
             .exec();
@@ -49,6 +51,7 @@ const getTestResult = async (req, res) => {
   .populate('patient')
   .populate('test')
   .populate('sample')
+  .populate('bill')
   .populate('result.category')
   .sort({createdAt: -1})
   .exec();
@@ -63,12 +66,13 @@ const getTestResult = async (req, res) => {
 //create a new test result through api call
 const createTestResult = async (req, res) => {
     try {
-      const { patientId, testId, sampleId} = req.body;
+      const { patientId, testId, sampleId, billId} = req.body;
   
       const testResult = await TestResult.create({
         patient: patientId,
         test: testId,
         sample: sampleId,
+        bill: billId,
         result: []
       });
       
@@ -90,12 +94,13 @@ const createTestResult = async (req, res) => {
   };
   
 //create test result through parameters
-const createTestResultParams = async (patientId, testId, sampleId) => {
+const createTestResultParams = async (patientId, testId, sampleId, billId) => {
   try {
     const testResult = new TestResult({
       patient: patientId,
       test: testId,
       sample: sampleId,
+      bill: billId,
       result: [],
     });
 

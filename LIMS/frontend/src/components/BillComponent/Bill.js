@@ -207,20 +207,20 @@ const Bill = ({ patient }) => {
         timer: 2000,
       });
 
-      createSample(patient._id, billedTests);
+      createSample(patient._id, billedTests, json._id );
     }
     navigate('./print-bill', { state: { status: status } });
   };
 
   //create sample and test result
-  const createSample = async (patient, billedTests) => {
+  const createSample = async (patient, billedTests , billId) => {
     try {
       const response = await fetch('/api/samples/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ patient, billedTests }),
+        body: JSON.stringify({ patient, billedTests, billId }),
       });
 
       const data = await response.json();
