@@ -54,10 +54,6 @@ const LabInfo = () => {
 
           const json = await response.json()
 
-          if(!response.ok){
-            setError(json.error)
-            setEmptyFields(json.emptyFields)
-          }
           if (response.ok) {
             Swal.fire(
                 {
@@ -72,6 +68,9 @@ const LabInfo = () => {
               setError(null)
               setEmptyFields([])
           }else{
+            setError(json.error)
+            setEmptyFields(json.emptyFields)
+            
             Swal.fire({
               title: 'Error',
               text: 'Record could not be updated',

@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const TestResultView = () => {
   const navigate = useNavigate()
   const { id } = useParams();
   const [testResult, setTestResult] = useState(null)
   const [updatedResult, setUpdatedResult] = useState([])
+  const [error,setError] = useState('')
+  const [emptyFields, setEmptyFields] = useState([])
 
   useEffect(() => {
     const fetchTestResult = async () => {
@@ -38,8 +41,35 @@ const TestResultView = () => {
           status: 'completed'
         })
       });
+      const json = await response.json()
+      if(!response.ok){
+        setError(json.error)
+        setEmptyFields(json.emptyFields)
+      }
       if (response.ok) {
-        navigate('/pendingTests')
+        Swal.fire(
+            {
+              title: 'Success',
+              text: 'Record has been updated',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true  
+          }
+          )
+          setError(null)
+          setEmptyFields([])
+          navigate('/pendingTests')
+      }else{
+        setError(json.error)
+        setEmptyFields(json.emptyFields)
+        Swal.fire({
+          title: 'Error',
+          text: 'Record could not be updated',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          customClass: 'alerts'
+        });
       }
     } catch (error) {
       console.log(error);
@@ -71,22 +101,33 @@ const TestResultView = () => {
           </tr>
         </thead>
         <tbody>
-          {testResult && testResult.result.map((resultObj, index) => (
-            <tr  key={index}>
-                <td>{resultObj.category?.category ?? "Record not found"}</td>
-                <td><input type="number" onChange={(e) => {
-                    const updatedResults = [...testResult.result];
-                    updatedResults[index].value = e.target.value;
-                    setTestResult({ ...testResult, result: updatedResults });
-                    }} value={resultObj.value || ''} required/></td>
-                <td>{resultObj.category?.UOM ?? "Record not found"}</td>
-                {testResult.patient?.gender === 'Male' && <td>{resultObj.category?.startMRef ?? "Record not found"}{resultObj.category?.operatorM ?? "Record not found"}{resultObj.category?.endMRef ?? "Record not found"}</td>}
-              {testResult.patient?.gender  === 'Female' && <td>{resultObj.category?.startFRef ?? "Record not found"}{resultObj.category?.operatorF ?? "Record not found"}{resultObj.category?.endFRef ?? "Record not found"}</td>}
-            </tr>
-          ))}
+          {testResult && testResult.result.map((resultObj, index) => {
+            const isEmpty = emptyFields.includes(index);
+            return(
+              <tr  key={index}>
+                  <td>{resultObj.category?.category ?? "Record not found"}</td>
+                  <td><input 
+                        type="number" 
+                        onChange={(e) => {
+                          const updatedResults = [...testResult.result];
+                          updatedResults[index].value = e.target.value;
+                          setTestResult({ ...testResult, result: updatedResults });
+                        }} 
+                        value={resultObj.value || ''}
+                        className={isEmpty ? 'error' : ''}
+                      />
+                  </td>
+                  <td>{resultObj.category?.UOM ?? "Record not found"}</td>
+                  {testResult.patient?.gender === 'Male' && <td>{resultObj.category?.startMRef ?? "Record not found"}{resultObj.category?.operatorM ?? "Record not found"}{resultObj.category?.endMRef ?? "Record not found"}</td>}
+                {testResult.patient?.gender  === 'Female' && <td>{resultObj.category?.startFRef ?? "Record not found"}{resultObj.category?.operatorF ?? "Record not found"}{resultObj.category?.endFRef ?? "Record not found"}</td>}
+              </tr>
+              )
+            }
+          )}
         </tbody>
       </table>
       <button className="btnSubmit" style={{marginRight:"10px"}} type="submit">Submit</button>
+      {error && <div className="error">{error}</div>}
     </form>
     </div>
   )

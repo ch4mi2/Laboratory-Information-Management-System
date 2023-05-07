@@ -125,6 +125,18 @@ const createTestResultParams = async (patientId, testId, sampleId, billId) => {
 //update test result
 const updateTestResult = async (req, res) => {
   const { id } = req.params
+  const { result } = req.body;
+
+  let emptyFields = []
+  for (let i = 0; i < result.length; i++) {
+    if (!result[i].value) {
+      emptyFields.push(i)
+    }
+  }
+
+  if(emptyFields.length > 0){
+    return res.status(400).json({error: "Please fill in all the fields", emptyFields })
+}
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({error: 'No such testResult'})
@@ -138,7 +150,9 @@ const updateTestResult = async (req, res) => {
     return res.status(400).json({error: 'No such testResult'})
   }
 
-  res.status(200).json(testResult)
+  if(emptyFields.length ==0){
+    res.status(200).json(testResult)
+}
 }  
 
 //delete a testresult
