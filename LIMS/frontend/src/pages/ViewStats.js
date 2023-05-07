@@ -59,8 +59,13 @@ const ViewStats = () => {
             })
             
             setTimeout(() => {
-                setMaxTest(testCount[countArr.indexOf(Math.max(...countArr))].arg)
-                setMinTest(testCount[countArr.indexOf(Math.min(...countArr))].arg)
+                if( Math.max(...countArr) !== Math.min(...countArr) ) {
+                    setMaxTest(testCount[countArr.indexOf(Math.max(...countArr))].arg)
+                    setMinTest(testCount[countArr.indexOf(Math.min(...countArr))].arg) 
+                } else {
+                    setMaxTest(null)
+                    setMinTest(null)
+                }
                 testCount = testCount.sort((t1, t2) => (t1.val < t2.val) ? 1 : (t1.val > t2.val) ? -1 : 0)
                 setData(testCount) 
                 setIsLoaded(true)
@@ -88,12 +93,18 @@ const ViewStats = () => {
             testCount.push({ arg: test.testName, val: count })
         })
 
+        
+
         setTimeout(() => {
-            setMaxTest(testCount[countArr.indexOf(Math.max(...countArr))].arg)
-            setMinTest(testCount[countArr.indexOf(Math.min(...countArr))].arg) 
+            if( Math.max(...countArr) !== Math.min(...countArr) ) {
+                setMaxTest(testCount[countArr.indexOf(Math.max(...countArr))].arg)
+                setMinTest(testCount[countArr.indexOf(Math.min(...countArr))].arg) 
+            } else {
+                setMaxTest(null)
+                setMinTest(null)
+            }
             testCount = testCount.sort((t1, t2) => (t1.val < t2.val) ? 1 : (t1.val > t2.val) ? -1 : 0)
             setData(testCount)
-             
         },3000)
 
         
@@ -102,9 +113,6 @@ const ViewStats = () => {
 
         return(
             <div>
-                {/* <button onClick={() => handleClick()}>Test</button> */}
-                {/* <h4>Heading</h4> */}
-
                 {isLoaded ?
                 <div id="stat" className="dx-swatch-dark">
                     {/* {console.log(data)} */}
@@ -148,8 +156,9 @@ const ViewStats = () => {
             </div>
             <center>
             <div className="maxMin">
-                <div><strong>The most used test:</strong> {maxTest}</div>
-                <div><strong>The least used test:</strong> {minTest}</div>
+                {maxTest && <div><strong>The most used test:</strong> {maxTest}</div>}
+                {minTest && <div><strong>The least used test:</strong> {minTest}</div>}
+                { !maxTest && !minTest && <div><strong>No tests used in this month</strong></div>}
             </div>
             </center>
             </div>
