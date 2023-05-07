@@ -8,7 +8,9 @@ import Swal from 'sweetalert2';
 
 const ViewStats = () => {
     const [data,setData] = useState(null)
-    const [tests, setTests] = useState(null)  
+    const [tests, setTests] = useState(null)
+    const [maxTest, setMaxTest] = useState(null)
+    const [minTest, setMinTest] = useState(null)
     const [month, setMonth] = useState("0")
     const [isLoaded,setIsLoaded] = useState(false)
 
@@ -47,19 +49,19 @@ const ViewStats = () => {
     const setTestCount = async(tests) => {
         
         var testCount = []
+        var countArr = []
         
         if( tests !== null && testCount.length <= 0) {
             tests.map(async(test) => {
-                // console.log(test._id);
                 var count = await(await fetch('/api/tests/count/' + test._id + " " + month)).json()
+                countArr.push(count)
                 testCount.push({ arg: test.testName, val: count })
             })
             
-
-            // localStorage.setItem('data', JSON.stringify(testCount))
             setTimeout(() => {
+                setMaxTest(testCount[countArr.indexOf(Math.max(...countArr))].arg)
+                setMinTest(testCount[countArr.indexOf(Math.min(...countArr))].arg)
                 testCount = testCount.sort((t1, t2) => (t1.val < t2.val) ? 1 : (t1.val > t2.val) ? -1 : 0)
-                // console.log(testCount)
                 setData(testCount) 
                 setIsLoaded(true)
             },3000)
@@ -77,17 +79,21 @@ const ViewStats = () => {
         Swal.showLoading();
 
         var testCount = []
+        var countArr = []
 
         tests.map(async(test) => {
             // console.log(test._id);
             var count = await(await fetch('/api/tests/count/' + test._id + " "+ month)).json()
-            console.log(count);
+            countArr.push(count)
             testCount.push({ arg: test.testName, val: count })
         })
 
         setTimeout(() => {
+            setMaxTest(testCount[countArr.indexOf(Math.max(...countArr))].arg)
+            setMinTest(testCount[countArr.indexOf(Math.min(...countArr))].arg) 
             testCount = testCount.sort((t1, t2) => (t1.val < t2.val) ? 1 : (t1.val > t2.val) ? -1 : 0)
-            setData(testCount) 
+            setData(testCount)
+             
         },3000)
 
         
@@ -124,8 +130,6 @@ const ViewStats = () => {
                     setMonth(e.target.value)
                     getMonthData(e.target.value)}}
                 value={month}
-                // className={}
-                
             >
                 <option value="0">All time</option>
                 <option value="1">January</option>
@@ -142,6 +146,12 @@ const ViewStats = () => {
                 <option value="12">December</option>
             </select>
             </div>
+            <center>
+            <div className="maxMin">
+                <div><strong>The most used test:</strong> {maxTest}</div>
+                <div><strong>The least used test:</strong> {minTest}</div>
+            </div>
+            </center>
             </div>
         )
     } 
