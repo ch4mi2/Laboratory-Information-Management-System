@@ -1,4 +1,6 @@
 const Machine = require('../models/machineModel')
+const Service = require('../models/serviceMachineModel')
+const MachineParts = require('../models/machinePartsModel')
 const mongoose = require('mongoose')
 
 //get all machines
@@ -138,6 +140,19 @@ const deleteMachine = async (req , res) => {
         return res.status(404).json({error: 'No such machine'})
       }
 
+    const service = await Service.deleteMany({machineId : id})
+    
+    if (!service){
+        return res.status(404).json({error: 'No such service'})
+    }
+
+    const machinepart = await MachineParts.deleteMany({machineId : id})
+    
+    if (!machinepart){
+        return res.status(404).json({error: 'No such machine'})
+    }
+
+    
     const machine = await Machine.findOneAndDelete({_id : id})
 
     if (!machine){

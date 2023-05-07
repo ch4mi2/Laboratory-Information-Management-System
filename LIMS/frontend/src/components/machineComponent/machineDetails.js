@@ -145,7 +145,6 @@ const MachineHistory = ({ machine}) => {
         <button className = "subBtn"  onClick={() => handleClickMachineParts (machine._id)}> Replace Machine Parts</button>
         </div>
         </div>
-        <p>{machine.createdAt}</p>
       </div>
       <div>
         <hr/>

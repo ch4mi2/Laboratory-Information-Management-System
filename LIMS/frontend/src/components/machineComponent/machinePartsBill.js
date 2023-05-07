@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import React ,  { useRef } from 'react';
+import React ,  { useRef , useState , useEffect } from 'react';
 import logo from '../../assets/common/mediLineLogo.webp';
 import moment from "moment";
 import ReactToPrint from "react-to-print";
@@ -7,6 +7,23 @@ import ReactToPrint from "react-to-print";
 const MachinePartsReport =({machinePartsDet}) =>{
     const componentRef = useRef();
     const navigate = useNavigate();
+    const [labInfo, setLabInfo] = useState()
+
+    useEffect(() => {
+        const fetchLabInfo = async () => {
+            try {
+                const response = await fetch('/api/labInfo')
+                const json = await response.json()
+                if(response.ok){
+                    setLabInfo(json);
+                    console.log(labInfo)
+                } 
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchLabInfo();  
+    },[])
 
     const clickCancel = () => {
         navigate('/machineHistory/' + machinePartsDet.machineId)
@@ -21,9 +38,9 @@ const MachinePartsReport =({machinePartsDet}) =>{
                         <img src={logo} alt="logo" />
                     </div> 
                     <div className="reportContact">
-                        <p className="info">Address : No. H/96 Borella Road, Athurugiriya</p>
-                        <p className="info">Tel: 0113631063 Hotline: 0711188514 | 0714744901</p>
-                        <p className="info">Email: medilinelaboratoryservice@gmail.com</p>
+                        <p className="info">Address : {labInfo?.address ?? "Record not found"}</p>
+                        <p className="info">Tel: {labInfo?.tel1 ?? "Record not found"} | {labInfo?.tel2 ?? "Record not found"} | {labInfo?.tel3 ?? "Record not found"}</p>
+                        <p className="info">Email: {labInfo?.email ?? "Record not found"}</p>
                     </div>
                 </div>
                 <div className="reporthr">
