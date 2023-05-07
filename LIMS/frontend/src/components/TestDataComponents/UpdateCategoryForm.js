@@ -186,7 +186,7 @@ const UpdateCategoryForm = ({subCategory}) => {
                                 emptyFields[emptyFields.indexOf('endMRef')] = '';
                                 setEndMRef(e.target.value)}}
                             value={endMRef}
-                            // className={emptyFields.includes('endMRef') ? 'error' : ''}
+                            className={emptyFields.includes('endMRef') ? 'error' : ''}
                             
                         />
                     </div>
@@ -231,7 +231,7 @@ const UpdateCategoryForm = ({subCategory}) => {
                                 emptyFields[emptyFields.indexOf('endFRef')] = '';
                                 setEndFRef(e.target.value)}}
                             value={endFRef}
-                            // className={emptyFields.includes('endFRef') ? 'error' : ''}
+                            className={emptyFields.includes('endFRef') ? 'error' : ''}
                         />
                     </div>
                 </div>

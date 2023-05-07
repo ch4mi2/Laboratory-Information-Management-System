@@ -69,24 +69,18 @@ const createTest = async(req,res) => {
         if(!operatorM) {
             emptyFields.push('operatorM')
         }
-        if(!endMRef) {
+        if ( operatorM == "-" && !endMRef) {
             emptyFields.push('endMRef')
         }
-        // if(!endMRef && operatorM == ">") {
-        //     endMRef = null
-        // }
         if(!startFRef) {
             emptyFields.push('startFRef')
         }
         if(!operatorF) {
             emptyFields.push('operatorF')
         }
-        if(!endFRef ) {
+        if ( operatorF == "-" && !endFRef) {
             emptyFields.push('endFRef')
         }
-        // if(!endFRef && operatorF == ">") {
-        //     endFRef = null
-        // }
 
         if(emptyFields.length > 0) {
             return res.status(400).json({error: 'Please fill in the highlighted fields', emptyFields})
@@ -209,11 +203,17 @@ const updateCategory = async(req,res) => {
     if(!operatorM) {
         emptyFields.push('operatorM')
     }
+    if ( operatorM == "-" && !endMRef) {
+        emptyFields.push('endMRef')
+    }
     if(!startFRef) {
         emptyFields.push('startFRef')
     }
     if(!operatorF) {
         emptyFields.push('operatorF')
+    }
+    if ( operatorF == "-" && !endFRef) {
+        emptyFields.push('endFRef')
     }
 
     if(emptyFields.length > 0) {
