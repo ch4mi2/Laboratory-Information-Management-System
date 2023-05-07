@@ -55,7 +55,7 @@ const MachineHistory = ({ machine}) => {
   };
 
   const handleClick = (id) => {
-    navigate(`../machinePartsReceipt/${id}`);
+    navigate(`../machinePartsBill/${id}`);
   };
 
   //Delete Machine Parts

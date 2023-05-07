@@ -38,6 +38,9 @@ const ViewServiceHistory = () => {
 const handleClickService = (id) => {
   navigate(`../updateMachineService/${id}` );
 };
+const handleClickBill = (id) => {
+  navigate(`../serviceBill/${id}` );
+};
 
 return (
         <div>
@@ -69,8 +72,8 @@ return (
                     <td >{service.TechnicianName}</td>
                     <td >{service.TechTelno}</td>
                     <td >{service.TechnicianPayment}</td>
-                    <td><button className="btnSubmit" >
-                        {/* key={machinePart._id} onClick={() => handleClick(machinePart._id)}> */}
+                    <td><button className="btnSubmit" 
+                        onClick={() => handleClickBill(service._id)}>
                         Receipt</button></td>
                     <td><button className="btnSubmit" 
                          onClick={() => handleClickService(service._id)}>

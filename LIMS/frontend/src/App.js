@@ -60,6 +60,8 @@ import AdminProfile from './pages/AdminProfile';
 import CompletedTestResults from './pages/CompletedTestResults';
 import Dashboard from './pages/Dashboard';
 import TopCustomers from './pages/TopCustomers';
+import MachineServiceBill from './pages/MachineServiceBill';
+import MachinePartsBill from './pages/MachinePartsBill'
 
 function App() {
   const { user } = useAuthContext();
@@ -161,6 +163,14 @@ function App() {
                   <Route
                     path="/updateMachineService/:id"
                     element={<UpdateMachineService />}
+                  ></Route>
+                  <Route
+                    path="/serviceBill/:id"
+                    element={<MachineServiceBill />}
+                  ></Route>
+                  <Route
+                    path="/machinePartsBill/:id"
+                    element={<MachinePartsBill />}
                   ></Route>
 
                   <Route path="/testData" element={<TestData />} />
