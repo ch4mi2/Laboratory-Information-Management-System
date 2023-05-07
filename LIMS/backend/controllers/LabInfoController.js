@@ -27,6 +27,22 @@ const createLabInfo = async(req,res) => {
 //patch
 const updateLabInfo = async (req, res) => {
     const { id } = req.params
+    const { name, address, tel1} = req.body;
+
+    let emptyFields = []
+    if(!name){
+      emptyFields.push('name')
+    }
+    if(!address){
+      emptyFields.push('address')
+    }
+    if(!tel1){
+      emptyFields.push('tel1')
+    }
+
+    if(emptyFields.length > 0){
+      return res.status(400).json({error: "Please fill in all the fields", emptyFields })
+  }
   
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({error: 'No such lab info'})
@@ -40,7 +56,9 @@ const updateLabInfo = async (req, res) => {
       return res.status(400).json({error: 'No such lab info'})
     }
   
-    res.status(200).json(labInfo)
+    if(emptyFields.length ==0){
+      res.status(200).json(labInfo)
+  }
   }
 
 module.exports = {
