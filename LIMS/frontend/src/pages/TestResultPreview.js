@@ -103,9 +103,9 @@ const TestResultPreview = () => {
             <tr key={index}>
               <td>{resultObj.category?.category ?? "Record not found"}</td>
               <td>{resultObj.value ?? "Record not found"}</td>
-              <td>{resultObj.category?.UOM ?? "Record not found"}</td>
-              {testResult.patient?.gender  === 'Male' && <td>{resultObj.category?.startMRef ?? "Record not found"}{resultObj.category?.operatorM ?? "Record not found"}{resultObj.category?.endMRef ?? "Record not found"}</td>}
-              {testResult.patient?.gender === 'Female' && <td>{resultObj.category?.startFRef ?? "Record not found"}{resultObj.category?.operatorF ?? "Record not found"}{resultObj.category?.endFRef ?? "Record not found"}</td>}
+              <td>{resultObj.category?.UOM ?? ""}</td>
+              {testResult.patient?.gender  === 'Male' && <td>{resultObj.category?.startMRef ?? ""}{resultObj.category?.operatorM ?? ""}{resultObj.category?.endMRef ?? ""}</td>}
+              {testResult.patient?.gender === 'Female' && <td>{resultObj.category?.startFRef ?? ""}{resultObj.category?.operatorF ?? ""}{resultObj.category?.endFRef ?? ""}</td>}
             </tr>
           ))}
             </tbody>
