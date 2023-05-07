@@ -209,17 +209,11 @@ const updateCategory = async(req,res) => {
     if(!operatorM) {
         emptyFields.push('operatorM')
     }
-    if(!endMRef) {
-        emptyFields.push('endMRef')
-    }
     if(!startFRef) {
         emptyFields.push('startFRef')
     }
     if(!operatorF) {
         emptyFields.push('operatorF')
-    }
-    if(!endFRef) {
-        emptyFields.push('endFRef')
     }
 
     if(emptyFields.length > 0) {
