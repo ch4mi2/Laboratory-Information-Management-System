@@ -77,7 +77,10 @@ const MachineHistory = ({ machine}) => {
 
     if(response.ok){
       console.log(json)
-      dispatch({type: 'DELETE_MACHINEPART' , payload:json})
+  //    dispatch({type: 'DELETE_MACHINEPART' , payload:json})
+    const table = $('#machineparts-list').DataTable();
+    const row = table.rows(`[data-id = "${id}"]`);
+    row.remove().draw()
 
       Swal.fire({
         title: 'Success',
@@ -132,6 +135,12 @@ const MachineHistory = ({ machine}) => {
           {machine.TelNo}
           </p>
         </div> 
+        <div className="col-6">
+          <p>
+          <strong>Price : </strong>
+          {machine.Price}
+          </p>
+        </div> 
         </div>
         <p>
         <strong>Warranty Expiration : </strong>
@@ -171,7 +180,7 @@ const MachineHistory = ({ machine}) => {
       {machineParts &&
                 machineParts.map((machinePart) => (
                   <tr
-                    key={machinePart._id}
+                    key={machinePart._id} data-id={machinePart._id}
                   >
                     <td >{machinePart.MaintenanceDate}</td>
                     <td >{machinePart.Issue}</td>

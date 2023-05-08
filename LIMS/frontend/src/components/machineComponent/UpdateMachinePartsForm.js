@@ -18,6 +18,7 @@ const UpdateMachine = ({machine}) => {
     const [TechTelno, setTechTelno] = useState(machine.TechTelno)
     const [TechnicianPayment, setTechnicianPayment] = useState(machine.TechnicianPayment)
     const [error, setError] = useState(null);
+    const[emptyFields, setEmptyFields] = useState([]);
 
   // useEffect(()=>{
   //   getMachineDetails();
@@ -45,7 +46,7 @@ const UpdateMachine = ({machine}) => {
     
             if(!response.ok) {
                 setError(json.error)
-                //setEmptyFields(json.emptyFields)
+                setEmptyFields(json.emptyFields)
                 Swal.fire({
                     title: 'Error',
                     text: error,
@@ -86,6 +87,7 @@ const UpdateMachine = ({machine}) => {
               onChange={(e) => setMaintenanceDate(e.target.value)}
               value={MaintenanceDate}
               required
+              className={emptyFields.includes('MaintenanceDate') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -95,6 +97,7 @@ const UpdateMachine = ({machine}) => {
               onChange={(e) => setIssue(e.target.value)}
               value={Issue}
               required
+              className={emptyFields.includes('Issue') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -104,6 +107,7 @@ const UpdateMachine = ({machine}) => {
               onChange={(e) => setMachinePart(e.target.value)}
               value={MachinePart}
               required
+              className={emptyFields.includes('MachinePart') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -113,6 +117,7 @@ const UpdateMachine = ({machine}) => {
               onChange={(e) => setbrandOfMachinePart(e.target.value)}
               value={brandOfMachinePart}
               required
+              className={emptyFields.includes('brandOfMachinePart') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -122,6 +127,7 @@ const UpdateMachine = ({machine}) => {
               onChange={(e) => setPriceOfMachinePart(e.target.value)}
               value={PriceOfMachinePart}
               required
+              className={emptyFields.includes('PriceOfMachinePart') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -131,6 +137,7 @@ const UpdateMachine = ({machine}) => {
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
               required
+              className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -141,6 +148,7 @@ const UpdateMachine = ({machine}) => {
               value={TechTelno}
               pattern="[0-9]{10}"
               required
+              className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -150,6 +158,7 @@ const UpdateMachine = ({machine}) => {
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
               required
+              className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>
           <div className="Add-button">

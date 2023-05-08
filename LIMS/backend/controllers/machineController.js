@@ -31,7 +31,7 @@ const getMachine = async (req, res) => {
 
 //create new workout
 const createMachine = async (req , res) => {
-    const {MachineType , Brand, PurchaseDate,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
+    const {MachineType , Price ,Brand, PurchaseDate,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
 
     let emptyFields = []
 
@@ -47,13 +47,18 @@ const createMachine = async (req , res) => {
         if(!Model) {
             emptyFields.push('Model')
         }
+        if(!Price) {
+            emptyFields.push('Price')
+        }
         if(!WarrantyExp) {
             emptyFields.push('WarrantyExp')
         }
         if(!Manufacturer) {
             emptyFields.push('Manufacturer')
         }
-
+        if(!PurchaseDate) {
+            emptyFields.push('PurchasedDate')
+        }
         if(!TelNo) {
             emptyFields.push('TelNo')
         }
@@ -67,6 +72,7 @@ const createMachine = async (req , res) => {
             Brand,
             PurchaseDate,
             Model,
+            Price,
             SerialNo,
             WarrantyExp,
             Manufacturer,
@@ -82,7 +88,7 @@ const createMachine = async (req , res) => {
 const updateMachine = async (req , res) => {
     const {id} = req.params
 
-    const {MachineType , Brand, PurchaseDate,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
+    const {MachineType , Brand, PurchaseDate, Price ,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
 
     let emptyFields = []
 
@@ -94,6 +100,9 @@ const updateMachine = async (req , res) => {
     }
     if(!PurchaseDate) {
         emptyFields.push('PurchaseDate')
+    }
+    if(!Price){
+        emptyFields.push('Price')
     }
     if(!Model) {
         emptyFields.push('Model')

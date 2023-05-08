@@ -1,4 +1,5 @@
 import UpdateMachine from "../components/machineComponent/UpdateMachineForm";
+import "../css/MachineStyles/machineDetails.css"
 import { useParams } from "react-router-dom";
 import { useEffect , useState } from "react";
 

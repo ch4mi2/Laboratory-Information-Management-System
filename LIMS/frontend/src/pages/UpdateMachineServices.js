@@ -1,6 +1,7 @@
 import UpdateMachineService from "../components/machineComponent/UpdateMachineServices";
 import { useParams } from "react-router-dom";
 import { useEffect , useState } from "react";
+import '../css/MachineStyles/machineDetails.css'
 
 const EditMachineService = () => {
     const { id } = useParams();
