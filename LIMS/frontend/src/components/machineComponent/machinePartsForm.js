@@ -104,7 +104,7 @@ const MachinePartsForm = ({machine}) => {
               type="text"
               onChange={(e) => setMachineId(e.target.value)}
               value={machineId}
-              required
+              // required
               hidden
             />
           </div>
@@ -114,7 +114,7 @@ const MachinePartsForm = ({machine}) => {
               type="text"
               onChange={(e) => setmachineName(e.target.value)}
               value={machineName}
-              required
+              // required
               disabled
               className={emptyFields.includes('machineName') ? 'error' : ''}
             />
@@ -125,7 +125,7 @@ const MachinePartsForm = ({machine}) => {
               type="date"
               onChange={(e) => setMaintenanceDate(e.target.value)}
               value={MaintenanceDate}
-              required
+              // required
               className={emptyFields.includes('MaintenanceDate') ? 'error' : ''}
             />
           </div>
@@ -135,7 +135,7 @@ const MachinePartsForm = ({machine}) => {
               type="text"
               onChange={(e) => setIssue(e.target.value)}
               value={Issue}
-              required
+              // required
               className={emptyFields.includes('Issue') ? 'error' : ''}
             />
           </div>
@@ -145,7 +145,7 @@ const MachinePartsForm = ({machine}) => {
               type="text"
               onChange={(e) => setMachinePart(e.target.value)}
               value={MachinePart}
-              required
+              // required
               className={emptyFields.includes('MachinePart') ? 'error' : ''}
             />
           </div>
@@ -155,7 +155,7 @@ const MachinePartsForm = ({machine}) => {
               type="text"
               onChange={(e) => setbrandOfMachinePart(e.target.value)}
               value={brandOfMachinePart}
-              required
+              // required
               className={emptyFields.includes('brandOfMachinePart') ? 'error' : ''}
             />
           </div>
@@ -165,7 +165,7 @@ const MachinePartsForm = ({machine}) => {
               type="number"
               onChange={(e) => setPriceOfMachinePart(e.target.value)}
               value={PriceOfMachinePart}
-              required
+              // required
               className={emptyFields.includes('PriceOfMachinePart') ? 'error' : ''}
             />
           </div>
@@ -175,7 +175,7 @@ const MachinePartsForm = ({machine}) => {
               type="text"
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
-              required
+              // required
               className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
@@ -185,7 +185,7 @@ const MachinePartsForm = ({machine}) => {
               type="tel"
               onChange={(e) => setTechTelno(e.target.value)}
               value={TechTelno}
-              required
+              // required
               pattern="[0-9]{10}"
               className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
@@ -196,7 +196,7 @@ const MachinePartsForm = ({machine}) => {
               type="text"
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
-              required
+              // required
               className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>

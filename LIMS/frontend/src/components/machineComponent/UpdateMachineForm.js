@@ -20,16 +20,6 @@ const UpdateMachine = ({machine}) => {
     const [error, setError] = useState(null);
     const[emptyFields, setEmptyFields] = useState([]);
 
-  // useEffect(()=>{
-  //   getMachineDetails();
-  //   // eslint-disable-next-line
-  // }, [])
-
-  // const getMachineDetails = async () => {
-  //   let result = await fetch(`/api/machines/`+ machine._id);
-  //   // eslint-disable-next-line
-  //   result = result.json();
-  // }
 
   const handleMachineUpdate = async (e) => {
             e.preventDefault()
