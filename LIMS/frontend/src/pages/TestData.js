@@ -74,11 +74,11 @@ const TestData = () => {
                     })
                 }
                 if(response.ok) {
-                    dispatch({type: 'DELETE_TEST', payload: json})
+                    
                     const table = $('#test-list').DataTable();
                     const row = table.rows(`[data-id ="${id}"]`);
                     row.remove().draw();
-                    
+                    // dispatch({type: 'DELETE_TEST', payload: json})
                     Swal.fire({
                         title: 'Success',
                         text: 'Successfully Deleted Test',
@@ -114,7 +114,7 @@ const TestData = () => {
                     <tbody>
                     {Tests &&
                         Tests.map((test) => (
-                        <tr key={test._id} /*onClick={() => handleClick(test._id)}*/>
+                        <tr key={test._id} data-id={test._id}>
                             <td onClick={() => handleClick(test._id)}>{test.testID}</td>
                             <td onClick={() => handleClick(test._id)}>{test.testName}</td>
                             <td onClick={() => handleClick(test._id)}>{test.shortName}</td>

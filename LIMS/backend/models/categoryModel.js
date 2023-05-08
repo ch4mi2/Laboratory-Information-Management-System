@@ -23,8 +23,7 @@ const categorySchema = new Schema({
         required: true
     },
     endMRef: {
-        type: Number,
-        required: true
+        type: Number
     },
     startFRef: {
         type: Number,
@@ -35,8 +34,7 @@ const categorySchema = new Schema({
         required: true
     },
     endFRef: {
-        type: Number,
-        required: true
+        type: Number
     },
     startBRef: {
         type: Number
