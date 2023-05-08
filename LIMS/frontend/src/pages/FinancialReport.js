@@ -13,6 +13,13 @@ const FinancialReport = () => {
   const [machineTotal, setMachineTotal] = useState()
   const [machineMTotal, setMachineM] = useState()
   const [machineServiceTotal, setMachineService] = useState()
+  const [expenses, setExpenses] = useState()
+ 
+  const [totalExpenses, setTotalExpenses] = useState()
+  const [totalotherExpense, setTotalotherExpense] = useState()
+
+
+  const [isFetched, setIsFetched] = useState()
 
   
 
@@ -34,8 +41,33 @@ const FinancialReport = () => {
 
 const handleGenarateReport = async (e) => {
   e.preventDefault();
-
+  setIsFetched(false)
   try {
+    
+    //expenses
+    const expensesResponse = await fetch('/api/expenses/');
+    const expensesJson= await expensesResponse.json();
+    if (expensesResponse.ok) {
+      const filteredExpenses = expensesJson.filter(
+        (expenses) =>
+          new Date(expenses.createdAt) >= new Date(startDate) &&
+          new Date(expenses.createdAt) <= new Date(endDate)
+      );
+      const total = filteredExpenses.reduce(
+        (acc, curr) => acc + parseFloat(curr.amount),
+        0
+      );
+      
+      console.log(filteredExpenses);
+      setExpenses(filteredExpenses)
+
+      setTotalotherExpense(total)
+      console.log(total);
+    
+      }
+
+
+    //total bills
     const billResponse = await fetch('/api/bills/');
     const billJson= await billResponse.json();
     if (billResponse.ok) {
@@ -53,6 +85,7 @@ const handleGenarateReport = async (e) => {
     
       }  
 
+      //total machines
     const machineResponse = await fetch('/api/machines/');
     const machineJson = await machineResponse.json();
     if (machineResponse.ok) {
@@ -69,6 +102,7 @@ const handleGenarateReport = async (e) => {
       setMachineTotal(total)
     }
 
+    //total machine maintainence
   const maintainenceResponse = await fetch('/api/machineParts/');
   const maintainenceJson = await maintainenceResponse.json();
   if (maintainenceResponse.ok) {
@@ -85,6 +119,7 @@ const handleGenarateReport = async (e) => {
     setMachineM(total)
     }
     
+    //total machine service
   const serviceResponse = await fetch('/api/serviceMachines/');
   const serviceJson = await serviceResponse.json();
   if (serviceResponse.ok) {
@@ -100,8 +135,16 @@ const handleGenarateReport = async (e) => {
     console.log(total);
     setMachineService(total)
   }
+
   
-    
+
+ 
+  
+  const ExpenseTotal = machineTotal + machineMTotal + machineServiceTotal + totalotherExpense
+  console.log(ExpenseTotal)
+  setTotalExpenses(ExpenseTotal)
+  
+    setIsFetched(true)
   } catch (error) {
     console.log(error);
   }
@@ -114,30 +157,43 @@ const handleGenarateReport = async (e) => {
 
   return (
     <div>
-      <div>
+      <div><center>
         <form  onSubmit={handleGenarateReport}>
-        <label>Start Date</label>
+          <h2>Select the time period</h2>
+          <br/>
+        <label>Start Date:</label>
             <input
              type="date"
              onChange={(e) => setStartDate(e.target.value)}
+             style={{width:"50%"}}
             />
-            <label>End Date</label>
+            <br/>
+
+            <label>End Date:</label>
             <input
              type="date"
              onChange={(e) => setEndDate(e.target.value)}
+             style={{width:"50%"}}
             />
-        <button type='submit'>Generate Report</button>    
+            <br/>
+        <button type='submit' className='btnConfirm'>Generate Report</button>    
         </form>
+        </center>
       </div>
+
+      <br/>
+
+      {isFetched &&  
+      <div>
       <div className="report" ref={componentRef}>
         <div className="reportHeader">
           <div className="reportLogo">
             <img src={logo} alt="logo" />
           </div>
           <div className="reportContact">
-            <p class="info">Address : {labInfo?.address ?? 'null'}</p>
-            <p class="info">Tel: {labInfo?.tel1 ?? 'null'} | {labInfo?.tel2 ?? 'null'} | {labInfo?.tel3 ?? 'null'}</p>
-            <p class="info">Email: {labInfo?.email ?? 'null'}</p>
+            <p className="info">Address : {labInfo?.address ?? 'null'}</p>
+            <p className="info">Tel: {labInfo?.tel1 ?? 'null'} | {labInfo?.tel2 ?? 'null'} | {labInfo?.tel3 ?? 'null'}</p>
+            <p className="info">Email: {labInfo?.email ?? 'null'}</p>
           </div>
         </div>
         <div className="reporthr">
@@ -166,6 +222,11 @@ const handleGenarateReport = async (e) => {
                 <td>{billTotal}</td>
                 <td>-</td>
             </tr>
+            <tr>
+                <td><br/></td>
+                <td></td>
+                <td></td>
+            </tr>
             
 
            </tbody>
@@ -174,13 +235,13 @@ const handleGenarateReport = async (e) => {
 
            <tbody>
                <tr>
-                <td>inventry</td>
+                <td>Staff</td>
                 <td>-</td>
                 <td>500</td>
                 </tr> 
 
                 <tr>
-                <td>machine</td>
+                <td>Machine</td>
                 <td>-</td>
                 <td>{machineTotal}</td>
                 </tr>
@@ -196,6 +257,19 @@ const handleGenarateReport = async (e) => {
                 <td>-</td>
                 <td>{machineServiceTotal}</td>
                 </tr>
+                
+              {expenses && expenses.map((expense) => (
+                <tr key={expense._id} >
+                  <td>{expense.description}</td>
+                  <td>-</td>
+                  <td>{expense.amount}</td>
+
+                </tr>
+
+              ))}
+                
+
+
 
                 
 
@@ -204,8 +278,8 @@ const handleGenarateReport = async (e) => {
            <thead>
               <tr>
                 <th>Total</th>
-                <th>2000</th>
-                <th>1000</th>
+                <th>{billTotal}</th>
+                <th>{totalExpenses}</th>
               </tr>
            </thead>
 
@@ -227,6 +301,10 @@ const handleGenarateReport = async (e) => {
           />
         </div>
       </div>
+      </div>
+
+              } 
+
     </div>
   );
 };
