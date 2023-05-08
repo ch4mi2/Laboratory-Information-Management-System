@@ -10,7 +10,7 @@ const TestSubCategoryDetails = ({ subCategory }) => {
                 {subCategory.categoryHeading &&
                     <div className="row">
                         <div className="col-12">
-                            <strong>Caegory Heading: </strong>
+                            <strong>Category Heading: </strong>
                             {subCategory.categoryHeading}
                         </div>
                     </div>
