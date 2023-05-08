@@ -77,8 +77,9 @@ const MachineForm = () => {
             showConfirmButton: false,
             timer: 2000,
             timerProgressBar: true
+        }).then(() => {
+          navigate('/machineList')
         })
-        navigate('/machineList') 
     }
   };
 
