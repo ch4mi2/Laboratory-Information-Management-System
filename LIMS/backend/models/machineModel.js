@@ -15,6 +15,10 @@ const machineSchema = new Schema({
         type: String,
         required:true
     },
+    Price:{
+        type:String,
+        required:true
+    },
     Model:{
        type: String,
         required:true
@@ -32,8 +36,9 @@ const machineSchema = new Schema({
         required:true
     },
     TelNo:{
-        type:String,
+        type:Number,
         required:true,
+        maxlength:10
     }
 } , {timestamps : true})
 

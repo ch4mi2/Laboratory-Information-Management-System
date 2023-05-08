@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useMachineContext } from '../../hooks/useMachineContext';
 import '../../css/MachineStyles/machineDetails.css'
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const MachineForm = () => {
   const { dispatch } = useMachineContext();
+  const navigate = useNavigate();
 
   const [MachineType, setMachineType] = useState('');
   const [Brand, setBrand] = useState('');
@@ -13,8 +15,10 @@ const MachineForm = () => {
   const [PurchaseDate, setpurchasedDate] = useState('');
   const [WarrantyExp, setWarrantyExp] = useState('');
   const [Manufacturer, setManufacturer] = useState('');
+  const [Price , setPrice] = useState('');
   const [TelNo, setTelNo] = useState('');
   const [error, setError] = useState(null);
+  const[emptyFields, setEmptyFields] = useState([]);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +27,7 @@ const MachineForm = () => {
       MachineType,
       Brand,
       Model,
+      Price,
       SerialNo,
       PurchaseDate,
       WarrantyExp,
@@ -41,6 +46,7 @@ const MachineForm = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields)
       console.log('error');
       Swal.fire({
         title: 'Error',
@@ -58,6 +64,7 @@ const MachineForm = () => {
       setSerialNo('');
       setpurchasedDate('');
       setWarrantyExp('');
+      setPrice('');
       setManufacturer('');
       setTelNo('');
       console.log('new machine added:', json);
@@ -70,8 +77,9 @@ const MachineForm = () => {
             showConfirmButton: false,
             timer: 2000,
             timerProgressBar: true
+        }).then(() => {
+          navigate('/machineList')
         })
-        
     }
   };
 
@@ -87,6 +95,7 @@ const MachineForm = () => {
               onChange={(e) => setMachineType(e.target.value)}
               value={MachineType}
               required
+              className={emptyFields.includes('MachineType') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -96,6 +105,7 @@ const MachineForm = () => {
               onChange={(e) => setBrand(e.target.value)}
               value={Brand}
               required
+              className={emptyFields.includes('Brand') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -105,6 +115,7 @@ const MachineForm = () => {
               onChange={(e) => setModel(e.target.value)}
               value={Model}
               required
+              className={emptyFields.includes('Model') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -114,6 +125,7 @@ const MachineForm = () => {
               onChange={(e) => setSerialNo(e.target.value)}
               value={SerialNo}
               required
+              className={emptyFields.includes('SerialNo') ? 'error' : ''} 
             />
           </div>
           <div className="input-box">
@@ -123,6 +135,17 @@ const MachineForm = () => {
               onChange={(e) => setpurchasedDate(e.target.value)}
               value={PurchaseDate}
               required
+              className={emptyFields.includes('PurchasedDate') ? 'error' : ''}
+            />
+          </div>
+          <div className="input-box">
+            <label>Price:</label>
+            <input
+              type="number"
+              onChange={(e) => setPrice(e.target.value)}
+              value={Price}
+              required
+              className={emptyFields.includes('Price') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -132,6 +155,7 @@ const MachineForm = () => {
               onChange={(e) => setWarrantyExp(e.target.value)}
               value={WarrantyExp}
               required
+              className={emptyFields.includes('WarrantyExp') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -141,6 +165,7 @@ const MachineForm = () => {
               onChange={(e) => setManufacturer(e.target.value)}
               value={Manufacturer}
               required
+              className={emptyFields.includes('Manufacturer') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -151,6 +176,7 @@ const MachineForm = () => {
               value={TelNo}
               required
               pattern="[0-9]{10}"
+              className={emptyFields.includes('TelNo') ? 'error' : ''}
             />
           </div>
           <br/>

@@ -95,6 +95,39 @@ const deleteMachinePart = async (req , res) => {
 const updateMachinePart = async (req , res) => {
     const {id} = req. params
 
+    const {MaintenanceDate , Issue ,MachinePart , brandOfMachinePart , PriceOfMachinePart , TechnicianName , TechTelno , TechnicianPayment} = req.body
+
+    let emptyFields = []
+
+        if(!MaintenanceDate) {
+            emptyFields.push('MaintenanceDate')
+        }
+        if(!Issue) {
+            emptyFields.push('Issue')
+        }
+        if(!MachinePart) {
+            emptyFields.push('MachinePart')
+        }
+        if(!brandOfMachinePart) {
+            emptyFields.push('brandOfMachinePart')
+        }
+        if(!PriceOfMachinePart) {
+            emptyFields.push('PriceOfMachinePart')
+        }
+        if(!TechnicianName) {
+            emptyFields.push('TechnicianName')
+        }
+        if(!TechTelno) {
+            emptyFields.push('TechTelno')
+        }
+        if(!TechnicianPayment) {
+            emptyFields.push('TechnicianPayment')
+        }
+        if(emptyFields.length > 0) {
+            return res.status(400).json({error: 'Please fill in the highlighted fields', emptyFields})
+        } else{
+
+
     if (!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: "No such machine part"})
     }
@@ -109,59 +142,7 @@ const updateMachinePart = async (req , res) => {
 
     res.status(200).json(machinePart)
 }
-
-
-// //update a machine part
-// const updateMachinePart = async (req , res) => {
-//     const {id} = req. params
-
-//     // const {MaintenanceDate , Issue ,MachinePart , brandOfMachinePart , PriceOfMachinePart , TechnicianName , TechTelno , TechnicianPayment} = req.body
-
-//     // let emptyFields = []
-
-//     // if(!MaintenanceDate) {
-//     //     emptyFields.push('MaintenanceDate')
-//     // }
-//     // if(!Issue) {
-//     //     emptyFields.push('Issue')
-//     // }
-//     // if(!MachinePart) {
-//     //     emptyFields.push('MachinePart')
-//     // }
-//     // if(!brandOfMachinePart) {
-//     //     emptyFields.push('brandOfMachinePart')
-//     // }
-//     // if(!PriceOfMachinePart) {
-//     //     emptyFields.push('PriceOfMachinePart')
-//     // }
-//     // if(!TechnicianName) {
-//     //     emptyFields.push('TechnicianName')
-//     // }
-//     // if(!TechTelno) {
-//     //     emptyFields.push('TechTelno')
-//     // }
-//     // if(!TechnicianPayment) {
-//     //     emptyFields.push('TechnicianPayment')
-//     // }
-
-//     // if(emptyFields.length > 0) {
-//     //     return res.status(400).json({error: 'Please fill in the highlighted fields', emptyFields})
-//     // } else {
-//         if (!mongoose.Types.ObjectId.isValid(id)){
-//             return res.status(404).json({error: "No such machine part"})
-//         }
-
-//         const machinePart = await MachineParts.findByIdAndUpdate({_id: id} , {
-//             ...req.body
-//         })
-
-//         if(!machinePart){
-//             return res.status(400).json({error: 'No such machine part'})
-//         }
-
-//         res.status(200).json(machinePart)
-//     } 
-// }
+}
 
 module.exports = {
     createMachinePart,

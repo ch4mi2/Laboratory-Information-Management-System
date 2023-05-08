@@ -13,6 +13,7 @@ const UpdateMachineService = ({machine}) => {
     const [TechTelno, setTechTelno] = useState(machine.TechTelno)
     const [TechnicianPayment, setTechnicianPayment] = useState(machine.TechnicianPayment)
     const [error, setError] = useState(null);
+    const[emptyFields, setEmptyFields] = useState([]);
 
   // useEffect(()=>{
   //   getMachineDetails();
@@ -41,7 +42,8 @@ const UpdateMachineService = ({machine}) => {
     
             if(!response.ok) {
                 setError(json.error)
-                //setEmptyFields(json.emptyFields)
+                setEmptyFields(json.emptyFields)
+                console.log(json.emptyFields)
                 Swal.fire({
                     title: 'Error',
                     text: error,
@@ -81,7 +83,7 @@ const UpdateMachineService = ({machine}) => {
               type="date"
               onChange={(e) => setLastserviceDate(e.target.value)}
               value={LastserviceDate}
-              required
+              className={emptyFields.includes('LastserviceDate') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -91,6 +93,7 @@ const UpdateMachineService = ({machine}) => {
               onChange={(e) => setNextServiceDate(e.target.value)}
               value={NextServiceDate}
               required
+              className={emptyFields.includes('NextServiceDate') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -100,6 +103,7 @@ const UpdateMachineService = ({machine}) => {
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
               required
+              className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -110,6 +114,7 @@ const UpdateMachineService = ({machine}) => {
               value={TechTelno}
               required
               pattern="[0-9]{10}"
+              className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -119,6 +124,7 @@ const UpdateMachineService = ({machine}) => {
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
               required
+              className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>
           <div className="Add-button">

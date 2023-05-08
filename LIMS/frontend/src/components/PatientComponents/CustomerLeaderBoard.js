@@ -68,6 +68,7 @@ const CustomerLeaderBoard = ({ top }) => {
         <thead>
           <tr className="bg-dark text-white">
             <th>Rank</th>
+            <th>NIC</th>
             <th>Customer Name</th>
             <th>Total</th>
           </tr>
@@ -78,6 +79,9 @@ const CustomerLeaderBoard = ({ top }) => {
               <tr key={customer.id} onClick={() => handleClick(customer.id)}>
                 <td>
                   <b>{index + 1} </b>
+                </td>
+                <td>
+                  <b>{customer.id} </b>
                 </td>
                 <td>
                   <b>{customer.name}</b>

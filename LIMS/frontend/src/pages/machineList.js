@@ -51,7 +51,10 @@ const MachineList = () => {
     const json = await response.json()
 
     if(response.ok){
-      dispatch({type: 'DELETE_MACHINE' , payload:json})
+      // dispatch({type: 'DELETE_MACHINE' , payload:json})
+      const table = $('#machine-list').DataTable();
+      const row = table.rows(`[data-id = "${id}"]`);
+      row.remove().draw()
       Swal.fire({
         title: 'Success',
         text: 'Record has been deleted',
@@ -85,7 +88,7 @@ const MachineList = () => {
               {machines &&
                 machines.map((machine) => (
                   <tr
-                    key={machine._id}
+                    key={machine._id} data-id={machine._id}
                     
                   >
                     {/* <td onClick={() => handleClick(machine._id)}>{machine._id}</td> */}
