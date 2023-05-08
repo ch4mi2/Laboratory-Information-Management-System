@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import ReactToPrint from 'react-to-print';
 import logo from '../assets/common/mediLineLogo.webp';
 import '../css/TestResultStyles/testResultPreview.css'
+import Swal from 'sweetalert2';
 
 const FinancialReport = () => {
   const componentRef = useRef();
@@ -40,9 +41,19 @@ const FinancialReport = () => {
 
 const handleGenerateReport = async (e) => {
   e.preventDefault();
-  
+
   try {
-    setIsFetched(false)
+    setIsFetched(false);
+
+    // Display a "Generating..." SweetAlert popup
+    const swalLoading = Swal.fire({
+      title: 'Generating...',
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    });
+    Swal.showLoading();
+
     // Use Promise.all to wait for all fetches to complete
     const responses = await Promise.all([
       fetchBills(),
@@ -50,9 +61,12 @@ const handleGenerateReport = async (e) => {
       fetchMachineMaintenance(),
       fetchMachineService(),
       fetchExpenses()
-    ])
-    
-    setIsFetched(true)
+    ]);
+
+    setIsFetched(true);
+
+    // Close the SweetAlert popup
+    await swalLoading.close();
 
   } catch (error) {
     console.log(error);
