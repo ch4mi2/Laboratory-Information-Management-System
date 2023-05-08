@@ -17,7 +17,7 @@ const ViewStats = () => {
     useEffect(() => {
         if(!isLoaded) {
             Swal.fire({
-                title: 'Fetching Test',
+                title: 'Fetching Stats',
                 showConfirmButton: false,
                 allowEscapeKey: false,
                 allowOutsideClick: false,
@@ -75,7 +75,7 @@ const ViewStats = () => {
 
     const getMonthData = async(month) => {
         Swal.fire({
-            title: 'Fetching Test',
+            title: 'Fetching Stats',
             showConfirmButton: false,
             allowEscapeKey: false,
             allowOutsideClick: false,
@@ -115,21 +115,9 @@ const ViewStats = () => {
             <div>
                 {isLoaded ?
                 <div id="stat" className="dx-swatch-dark">
-                    {/* {console.log(data)} */}
                     {data && <TestCountChart data = {data} />}
                 </div>:
                 <div>Loading</div>
-            // <div>
-            //     {
-            //         Swal.fire({
-            //             title: 'Fetching Test',
-            //             showConfirmButton: false,
-            //             // allowEscapeKey: false,
-            //             allowOutsideClick: false,
-            //             // timer: 2500 ,
-            //         })
-            //     }
-            // </div>
             }
             <div>
             <select 
