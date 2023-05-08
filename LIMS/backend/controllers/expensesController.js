@@ -1,6 +1,7 @@
 const Expenses = require('../models/expensesModel')
 const mongoose = require('mongoose')
 
+
 //get all expenses
 const getallexpenses = async (req,res) => {
     const expenses = await Expenses.find({}).sort({createdAt: -1})
@@ -91,7 +92,7 @@ const updateexpenses = async (req,res) => {
     }
     
     if(emptyFields.length > 0){
-        return res.status(400).json({error: "please fill all the fields", emptyFields })
+        return res.status(400).json({error: "Please fill all the fields", emptyFields })
     }
 
 
