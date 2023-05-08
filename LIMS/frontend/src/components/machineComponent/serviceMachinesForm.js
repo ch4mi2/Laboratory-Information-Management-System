@@ -75,30 +75,13 @@ const ServiceMachineForm = ({machine}) => {
     })
     navigate('/machineHistory/' + machine._id);
     }
-  };
-
-  // useEffect(() => {
-  //   if (currentMachine) {
-  //     setMachineId(currentMachine._id);
-  //     setmachineName(currentMachine.machineName);
-  //   }
-  //   // eslint-disable-next-line
-  // }, []);
+  };  
 
   return (
     <div class="">
       <hr />
       <form className="create" onSubmit={handleSubmit}>
         <div class="machinelabels">
-        {/* <div class="input-box">
-            <label>Machine ID :</label>
-            <input
-              type="text"
-              onChange={(e) => setMachineId(e.target.value)}
-              value={machineId}
-              required
-            />
-          </div> */}
           <div class="input-box">
             <label>Machine Name :</label>
             <input

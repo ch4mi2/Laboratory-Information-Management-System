@@ -7,9 +7,7 @@ import Swal from 'sweetalert2';
 
 const MachineHistory = ({ machine}) => {
   const navigate = useNavigate();
-  //const [machineParts,setMachineParts] = useState(null);
   const {machineParts, dispatch} = useMachinePartsContext();
-  // const currentMachine = machineParts.filter((m) => m.machineId === machine._id)[0];
   // console.log(currentMachine);
 
   //Machine Parts Details
