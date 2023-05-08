@@ -15,6 +15,10 @@ const machineSchema = new Schema({
         type: String,
         required:true
     },
+    Price:{
+        type:String,
+        required:true
+    },
     Model:{
        type: String,
         required:true

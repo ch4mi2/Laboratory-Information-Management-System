@@ -18,6 +18,7 @@ const ServiceMachineForm = ({machine}) => {
   const [TechTelno, setTechTelno] = useState('');
   const [TechnicianPayment, setTechnicianPayment] = useState('');
   const [error, setError] = useState(null);
+  const[emptyFields, setEmptyFields] = useState([]);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +44,7 @@ const ServiceMachineForm = ({machine}) => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields)
       console.log('error');
       Swal.fire({
         title: 'Error',
@@ -105,6 +107,7 @@ const ServiceMachineForm = ({machine}) => {
               value={machineName}
               required
               disabled
+              className={emptyFields.includes('MachineType') ? 'error' : ''}
             />
           </div>
           <div class="input-box">
@@ -114,6 +117,7 @@ const ServiceMachineForm = ({machine}) => {
               onChange={(e) => setLastServiceDate(e.target.value)}
               value={LastserviceDate}
               required
+              className={emptyFields.includes('LastserviceDate') ? 'error' : ''}
             />
           </div>
           <div class="input-box">
@@ -123,6 +127,7 @@ const ServiceMachineForm = ({machine}) => {
               onChange={(e) => setNextServiceDate(e.target.value)}
               value={NextServiceDate}
               required
+              className={emptyFields.includes('NextServiceDate') ? 'error' : ''}
             />
           </div>
           <div class="input-box">
@@ -132,6 +137,7 @@ const ServiceMachineForm = ({machine}) => {
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
               required
+              className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
           <div class="input-box">
@@ -142,6 +148,7 @@ const ServiceMachineForm = ({machine}) => {
               value={TechTelno}
               required
               pattern="[0-9]{10}"
+              className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
           </div>
           <div class="input-box">
@@ -151,6 +158,7 @@ const ServiceMachineForm = ({machine}) => {
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
               required
+              className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>
           <div class="Add-button">

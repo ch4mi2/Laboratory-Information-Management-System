@@ -224,6 +224,7 @@ const MachinePartsForm = ({machine}) => {
   const [TechTelno, setTechTelno] = useState('');
   const [TechnicianPayment, setTechnicianPayment] = useState('');
   const [error, setError] = useState(null);
+  const[emptyFields, setEmptyFields] = useState([]);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -253,6 +254,7 @@ const MachinePartsForm = ({machine}) => {
     if (!response.ok) {
       setError(json.error);
       console.log('error');
+      setEmptyFields(json.emptyFields)
       Swal.fire({
                 title: 'Error',
                 text: error,
@@ -316,6 +318,7 @@ const MachinePartsForm = ({machine}) => {
               value={machineName}
               required
               disabled
+              className={emptyFields.includes('machineName') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -325,6 +328,7 @@ const MachinePartsForm = ({machine}) => {
               onChange={(e) => setMaintenanceDate(e.target.value)}
               value={MaintenanceDate}
               required
+              className={emptyFields.includes('MaintenanceDate') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -334,6 +338,7 @@ const MachinePartsForm = ({machine}) => {
               onChange={(e) => setIssue(e.target.value)}
               value={Issue}
               required
+              className={emptyFields.includes('Issue') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -343,6 +348,7 @@ const MachinePartsForm = ({machine}) => {
               onChange={(e) => setMachinePart(e.target.value)}
               value={MachinePart}
               required
+              className={emptyFields.includes('MachinePart') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -352,6 +358,7 @@ const MachinePartsForm = ({machine}) => {
               onChange={(e) => setbrandOfMachinePart(e.target.value)}
               value={brandOfMachinePart}
               required
+              className={emptyFields.includes('brandOfMachinePart') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -361,6 +368,7 @@ const MachinePartsForm = ({machine}) => {
               onChange={(e) => setPriceOfMachinePart(e.target.value)}
               value={PriceOfMachinePart}
               required
+              className={emptyFields.includes('PriceOfMachinePart') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -370,6 +378,7 @@ const MachinePartsForm = ({machine}) => {
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
               required
+              className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -380,6 +389,7 @@ const MachinePartsForm = ({machine}) => {
               value={TechTelno}
               required
               pattern="[0-9]{10}"
+              className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -389,6 +399,7 @@ const MachinePartsForm = ({machine}) => {
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
               required
+              className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>
           <div className="Add-button">

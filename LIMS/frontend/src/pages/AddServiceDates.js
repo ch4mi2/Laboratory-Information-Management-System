@@ -1,4 +1,5 @@
 import ServiceMachineForm from "../components/machineComponent/serviceMachinesForm"
+import '../css/MachineStyles/machineDetails.css'
 import { useLocation } from "react-router-dom";
 import { useEffect , useState } from "react";
 
