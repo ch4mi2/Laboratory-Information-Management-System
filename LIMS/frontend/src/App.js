@@ -61,7 +61,7 @@ import CompletedTestResults from './pages/CompletedTestResults';
 import Dashboard from './pages/Dashboard';
 import TopCustomers from './pages/TopCustomers';
 import MachineServiceBill from './pages/MachineServiceBill';
-import MachinePartsBill from './pages/MachinePartsBill'
+import MachinePartsBill from './pages/MachinePartsBill';
 
 function App() {
   const { user } = useAuthContext();
@@ -230,6 +230,7 @@ function App() {
                     element={<CompletedTestResults />}
                   />
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route exact path="/" element={<Dashboard />} />
                 </Routes>
               </div>
             </div>
