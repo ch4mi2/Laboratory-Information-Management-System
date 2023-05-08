@@ -52,8 +52,8 @@ const TestDataForm = () => {
 
         if(!response.ok) {
             setError(json.error)
-            setEmptyFields(json.emptyFields)
             if(response.status == 400) {
+                setEmptyFields(json.emptyFields)
                 MySwal.fire({
                     title: 'Error',
                     text: error,
@@ -62,14 +62,13 @@ const TestDataForm = () => {
                     timer: 1500,
                 })
             }else {
+                setEmptyFields([])
                 MySwal.fire({
                     title: 'Error',
                     text: json.error,
                     icon: 'error',
                     showConfirmButton: false,
                     timer: 2000,
-                }).then(() => {
-                    navigate('/testData');
                 })
             }     
         }

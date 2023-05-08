@@ -24,27 +24,32 @@ const categorySchema = new Schema({
         required: true
     },
     endMRef: {
-        type: Number
+        type: Number,
+        min: 0
     },
     startFRef: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     operatorF: {
         type: String,
         required: true
     },
     endFRef: {
-        type: Number
+        type: Number,
+        min: 0
     },
     startBRef: {
-        type: Number
+        type: Number,
+        min: 0
     },
     operatorB: {
         type: String
     },
     endBRef: {
-        type: Number
+        type: Number,
+        min: 0
     }
 });
 

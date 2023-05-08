@@ -26,7 +26,8 @@ const testSchema = new Schema({
     },
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     heading: {
         type: String,
