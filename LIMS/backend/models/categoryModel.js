@@ -16,7 +16,8 @@ const categorySchema = new Schema({
     },
     startMRef: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     operatorM: {
         type: String,

@@ -32,14 +32,6 @@ const TestData = () => {
         fetchTests();
     }, []);
 
-    // useEffect(() => {
-    //     $(function () {
-    //       $('#example').DataTable({
-    //         order: [[4, 'desc']],
-    //         bDestroy: true,
-    //       });
-    //     });
-    // }, []);
 
     const handleClick = (id) => {
         navigate(`/viewTest/${id}`, {state:{id}})
@@ -78,7 +70,7 @@ const TestData = () => {
                     const table = $('#test-list').DataTable();
                     const row = table.rows(`[data-id ="${id}"]`);
                     row.remove().draw();
-                    // dispatch({type: 'DELETE_TEST', payload: json})
+                    
                     Swal.fire({
                         title: 'Success',
                         text: 'Successfully Deleted Test',

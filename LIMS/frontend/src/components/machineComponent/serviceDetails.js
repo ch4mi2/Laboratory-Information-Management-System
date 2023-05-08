@@ -7,14 +7,6 @@ const ServiceDetails = ({ service }) => {
     navigate(`../updateServiceDates/${id}`);
   };
 
-//   const handleClick2 = (id) => {
-//     navigate(`../AddMachineParts`);
-//   };
-
-//   const handleClick3 = (id) => {
-//     navigate(`../AddServiceDates`);
-//   };
-
    return (
     <div className="">
       <div className="machine-details">

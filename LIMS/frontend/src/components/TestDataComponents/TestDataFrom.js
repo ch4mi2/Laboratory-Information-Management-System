@@ -40,7 +40,7 @@ const TestDataForm = () => {
 
         const Test = {testID, testName, outsourced, shortName, specimen, price, heading, remarks, 
             categoryHeading, category, UOM, startMRef, operatorM, endMRef, startFRef, operatorF, endFRef, startBRef, operatorB, endBRef}
-
+        
         const response = await fetch('/api/tests', {
             method: 'POST',
             body: JSON.stringify(Test),
@@ -68,7 +68,7 @@ const TestDataForm = () => {
                     icon: 'error',
                     showConfirmButton: false,
                     timer: 2000,
-                }).then(() => {  
+                }).then(() => {
                     navigate('/testData');
                 })
             }     

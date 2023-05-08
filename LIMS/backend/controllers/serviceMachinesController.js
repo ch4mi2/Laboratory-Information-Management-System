@@ -90,12 +90,6 @@ const updateServiceDates = async (req , res) => {
 
     let emptyFields = []
 
-        // if(!machineId) {
-        //     emptyFields.push('machineId')
-        // }
-        // if(!machineName) {
-        //     emptyFields.push('machineName')
-        // }
         if(!LastserviceDate) {
             emptyFields.push('LastserviceDate')
         }

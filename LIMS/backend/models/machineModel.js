@@ -36,8 +36,9 @@ const machineSchema = new Schema({
         required:true
     },
     TelNo:{
-        type:String,
+        type:Number,
         required:true,
+        maxlength:10
     }
 } , {timestamps : true})
 
