@@ -15,11 +15,7 @@ const Inventory = () => {
   const navigate = useNavigate();
   const [inventory, setInventory] = useState(null);
   const MySwal = withReactContent(Swal);
-  // const [Tests,setTests] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const navigate = useNavigate();
-  const [inventory, setInventory] = useState(null);
-  const MySwal = withReactContent(Swal);
+
 
   useEffect(() => {
     const fetchTests = async () => {
