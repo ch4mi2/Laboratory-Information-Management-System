@@ -10,7 +10,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
 
-// pages and components
+// pages and components`
+import Inventory from './pages/Inventory'
+import FormInventory from './pages/InventoryForm';
 import PatientList from './pages/PatientList';
 import PatientProfile from './pages/PatientProfile';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
@@ -63,6 +65,7 @@ import TopCustomers from './pages/TopCustomers';
 import MachineServiceBill from './pages/MachineServiceBill';
 import MachinePartsBill from './pages/MachinePartsBill';
 import EditBillNew from './pages/EditBillNew';
+import Salary from './pages/salary';
 
 function App() {
   const { user } = useAuthContext();
@@ -103,6 +106,7 @@ function App() {
                     path="/view-bills/:billId/edit"
                     element={<EditBillNew />}
                   />
+                  <Route path="/Salary" element={<Salary/>} />
                   <Route path="/AdminProfile" element={<AdminProfile />} />
                   <Route path="/view-bills" element={<AllBills />} />
 
@@ -130,6 +134,11 @@ function App() {
                   <Route
                     path="/pendingAccession"
                     element={<PendingAccession />}
+                  />
+
+                  <Route
+                    path="/inventory"
+                    element={<Inventory/>}
                   />
 
                   <Route path="/accessed" element={<Accessed />} />
@@ -229,6 +238,15 @@ function App() {
                   <Route
                     path="/completedTests"
                     element={<CompletedTestResults />}
+                  />
+
+                 <Route
+                    path="/InventoryForm"
+                    element={<FormInventory />}
+                  />
+                  <Route
+                    path="/inventoryRoutes"
+                    element={<FormInventory />}
                   />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route exact path="/" element={<Dashboard />} />

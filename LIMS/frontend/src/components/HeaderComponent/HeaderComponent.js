@@ -17,6 +17,19 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
     navigate("/Welcome")
   }
 
+  const profileClick =() =>
+  {
+    if(user.username === "admin2")
+    {
+      navigate("/AdminProfile")
+    }
+    else
+    {
+      navigate("/StaffProfile")
+    }
+
+  }
+
 
 
   return (
@@ -30,7 +43,10 @@ const HeaderComponent = ({ logoImgSrc, username }) => {
       {user && (
       <div className="userdiv">
         <span style={{marginRight:"10px"}}>{user.username}                                                                                     </span>
+        
+        <button className="btnDelete"  onClick={profileClick}>Profile</button>
         <button className="btnDelete" onClick={handleClick}>Log out</button>
+        
       </div>)}
       <div className="userdiv">
 

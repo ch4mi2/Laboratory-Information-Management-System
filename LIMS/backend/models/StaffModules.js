@@ -58,6 +58,11 @@ StaffSchema.statics.creatingStaff = async function(name,NIC,Eid,contact,post,ema
     }
 
     const exist = await this.findOne({username})
+    const exist1 = await this.findOne({Eid})
+
+    if(exist1) {
+        throw Error('Employee id is in use')
+    }
 
     if(exist) {
         throw Error('Username in use')

@@ -16,7 +16,8 @@ const  UpdateProfile = () => {
     const [email,setEmail] = useState(null)
     const [username,setUsername] = useState(null)
     const [pw,setPW] = useState(null)
-    
+    const [emptyFields, setEmptyFields] = useState([])
+    const [error, setError] = useState(null)
     const {user} = useAuthContext()
 
 
@@ -60,7 +61,12 @@ const  UpdateProfile = () => {
               NIC,
             })
           })
+
+          const json1 = await response.json()
+
           if (response.ok) {
+            setError(null)
+            setEmptyFields([])
             Swal.fire(
                 {
                   title: 'Success',
@@ -71,6 +77,10 @@ const  UpdateProfile = () => {
                   timerProgressBar: true  
               }
               )
+          }
+          else{
+            setError(json1.error)
+            setEmptyFields(json1.emptyFields)
           }
         } catch (error) {
           console.log(error)
@@ -92,6 +102,7 @@ const  UpdateProfile = () => {
              type="text"
              onChange={(e) => setName(e.target.value)}
              value={name}
+             className={emptyFields.includes('name') ? 'error' : ""}
             />
             <label>Employee ID</label>
             <input
@@ -99,6 +110,7 @@ const  UpdateProfile = () => {
              type="text"
              onChange={(e) => setEid(e.target.value)}
              value={Eid}
+             className={emptyFields.includes('Eid') ? 'error' : ""}
             />
             <label>Position</label>
             <input
@@ -106,6 +118,7 @@ const  UpdateProfile = () => {
              type="text"
              onChange={(e) => setPost(e.target.value)}
              value={post}
+             className={emptyFields.includes('post') ? 'error' : ""}
             />
             <label>Contact</label>
             <input
@@ -113,6 +126,8 @@ const  UpdateProfile = () => {
              type="text"
              onChange={(e) => setContact(e.target.value)}
              value={contact}
+             pattern="[0-9]{10}"
+             className={emptyFields.includes('contact') ? 'error' : ""}
             />
             <label>NIC</label>
             <input
@@ -120,6 +135,7 @@ const  UpdateProfile = () => {
              type="text"
              onChange={(e) => setNIC(e.target.value)}
              value={NIC}
+             className={emptyFields.includes('NIC') ? 'error' : ""}
             />
             <label>Email</label>
             <input
@@ -127,8 +143,10 @@ const  UpdateProfile = () => {
              type="text"
              onChange={(e) => setEmail(e.target.value)}
              value={email}
+             className={emptyFields.includes('email') ? 'error' : ""}
             /><br/>
-            <button className="btnSubmit" type="submit">Submit</button>
+            <button className="btnSubmit" type="submit">Update</button>
+            {error && <div className="error">{error}</div>}
             </form>
             
         

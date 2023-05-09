@@ -107,12 +107,24 @@ function SideNavBar() {
             </NavItem>
           </NavItem>
 
-          <NavItem eventKey="">
+          <NavItem eventKey="Inventory">
+            <NavIcon>
+              <MdIcons.MdOutlineInventory size={30} />
+            </NavIcon>
+            <NavItem className="subNav" eventKey="inventory">
+              <NavText>Inventory</NavText>
+            </NavItem>
+            <NavItem className="subNav" eventKey="InventoryForm">
+              <NavText>Add Inventory</NavText>
+            </NavItem>
+          </NavItem>
+        
+          {/*<NavItem eventKey="">
             <NavIcon>
               <MdIcons.MdOutlineInventory size={30} />
             </NavIcon>
             <NavText>Inventory</NavText>
-          </NavItem>
+      </NavItem> */}
 
           <NavItem eventKey="machines">
             <NavIcon>
