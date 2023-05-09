@@ -108,6 +108,10 @@ const updatePatient = async (req, res) => {
   const { firstName, lastName, NIC, tpNo, gender, age, email } = req.body;
 
   let emptyFields = [];
+  if (age > 200 || age < 0) {
+    emptyFields.push('Age');
+    return res.status(400).json({ error: 'Invalid Age', emptyFields });
+  }
   if (NIC.length > 12 || NIC.length < 10) {
     emptyFields.push('NIC');
     return res.status(400).json({ error: 'Invalid NIC', emptyFields });

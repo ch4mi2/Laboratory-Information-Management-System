@@ -182,6 +182,7 @@ const EditPatientForm = ({ patient }) => {
             value={age}
             className={emptyFields.includes('age') ? 'error' : ''}
             min="0"
+            max="200"
           />
 
           <label>Email :</label>
