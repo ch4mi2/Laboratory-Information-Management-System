@@ -20,7 +20,7 @@ const PendingTestResults = () => {
 
         $(function() {
           $('#example').DataTable({
-            order: [[0,'desc']],
+            order: [[0,'asc']],
             bDestroy: true,
           });
         });
