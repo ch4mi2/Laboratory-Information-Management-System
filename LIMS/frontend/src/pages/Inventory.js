@@ -38,8 +38,8 @@ const Inventory = () => {
 
 
 
-  const handleUpdate = () => {
-    //go to update form here
+  const handleUpdate = (id) => {
+    navigate(`/updateInventory/${id}`)
   };
 
   const clickDelete = (id) => {

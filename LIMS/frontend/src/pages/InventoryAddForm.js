@@ -1,16 +1,13 @@
 import React from 'react'
- 
-import '../../css/Inventory/Inventory.css';
+import InventoryForm from '../components/InventoryComponent/InventoryForm'
 
-const InventoryAdd = () => {
-    return ( 
+
+export default function FormInventory() {
+
+    
+    return (
         <div>
-            <h4>Add New Test</h4>
-            <div >
-               <h1>InventoryAdd</h1> 
-            </div>
+            <InventoryForm/>
         </div>
-    );
+    )
 }
- 
-export default InventoryAdd;

@@ -73,9 +73,7 @@ const TestDataz = () => {
     fetchInventory();
   }, []);
 
-  useEffect(() => {
-    $("#inventory-list").DataTable();
-  }, [inventory]);
+  
 
   return (
     <div className="container">
