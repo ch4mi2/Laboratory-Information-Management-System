@@ -118,6 +118,9 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="InventoryForm">
               <NavText>Add Inventory</NavText>
             </NavItem>
+            <NavItem className="subNav" eventKey="inventoryReport">
+              <NavText>Inventory Report</NavText>
+            </NavItem>
           </NavItem>
         
           {/*<NavItem eventKey="">

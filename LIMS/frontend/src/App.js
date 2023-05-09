@@ -3,16 +3,18 @@ import {
   Routes,
   Route,
   Navigate,
-} from "react-router-dom";
-import { useAuthContext } from "./hooks/useAuthContext";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+} from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 // assets
-import mediLineLogo from "./assets/common/mediLineLogo.webp";
+import mediLineLogo from './assets/common/mediLineLogo.webp';
 
 // pages and components`
+import InventoryReport from "./pages/InventoryReport";
+import InventoryUpdate from "./pages/InventoryUpdateForm";
 import Inventory from "./pages/Inventory";
-import FormInventory from "./pages/InventoryForm";
+import FormInventory from "./pages/InventoryAddForm";
 import PatientList from "./pages/PatientList";
 import PatientProfile from "./pages/PatientProfile";
 import CreatePatientForm from "./components/PatientComponents/CreatePatientForm";
@@ -31,41 +33,41 @@ import ViewStat from "./pages/ViewStats";
 import AddMachines from "./pages/AddMachines";
 import PendingTestResults from "./pages/PendingTestResults";
 //import Machines from './pages/machineHistory';
-import UpdateExpenses from "./pages/UpdateExpenses";
-import AddTestResults from "./pages/AddTestResults";
-import TestResultPreview from "./pages/TestResultPreview";
-import AddBill from "./pages/AddBill";
-import PrintBill from "./pages/PrintBill";
-import AllBills from "./components/BillComponent/AllBills";
-import ShowABill from "./components/BillComponent/ShowABill";
-import TransactionHistory from "./pages/TransactionHistory";
+import UpdateExpenses from './pages/UpdateExpenses';
+import AddTestResults from './pages/AddTestResults';
+import TestResultPreview from './pages/TestResultPreview';
+import AddBill from './pages/AddBill';
+import PrintBill from './pages/PrintBill';
+import AllBills from './components/BillComponent/AllBills';
+import ShowABill from './components/BillComponent/ShowABill';
+import TransactionHistory from './pages/TransactionHistory';
 //import EditBill from './pages/EditBill';
-import AddStaff from "./pages/AddStaff";
-import LabInfo from "./pages/LabInfo";
-import MachineList from "./pages/machineList";
-import MachineHistory from "./pages/machineHistory";
-import AddMachineParts from "./pages/AddMachineParts";
-import MachineServiceDates from "./pages/AddServiceDates";
-import ViewMachineService from "./pages/viewServiceDates";
-import FinancialReport from "./pages/FinancialReport";
-import EditPatient from "./pages/EditPatient";
-import UpdateMachine from "./pages/UpdateMachines";
-import UpdateMachineParts from "./pages/UpdateMachineParts";
-import UpdateMachineService from "./pages/UpdateMachineServices";
-import LoginAdmin from "./pages/LoginAdmin";
-import LoginStaff from "./pages/LoginStaff";
-import Welcome from "./pages/Welcome";
-import AllStaff from "./pages/AllStaff";
-import StaffProfile from "./pages/StaffPorfile";
-import UpdateProfile from "./pages/UpdateProfile";
-import AdminProfile from "./pages/AdminProfile";
-import CompletedTestResults from "./pages/CompletedTestResults";
-import Dashboard from "./pages/Dashboard";
-import TopCustomers from "./pages/TopCustomers";
-import MachineServiceBill from "./pages/MachineServiceBill";
-import MachinePartsBill from "./pages/MachinePartsBill";
-import EditBillNew from "./pages/EditBillNew";
-import Salary from "./pages/salary";
+import AddStaff from './pages/AddStaff';
+import LabInfo from './pages/LabInfo';
+import MachineList from './pages/machineList';
+import MachineHistory from './pages/machineHistory';
+import AddMachineParts from './pages/AddMachineParts';
+import MachineServiceDates from './pages/AddServiceDates';
+import ViewMachineService from './pages/viewServiceDates';
+import FinancialReport from './pages/FinancialReport';
+import EditPatient from './pages/EditPatient';
+import UpdateMachine from './pages/UpdateMachines';
+import UpdateMachineParts from './pages/UpdateMachineParts';
+import UpdateMachineService from './pages/UpdateMachineServices';
+import LoginAdmin from './pages/LoginAdmin';
+import LoginStaff from './pages/LoginStaff';
+import Welcome from './pages/Welcome';
+import AllStaff from './pages/AllStaff';
+import StaffProfile from './pages/StaffPorfile';
+import UpdateProfile from './pages/UpdateProfile';
+import AdminProfile from './pages/AdminProfile';
+import CompletedTestResults from './pages/CompletedTestResults';
+import Dashboard from './pages/Dashboard';
+import TopCustomers from './pages/TopCustomers';
+import MachineServiceBill from './pages/MachineServiceBill';
+import MachinePartsBill from './pages/MachinePartsBill';
+import EditBillNew from './pages/EditBillNew';
+import Salary from './pages/salary';
 
 function App() {
   const { user } = useAuthContext();
@@ -80,9 +82,9 @@ function App() {
           </Helmet>
         </HelmetProvider>
         <HeaderComponent
-          profileImgSrc={""}
+          profileImgSrc={''}
           logoImgSrc={mediLineLogo}
-          username={""}
+          username={''}
         />
 
         <div className="container-fluid mt-5">
@@ -309,10 +311,22 @@ function App() {
                     element={user ? <FormInventory /> : <Welcome />}
                   />
                   <Route
+                    path="/updateInventory/:id"
+                    element={user ? <InventoryUpdate /> : <Welcome />}
+                  />
+                  <Route
+                    path="/inventoryReport"
+                    element={user ? <InventoryReport /> : <Welcome />}
+                  />
+                  <Route
                     path="/dashboard"
                     element={user ? <Dashboard /> : <Welcome />}
                   />
-                  <Route exact path="/" element={<Dashboard />} />
+                  <Route
+                    exact
+                    path="/"
+                    element={user ? <Dashboard /> : <Welcome />}
+                  />
                 </Routes>
               </div>
             </div>

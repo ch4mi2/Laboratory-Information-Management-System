@@ -104,14 +104,18 @@ const updateBill = async (req, res) => {
   const {
     patientId,
     patientName,
-    normalServices: services,
+    services,
     outsourceServices,
-    Total: total,
+    total,
     referredDoctor,
   } = req.body;
 
   let emptyFields = [];
 
+  if (!total > 0) {
+    emptyFields.push('total');
+    return res.status(400).json({ error: 'Invalid total', emptyFields });
+  }
   if (!patientId) {
     emptyFields.push('patientId');
   }
