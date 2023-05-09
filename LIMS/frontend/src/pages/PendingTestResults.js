@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
+import moment from 'moment';
 
 const PendingTestResults = () => {
   const [testResults, setTestResults] = useState(null);
@@ -18,7 +19,10 @@ const PendingTestResults = () => {
         setTestResults(json);
 
         $(function() {
-          $('#example').DataTable();
+          $('#example').DataTable({
+            order: [[0,'desc']],
+            bDestroy: true,
+          });
         });
       }
       } catch (error) {
@@ -51,7 +55,7 @@ const PendingTestResults = () => {
       <table id="example" className="table" style={{ width: '100%' }}>
         <thead>
           <tr>
-            
+            <th>Created At</th>
             <th>Patient</th>
             <th>Test</th>
             <th>Referred Doctor</th>
@@ -65,12 +69,12 @@ const PendingTestResults = () => {
           {testResults &&
             testResults.map((testResult) => (
               <tr key={testResult._id} data-status={testResult.sample?.status}>
-                
+                <td>{moment(testResult.createdAt).format('DD-MM-YYYY h:mm a') ?? "Record not found"}</td>
                 <td>{testResult.patient?.firstName ?? "Record not found"}{testResult.patient?.lastName}</td>
                 <td>{testResult.test?.testName ?? "Record not found"}</td>
-                <td></td>
+                <td>{testResult.bill?.referredDoctor ?? "Record not found"}</td>
                 <td>{testResult.sample?.sampleID ?? "Record not found"}</td>
-                <td>{testResult.sample?.status}</td>
+                <td>{testResult.sample?.status ?? "Record not found"}</td>
                 <td>
                   <button 
                     className='btnSubmit' 
@@ -78,7 +82,7 @@ const PendingTestResults = () => {
                     disabled={testResult.sample?.status === "pending"}
                     style={{backgroundColor: testResult.sample?.status === "pending" ? "#aaa" : ""}}
                   >
-                    Add Results
+                    Add
                   </button>
                 </td>
                 <td>
@@ -89,17 +93,6 @@ const PendingTestResults = () => {
               </tr>
             ))}
         </tbody>
-        <tfoot>     
-          <tr>
-            <th>Patient</th>
-            <th>Test</th>
-            <th>Referred Doctor</th>
-            <th>Sample Id</th>
-            <th>Sample Status</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </tfoot>
       </table>
     </div>               
   );

@@ -1,6 +1,7 @@
 const Expenses = require('../models/expensesModel')
 const mongoose = require('mongoose')
 
+
 //get all expenses
 const getallexpenses = async (req,res) => {
     const expenses = await Expenses.find({}).sort({createdAt: -1})
@@ -58,6 +59,7 @@ try{
 const deleteexpenses = async (req,res) => {
     const { id } = req.params
 
+
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'no such expense'})
     }
@@ -77,6 +79,23 @@ const deleteexpenses = async (req,res) => {
 const updateexpenses = async (req,res) => {
     const{ id } = req.params
 
+    const { description, amount} = req.body;
+    
+
+    let emptyFields = []
+
+    if(!description){
+        emptyFields.push('description')
+    }
+    if(!amount){
+        emptyFields.push('amount')
+    }
+    
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: "Please fill all the fields", emptyFields })
+    }
+
+
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'no such expense'})
     }
@@ -90,7 +109,10 @@ const updateexpenses = async (req,res) => {
         return res.status(400).json({error: 'No such expenses'})
     }
 
-    res.status(200).json(expenses)
+    if(emptyFields.length ==0){
+        res.status(200).json(expenses)
+    }
+    
 }
 
 

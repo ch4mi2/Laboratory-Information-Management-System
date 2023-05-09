@@ -51,7 +51,10 @@ const MachineList = () => {
     const json = await response.json()
 
     if(response.ok){
-      dispatch({type: 'DELETE_MACHINE' , payload:json})
+      // dispatch({type: 'DELETE_MACHINE' , payload:json})
+      const table = $('#machine-list').DataTable();
+      const row = table.rows(`[data-id = "${id}"]`);
+      row.remove().draw()
       Swal.fire({
         title: 'Success',
         text: 'Record has been deleted',
@@ -74,7 +77,7 @@ const MachineList = () => {
           <table id="machine-list" className="table" style={{ width: '100%' }}>
             <thead>
               <tr>
-                <th >Machine ID</th>
+                {/* <th >Machine ID</th> */}
                 <th >Machine Type</th>
                 <th >Brand</th>
                 <th >Purchased Date</th>
@@ -85,10 +88,10 @@ const MachineList = () => {
               {machines &&
                 machines.map((machine) => (
                   <tr
-                    key={machine._id}
+                    key={machine._id} data-id={machine._id}
                     
                   >
-                    <td onClick={() => handleClick(machine._id)}>{machine._id}</td>
+                    {/* <td onClick={() => handleClick(machine._id)}>{machine._id}</td> */}
                     <td onClick={() => handleClick(machine._id)}>{machine.MachineType}</td>
                     <td onClick={() => handleClick(machine._id)}>{machine.Brand}</td>
                     <td onClick={() => handleClick(machine._id)}>{machine.PurchaseDate}</td>

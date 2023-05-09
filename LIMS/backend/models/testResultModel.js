@@ -14,6 +14,10 @@ const testResultSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Sample'
     },
+    bill: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Bill',
+    },
     result: [
       {
         category: {

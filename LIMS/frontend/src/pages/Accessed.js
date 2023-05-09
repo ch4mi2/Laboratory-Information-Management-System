@@ -1,13 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
-import formatDate from '../UtillFuntions/formatDate';
 import JsBarcode from 'jsbarcode';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import moment from 'moment';
-import * as FaIcons from 'react-icons/fa';
-import { FaTrash } from 'react-icons/fa';
+
 
 const Accessed = () => {
   const { samples, dispatch } = useSampleContext();
@@ -33,7 +31,7 @@ const Accessed = () => {
   useEffect(() => {
     $(function() {
       $('#example').DataTable({
-        order: [[4,'desc']],
+        order: [[0,'desc']],
         "bDestroy": true
       });
     });
@@ -82,36 +80,46 @@ const Accessed = () => {
 
   const handleDeleteClick = async (id) => {
     const confirmed = await Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Are you sure you want to delete?',
+      text: "Test record corresponding to this sample will be deleted",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
-      customClass:'alerts'
+      customClass: 'alerts'
     });
   
     if (confirmed.isConfirmed) {
-      const response = await fetch(`/api/samples/${id}`, {
-        method: "DELETE",
-      });
-      const json = await response.json();
+      try {
+        const [sampleResponse, testResultResponse] = await Promise.all([
+          fetch(`/api/samples/${id}`, { method: 'DELETE' }),
+          fetch(`/api/testResult/all/${id}`, { method: 'DELETE' })
+        ]);
   
-      if (response.ok) {
-        const table = $('#example').DataTable();
-        const row = table.rows(`[data-id ="${id}"]`);
-        row.remove().draw();
-
-        Swal.fire(
-          {
+        const sampleJson = await sampleResponse.json();
+        const testResultJson = await testResultResponse.json();
+  
+        if (sampleResponse.ok && testResultResponse.ok) {
+          const table = $('#example').DataTable();
+          const row = table.rows(`[data-id ="${id}"]`);
+          row.remove().draw();
+  
+          Swal.fire({
             title: 'Success',
-            text: 'Record has been deleted',
+            text: 'Records has been deleted',
             icon: 'success',
             showConfirmButton: false,
             timer: 2000,
             timerProgressBar: true
-            
+          });
         }
-        )
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Something went wrong',
+          icon: 'error',
+          showConfirmButton: true
+        });
       }
     }
   };
@@ -132,12 +140,12 @@ const Accessed = () => {
           <table id="example" className="table" style={{ width: '100%' }}>
             <thead>
               <tr>
+                <th>Collected At</th>
+                <th>Created At</th>
                 <th>Sample Id</th>
                 <th>Patient</th>
                 <th>Test</th>
                 <th>Specimen</th>
-                <th>Billing Date</th>
-                <th>Collection Time</th>
                 <th>Barcode</th>
                 <th>Delete</th>
               </tr>
@@ -145,12 +153,12 @@ const Accessed = () => {
             <tbody>
               {samples && samples.map((sample) => (
                 <tr key={sample._id} data-id={sample._id}>
-                  <td>{sample.sampleID}</td>
+                  <td>{moment(sample.collectionTime).format('DD-MM-YYYY h:mm a') ?? "Record not found"}</td>
+                  <td>{moment(sample.createdAt).format('DD-MM-YYYY h:mm a')}</td>
+                  <td>{sample.sampleID ?? "Record not found"}</td>
                   <td>{sample.patient?.firstName ?? "Record not found"}</td>
                   <td>{sample.test?.testName ?? "Record not found"}</td>
                   <td>{sample.test?.specimen ?? "Record not found"}</td>
-                  <td>{moment(sample.createdAt).format('DD-MM-YYYY HH:mm a')}</td>
-                  <td>{moment(sample.collectionTime).format('DD-MM-YYYY HH:mm a')}</td>
                   <td>
                     <button 
                       className="btnSubmit" 

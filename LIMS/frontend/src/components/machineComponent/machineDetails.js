@@ -7,9 +7,7 @@ import Swal from 'sweetalert2';
 
 const MachineHistory = ({ machine}) => {
   const navigate = useNavigate();
-  //const [machineParts,setMachineParts] = useState(null);
   const {machineParts, dispatch} = useMachinePartsContext();
-  // const currentMachine = machineParts.filter((m) => m.machineId === machine._id)[0];
   // console.log(currentMachine);
 
   //Machine Parts Details
@@ -55,7 +53,7 @@ const MachineHistory = ({ machine}) => {
   };
 
   const handleClick = (id) => {
-    navigate(`../machinePartsReceipt/${id}`);
+    navigate(`../machinePartsBill/${id}`);
   };
 
   //Delete Machine Parts
@@ -77,7 +75,10 @@ const MachineHistory = ({ machine}) => {
 
     if(response.ok){
       console.log(json)
-      dispatch({type: 'DELETE_MACHINEPART' , payload:json})
+  //    dispatch({type: 'DELETE_MACHINEPART' , payload:json})
+    const table = $('#machineparts-list').DataTable();
+    const row = table.rows(`[data-id = "${id}"]`);
+    row.remove().draw()
 
       Swal.fire({
         title: 'Success',
@@ -132,6 +133,12 @@ const MachineHistory = ({ machine}) => {
           {machine.TelNo}
           </p>
         </div> 
+        <div className="col-6">
+          <p>
+          <strong>Price : </strong>
+          {machine.Price}
+          </p>
+        </div> 
         </div>
         <p>
         <strong>Warranty Expiration : </strong>
@@ -145,7 +152,6 @@ const MachineHistory = ({ machine}) => {
         <button className = "subBtn"  onClick={() => handleClickMachineParts (machine._id)}> Replace Machine Parts</button>
         </div>
         </div>
-        <p>{machine.createdAt}</p>
       </div>
       <div>
         <hr/>
@@ -172,7 +178,7 @@ const MachineHistory = ({ machine}) => {
       {machineParts &&
                 machineParts.map((machinePart) => (
                   <tr
-                    key={machinePart._id}
+                    key={machinePart._id} data-id={machinePart._id}
                   >
                     <td >{machinePart.MaintenanceDate}</td>
                     <td >{machinePart.Issue}</td>

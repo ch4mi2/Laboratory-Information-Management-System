@@ -16,7 +16,8 @@ const categorySchema = new Schema({
     },
     startMRef: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     operatorM: {
         type: String,
@@ -24,11 +25,12 @@ const categorySchema = new Schema({
     },
     endMRef: {
         type: Number,
-        required: true
+        min: 0
     },
     startFRef: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     operatorF: {
         type: String,
@@ -36,16 +38,18 @@ const categorySchema = new Schema({
     },
     endFRef: {
         type: Number,
-        required: true
+        min: 0
     },
     startBRef: {
-        type: Number
+        type: Number,
+        min: 0
     },
     operatorB: {
         type: String
     },
     endBRef: {
-        type: Number
+        type: Number,
+        min: 0
     }
 });
 

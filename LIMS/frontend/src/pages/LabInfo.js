@@ -10,6 +10,7 @@ const LabInfo = () => {
     const [email,setEmail] = useState('')
     const [id,setId] = useState('')
     const [error,setError] = useState('')
+    const [emptyFields, setEmptyFields] = useState([])
 
     useEffect(() => {
         const fetchLabInfo = async () => {
@@ -51,7 +52,8 @@ const LabInfo = () => {
             })
           })
 
-          
+          const json = await response.json()
+
           if (response.ok) {
             Swal.fire(
                 {
@@ -64,7 +66,11 @@ const LabInfo = () => {
               }
               )
               setError(null)
+              setEmptyFields([])
           }else{
+            setError(json.error)
+            setEmptyFields(json.emptyFields)
+            
             Swal.fire({
               title: 'Error',
               text: 'Record could not be updated',
@@ -83,51 +89,52 @@ const LabInfo = () => {
             <h3>Lab Information</h3>
             <label>Name</label>
             <input
-            class="form-control"
+             className={`form-control ${emptyFields.includes('name') ? 'error' : ''}`}
              type="text"
              onChange={(e) => setName(e.target.value)}
              value={name}
-             required
             />
             <label>Address</label>
             <input
-            class="form-control"
+             className={`form-control ${emptyFields.includes('address') ? 'error' : ''}`}
              type="textarea"
              onChange={(e) => setAddress(e.target.value)}
              value={address}
-             required
             />  
             <label>Tel 1</label>
             <input
-            class="form-control"
+             className={`form-control ${emptyFields.includes('tel1') ? 'error' : ''}`}
              type="tel"
              onChange={(e) => setTel1(e.target.value)}
              value={tel1}
-             pattern="[0-9]*"
+             pattern="[0-9]{10}"
             />  
             <label>Tel 2</label>
             <input
-            class="form-control"
+            className="form-control"
              type="tel"
              onChange={(e) => setTel2(e.target.value)}
              value={tel2}
+             pattern="[0-9]{10}"
             />  
             <label>Tel 3</label>
             <input
-            class="form-control"
+            className="form-control"
              type="tel"
              onChange={(e) => setTel3(e.target.value)}
              value={tel3}
+             pattern="[0-9]{10}"
             /> 
             <label>Email</label>
             <input
-            class="form-control"
+            className="form-control"
              type="email"
              onChange={(e) => setEmail(e.target.value)}
              value={email}
             /> 
             <br />
-            <button className="btnSubmit" type="submit"> Update </button>  
+            <button className="btnSubmit" type="submit"> Update </button> 
+            {error && <div className="error">{error}</div>} 
         </form>
     )
 }

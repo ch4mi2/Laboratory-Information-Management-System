@@ -13,17 +13,7 @@ const UpdateMachineService = ({machine}) => {
     const [TechTelno, setTechTelno] = useState(machine.TechTelno)
     const [TechnicianPayment, setTechnicianPayment] = useState(machine.TechnicianPayment)
     const [error, setError] = useState(null);
-
-  // useEffect(()=>{
-  //   getMachineDetails();
-  //   // eslint-disable-next-line
-  // }, [])
-
-  // const getMachineDetails = async () => {
-  //   let result = await fetch(`/api/machines/`+ machine._id);
-  //   // eslint-disable-next-line
-  //   result = result.json();
-  // }
+    const[emptyFields, setEmptyFields] = useState([]);
 
   const handleMachineUpdate = async (e) => {
             e.preventDefault()
@@ -41,7 +31,8 @@ const UpdateMachineService = ({machine}) => {
     
             if(!response.ok) {
                 setError(json.error)
-                //setEmptyFields(json.emptyFields)
+                setEmptyFields(json.emptyFields)
+                console.log(json.emptyFields)
                 Swal.fire({
                     title: 'Error',
                     text: error,
@@ -66,9 +57,7 @@ const UpdateMachineService = ({machine}) => {
             }
         }
   
-  // const handleUpdate = async (e) => {
-  //   console.log(MachineType, Brand, Model, SerialNo,PurchaseDate,WarrantyExp, Manufacturer, TelNo);
-  // };
+  ;
 
   return (
     <div className="">
@@ -81,7 +70,7 @@ const UpdateMachineService = ({machine}) => {
               type="date"
               onChange={(e) => setLastserviceDate(e.target.value)}
               value={LastserviceDate}
-              required
+              className={emptyFields.includes('LastserviceDate') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -90,7 +79,8 @@ const UpdateMachineService = ({machine}) => {
               type="date"
               onChange={(e) => setNextServiceDate(e.target.value)}
               value={NextServiceDate}
-              required
+              // required
+              className={emptyFields.includes('NextServiceDate') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -99,7 +89,8 @@ const UpdateMachineService = ({machine}) => {
               type="text"
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
-              required
+              // required
+              className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -108,8 +99,9 @@ const UpdateMachineService = ({machine}) => {
               type="text"
               onChange={(e) => setTechTelno(e.target.value)}
               value={TechTelno}
-              required
+              // required
               pattern="[0-9]{10}"
+              className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
           </div>
           <div className="input-box">
@@ -118,7 +110,8 @@ const UpdateMachineService = ({machine}) => {
               type="number"
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
-              required
+              // required
+              className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>
           <div className="Add-button">

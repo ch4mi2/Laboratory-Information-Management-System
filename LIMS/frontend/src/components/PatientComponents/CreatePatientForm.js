@@ -73,6 +73,45 @@ const CreatePatientForm = () => {
     }
   };
 
+  const handleNICValidation = (e) => {
+    const value = e.target.value;
+    const key = e.key;
+    const isNumeric = /^\d$/.test(key);
+    const isModifierKey = [
+      'Backspace',
+      'End',
+      'Home',
+      'ArrowLeft',
+      'ArrowRight',
+    ].includes(key);
+
+    const isAllowed =
+      (value.length === 9 && ('x' || 'X' || 'z' || 'Z')) ||
+      (value.length >= 10 && value.length < 12 && isNumeric) ||
+      (value.length < 12 && isNumeric) ||
+      isModifierKey;
+    if (!isAllowed) {
+      e.preventDefault();
+    }
+  };
+
+  const handleTpNoValidation = (e) => {
+    const value = e.target.value;
+    const key = e.key;
+    const isNumeric = /^\d$/.test(key);
+    const isModifierKey = [
+      'Backspace',
+      'End',
+      'Home',
+      'ArrowLeft',
+      'ArrowRight',
+    ].includes(key);
+
+    const isAllowed = (value.length < 10 && isNumeric) || isModifierKey;
+    if (!isAllowed) {
+      e.preventDefault();
+    }
+  };
   return (
     <div className="createPatientFormContainer">
       <div className="row my-3">
@@ -102,6 +141,10 @@ const CreatePatientForm = () => {
             onChange={(e) => setNIC(e.target.value)}
             value={NIC}
             className={emptyFields.includes('NIC') ? 'error' : ''}
+            pattern="[0-9]{9}[x|X|v|V]|[0-9]{12}"
+            onKeyDown={(e) => {
+              handleNICValidation(e);
+            }}
           />
 
           <label>First Name :</label>
@@ -130,9 +173,10 @@ const CreatePatientForm = () => {
             value={tpNo}
             className={emptyFields.includes('tpNo') ? 'error' : ''}
             pattern="[0-9]{10}"
+            onKeyDown={(e) => handleTpNoValidation(e)}
           />
 
-          <label>Age :</label>
+          <label>Age (Years):</label>
           <input
             required
             type="number"

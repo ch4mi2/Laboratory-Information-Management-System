@@ -1,4 +1,6 @@
 const Machine = require('../models/machineModel')
+const Service = require('../models/serviceMachineModel')
+const MachineParts = require('../models/machinePartsModel')
 const mongoose = require('mongoose')
 
 //get all machines
@@ -29,7 +31,7 @@ const getMachine = async (req, res) => {
 
 //create new workout
 const createMachine = async (req , res) => {
-    const {MachineType , Brand, PurchaseDate,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
+    const {MachineType , Price ,Brand, PurchaseDate,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
 
     let emptyFields = []
 
@@ -45,13 +47,18 @@ const createMachine = async (req , res) => {
         if(!Model) {
             emptyFields.push('Model')
         }
+        if(!Price) {
+            emptyFields.push('Price')
+        }
         if(!WarrantyExp) {
             emptyFields.push('WarrantyExp')
         }
         if(!Manufacturer) {
             emptyFields.push('Manufacturer')
         }
-
+        if(!PurchaseDate) {
+            emptyFields.push('PurchasedDate')
+        }
         if(!TelNo) {
             emptyFields.push('TelNo')
         }
@@ -65,6 +72,7 @@ const createMachine = async (req , res) => {
             Brand,
             PurchaseDate,
             Model,
+            Price,
             SerialNo,
             WarrantyExp,
             Manufacturer,
@@ -80,7 +88,7 @@ const createMachine = async (req , res) => {
 const updateMachine = async (req , res) => {
     const {id} = req.params
 
-    const {MachineType , Brand, PurchaseDate,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
+    const {MachineType , Brand, PurchaseDate, Price ,Model, SerialNo,WarrantyExp,Manufacturer , TelNo} = req.body
 
     let emptyFields = []
 
@@ -92,6 +100,9 @@ const updateMachine = async (req , res) => {
     }
     if(!PurchaseDate) {
         emptyFields.push('PurchaseDate')
+    }
+    if(!Price){
+        emptyFields.push('Price')
     }
     if(!Model) {
         emptyFields.push('Model')
@@ -138,6 +149,19 @@ const deleteMachine = async (req , res) => {
         return res.status(404).json({error: 'No such machine'})
       }
 
+    const service = await Service.deleteMany({machineId : id})
+    
+    if (!service){
+        return res.status(404).json({error: 'No such service'})
+    }
+
+    const machinepart = await MachineParts.deleteMany({machineId : id})
+    
+    if (!machinepart){
+        return res.status(404).json({error: 'No such machine'})
+    }
+
+    
     const machine = await Machine.findOneAndDelete({_id : id})
 
     if (!machine){

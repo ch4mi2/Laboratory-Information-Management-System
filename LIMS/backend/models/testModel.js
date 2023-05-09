@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
 const testSchema = new Schema({
     testID : {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     outsourced: {
         type: String,
@@ -26,7 +27,8 @@ const testSchema = new Schema({
     },
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     heading: {
         type: String,

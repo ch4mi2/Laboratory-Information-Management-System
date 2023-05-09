@@ -149,18 +149,17 @@ const UpdateCategoryForm = ({subCategory}) => {
                 <div className="row">
                 <label>Male Ref Range: </label>
                     <div className="col-4">
-                        {/* <label>Starting Range: </label> */}
                         <input 
                                 type = "number"
                                 onChange={(e) => {
                                     emptyFields[emptyFields.indexOf('startMRef')] = '';
                                     setStartMRef(e.target.value)}}
                                 value={startMRef}
+                                min="0"
                                 className={emptyFields.includes('startMRef') ? 'error' : ''}
                         />
                     </div>
                     <div className="col-2">
-                        {/* <label>Operator: </label> */}
                         <select 
                             type = "text"
                             onChange={(e) => {
@@ -186,6 +185,7 @@ const UpdateCategoryForm = ({subCategory}) => {
                                 emptyFields[emptyFields.indexOf('endMRef')] = '';
                                 setEndMRef(e.target.value)}}
                             value={endMRef}
+                            min="0"
                             className={emptyFields.includes('endMRef') ? 'error' : ''}
                             
                         />
@@ -202,6 +202,7 @@ const UpdateCategoryForm = ({subCategory}) => {
                                 emptyFields[emptyFields.indexOf('startFRef')] = '';
                                 setStartFRef(e.target.value)}}
                             value={startFRef}
+                            min="0"
                             className={emptyFields.includes('startFRef') ? 'error' : ''}
                         />
                     </div>
@@ -231,6 +232,7 @@ const UpdateCategoryForm = ({subCategory}) => {
                                 emptyFields[emptyFields.indexOf('endFRef')] = '';
                                 setEndFRef(e.target.value)}}
                             value={endFRef}
+                            min="0"
                             className={emptyFields.includes('endFRef') ? 'error' : ''}
                         />
                     </div>
@@ -243,6 +245,7 @@ const UpdateCategoryForm = ({subCategory}) => {
                             type = "number"
                             onChange={(e) => setStartBRef(e.target.value)}
                             value={startBRef}
+                            min="0"
                             className={emptyFields.includes('startBRef') ? 'error' : ''}
                             
                         />
@@ -270,6 +273,7 @@ const UpdateCategoryForm = ({subCategory}) => {
                             type = "number"
                             onChange={(e) => setEndBRef(e.target.value)}
                             value={endBRef}
+                            min="0"
                             className={emptyFields.includes('endBRef') ? 'error' : ''}
                     
                         />

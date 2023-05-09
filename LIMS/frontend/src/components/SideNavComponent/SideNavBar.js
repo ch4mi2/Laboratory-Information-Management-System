@@ -28,9 +28,10 @@ function SideNavBar() {
           navigate('/' + selected);
         }}
         id="sideNav"
+        className="side-nav"
       >
         <SideNav.Toggle />
-        <SideNav.Nav defaultSelected={current}>
+        <SideNav.Nav defaultSelected="dashboard">
           <NavItem eventKey="dashboard" className="navItems">
             <NavIcon>
               <AiIcons.AiOutlineHome size={30} />
@@ -59,6 +60,9 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="view-bills">
               <NavText>View all Bills</NavText>
             </NavItem>
+            <NavItem className="subNav" eventKey="customer-leaderboard">
+              <NavText>Customer Leaderboard</NavText>
+            </NavItem>
           </NavItem>
 
           <NavItem eventKey="pendingAccession">
@@ -82,6 +86,9 @@ function SideNavBar() {
             <NavItem className="subNav" eventKey="pendingTests">
               <NavText>Pending</NavText>
             </NavItem>
+            <NavItem className="subNav" eventKey="completedTests">
+              <NavText>Completed</NavText>
+            </NavItem>
           </NavItem>
 
           <NavItem eventKey="testData">
@@ -100,12 +107,24 @@ function SideNavBar() {
             </NavItem>
           </NavItem>
 
-          <NavItem eventKey="">
+          <NavItem eventKey="Inventory">
+            <NavIcon>
+              <MdIcons.MdOutlineInventory size={30} />
+            </NavIcon>
+            <NavItem className="subNav" eventKey="inventory">
+              <NavText>Inventory</NavText>
+            </NavItem>
+            <NavItem className="subNav" eventKey="InventoryForm">
+              <NavText>Add Inventory</NavText>
+            </NavItem>
+          </NavItem>
+        
+          {/*<NavItem eventKey="">
             <NavIcon>
               <MdIcons.MdOutlineInventory size={30} />
             </NavIcon>
             <NavText>Inventory</NavText>
-          </NavItem>
+      </NavItem> */}
 
           <NavItem eventKey="machines">
             <NavIcon>

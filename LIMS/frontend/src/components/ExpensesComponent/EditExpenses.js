@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+import Swal from 'sweetalert2';
 
 import '../../css/expensesStyles/expenses.css'
 
@@ -8,6 +9,8 @@ const EditExpenses = () => {
   const [description, setDescription] = useState('')
   const [amount, setAmount] = useState('')
   const { id } = useParams();
+  const [error,setError] = useState('')
+  const [emptyFields, setEmptyFields] = useState([])
  // const [expenses, setExpenses] = useState('')
   const navigate = useNavigate()
 
@@ -42,9 +45,36 @@ const EditExpenses = () => {
           amount
         })
       })
-      if (response.ok) {
-        navigate('/expenseslist')
-      }
+
+      const json = await response.json()
+
+ if (response.ok) {
+            Swal.fire(
+                {
+                  title: 'Success',
+                  text: 'Record has been updated',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true  
+              }
+              )
+              setError(null)
+              setEmptyFields([])
+              navigate('/expenseslist')
+          }else{
+            setError(json.error)
+            setEmptyFields(json.emptyFields)
+            
+            Swal.fire({
+              title: 'Error',
+              text: 'Record could not be updated',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              customClass: 'alerts'
+            });
+          }
+      
     } catch (error) {
       console.log(error)
     }
@@ -59,6 +89,7 @@ const EditExpenses = () => {
         type="text"
         onChange={(e) => setDescription(e.target.value)}
         value={description}
+        className={`form-control ${emptyFields.includes('description') ? 'error' : ''}`}
       />
 
       <label style={{marginTop:20}}>Amount:</label>
@@ -66,9 +97,11 @@ const EditExpenses = () => {
         type="number"
         onChange={(e) => setAmount(e.target.value)}
         value={amount}
+        className={`form-control ${emptyFields.includes('amount') ? 'error' : ''}`}
       />
 
       <button className="expenseSubmit" type="submit">Update</button>
+      {error && <div className="error">{error}</div>} 
     </form>
   )
 }

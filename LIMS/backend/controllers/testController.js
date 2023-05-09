@@ -1,7 +1,9 @@
 const Test = require('../models/testModel');
 const Category = require('../models/categoryModel');
 const Bill = require('../models/BillModel');
+const moment = require ('moment');
 const mongoose = require('mongoose');
+
 
 //retrieve All tests
 const getTests = async(req,res) => {
@@ -69,24 +71,18 @@ const createTest = async(req,res) => {
         if(!operatorM) {
             emptyFields.push('operatorM')
         }
-        if(!endMRef) {
+        if ( operatorM == "-" && !endMRef) {
             emptyFields.push('endMRef')
         }
-        // if(!endMRef && operatorM == ">") {
-        //     endMRef = null
-        // }
         if(!startFRef) {
             emptyFields.push('startFRef')
         }
         if(!operatorF) {
             emptyFields.push('operatorF')
         }
-        if(!endFRef ) {
+        if ( operatorF == "-" && !endFRef) {
             emptyFields.push('endFRef')
         }
-        // if(!endFRef && operatorF == ">") {
-        //     endFRef = null
-        // }
 
         if(emptyFields.length > 0) {
             return res.status(400).json({error: 'Please fill in the highlighted fields', emptyFields})
@@ -209,7 +205,7 @@ const updateCategory = async(req,res) => {
     if(!operatorM) {
         emptyFields.push('operatorM')
     }
-    if(!endMRef) {
+    if ( operatorM == "-" && !endMRef) {
         emptyFields.push('endMRef')
     }
     if(!startFRef) {
@@ -218,7 +214,7 @@ const updateCategory = async(req,res) => {
     if(!operatorF) {
         emptyFields.push('operatorF')
     }
-    if(!endFRef) {
+    if ( operatorF == "-" && !endFRef) {
         emptyFields.push('endFRef')
     }
 
@@ -270,31 +266,73 @@ const deleteCategory = async(req,res) => {
 
 const getTestCount = async(req,res) => {
     const { id } = req.params
+    const Array = id.split(" ")
+    const newID = Array[0]
+    const Month = Number(Array[1])
 
-    if(!mongoose.Types.ObjectId.isValid(id)) {
+    if(!mongoose.Types.ObjectId.isValid(newID)) {
         return res.status(404).json({error: "Not a vlid object ID"})
     }
 
     try {
-        const test = await Test.findById(id)
+        const test = await Test.findById(newID)
 
-        if( test.outsourced === "No" ) {
-            var testCount = await Bill.aggregate([
+        if( Month !== 0 ) {
+            if( test.outsourced === "No" ) {
+                var testCount = await Bill.aggregate([
+                {$project:{
+                    month: {$month: '$createdAt'},
+                    year: {$year: '$createdAt'},
+                    services: 1
+                }},
+                {$match:{
+                    month: Month,
+                    year: Number(moment().format("YYYY"))
+                }},
                 {$unwind: "$services"},
                 {$match: {
-                    'services': test.testName
-                }},
+                    'services': test.testName,}
+                },
                 { $count: 'Count' }
             ])
+            } else {
+                var testCount = await Bill.aggregate([
+                    {$project:{
+                        month: {$month: '$createdAt'},
+                        year: {$year: '$createdAt'},
+                        outsourceServices: 1
+                    }},
+                    {$match:{
+                        month: Month,
+                        year: Number(moment().format("YYYY"))
+                    }},
+                    {$unwind: "$outsourceServices"},
+                    {$match: {
+                        'outsourceServices': test.testName,
+                    }},
+                    { $count: 'Count' }
+                ])
+            }
         } else {
-            var testCount = await Bill.aggregate([
-                {$unwind: "$outsourceServices"},
+            if( test.outsourced === "No" ) {
+                var testCount = await Bill.aggregate([
+                {$unwind: "$services"},
                 {$match: {
-                    'outsourceServices': test.testName
-                }},
+                    'services': test.testName,}
+                },
                 { $count: 'Count' }
             ])
+            } else {
+                var testCount = await Bill.aggregate([
+                    {$unwind: "$outsourceServices"},
+                    {$match: {
+                        'outsourceServices': test.testName,
+                    }},
+                    { $count: 'Count' }
+                ])
+            }
         }
+        
         if( testCount.length > 0 ) {
             res.status(200).json(testCount[0].Count)
         } else {

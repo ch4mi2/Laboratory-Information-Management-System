@@ -8,6 +8,10 @@ body {
   background-color: var(--background);
 }
 
+p{
+  font-size: 18px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -21,6 +25,7 @@ form {
   background-color: var(--contentBackground);
   padding: 20px;
   border-radius: 25px;
+  font-size: 18px;
 }
 
 input {
@@ -66,6 +71,8 @@ input {
   width: 100px;
   height: 30px;
   border-radius: 25px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .btnSubmit:hover {
@@ -79,6 +86,8 @@ input {
   width: 100px;
   height: 30px;
   border-radius: 25px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .btnDelete:hover {
@@ -90,6 +99,8 @@ input {
   background-color: var(--orange);
   color: #ffffff;
   border: none;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .btnConfirm:hover{
@@ -101,6 +112,8 @@ input {
   background-color: var(--ash);
   color: #ffffff;
   border: none;
+  font-weight: bold;
+  font-size: 18px;
 }
 .btnCancel:hover{
   background-color: var(--hoverDelete);
@@ -119,6 +132,11 @@ input {
 table.dataTable tbody tr:hover {
   background-color: var(--contentHover);
 }
+
+table {
+  font-size: 18px;
+}
+
 
 .alerts .swal2-confirm {
   background-color: var(
@@ -261,3 +279,8 @@ table.dataTable tbody tr:hover {
   height: 50px;
   border-radius: 25px;
 }
+
+.side-nav {
+  font-size: 20px;
+}
+

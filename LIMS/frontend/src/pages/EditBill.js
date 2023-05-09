@@ -102,8 +102,15 @@ const EditBill = () => {
     const patientName = location.state.bill.patientName;
     const normal = selectedValues;
     const outsource = selectedValuesOut;
-    const services = normal.map((s) => s.name);
-    const outsourceServices = outsource.map((s) => s.name);
+    let services = '';
+    let outsourceServices = '';
+    if (normal.length > 0) {
+      services = normal.map((s) => s.name);
+    }
+
+    if (outsource.length > 0) {
+      outsourceServices = outsource.map((s) => s.name);
+    }
 
     const bill = {
       patientId,
@@ -205,14 +212,27 @@ const EditBill = () => {
           <div className="mb-3">
             <h2>Total = Rs. {total}</h2>
           </div>
-
-          <button
-            style={{ width: 'auto' }}
-            className="btnSubmit mx-3"
-            onClick={handleUpdateClick}
-          >
-            Update Bill
-          </button>
+          {'sv : ' + selectedValues.length}
+          <br /> {'svo : ' + selectedValuesOut.length}
+          {referredDoctor.length > 0 &&
+          (selectedValues.length > 0 || selectedValuesOut.length > 0) ? (
+            <button
+              style={{ width: 'auto' }}
+              className="btnSubmit mx-3"
+              onClick={handleUpdateClick}
+            >
+              Update Bill
+            </button>
+          ) : (
+            <button
+              disabled
+              style={{ width: 'auto' }}
+              className="btnSubmit-disabled mx-3"
+              onClick={handleUpdateClick}
+            >
+              Update Bill
+            </button>
+          )}
           <button
             style={{ width: 'auto' }}
             className="btnDelete"

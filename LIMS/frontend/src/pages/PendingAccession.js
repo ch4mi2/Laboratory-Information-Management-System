@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSampleContext } from '../hooks/useSampleContext';
 import $ from 'jquery';
-import formatDate from '../UtillFuntions/formatDate';
 import JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
 import moment from 'moment';
-
+import Swal from 'sweetalert2';
 
 const initilizeDataTable = () => {
   $(function() {
@@ -16,7 +15,7 @@ const initilizeDataTable = () => {
     }
     // Initialize a new DataTable with options
     var table = $('#example').DataTable({
-      order: [[4,'desc']],
+      order: [[0,'desc']],
       buttons: [
         {
           extend: 'copy',
@@ -171,6 +170,52 @@ const PendingAccession = () => {
     return canvas.toDataURL();
   };
   
+  const handleDeleteClick = async (id) => {
+    const confirmed = await Swal.fire({
+      title: 'Are you sure you want to delete?',
+      text: "Test record corresponding to this sample will be deleted",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      customClass: 'alerts'
+    });
+  
+    if (confirmed.isConfirmed) {
+      try {
+        const [sampleResponse, testResultResponse] = await Promise.all([
+          fetch(`/api/samples/${id}`, { method: 'DELETE' }),
+          fetch(`/api/testResult/all/${id}`, { method: 'DELETE' })
+        ]);
+  
+        const sampleJson = await sampleResponse.json();
+        const testResultJson = await testResultResponse.json();
+  
+        if (sampleResponse.ok && testResultResponse.ok) {
+          const table = $('#example').DataTable();
+          const row = table.rows(`[data-id ="${id}"]`);
+          row.remove().draw();
+  
+          Swal.fire({
+            title: 'Success',
+            text: 'Records has been deleted',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Something went wrong',
+          icon: 'error',
+          showConfirmButton: true
+        });
+      }
+    }
+  };
+  
  
   
 
@@ -187,23 +232,24 @@ const PendingAccession = () => {
       <table id="example" className="table" style={{ width: '100%' }}>
         <thead>
           <tr>
+            <th>Created At</th>
             <th>Sample Id</th>
             <th>Patient</th>
             <th>Test</th>
             <th>Specimen</th>
-            <th>Billing Date</th>
             <th>Barcode</th>
             <th>Mark Collected</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {samples && samples.map((sample ) => (
             <tr key={sample._id} data-id={sample._id}>
-              <td>{sample.sampleID}</td>
+              <td>{moment(sample.createdAt).format('DD-MM-YYYY h:mm a') ?? "Record not found"}</td>
+              <td>{sample.sampleID ?? "Record not found"}</td>
               <td>{sample.patient?.firstName ?? "Record not found"}</td>
               <td>{sample.test?.testName ?? "Record not found"}</td>
               <td>{sample.test?.specimen ?? "Record not found"}</td>
-              <td>{moment(sample.createdAt).format('DD-MM-YYYY HH:mm a') ?? "Record not found"}</td>
               <td>
                 <button 
                   className="btnSubmit" 
@@ -219,6 +265,14 @@ const PendingAccession = () => {
                   disabled={collectingSampleId === sample._id}
                 >
                   {collectingSampleId === sample._id ? 'Collecting...' : 'Collect'}
+                </button>
+              </td>
+              <td>
+                <button
+                  className="btnDelete"
+                  onClick={() => handleDeleteClick(sample._id)}
+                >
+                  Delete
                 </button>
               </td>
             </tr>

@@ -30,6 +30,11 @@ const createPatient = async (req, res) => {
   const { firstName, lastName, NIC, tpNo, gender, age, email } = req.body;
 
   let emptyFields = [];
+  let invalidFields = [];
+
+  if (NIC.length > 12 || NIC.length < 10) {
+    return res.status(400).json({ error: 'Invalid NIC', invalidFields });
+  }
 
   if (!firstName) {
     emptyFields.push('firstName');
@@ -96,22 +101,53 @@ const deletePatient = async (req, res) => {
 const updatePatient = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'No such patient' });
-  }
+  const { firstName, lastName, NIC, tpNo, gender, age, email } = req.body;
 
-  const patient = await Patient.findByIdAndUpdate(
-    { _id: id },
-    {
-      ...req.body,
+  let emptyFields = [];
+
+  if (!firstName) {
+    emptyFields.push('firstName');
+  }
+  if (!lastName) {
+    emptyFields.push('lastName');
+  }
+  if (!NIC) {
+    emptyFields.push('NIC');
+  }
+  if (!tpNo) {
+    emptyFields.push('tpNo');
+  }
+  if (!gender) {
+    emptyFields.push('gender');
+  }
+  if (!age) {
+    emptyFields.push('age');
+  }
+  if (!email) {
+    emptyFields.push('email');
+  }
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: 'Please fill in all the fields', emptyFields });
+  } else {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'No such patient' });
     }
-  );
 
-  if (!patient) {
-    return res.status(400).json({ error: 'No such patient' });
+    const patient = await Patient.findByIdAndUpdate(
+      { _id: id },
+      {
+        ...req.body,
+      }
+    );
+
+    if (!patient) {
+      return res.status(400).json({ error: 'No such patient' });
+    }
+
+    return res.status(200).json(patient);
   }
-
-  return res.status(200).json(patient);
 };
 
 module.exports = {

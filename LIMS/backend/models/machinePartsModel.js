@@ -35,11 +35,11 @@ const machineMaintenanceSchema = new Schema({
         required:true
     },
     TechTelno:{
-        type: String,
-        maxlength:15 //with country code
+        type: Number,
+        maxlength:10 //with country code
     },
     TechnicianPayment:{
-        type: String,
+        type: Number,
         required:true
     }
 } , {timestamps : true})

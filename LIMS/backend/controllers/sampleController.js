@@ -75,7 +75,7 @@ const getSample = async (req, res) => {
 
 //create a new sample
 const createSample = async (req, res) => {
-  const { patient, billedTests } = req.body;
+  const { patient, billedTests, billId } = req.body;
 
   try {
     const samples = [];
@@ -97,7 +97,7 @@ const createSample = async (req, res) => {
       });
 
       // Create new test result record for the sample
-      const testResult = await createTestResultParams(patient, test, sample._id);
+      const testResult = await createTestResultParams(patient, test, sample._id , billId);
       if (testResult != null) {
         console.log("Test result record created");
         testResults.push(testResult);
@@ -129,7 +129,7 @@ const deleteSample = async (req, res) => {
     //property matches the value of id 
 
     if(!sample) {
-        return res.status(400).json({error: 'No such workout'})
+        return res.status(400).json({error: 'No such sample'})
       }
     
       res.status(200).json(sample)

@@ -1,6 +1,7 @@
 import UpdateMachinePart from "../components/machineComponent/UpdateMachinePartsForm";
 import { useParams } from "react-router-dom";
 import { useEffect , useState } from "react";
+import "../css/MachineStyles/machineDetails.css"
 
 const EditMachinePartsDetails = () => {
     const { id } = useParams();

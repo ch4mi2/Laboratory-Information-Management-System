@@ -97,23 +97,57 @@ const deleteBill = async (req, res) => {
 // update a bill
 const updateBill = async (req, res) => {
   const { id } = req.params;
+  const {
+    patientId,
+    patientName,
+    normalServices: services,
+    outsourceServices,
+    Total: total,
+    referredDoctor,
+  } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'No such bill' });
+  let emptyFields = [];
+
+  if (!patientId) {
+    emptyFields.push('patientId');
   }
-
-  const bill = await Bill.findByIdAndUpdate(
-    { _id: id },
-    {
-      ...req.body, // update with request body
+  if (!patientName) {
+    emptyFields.push('patientName');
+  }
+  if (!services) {
+    emptyFields.push('services');
+  }
+  if (!outsourceServices) {
+    emptyFields.push('outsourceServices');
+  }
+  if (!total) {
+    emptyFields.push('total');
+  }
+  if (!referredDoctor) {
+    emptyFields.push('referredDoctor');
+  }
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: 'Please fill in all the fields', emptyFields });
+  } else {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'No such bill' });
     }
-  );
 
-  if (!bill) {
-    return res.status(400).json({ error: 'No such bill' });
+    const bill = await Bill.findByIdAndUpdate(
+      { _id: id },
+      {
+        ...req.body, // update with request body
+      }
+    );
+
+    if (!bill) {
+      return res.status(400).json({ error: 'No such bill' });
+    }
+
+    return res.status(200).json(bill);
   }
-
-  return res.status(200).json(bill);
 };
 
 module.exports = {

@@ -207,20 +207,20 @@ const Bill = ({ patient }) => {
         timer: 2000,
       });
 
-      createSample(patient._id, billedTests);
+      createSample(patient._id, billedTests, json._id);
     }
     navigate('./print-bill', { state: { status: status } });
   };
 
   //create sample and test result
-  const createSample = async (patient, billedTests) => {
+  const createSample = async (patient, billedTests, billId) => {
     try {
       const response = await fetch('/api/samples/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ patient, billedTests }),
+        body: JSON.stringify({ patient, billedTests, billId }),
       });
 
       const data = await response.json();
@@ -293,17 +293,35 @@ const Bill = ({ patient }) => {
       </div>
       <div className="row mt-3">
         <div className="col-6 col-lg-12 mx-auto d-flex justify-content-end">
-          <button
-            className={
-              selectedVal.length > 0 && referredDoctor.trim().length !== 0
-                ? 'btnSubmit mx-2'
-                : 'btnSubmit-disabled mx-2'
-            }
-            onClick={confirmBill}
-            disabled={noOfDropdowns < 1}
-          >
-            Confirm
-          </button>
+          {selectedVal.length > 0 && referredDoctor.length > 0 ? (
+            <button
+              className={
+                selectedVal.length > 0 &&
+                referredDoctor.length > 0 &&
+                referredDoctor.trim().length !== 0
+                  ? 'btnSubmit mx-2'
+                  : 'btnSubmit-disabled mx-2'
+              }
+              onClick={confirmBill}
+            >
+              Confirm
+            </button>
+          ) : (
+            <button
+              className={
+                selectedVal.length > 0 &&
+                referredDoctor.length > 0 &&
+                referredDoctor.trim().length !== 0
+                  ? 'btnSubmit mx-2'
+                  : 'btnSubmit-disabled mx-2'
+              }
+              onClick={confirmBill}
+              disabled
+            >
+              Confirm
+            </button>
+          )}
+
           <button className="btnDelete" onClick={cancelBill}>
             Cancel
           </button>

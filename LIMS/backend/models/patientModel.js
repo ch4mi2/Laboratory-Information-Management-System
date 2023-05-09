@@ -15,10 +15,13 @@ const patientSchema = new Schema(
     NIC: {
       type: String,
       required: true,
+      maxlength: 12,
     },
     tpNo: {
       type: String,
       required: true,
+      minlength: 10,
+      maxlength: 10,
     },
     gender: {
       type: String,
@@ -27,6 +30,7 @@ const patientSchema = new Schema(
     age: {
       type: String,
       required: true,
+      min: 0,
     },
     email: {
       type: String,

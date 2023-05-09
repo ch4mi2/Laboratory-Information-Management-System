@@ -4,7 +4,9 @@ const {
     getPendingTestResults,
     getCompletedTestResults,
     getTestResult,
-    updateTestResult
+    updateTestResult,
+    deleteTestResult,
+    deleteTestResultWithSample
 } = require('../controllers/testResultController')
 
 const router = express.Router()
@@ -23,5 +25,11 @@ router.post('/', createTestResult)
 
 //UPDATE test result
 router.patch('/:id', updateTestResult)
+
+//DELETE test result
+router.delete('/:id', deleteTestResult)
+
+//DELETE test result with sample id
+router.delete('/all/:id', deleteTestResultWithSample)
 
 module.exports = router
