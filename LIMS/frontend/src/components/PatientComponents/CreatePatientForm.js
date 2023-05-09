@@ -86,7 +86,7 @@ const CreatePatientForm = () => {
     ].includes(key);
 
     const isAllowed =
-      (value.length === 9 && ('x' || 'X' || 'z' || 'Z')) ||
+      (value.length === 9 && ('x' || 'X' || 'V' || 'v')) ||
       (value.length >= 10 && value.length < 12 && isNumeric) ||
       (value.length < 12 && isNumeric) ||
       isModifierKey;
