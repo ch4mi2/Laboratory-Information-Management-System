@@ -40,58 +40,53 @@ const Inventory = () => {
         fetchTests();
     }, []);
 
-
-    //  useEffect(() => {
-    //    $(function () {
-    //      $('#example').DataTable({
-    //        order: [[4, 'desc']],
-    //        bDestroy: true,
-    //        });
-    //      });
-    //  }, []);
-
-     const handleUpdate = async(id) => {
+    //  const handleUpdate = async(id) => {
        
-            e.preventDefault();
+    //         e.preventDefault();
             
-            const inventory = {inveType,proName,quantity,exDate};
+    //         const inventory = {inveType,proName,quantity,exDate};
         
-            const response = await fetch('/api/inventoryRoutes/' + id, {
-              method: 'PATCH',
-              body: JSON.stringify(inventory),
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
+    //         const response = await fetch('/api/inventoryRoutes/' + id, {
+    //           method: 'PATCH',
+    //           body: JSON.stringify(inventory),
+    //           headers: {
+    //             'Content-Type': 'application/json',
+    //           },
+    //         });
         
-            const json = await response.json();
+    //         const json = await response.json();
         
-            if (!response.ok) {
+    //         if (!response.ok) {
              
         
-              if (!response.ok) {
-                MySwal.fire({
-                  title: 'Error',
-                  text: error,
-                  icon: 'error',
-                  showConfirmButton: false,
-                  timer: 1000,
-                });
-              }
-            }
-            if (response.ok) {
+    //           if (!response.ok) {
+    //             MySwal.fire({
+    //               title: 'Error',
+    //               text: error,
+    //               icon: 'error',
+    //               showConfirmButton: false,
+    //               timer: 1000,
+    //             });
+    //           }
+    //         }
+    //         if (response.ok) {
              
-              MySwal.fire({
-                title: 'Success',
-                text: 'Successfully Created',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 2000,
-              });
-              navigate(`/inventoryRoutes/${id}`, {state:{id}})
+    //           MySwal.fire({
+    //             title: 'Success',
+    //             text: 'Successfully Created',
+    //             icon: 'success',
+    //             showConfirmButton: false,
+    //             timer: 2000,
+    //           });
+    //           navigate(`/inventoryRoutes/${id}`, {state:{id}})
               
-            }
-          };
+    //         }
+    //       };
+
+
+    const handleUpdate = () => {
+        //go to update form here
+    }
 
         
 

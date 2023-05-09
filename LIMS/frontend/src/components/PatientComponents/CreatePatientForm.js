@@ -86,7 +86,7 @@ const CreatePatientForm = () => {
     ].includes(key);
 
     const isAllowed =
-      (value.length === 9 && ('x' || 'X' || 'z' || 'Z')) ||
+      (value.length === 9 && ('x' || 'X' || 'V' || 'v')) ||
       (value.length >= 10 && value.length < 12 && isNumeric) ||
       (value.length < 12 && isNumeric) ||
       isModifierKey;
@@ -184,6 +184,7 @@ const CreatePatientForm = () => {
             value={age}
             className={emptyFields.includes('age') ? 'error' : ''}
             min="0"
+            max="200"
           />
 
           <label>Email :</label>

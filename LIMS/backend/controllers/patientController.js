@@ -30,10 +30,14 @@ const createPatient = async (req, res) => {
   const { firstName, lastName, NIC, tpNo, gender, age, email } = req.body;
 
   let emptyFields = [];
-  let invalidFields = [];
 
   if (NIC.length > 12 || NIC.length < 10) {
-    return res.status(400).json({ error: 'Invalid NIC', invalidFields });
+    emptyFields.push('NIC');
+    return res.status(400).json({ error: 'Invalid NIC', emptyFields });
+  }
+  if (!tpNo.length === 10) {
+    emptyFields.push('tpNo');
+    return res.status(400).json({ error: 'Invalid tpNo', emptyFields });
   }
 
   if (!firstName) {
@@ -104,7 +108,18 @@ const updatePatient = async (req, res) => {
   const { firstName, lastName, NIC, tpNo, gender, age, email } = req.body;
 
   let emptyFields = [];
-
+  if (age > 200 || age < 0) {
+    emptyFields.push('Age');
+    return res.status(400).json({ error: 'Invalid Age', emptyFields });
+  }
+  if (NIC.length > 12 || NIC.length < 10) {
+    emptyFields.push('NIC');
+    return res.status(400).json({ error: 'Invalid NIC', emptyFields });
+  }
+  if (!tpNo.length === 10) {
+    emptyFields.push('tpNo');
+    return res.status(400).json({ error: 'Invalid tpNo', emptyFields });
+  }
   if (!firstName) {
     emptyFields.push('firstName');
   }
