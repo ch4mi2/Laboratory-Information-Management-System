@@ -107,7 +107,7 @@ const LabInfo = () => {
              type="tel"
              onChange={(e) => setTel1(e.target.value)}
              value={tel1}
-             pattern="[0-9]*"
+             pattern="[0-9]{10}"
             />  
             <label>Tel 2</label>
             <input
@@ -115,7 +115,7 @@ const LabInfo = () => {
              type="tel"
              onChange={(e) => setTel2(e.target.value)}
              value={tel2}
-             pattern="[0-9]*"
+             pattern="[0-9]{10}"
             />  
             <label>Tel 3</label>
             <input
@@ -123,7 +123,7 @@ const LabInfo = () => {
              type="tel"
              onChange={(e) => setTel3(e.target.value)}
              value={tel3}
-             pattern="[0-9]*"
+             pattern="[0-9]{10}"
             /> 
             <label>Email</label>
             <input
