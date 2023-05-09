@@ -111,8 +111,9 @@ function SideNavBar() {
             <NavIcon>
               <MdIcons.MdOutlineInventory size={30} />
             </NavIcon>
+            <NavText>Inventory</NavText>
             <NavItem className="subNav" eventKey="inventory">
-              <NavText>Inventory</NavText>
+              <NavText>Inventory List</NavText>
             </NavItem>
             <NavItem className="subNav" eventKey="InventoryForm">
               <NavText>Add Inventory</NavText>
