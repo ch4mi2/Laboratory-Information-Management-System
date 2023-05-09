@@ -141,7 +141,7 @@ const  StaffProfile = () => {
             </div><br></br>
             <br/>
             <a href="/UpdateProfile"><button className="btnupdate">Edit Profile</button></a>
-            <button className="btnAttendance" onClick={AttMark}>Mark</button>
+            <button className="btnAttendance" onClick={AttMark}>Mark Attendance</button>
           
 
 

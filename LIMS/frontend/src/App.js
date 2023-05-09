@@ -93,134 +93,132 @@ function App() {
             <div className="col-9 col-sm-8 col-md-8 col-lg-9 mt-4">
               <div className="pages">
                 <Routes>
-                  <Route path="/patient-list" element={<PatientList />} />
-                  <Route
-                    path="/create-patient"
-                    element={<CreatePatientForm />}
+                  <Route path="/patient-list" element={ user ? <PatientList/> : <Welcome/>} />
+                  <Route path="/create-patient"  element={ user ? <CreatePatientForm/> : <Welcome/>}
                   />
                   <Route
                     path="/patient-profile/:id"
-                    element={<PatientProfile />}
+                    element={ user ? <PatientProfile/> : <Welcome/>}
                   />
                   <Route
                     path="/view-bills/:billId/edit"
-                    element={<EditBillNew />}
+                    element={ user ? <EditBillNew/> : <Welcome/>}
                   />
                   <Route path="/Salary" element={<Salary/>} />
-                  <Route path="/AdminProfile" element={<AdminProfile />} />
-                  <Route path="/view-bills" element={<AllBills />} />
+                  <Route path="/AdminProfile" element={ user ? <AdminProfile/> : <Welcome/>} />
+                  <Route path="/view-bills" element={ user ? <AllBills/> : <Welcome/>} />
 
                   <Route
                     path="/patient-profile/:id/addBill"
-                    element={<AddBill />}
+                    element={ user ? <AddBill/> : <Welcome/>}
                   />
-                  <Route path="/bill/:id" element={<ShowABill />} />
+                  <Route path="/bill/:id" element={ user ? <ShowABill/> : <Welcome/>} />
                   <Route
                     path="/patient-profile/:id/addBill/print-bill"
-                    element={<PrintBill />}
+                    element={ user ? <PrintBill/> : <Welcome/>}
                   />
                   <Route
                     path="/patient-profile/:id/edit"
-                    element={<EditPatient />}
+                    element={ user ? <EditPatient/> : <Welcome/>}
                   />
                   <Route
                     path="/patient-profile/:id/transactionHistory"
-                    element={<TransactionHistory />}
+                    element={ user ? <TransactionHistory/> : <Welcome/>}
                   />
                   <Route
                     path="/customer-leaderboard"
-                    element={<TopCustomers />}
+                    element={ user ? <TopCustomers/> : <Welcome/>}
                   />
                   <Route
                     path="/pendingAccession"
-                    element={<PendingAccession />}
+                    element={ user ? <PendingAccession/> : <Welcome/>}
                   />
 
                   <Route
                     path="/inventory"
-                    element={<Inventory/>}
+                    element={ user ? <Inventory/> : <Welcome/>}
                   />
 
-                  <Route path="/accessed" element={<Accessed />} />
+                  <Route path="/accessed" element={ user ? <Accessed/> : <Welcome/>}/>
 
                   {/* <Route path="/machines" element={<Machines />} /> */}
-                  <Route path="/addMachines" element={<AddMachines />}></Route>
-                  <Route path="/machineList" element={<MachineList />}></Route>
+                  <Route path="/addMachines" element={ user ? <AddMachines/> : <Welcome/>}></Route>
+                  <Route path="/machineList" element={ user ? <MachineList/> : <Welcome/>}></Route>
                   <Route
                     path="/machineHistory/:id"
-                    element={<MachineHistory />}
+                    element={ user ? <MachineHistory/> : <Welcome/>}
                   ></Route>
                   <Route
                     path="/AddMachineParts"
-                    element={<AddMachineParts />}
+                    element={ user ? <AddMachineParts/> : <Welcome/>}
                   ></Route>
                   <Route
                     path="/AddServiceDates"
-                    element={<MachineServiceDates />}
+                    element={ user ? <MachineServiceDates/> : <Welcome/>}
                   ></Route>
                   <Route
                     path="/viewServiceDetails/:id"
-                    element={<ViewMachineService />}
+                    element={ user ? <ViewMachineService/> : <Welcome/>}
                   ></Route>
                   <Route
                     path="/updateMachine/:id"
-                    element={<UpdateMachine />}
+                    element={ user ? <UpdateMachine/> : <Welcome/>}
                   ></Route>
                   <Route
                     path="/updateMachineParts/:id"
-                    element={<UpdateMachineParts />}
+                    element={ user ? <UpdateMachineParts/> : <Welcome/>}
                   ></Route>
                   <Route
                     path="/updateMachineService/:id"
-                    element={<UpdateMachineService />}
+                    element={ user ? <UpdateMachineService/> : <Welcome/>}
                   ></Route>
                   <Route
                     path="/serviceBill/:id"
-                    element={<MachineServiceBill />}
+                    element={ user ? <MachineServiceBill/> : <Welcome/>}
                   ></Route>
                   <Route
                     path="/machinePartsBill/:id"
-                    element={<MachinePartsBill />}
+                    element={ user ? <MachinePartsBill/> : <Welcome/>}
                   ></Route>
 
-                  <Route path="/testData" element={<TestData />} />
-                  <Route path="/createTest" element={<CreateTest />} />
-                  <Route path="/viewTest/:id" element={<ViewTest />} />
-                  <Route path="/updateTest" element={<UpdateTest />} />
-                  <Route path="/updateCategory" element={<UpdateCategory />} />
-                  <Route path="/viewStats" element={<ViewStat />} />
+                  <Route path="/testData" element={ user ? <TestData/> : <Welcome/>}/>
+                  <Route path="/createTest" element={ user ? <CreateTest/> : <Welcome/>}/>
+                  <Route path="/viewTest/:id" element={ user ? <ViewTest/> : <Welcome/>}/>
+                  <Route path="/updateTest" element={ user ? <UpdateTest/> : <Welcome/>} />
+                  <Route path="/updateCategory" element={ user ? <UpdateCategory/> : <Welcome/>} />
+                  <Route path="/viewStats" element={ user ? <ViewStat/> : <Welcome/>} />
 
-                  <Route path="/expenseslist" element={<Expenseslist />} />
-                  <Route path="/addExpenses" element={<AddExpenses />} />
+                  <Route path="/expenseslist" element={ user ? <Expenseslist/> : <Welcome/>} />
+                  <Route path="/addExpenses" element={ user ? <AddExpenses/> : <Welcome/>} />
                   <Route
                     path="/editExpenses/:id"
-                    element={<UpdateExpenses />}
+                    element={ user ? <UpdateExpenses/> : <Welcome/>}
                   />
 
                   <Route
                     path="/pendingTests"
-                    element={<PendingTestResults />}
+                    element={ user ? <PendingTestResults/> : <Welcome/>}
                   />
                   <Route
                     path="/addTestResults/:id"
-                    element={<AddTestResults />}
+                    element={ user ? <AddTestResults/> : <Welcome/>}
                   />
                   <Route
                     path="/testResultPreview/:id"
-                    element={<TestResultPreview />}
+                    element={ user ? <TestResultPreview/> : <Welcome/>}
                   />
-                  <Route path="/AllStaff" element={<AllStaff />} />
-                  <Route path="/StaffProfile" element={<StaffProfile />} />
+                  <Route path="/AllStaff" element={ user ? <AllStaff/> : <Welcome/>} />
+                  <Route path="/StaffProfile" element={ user ? <StaffProfile/> : <Welcome/>} />
                   <Route
                     path="/financialReport"
-                    element={<FinancialReport />}
+                    element={ user ? <FinancialReport/> : <Welcome/>}
                   />
-                  <Route path="/addStaff" element={<AddStaff />} />
-                  <Route path="/labInfo" element={<LabInfo />} />
+                  <Route path="/addStaff" element={ user ? <AddStaff/> : <Welcome/>}/>
+                  <Route path="/labInfo" element={ user ? <LabInfo/> : <Welcome/>} />
                   <Route
                     path="/StaffLogin"
                     element={
-                      !user ? <LoginStaff /> : <Navigate to="/StaffProfile" />
+                      !user ? <LoginStaff /> : <Navigate to="/dashboard" />
                     }
                   />
                   <Route
@@ -230,25 +228,29 @@ function App() {
                     }
                   />
                   <Route path="/Welcome" element={<Welcome />} />
-                  <Route path="/UpdateProfile" element={<UpdateProfile />} />
+                  <Route path="/UpdateProfile" element={ user ? <UpdateProfile/> : <Welcome/>} />
                   <Route
                     path="/completedTests"
-                    element={<CompletedTestResults />}
+                    element={ user ? <CompletedTestResults/> : <Welcome/>}
                   />
                   <Route
                     path="/completedTests"
-                    element={<CompletedTestResults />}
+                    element={ user ? <CompletedTestResults/> : <Welcome/>}
                   />
 
                  <Route
                     path="/InventoryForm"
-                    element={<FormInventory />}
+                    element={ user ? <FormInventory/> : <Welcome/>}
                   />
                   <Route
                     path="/inventoryRoutes"
-                    element={<FormInventory />}
+                    element={
+                      user ? <FormInventory/> : <Welcome/>
+                    }
                   />
-                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/dashboard" element={
+                      user ? <Dashboard/> : <Welcome/>
+                    } />
                   <Route exact path="/" element={<Dashboard />} />
                 </Routes>
               </div>

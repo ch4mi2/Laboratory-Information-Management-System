@@ -8,9 +8,9 @@ const AdminProfile= () =>{
                 <br/>
                 <nav>
                     <div >
-                    <a href='/AddStaff'><button className="btn11">Register Staff Member</button></a><br/><br/>
-                    <a href='/AllStaff'><button className="btn11">Staff Details</button></a><br/><br/>
-                    <a href='/Salary'><button className="btn11">Salary Calculation</button></a>
+                    <a href='/AddStaff'><button className="btnConfirm" style={{width: '250px',height: '50px'}}>Register Staff Member</button></a><br/><br/>
+                    <a href='/AllStaff'><button className="btnConfirm" style={{width: '250px',height: '50px'}}>Staff Details</button></a><br/><br/>
+                    <a href='/Salary'><button className="btnConfirm" style={{width: '250px',height: '50px'}}>Salary Calculation</button></a>
                     </div>
                 </nav>
             </div>

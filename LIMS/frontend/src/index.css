@@ -259,14 +259,7 @@ table {
   border-radius: 25px;
 }
 
-.btn11{
-  background-color: var(--orange);
-  color: #ffffff;
-  border: none;
-  width: 250px;
-  height: 50px;
-  border-radius: 25px;
-}
+
 
 .btnupdate{
   background-color: var(--orange);
@@ -276,6 +269,8 @@ table {
   color: #ffffff;
   border: none;
   width: 250px;
+  font-size: 18px;
+  font-weight: bold;
   height: 50px;
   border-radius: 25px;
 }
