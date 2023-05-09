@@ -7,6 +7,8 @@ const TestDataz = () => {
   const navigate = useNavigate();
   const [inventory, setInventory] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState("");
+  const [emptyFields, setEmptyFields] = useState([]);
   const [formData, setFormData] = useState({
     inveType: "",
     proName: "",
@@ -46,7 +48,11 @@ const TestDataz = () => {
           timer: 1500,
           timerProgressBar: true,
         });
+        setError(null);
+        setEmptyFields([]);
       } else {
+        setError(json.error);
+        setEmptyFields(json.emptyFields);
         Swal.fire({
           title: "Error",
           text: json.error,
@@ -73,8 +79,6 @@ const TestDataz = () => {
     fetchInventory();
   }, []);
 
-  
-
   return (
     <div className="container">
       <h4>Add Inventory Item</h4>
@@ -83,54 +87,59 @@ const TestDataz = () => {
           <label htmlFor="inveType">Inventory Type:</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${
+              emptyFields.includes("inveType") ? "error" : ""
+            }`}
             id="inveType"
             name="inveType"
             value={formData.inveType}
             onChange={handleInputChange}
-            required
           />
         </div>
         <div className="form-group">
           <label htmlFor="proName">Product Name:</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${
+              emptyFields.includes("proName") ? "error" : ""
+            }`}
             id="proName"
             name="proName"
             value={formData.proName}
             onChange={handleInputChange}
-            required
           />
         </div>
         <div className="form-group">
           <label htmlFor="exDate">Expire Date:</label>
           <input
             type="date"
-            className="form-control"
+            className={`form-control ${
+              emptyFields.includes("exDate") ? "error" : ""
+            }`}
             id="exDate"
             name="exDate"
             value={formData.exDate}
             onChange={handleInputChange}
-            required
           />
         </div>
         <div className="form-group">
           <label htmlFor="quantity">Quantity:</label>
           <input
             type="number"
-            className="form-control"
+            className={`form-control ${
+              emptyFields.includes("quantity") ? "error" : ""
+            }`}
             id="quantity"
             name="quantity"
             value={formData.quantity}
             onChange={handleInputChange}
-            required
           />
         </div>
         <br />
         <button className="btnConfirm" type="submit">
           Submit
         </button>
+        {error && <div className="error">{error}</div>}
       </form>
     </div>
   );
