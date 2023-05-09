@@ -6,7 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
 
 const EditBill = ({ patient }) => {
   const [Tests, setTests] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [Total, setTotal] = useState(0);
   const [selectedVal, setSelectedVal] = useState([]);
   const [noOfDropdowns, setNoOfDropdowns] = useState([]);
   const [Services, setServices] = useState([]);
@@ -168,7 +168,7 @@ const EditBill = ({ patient }) => {
     const patientId = patient._id;
     let outsourceServices = [];
     let services = [];
-    // total = Number(total);
+    let total = Number(Total);
 
     for (let i = 0; i < outsourced.length; i++) {
       if (outsourced[i] == 0 || outsourced[i] === '0') continue;
@@ -248,7 +248,7 @@ const EditBill = ({ patient }) => {
     <div className=" receipt mt-5">
       <div className="row">
         <div className="col-12">
-          <h1 className="text-center">MEDILINE Receipt</h1> {selectedVal}
+          <h1 className="text-center">MEDILINE Receipt</h1>
         </div>
       </div>
       <br />
@@ -302,7 +302,7 @@ const EditBill = ({ patient }) => {
       <hr />
       <div className="row mt-5">
         <div className="col-12">
-          <h1 className="">Total : Rs. {total}</h1>
+          <h1 className="">Total : Rs. {Total}</h1>
         </div>
       </div>
       <div className="row mt-3">
