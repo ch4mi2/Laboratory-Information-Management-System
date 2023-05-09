@@ -119,7 +119,7 @@ const Expenseslist = () => {
             ))}
         </tbody>
 
-        <tfoot>
+       {/* <tfoot>
           <tr>
             <th>Date</th>
             <th>Description</th>
@@ -127,7 +127,7 @@ const Expenseslist = () => {
             <th></th>
             <th></th>
           </tr>
-        </tfoot>
+            </tfoot>*/}
       </table>
     </div>
   );
