@@ -28,7 +28,7 @@ function SideNavBar() {
           navigate('/' + selected);
         }}
         id="sideNav"
-        class="side-nav"
+        className="side-nav"
       >
         <SideNav.Toggle />
         <SideNav.Nav defaultSelected="dashboard">
