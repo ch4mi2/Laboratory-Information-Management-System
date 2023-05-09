@@ -126,6 +126,7 @@ const  UpdateProfile = () => {
              type="text"
              onChange={(e) => setContact(e.target.value)}
              value={contact}
+             pattern="[0-9]{10}"
              className={emptyFields.includes('contact') ? 'error' : ""}
             />
             <label>NIC</label>
