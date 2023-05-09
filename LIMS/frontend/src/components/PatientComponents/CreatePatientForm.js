@@ -189,7 +189,6 @@ const CreatePatientForm = () => {
 
           <label>Email :</label>
           <input
-            required
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}

@@ -31,6 +31,10 @@ const createPatient = async (req, res) => {
 
   let emptyFields = [];
 
+  if (age > 200 || age < 0) {
+    emptyFields.push('Age');
+    return res.status(400).json({ error: 'Invalid Age', emptyFields });
+  }
   if (NIC.length > 12 || NIC.length < 10) {
     emptyFields.push('NIC');
     return res.status(400).json({ error: 'Invalid NIC', emptyFields });
@@ -58,9 +62,7 @@ const createPatient = async (req, res) => {
   if (!age) {
     emptyFields.push('age');
   }
-  if (!email) {
-    emptyFields.push('email');
-  }
+
   if (emptyFields.length > 0) {
     return res
       .status(400)
@@ -138,9 +140,7 @@ const updatePatient = async (req, res) => {
   if (!age) {
     emptyFields.push('age');
   }
-  if (!email) {
-    emptyFields.push('email');
-  }
+
   if (emptyFields.length > 0) {
     return res
       .status(400)
