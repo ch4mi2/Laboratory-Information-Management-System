@@ -232,8 +232,8 @@ const fetchMachineService = async () => {
               <thead>
                 <tr>
                   <th scope="col">Description</th>
-                  <th scope="col">Income(Rs:)</th>
-                  <th scope="col">Expenses(Rs:)</th>
+                  <th scope="col">Income(Rs:.00)</th>
+                  <th scope="col">Expenses(Rs:.00)</th>
                 </tr>
               </thead>
             <tbody>
