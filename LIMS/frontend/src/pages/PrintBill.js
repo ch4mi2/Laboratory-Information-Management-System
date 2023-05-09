@@ -34,7 +34,7 @@ const PrintBill = ({ billID }) => {
 
   const handleEditClick = () => {
     navigate(`/view-bills/${thisBill._id}/edit`, {
-      state: { bill: thisBill },
+      state: { patientId: thisBill.patientId },
     });
   };
 

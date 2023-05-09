@@ -4,17 +4,18 @@ import '../../css/BillStyles/bill.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-const Bill = ({ patient }) => {
+const EditBill = ({ patient }) => {
   const [Tests, setTests] = useState([]);
   const [total, setTotal] = useState(0);
   const [selectedVal, setSelectedVal] = useState([]);
   const [noOfDropdowns, setNoOfDropdowns] = useState([]);
-  const [services, setServices] = useState([]);
+  const [Services, setServices] = useState([]);
   const [outsourced, setOutsourced] = useState([]);
   const [referredDoctor, setReferredDoctor] = useState([]);
   const ref = useRef([]);
   const MySwal = withReactContent(Swal);
-  const { id } = useParams();
+  const { billId } = useParams();
+  const [currentBill, setCurrentBill] = useState();
 
   //save test ids
   const [billedTests, setBilledTests] = useState([]);
@@ -31,6 +32,18 @@ const Bill = ({ patient }) => {
       }
     };
 
+    const fetchBill = async () => {
+      const response = await fetch('/api/bills/' + billId);
+      const json = await response.json();
+
+      if (response.ok) {
+        setCurrentBill(json);
+        //setServices(json.Services);
+        //setOutsourced(json.outsourceServices);
+        setReferredDoctor(json.referredDoctor);
+      }
+    };
+    fetchBill();
     fetchTests();
   }, []);
 
@@ -133,7 +146,7 @@ const Bill = ({ patient }) => {
     setOutsourced(newOutsourcedArr);
 
     //normal
-    const newServicesArr = [...services];
+    const newServicesArr = [...Services];
     newServicesArr.splice(index, 1);
     setServices(newServicesArr);
 
@@ -154,30 +167,30 @@ const Bill = ({ patient }) => {
     const patientName = patient.firstName + ' ' + patient.lastName;
     const patientId = patient._id;
     let outsourceServices = [];
-    let normalServices = [];
-    let Total = Number(total);
+    let services = [];
+    // total = Number(total);
 
     for (let i = 0; i < outsourced.length; i++) {
       if (outsourced[i] == 0 || outsourced[i] === '0') continue;
       else outsourceServices.push(outsourced[i]);
     }
 
-    for (let i = 0; i < services.length; i++) {
-      if (services[i] == 0 || services[i] === '0') continue;
-      else normalServices.push(services[i]);
+    for (let i = 0; i < Services.length; i++) {
+      if (Services[i] == 0 || Services[i] === '0') continue;
+      else services.push(Services[i]);
     }
 
     const bill = {
       patientId,
       patientName,
-      normalServices,
+      services,
       outsourceServices,
-      Total,
+      total,
       referredDoctor,
     };
 
-    const response = await fetch('/api/bills/', {
-      method: 'POST',
+    const response = await fetch('/api/bills/' + billId, {
+      method: 'PATCH',
       body: JSON.stringify(bill),
       headers: {
         'Content-Type': 'application/json',
@@ -196,7 +209,7 @@ const Bill = ({ patient }) => {
         timer: 1000,
       });
 
-      navigate(`/patient-profile/${id}`);
+      navigate(`/patient-profile/${patient.patientId}`);
     } else {
       status = 'Bill Added';
       MySwal.fire({
@@ -209,7 +222,8 @@ const Bill = ({ patient }) => {
 
       createSample(patient._id, billedTests, json._id);
     }
-    navigate('./print-bill', { state: { status: status } });
+    // navigate('/bills/' + billId, { state: { status: status } });
+    navigate(-1);
   };
 
   //create sample and test result
@@ -234,7 +248,7 @@ const Bill = ({ patient }) => {
     <div className=" receipt mt-5">
       <div className="row">
         <div className="col-12">
-          <h1 className="text-center">MEDILINE Receipt</h1>
+          <h1 className="text-center">MEDILINE Receipt</h1> {selectedVal}
         </div>
       </div>
       <br />
@@ -321,7 +335,6 @@ const Bill = ({ patient }) => {
               Confirm
             </button>
           )}
-
           <button className="btnDelete" onClick={cancelBill}>
             Cancel
           </button>
@@ -331,4 +344,4 @@ const Bill = ({ patient }) => {
   );
 };
 
-export default Bill;
+export default EditBill;

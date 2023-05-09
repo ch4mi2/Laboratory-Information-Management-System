@@ -86,7 +86,7 @@ const UpdateMachine = ({machine}) => {
               type="date"
               onChange={(e) => setMaintenanceDate(e.target.value)}
               value={MaintenanceDate}
-              required
+              // required
               className={emptyFields.includes('MaintenanceDate') ? 'error' : ''}
             />
           </div>
@@ -96,7 +96,7 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setIssue(e.target.value)}
               value={Issue}
-              required
+              // required
               className={emptyFields.includes('Issue') ? 'error' : ''}
             />
           </div>
@@ -106,7 +106,7 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setMachinePart(e.target.value)}
               value={MachinePart}
-              required
+              // required
               className={emptyFields.includes('MachinePart') ? 'error' : ''}
             />
           </div>
@@ -116,7 +116,7 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setbrandOfMachinePart(e.target.value)}
               value={brandOfMachinePart}
-              required
+              // required
               className={emptyFields.includes('brandOfMachinePart') ? 'error' : ''}
             />
           </div>
@@ -126,7 +126,7 @@ const UpdateMachine = ({machine}) => {
               type="number"
               onChange={(e) => setPriceOfMachinePart(e.target.value)}
               value={PriceOfMachinePart}
-              required
+              // required
               className={emptyFields.includes('PriceOfMachinePart') ? 'error' : ''}
             />
           </div>
@@ -136,7 +136,7 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
-              required
+              // required
               className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
@@ -147,7 +147,7 @@ const UpdateMachine = ({machine}) => {
               onChange={(e) => setTechTelno(e.target.value)}
               value={TechTelno}
               pattern="[0-9]{10}"
-              required
+              // required
               className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
           </div>
@@ -157,7 +157,7 @@ const UpdateMachine = ({machine}) => {
               type="number"
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
-              required
+              // required
               className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>

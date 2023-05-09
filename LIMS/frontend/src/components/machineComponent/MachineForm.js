@@ -68,7 +68,7 @@ const MachineForm = () => {
       setManufacturer('');
       setTelNo('');
       console.log('new machine added:', json);
-      dispatch({ type: 'CREATE_MACHINE', payload: json });
+      // dispatch({ type: 'CREATE_MACHINE', payload: json });
       // if( response.status === 200 ) {
         Swal.fire({
             title: 'Success',
@@ -94,7 +94,7 @@ const MachineForm = () => {
               type="text"
               onChange={(e) => setMachineType(e.target.value)}
               value={MachineType}
-              required
+              // required
               className={emptyFields.includes('MachineType') ? 'error' : ''}
             />
           </div>
@@ -104,7 +104,7 @@ const MachineForm = () => {
               type="text"
               onChange={(e) => setBrand(e.target.value)}
               value={Brand}
-              required
+              // required
               className={emptyFields.includes('Brand') ? 'error' : ''}
             />
           </div>
@@ -114,7 +114,7 @@ const MachineForm = () => {
               type="text"
               onChange={(e) => setModel(e.target.value)}
               value={Model}
-              required
+              // required
               className={emptyFields.includes('Model') ? 'error' : ''}
             />
           </div>
@@ -124,7 +124,7 @@ const MachineForm = () => {
               type="text"
               onChange={(e) => setSerialNo(e.target.value)}
               value={SerialNo}
-              required
+              // required
               className={emptyFields.includes('SerialNo') ? 'error' : ''} 
             />
           </div>
@@ -134,7 +134,7 @@ const MachineForm = () => {
               type="date"
               onChange={(e) => setpurchasedDate(e.target.value)}
               value={PurchaseDate}
-              required
+              // required
               className={emptyFields.includes('PurchasedDate') ? 'error' : ''}
             />
           </div>
@@ -144,7 +144,7 @@ const MachineForm = () => {
               type="number"
               onChange={(e) => setPrice(e.target.value)}
               value={Price}
-              required
+              // required
               className={emptyFields.includes('Price') ? 'error' : ''}
             />
           </div>
@@ -154,7 +154,7 @@ const MachineForm = () => {
               type="date"
               onChange={(e) => setWarrantyExp(e.target.value)}
               value={WarrantyExp}
-              required
+              // required
               className={emptyFields.includes('WarrantyExp') ? 'error' : ''}
             />
           </div>
@@ -164,7 +164,7 @@ const MachineForm = () => {
               type="text"
               onChange={(e) => setManufacturer(e.target.value)}
               value={Manufacturer}
-              required
+              // required
               className={emptyFields.includes('Manufacturer') ? 'error' : ''}
             />
           </div>
@@ -174,7 +174,7 @@ const MachineForm = () => {
               type="tel"
               onChange={(e) => setTelNo(e.target.value)}
               value={TelNo}
-              required
+              // required
               pattern="[0-9]{10}"
               className={emptyFields.includes('TelNo') ? 'error' : ''}
             />
