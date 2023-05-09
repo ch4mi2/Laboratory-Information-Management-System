@@ -15,7 +15,7 @@ const initilizeDataTable = () => {
     }
     // Initialize a new DataTable with options
     var table = $('#example').DataTable({
-      order: [[0,'desc']],
+      order: [[0,'asc']],
       buttons: [
         {
           extend: 'copy',
