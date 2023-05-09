@@ -1,0 +1,11 @@
+.btnAttendance{
+    background-color: var(--orange);
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    color: #ffffff;
+    border: none;
+    width: 250px;
+    height: 50px;
+    border-radius: 25px;
+  }

@@ -52,7 +52,7 @@ import AllStaff from './pages/AllStaff';
 import StaffProfile from './pages/StaffPorfile';
 import UpdateProfile from './pages/UpdateProfile';
 import AdminProfile from './pages/AdminProfile';
-
+import Salary from './pages/salary';
 
 function App() {
   const {user} = useAuthContext()
@@ -93,6 +93,7 @@ function App() {
                     path="/view-bills/:billId/edit"
                     element={<EditBill />}
                   />
+                  <Route path="/Salary" element={<Salary/>} />
                   <Route path="/AdminProfile" element={<AdminProfile />} />
                   <Route path="/view-bills" element={<AllBills />} />
 

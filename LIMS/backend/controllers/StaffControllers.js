@@ -85,9 +85,10 @@ const createStaff = async (req,res) => {
       //create token
       const token = createToken(staffMember._id)
       const userid = staffMember._id
+      const eid = staffMember.Eid
       
       console.log(staffMember);
-      res.status(200).json({staffMember,token,userid})
+      res.status(200).json({staffMember,token,userid,eid})
 
   } catch(error){
       res.status(400).json({error:error.message})
@@ -116,6 +117,34 @@ const deleteStaff = async (req, res) => {
 
 const updateStaff = async (req, res) => {
   const { id } = req.params;
+  const{name, NIC, Eid, contact, post, email, username} = req.body
+
+  let emptyFields = []
+    if(!name){
+        emptyFields.push('name')
+    }
+    if(!NIC){
+        emptyFields.push('NIC')
+    }
+    if(!Eid){
+        emptyFields.push('Eid')
+    }
+    if(!contact){
+        emptyFields.push('contact')
+    }
+    if(!post){
+        emptyFields.push('post')
+    }
+    if(!email){
+        emptyFields.push('email')
+    }
+    if(!username){
+        emptyFields.push('username')
+    }
+    
+    if (emptyFields.length > 0) {
+            return res.status(400).json({error: 'Please fill all the fields', emptyFields})
+        }
 
   if (!mongooose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: 'No such staff' });
@@ -131,8 +160,9 @@ const updateStaff = async (req, res) => {
   if (!staff) {
     return res.status(400).json({ error: 'No such staff' });
   }
-
+  if (emptyFields.length == 0){
   res.status(200).json(staff);
+  }
 };
 
 //login user 
@@ -143,9 +173,10 @@ const loginStaff = async (req,res) => {
     const staffMember = await Staff.login(username,pw)
     const token = createToken(staffMember._id)
     const userid = staffMember._id
+    const eid = staffMember.Eid
     
 
-    res.status(200).json({username,token,userid})
+    res.status(200).json({username,token,userid,eid})
 
 } catch(error){
     res.status(400).json({error:error.message})

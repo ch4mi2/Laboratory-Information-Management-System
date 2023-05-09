@@ -10,7 +10,7 @@ const AdminProfile= () =>{
                     <div >
                     <a href='/AddStaff'><button className="btn11">Register Staff Member</button></a><br/><br/>
                     <a href='/AllStaff'><button className="btn11">Staff Details</button></a><br/><br/>
-                    <a href='/'><button className="btn11">Salary Calculation</button></a>
+                    <a href='/Salary'><button className="btn11">Salary Calculation</button></a>
                     </div>
                 </nav>
             </div>
