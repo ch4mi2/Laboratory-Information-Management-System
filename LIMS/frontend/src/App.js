@@ -10,7 +10,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 // assets
 import mediLineLogo from './assets/common/mediLineLogo.webp';
 
-// pages and components
+// pages and components`
+import Inventory from './pages/Inventory'
+import FormInventory from './pages/InventoryForm';
 import PatientList from './pages/PatientList';
 import PatientProfile from './pages/PatientProfile';
 import CreatePatientForm from './components/PatientComponents/CreatePatientForm';
@@ -132,6 +134,11 @@ function App() {
                     element={<PendingAccession />}
                   />
 
+                  <Route
+                    path="/inventory"
+                    element={<Inventory/>}
+                  />
+
                   <Route path="/accessed" element={<Accessed />} />
 
                   {/* <Route path="/machines" element={<Machines />} /> */}
@@ -229,6 +236,15 @@ function App() {
                   <Route
                     path="/completedTests"
                     element={<CompletedTestResults />}
+                  />
+
+                 <Route
+                    path="/InventoryForm"
+                    element={<FormInventory />}
+                  />
+                  <Route
+                    path="/inventoryRoutes"
+                    element={<FormInventory />}
                   />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route exact path="/" element={<Dashboard />} />
