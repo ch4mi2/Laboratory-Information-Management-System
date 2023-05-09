@@ -61,7 +61,7 @@ const CustomerLeaderBoard = ({ top }) => {
   return (
     <div className="container-fluid mt-5">
       <center>
-        <h1>Top Customers</h1>
+        <h1>Top {top ? top : ''} Customers</h1>
       </center>
 
       <table className="table table-hover mt-5">
