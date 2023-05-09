@@ -1,7 +1,9 @@
 const Test = require('../models/testModel');
 const Category = require('../models/categoryModel');
 const Bill = require('../models/BillModel');
+const moment = require ('moment');
 const mongoose = require('mongoose');
+
 
 //retrieve All tests
 const getTests = async(req,res) => {
@@ -280,10 +282,12 @@ const getTestCount = async(req,res) => {
                 var testCount = await Bill.aggregate([
                 {$project:{
                     month: {$month: '$createdAt'},
+                    year: {$year: '$createdAt'},
                     services: 1
                 }},
                 {$match:{
-                    month: Month
+                    month: Month,
+                    year: Number(moment().format("YYYY"))
                 }},
                 {$unwind: "$services"},
                 {$match: {
@@ -295,10 +299,12 @@ const getTestCount = async(req,res) => {
                 var testCount = await Bill.aggregate([
                     {$project:{
                         month: {$month: '$createdAt'},
+                        year: {$year: '$createdAt'},
                         outsourceServices: 1
                     }},
                     {$match:{
-                        month: Month
+                        month: Month,
+                        year: Number(moment().format("YYYY"))
                     }},
                     {$unwind: "$outsourceServices"},
                     {$match: {
