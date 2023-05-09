@@ -88,7 +88,7 @@ const ServiceMachineForm = ({machine}) => {
               type="text"
               onChange={(e) => setmachineName(e.target.value)}
               value={machineName}
-              required
+              // required
               disabled
               className={emptyFields.includes('MachineType') ? 'error' : ''}
             />
@@ -99,7 +99,7 @@ const ServiceMachineForm = ({machine}) => {
               type="date"
               onChange={(e) => setLastServiceDate(e.target.value)}
               value={LastserviceDate}
-              required
+              // required
               className={emptyFields.includes('LastserviceDate') ? 'error' : ''}
             />
           </div>
@@ -109,7 +109,7 @@ const ServiceMachineForm = ({machine}) => {
               type="date"
               onChange={(e) => setNextServiceDate(e.target.value)}
               value={NextServiceDate}
-              required
+              // required
               className={emptyFields.includes('NextServiceDate') ? 'error' : ''}
             />
           </div>
@@ -119,7 +119,7 @@ const ServiceMachineForm = ({machine}) => {
               type="text"
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
-              required
+              // required
               className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
@@ -129,7 +129,7 @@ const ServiceMachineForm = ({machine}) => {
               type="telno"
               onChange={(e) => setTechTelno(e.target.value)}
               value={TechTelno}
-              required
+              // required
               pattern="[0-9]{10}"
               className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
@@ -140,7 +140,7 @@ const ServiceMachineForm = ({machine}) => {
               type="number"
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
-              required
+              // required
               className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>

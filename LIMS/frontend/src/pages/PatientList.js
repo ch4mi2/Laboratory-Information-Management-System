@@ -89,7 +89,7 @@ const PatientList = () => {
                 <th>NIC</th>
                 <th>Name</th>
                 <th>Gender</th>
-                <th>tpNo</th>
+                <th>Tel</th>
                 <th>Delete</th>
               </tr>
             </thead>

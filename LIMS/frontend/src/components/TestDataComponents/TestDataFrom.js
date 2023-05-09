@@ -191,6 +191,7 @@ const TestDataForm = () => {
                                 
                             }}
                             value={testID}
+                            min="0"
                             className={emptyFields.includes('testID') ? 'error' : ''}
                             disabled = {disableID}
 
@@ -236,6 +237,7 @@ const TestDataForm = () => {
                                 emptyFields[emptyFields.indexOf('price')] = '';
                                 setPrice(e.target.value)}}
                             value={price}
+                            min="0"
                             className={emptyFields.includes('price') ? 'error' : ''}
                             disabled = {disable}
                         />
@@ -358,6 +360,7 @@ const TestDataForm = () => {
                                     emptyFields[emptyFields.indexOf('startMRef')] = '';
                                     setStartMRef(e.target.value)}}
                                 value={startMRef}
+                                min="0"
                                 className={emptyFields.includes('startMRef') ? 'error' : ''}
                         />
                     </div>
@@ -388,6 +391,7 @@ const TestDataForm = () => {
                                 emptyFields[emptyFields.indexOf('endMRef')] = '';
                                 setEndMRef(e.target.value)}}
                             value={endMRef}
+                            min="0"
                             className={emptyFields.includes('endMRef') ? 'error' : ''}
                             
                         />
@@ -404,6 +408,7 @@ const TestDataForm = () => {
                                 emptyFields[emptyFields.indexOf('startFRef')] = '';
                                 setStartFRef(e.target.value)}}
                             value={startFRef}
+                            min="0"
                             className={emptyFields.includes('startFRef') ? 'error' : ''}
                         />
                     </div>
@@ -433,6 +438,7 @@ const TestDataForm = () => {
                                 emptyFields[emptyFields.indexOf('endFRef')] = '';
                                 setEndFRef(e.target.value)}}
                             value={endFRef}
+                            min="0"
                             className={emptyFields.includes('endFRef') ? 'error' : ''}
                         />
                     </div>
@@ -445,6 +451,7 @@ const TestDataForm = () => {
                             type = "number"
                             onChange={(e) => setStartBRef(e.target.value)}
                             value={startBRef}
+                            min="0"
                             className={emptyFields.includes('startBRef') ? 'error' : ''}
                             
                         />
@@ -472,6 +479,7 @@ const TestDataForm = () => {
                             type = "number"
                             onChange={(e) => setEndBRef(e.target.value)}
                             value={endBRef}
+                            min="0"
                             className={emptyFields.includes('endBRef') ? 'error' : ''}
                     
                         />

@@ -15,17 +15,6 @@ const UpdateMachineService = ({machine}) => {
     const [error, setError] = useState(null);
     const[emptyFields, setEmptyFields] = useState([]);
 
-  // useEffect(()=>{
-  //   getMachineDetails();
-  //   // eslint-disable-next-line
-  // }, [])
-
-  // const getMachineDetails = async () => {
-  //   let result = await fetch(`/api/machines/`+ machine._id);
-  //   // eslint-disable-next-line
-  //   result = result.json();
-  // }
-
   const handleMachineUpdate = async (e) => {
             e.preventDefault()
     
@@ -68,9 +57,7 @@ const UpdateMachineService = ({machine}) => {
             }
         }
   
-  // const handleUpdate = async (e) => {
-  //   console.log(MachineType, Brand, Model, SerialNo,PurchaseDate,WarrantyExp, Manufacturer, TelNo);
-  // };
+  ;
 
   return (
     <div className="">
@@ -92,7 +79,7 @@ const UpdateMachineService = ({machine}) => {
               type="date"
               onChange={(e) => setNextServiceDate(e.target.value)}
               value={NextServiceDate}
-              required
+              // required
               className={emptyFields.includes('NextServiceDate') ? 'error' : ''}
             />
           </div>
@@ -102,7 +89,7 @@ const UpdateMachineService = ({machine}) => {
               type="text"
               onChange={(e) => setTechnicianName(e.target.value)}
               value={TechnicianName}
-              required
+              // required
               className={emptyFields.includes('TechnicianName') ? 'error' : ''}
             />
           </div>
@@ -112,7 +99,7 @@ const UpdateMachineService = ({machine}) => {
               type="text"
               onChange={(e) => setTechTelno(e.target.value)}
               value={TechTelno}
-              required
+              // required
               pattern="[0-9]{10}"
               className={emptyFields.includes('TechTelno') ? 'error' : ''}
             />
@@ -123,7 +110,7 @@ const UpdateMachineService = ({machine}) => {
               type="number"
               onChange={(e) => setTechnicianPayment(e.target.value)}
               value={TechnicianPayment}
-              required
+              // required
               className={emptyFields.includes('TechnicianPayment') ? 'error' : ''}
             />
           </div>

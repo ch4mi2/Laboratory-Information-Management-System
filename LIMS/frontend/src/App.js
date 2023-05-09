@@ -37,7 +37,7 @@ import PrintBill from './pages/PrintBill';
 import AllBills from './components/BillComponent/AllBills';
 import ShowABill from './components/BillComponent/ShowABill';
 import TransactionHistory from './pages/TransactionHistory';
-import EditBill from './pages/EditBill';
+//import EditBill from './pages/EditBill';
 import AddStaff from './pages/AddStaff';
 import LabInfo from './pages/LabInfo';
 import MachineList from './pages/machineList';
@@ -62,6 +62,7 @@ import Dashboard from './pages/Dashboard';
 import TopCustomers from './pages/TopCustomers';
 import MachineServiceBill from './pages/MachineServiceBill';
 import MachinePartsBill from './pages/MachinePartsBill';
+import EditBillNew from './pages/EditBillNew';
 
 function App() {
   const { user } = useAuthContext();
@@ -100,7 +101,7 @@ function App() {
                   />
                   <Route
                     path="/view-bills/:billId/edit"
-                    element={<EditBill />}
+                    element={<EditBillNew />}
                   />
                   <Route path="/AdminProfile" element={<AdminProfile />} />
                   <Route path="/view-bills" element={<AllBills />} />
