@@ -11,6 +11,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import mediLineLogo from "./assets/common/mediLineLogo.webp";
 
 // pages and components`
+import InventoryReport from "./pages/InventoryReport";
 import InventoryUpdate from "./pages/InventoryUpdateForm";
 import Inventory from "./pages/Inventory";
 import FormInventory from "./pages/InventoryAddForm";
@@ -312,6 +313,10 @@ function App() {
                   <Route
                     path="/updateInventory/:id"
                     element={user ? <InventoryUpdate /> : <Welcome />}
+                  />
+                  <Route
+                    path="/inventoryReport"
+                    element={user ? <InventoryReport /> : <Welcome />}
                   />
                   <Route
                     path="/dashboard"
