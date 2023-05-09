@@ -75,7 +75,7 @@ const PrintBill = ({ billID }) => {
         });
       }
     }
-    navigate('/view-bills');
+    navigate(-1);
   };
 
   return (
