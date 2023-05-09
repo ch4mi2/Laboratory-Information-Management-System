@@ -68,7 +68,7 @@ const MachineForm = () => {
       setManufacturer('');
       setTelNo('');
       console.log('new machine added:', json);
-      dispatch({ type: 'CREATE_MACHINE', payload: json });
+      // dispatch({ type: 'CREATE_MACHINE', payload: json });
       // if( response.status === 200 ) {
         Swal.fire({
             title: 'Success',

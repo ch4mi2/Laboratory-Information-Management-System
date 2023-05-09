@@ -77,7 +77,8 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setMachineType(e.target.value)}
               value={MachineType}
-              required
+              // required
+              disabled
               className={emptyFields.includes('MachineType') ? 'error' : ''}
             />
           </div>
@@ -87,7 +88,7 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setBrand(e.target.value)}
               value={Brand}
-              required
+              // required
               className={emptyFields.includes('Brand') ? 'error' : ''}
             />
           </div>
@@ -97,7 +98,7 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setModel(e.target.value)}
               value={Model}
-              required
+              // required
               className={emptyFields.includes('Model') ? 'error' : ''}
             />
           </div>
@@ -107,7 +108,7 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setSerialNo(e.target.value)}
               value={SerialNo}
-              required
+              // required
               className={emptyFields.includes('SerialNo') ? 'error' : ''} 
             />
           </div>
@@ -117,7 +118,7 @@ const UpdateMachine = ({machine}) => {
               type="date"
               onChange={(e) => setPurchaseDate(e.target.value)}
               value={PurchaseDate}
-              required
+              // required
               className={emptyFields.includes('PurchasedDate') ? 'error' : ''}
             />
           </div>
@@ -127,7 +128,7 @@ const UpdateMachine = ({machine}) => {
               type="number"
               onChange={(e) => setPrice(e.target.value)}
               value={Price}
-              required
+              // required
               className={emptyFields.includes('Price') ? 'error' : ''}
             />
           </div>
@@ -137,7 +138,7 @@ const UpdateMachine = ({machine}) => {
               type="date"
               onChange={(e) => setWarrantyExp(e.target.value)}
               value={WarrantyExp}
-              required
+              // required
               className={emptyFields.includes('WarrantyExp') ? 'error' : ''}
             />
           </div>
@@ -147,7 +148,7 @@ const UpdateMachine = ({machine}) => {
               type="text"
               onChange={(e) => setManufacturer(e.target.value)}
               value={Manufacturer}
-              required
+              // required
               className={emptyFields.includes('Manufacturer') ? 'error' : ''}
             />
           </div>
@@ -157,7 +158,7 @@ const UpdateMachine = ({machine}) => {
               type="telno"
               onChange={(e) => setTelNo(e.target.value)}
               value={TelNo}
-              required
+              // required
               pattern="[0-9]{10}"
               className={emptyFields.includes('TelNo') ? 'error' : ''}
             />
