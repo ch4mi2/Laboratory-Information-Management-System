@@ -11,7 +11,7 @@ const login = async (username,pw) => {
     setError(null)
 
 
-const response = await fetch('https://lims-mediline.onrender.com/api/Admin/login',{
+const response = await fetch('/api/Admin/login',{
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({username,pw})
