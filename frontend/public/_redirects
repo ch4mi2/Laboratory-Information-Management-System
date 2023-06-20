@@ -1,9 +1,2 @@
-[[redirects]]
-  from = "/api/*"
-  to = "https://lims-mediline.onrender.com/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+/api/* https://lims-mediline.onrender.com/:splat 200!
+/*    /index.html    200
