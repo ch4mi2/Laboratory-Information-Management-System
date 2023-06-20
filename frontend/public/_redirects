@@ -1,2 +1,2 @@
-/api/* https://lims-mediline.onrender.com/:splat 200!
+/api/* /lims-mediline.onrender.com/:splat 200!
 /*    /index.html    200
