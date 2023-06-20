@@ -14,7 +14,7 @@ const PatientList = () => {
 
   useEffect(() => {
     const fetchPatients = async () => {
-      const response = await fetch('/api/patients/');
+      const response = await fetch('https://lims-mediline.onrender.com/api/patients/');
       const json = await response.json();
 
       if (response.ok) {
