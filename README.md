@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-Please go under edit and edit this file as needed for your project
-
 # Project Name - Laboratory Information Management System (LIMS)
 
 # Batch - ITP_WD_B08_G05
@@ -19,9 +16,6 @@ Please go under edit and edit this file as needed for your project
 
 ### Member 7 - IT21219252 - Senadheera S.A.A.D (Dinal-Senadheera)
 
-### Member 8 -
-
-#### Brief Description of Project -
 
 Medi Line is a small, independently owned and operated laboratory located in
 Athurugiriya. The laboratory was founded in 2016. The laboratory focuses on providing
@@ -42,7 +36,5 @@ research outcomes.
 #### Technologies used -
 
 MongoDB, Express, React, Node
-
-Note - The student's github account should be given in brackets e.g. (asiriRepos), this ideally should be your student id
 
 =======
