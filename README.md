@@ -16,11 +16,11 @@ By providing a centralized location for data storage and management, the LIMS ma
 easier to access and analyze data, which can help to improve decision-making and
 research outcomes.
 
-#### Technologies used -
+## Technologies used -
 
 MongoDB, Express, React, Node
 
-# Batch - ITP_WD_B08_G05
+## Batch - ITP_WD_B08_G05
 
 ### Group Leader - IT21237904 - Gunawardana U.G.C.D (ch4mi2)
 ### Member 2 - IT21286414 - Gunathilaka L.P.N (Navojith)
