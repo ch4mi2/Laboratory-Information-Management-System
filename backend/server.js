@@ -2,6 +2,8 @@ require('dotenv').config(); //require and directly invoke the config method
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
 const patientRoutes = require('./routes/patientRoutes');
 const servicesRoutes = require('./routes/servicesRoutes');
 const billRoutes = require('./routes/billRoutes');
@@ -21,6 +23,9 @@ const SalaryRoute = require('./routes/salaryRoutes')
 
 //express app
 const app = express(); //invokes the function
+
+// Enable CORS for all routes
+app.use(cors());
 
 //middleware
 app.use(express.json()); //if the request has a body or data then it passes and attaches to req object
