@@ -1,2 +1,2 @@
-/api/* https://lims-mediline.onrender.com/api/:splat 200!
+/api/* ${process.env.REACT_APP_BACKEND_URL}/:splat 200!
 /*    /index.html    200              
