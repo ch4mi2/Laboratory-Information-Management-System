@@ -30,7 +30,7 @@
     "jszip": "^3.10.1",
     "moment": "^2.29.4",
     "multiselect-react-dropdown": "^2.0.25",
-    "pdfmake": "^0.2.7",
+    "pdfmake": "^0.2.15",
     "print-js": "^1.6.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
